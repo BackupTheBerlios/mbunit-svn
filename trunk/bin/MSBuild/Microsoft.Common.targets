@@ -1,0 +1,3903 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- These tasks are specific to the build process defined in this file, and are not considered general-purpose build tasks. -->
+    <UsingTask TaskName="Microsoft.Build.Tasks.AssignTargetPath"                AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.FormatUrl"                       AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.FormatVersion"                   AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.FxCop"                           AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.GenerateTrustInfo"               AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.ResolveManifestFiles"            AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.ResolveVCProjectOutput"          AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.ResolveNonMSBuildProjectOutput"  AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.Build.Tasks.UpdateManifest"                  AssemblyName="Microsoft.Build.Tasks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <UsingTask TaskName="Microsoft.VisualStudio.EnterpriseTools.MappingTool.CompileTime.ObjectRelationalValidator" AssemblyName="Microsoft.VisualStudio.EnterpriseTools.MappingTool"/>
+
+    <Import Project="$(MSBuildProjectFullPath).user" Condition="Exists('$(MSBuildProjectFullPath).user')"/>
+
+    <PropertyGroup>
+        <CustomBeforeMicrosoftCommonTargets Condition="'$(CustomBeforeMicrosoftCommonTargets)'==''">$(MSBuildExtensionsPath)\v2.0\Custom.Before.Microsoft.Common.targets</CustomBeforeMicrosoftCommonTargets>
+        <CustomAfterMicrosoftCommonTargets Condition="'$(CustomAfterMicrosoftCommonTargets)'==''">$(MSBuildExtensionsPath)\v2.0\Custom.After.Microsoft.Common.targets</CustomAfterMicrosoftCommonTargets>
+        <ReportingServicesTargets Condition="'$(ReportingServicesTargets)'==''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\ReportingServices\Microsoft.ReportingServices.targets</ReportingServicesTargets>
+    </PropertyGroup>
+    
+    <Import Project="$(CustomBeforeMicrosoftCommonTargets)" Condition="Exists('$(CustomBeforeMicrosoftCommonTargets)')"/>
+
+    <Error Condition=" '$(InvalidConfigurationError)' == 'true' " Text="The OutputPath property is not set for this project.  Please check to make sure that you have specified a valid Configuration/Platform combination.  Configuration='$(Configuration)'  Platform='$(Platform)'"/>
+    <Warning Condition=" '$(InvalidConfigurationWarning)' == 'true' " Text="The OutputPath property is not set for this project.  Please check to make sure that you have specified a valid Configuration/Platform combination.  Configuration='$(Configuration)'  Platform='$(Platform)'"/>
+
+    <Message Text="Configuration=$(Configuration)" Importance="Low" />
+    <Message Text="Platform=$(Platform)" Importance="Low" />
+
+    <!--
+    Several properties must be set in the main project file, before using this .TARGETS file.
+    However, if the properties are not set, we pick some defaults.
+    -->
+    <PropertyGroup>
+        <AssemblyName Condition=" '$(AssemblyName)'=='' ">$(MSBuildProjectName)</AssemblyName>
+        <!--
+        Be careful not to give OutputPath a default value in the case of an invalid Configuration.
+        We use OutputPath specifically to check for invalid configurations. 
+        -->
+        <OutputPath Condition=" '$(Configuration)$(OutputPath)' == '' ">bin\Debug\</OutputPath>
+        <Configuration Condition=" '$(Configuration)'=='' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)'=='' ">AnyCPU</Platform>
+
+        <OutputType Condition=" '$(TargetType)' != ''">$(TargetType)</OutputType>
+        <OutputType Condition=" '$(TargetType)' == 'Container' or '$(TargetType)' == 'DocumentContainer' ">library</OutputType>
+        <OutputType Condition=" '$(OutputType)' == '' ">exe</OutputType>
+
+        <DebugSymbols Condition=" '$(Configuration)_$(DebugSymbols)_$(DebugType)'=='Debug__'">true</DebugSymbols>
+        
+        <!-- Whether or not a .pdb file is produced. -->
+        <DebugSymbolsProduced>false</DebugSymbolsProduced>
+        <DebugSymbolsProduced Condition="'$(DebugSymbols)'=='true'">true</DebugSymbolsProduced>
+        <DebugSymbolsProduced Condition="'$(DebugType)'=='none'">false</DebugSymbolsProduced>
+        <DebugSymbolsProduced Condition="'$(DebugType)'=='pdbonly'">true</DebugSymbolsProduced>
+        <DebugSymbolsProduced Condition="'$(DebugType)'=='full'">true</DebugSymbolsProduced>
+        
+        <!-- Whether or not a .xml file is produced. -->
+        <DocumentationFileProduced>true</DocumentationFileProduced>
+        <DocumentationFileProduced Condition="'$(DocumentationFile)'==''">false</DocumentationFileProduced>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition=" '$(OutputPath)' == '' ">
+        <!-- 
+        A blank OutputPath at this point means that the user passed in an invalid Configuration/Platform
+        combination.  Whether this is considered an error or a warning depends on the value of
+        $(SkipInvalidConfigurations). 
+        -->
+        <InvalidConfigurationError Condition=" '$(SkipInvalidConfigurations)' != 'true' ">true</InvalidConfigurationError>
+        <InvalidConfigurationWarning Condition=" '$(SkipInvalidConfigurations)' == 'true' ">true</InvalidConfigurationWarning>
+    </PropertyGroup>
+
+    <!--
+    Visual Studio Macros available from both integrated builds and from command line builds.
+    The following properties are 'macros' that are available via Visual Studio for
+    pre and post build steps.
+    -->
+    <PropertyGroup>
+        <TargetExt Condition="'$(OutputType)'=='exe'">.exe</TargetExt>
+        <TargetExt Condition="'$(OutputType)'=='winexe'">.exe</TargetExt>
+        <TargetExt Condition="'$(OutputType)'=='library'">.dll</TargetExt>
+        <TargetExt Condition="'$(OutputType)'=='module'">.netmodule</TargetExt>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <OutDir Condition=" '$(OutDir)' == '' ">$(OutputPath)</OutDir>                                          <!-- Example, bin\Debug\ -->
+        <ConfigurationName Condition=" '$(ConfigurationName)' == '' ">$(Configuration)</ConfigurationName>      <!-- Example, Debug -->
+        <ProjectName Condition=" '$(ProjectName)' == '' ">$(MSBuildProjectName)</ProjectName>                   <!-- Example, MyProject -->
+        <TargetName Condition=" '$(TargetName)' == '' ">$(AssemblyName)</TargetName>                            <!-- Example, MyAssembly -->
+        <ProjectFileName Condition=" '$(ProjectFileName)' == '' ">$(MSBuildProjectFile)</ProjectFileName>       <!-- Example, MyProject.csproj -->
+        <ProjectExt Condition=" '$(ProjectExt)' == '' ">$(MSBuildProjectExtension)</ProjectExt>                 <!-- Example, .csproj -->
+        <TargetFileName Condition=" '$(TargetFileName)' == '' ">$(TargetName)$(TargetExt)</TargetFileName>      <!-- Example, MyAssembly.dll -->
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!--
+        The PublishableProject property is used when invoking the publish target on a solution that
+        contains multiple projects. The property determines which projects should be published, and
+        which projects should be skipped in the publish target. By default any "Windows Application"
+        or "Console Application" project type is publishable. However, a project that would otherwise
+        be published can be skipped by defining the PublishableProject property in the project itself.
+        -->
+        <PublishableProjectDefault Condition="'$(OutputType)'=='winexe' or '$(OutputType)'=='exe'">true</PublishableProjectDefault>
+        <PublishableProject Condition="'$(PublishableProject)'==''">$(PublishableProjectDefault)</PublishableProject>
+
+        <TargetApplicationManifestFileName Condition="'$(OutputType)'=='library'">Native.$(AssemblyName).manifest</TargetApplicationManifestFileName> <!-- Example, Native.MyAssembly.manifest -->
+        <TargetApplicationManifestFileName Condition="'$(OutputType)'=='winexe'">$(TargetFileName).manifest</TargetApplicationManifestFileName>       <!-- Example, MyAssembly.exe.manifest -->
+        <TargetApplicationManifestFileName Condition="'$(OutputType)'=='exe'">$(TargetFileName).manifest</TargetApplicationManifestFileName>          <!-- Example, MyAssembly.exe.manifest -->
+        <TargetDeployManifestFileName Condition="'$(TargetDeployManifestFileName)' == ''">$(AssemblyName).application</TargetDeployManifestFileName>  <!-- Example, MyAssembly.application -->
+        <GenerateClickOnceManifests>$(GenerateManifests)</GenerateClickOnceManifests>
+
+        <ManifestIdentity>$(AssemblyName)</ManifestIdentity>
+        <ApplicationManifestIdentity Condition="'$(OutputType)'=='library'">Native.$(AssemblyName)</ApplicationManifestIdentity>
+        <ApplicationManifestIdentity Condition="'$(OutputType)'=='winexe'">$(ManifestIdentity).exe</ApplicationManifestIdentity>
+        <ApplicationManifestIdentity Condition="'$(OutputType)'=='exe'">$(ManifestIdentity).exe</ApplicationManifestIdentity>
+        <DeployManifestIdentity>$(ManifestIdentity).application</DeployManifestIdentity>
+
+        <FileMappingExtension Condition="'$(MapFileExtensions)'=='true'">.deploy</FileMappingExtension>
+        <FileMappingExtension Condition="'$(MapFileExtensions)'!='true'"></FileMappingExtension>
+
+        <BuiltUpdateInterval Condition="'$(UpdatePeriodically)'=='true'">$(UpdateInterval)</BuiltUpdateInterval>
+        <BuiltUpdateIntervalUnits Condition="'$(UpdatePeriodically)'=='true'">$(UpdateIntervalUnits)</BuiltUpdateIntervalUnits>
+        <BuiltUpdateInterval Condition="'$(UpdatePeriodically)'!='true'">0</BuiltUpdateInterval>
+        <BuiltUpdateIntervalUnits Condition="'$(UpdatePeriodically)'!='true'">Days</BuiltUpdateIntervalUnits>
+        <BuiltMinimumRequiredVersion Condition="'$(UpdateRequired)'=='true'">$(MinimumRequiredVersion)</BuiltMinimumRequiredVersion>
+
+        <MaxTargetPath>100</MaxTargetPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Create the output path as an item so that we can use %(FullPath) on it. -->
+        <OutputPathItem Include="$(OutDir)">
+            <InProject>false</InProject>
+        </OutputPathItem>
+        <UnmanagedRegistrationCache Include="$(BaseOutputPath)UnmanagedRegistration.cache">
+            <InProject>false</InProject>
+        </UnmanagedRegistrationCache>
+        <ResolveComReferenceCache Include="$(IntermediateOutputPath)ResolveComReference.cache">
+            <InProject>false</InProject>
+        </ResolveComReferenceCache>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <!-- Example, c:\MyProjects\MyProject\bin\debug\ -->
+        <!-- 
+        Condition intentionally omitted on this one, because it causes problems
+        when we pick up the value of an environment variable named TargetDir 
+        -->
+        <TargetDir>@(OutputPathItem->'%(FullPath)')</TargetDir>
+
+        <!-- Example, c:\MyProjects\MyProject\bin\debug\MyAssembly.dll -->
+        <TargetPath Condition=" '$(TargetPath)' == '' ">@(OutputPathItem->'%(FullPath)$(TargetFileName)')</TargetPath>
+
+        <!-- Example, c:\MyProjects\MyProject\ -->
+        <ProjectDir Condition=" '$(ProjectDir)' == '' ">$(MSBuildProjectDirectory)\</ProjectDir>
+
+        <!-- Example, c:\MyProjects\MyProject\MyProject.csproj -->
+        <ProjectPath Condition=" '$(ProjectPath)' == '' ">$(ProjectDir)$(ProjectFileName)</ProjectPath>
+
+        <!-- Example, AnyCPU -->
+         <PlatformName Condition=" '$(PlatformName)' == '' ">$(Platform)</PlatformName>
+    </PropertyGroup>
+
+    <!-- Turn off delay signing if SignAssembly is not set -->
+    <PropertyGroup>
+      <DelaySign Condition="'$(SignAssembly)' != 'true'">false</DelaySign>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <AppConfigFileDestination Include="$(OutDir)$(TargetFileName).config">
+            <InProject>false</InProject>
+        </AppConfigFileDestination>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <LoadTimeSensitiveTargets>
+            $(LoadTimeSensitiveTargets);
+            Compile;
+            ResolveReferences;
+            BeforeResolveReferences;
+            SplitProjectReferencesByType;
+            ResolveProjectReferences;
+            ResolveVCProjectReferences;
+            ResolveNativeReferences;
+            ResolveAssemblyReferences;
+            GetFrameworkPaths;
+            PrepareForBuild;
+            ResolveComReferences;
+            ResolveKeySource;
+            AfterResolveReferences;
+            BeforeCompile;
+            TimeStampBeforeCompile;
+            CoreCompile;
+            _ComputeNonExistentFileProperty;
+            TimeStampAfterCompile;
+            AfterCompile;
+            AllProjectOutputGroupsDependencies;
+            BuildOnlySettings;
+            AssignTargetPaths;
+            BuiltProjectOutputGroupDependencies;
+            DebugSymbolsProjectOutputGroupDependencies;
+            SatelliteDllsProjectOutputGroupDependencies;
+            DocumentationProjectOutputGroupDependencies;
+            SGenFilesOutputGroupDependencies;
+            AllProjectOutputGroups;
+            BuiltProjectOutputGroup;
+            DebugSymbolsProjectOutputGroup;
+            SGenFileItems;
+            SgenSettings;
+            DocumentationProjectOutputGroup;
+            SatelliteDllsProjectOutputGroup;
+            PrepareResourceNames;
+            SplitResourcesByCulture;
+            CreateManifestResourceNames;
+            SourceFilesProjectOutputGroup;
+            ContentFilesProjectOutputGroup;
+            SGenFilesOutputGroup;
+            CopyRunEnvironmentFiles;
+            CopyAppConfigFile;
+            RecordFileWrites;
+            GetCurrentAndPriorFileWrites;
+            CheckForCompileOutputs;
+            CheckForSGenOutputs;
+            
+            MainBuiltProjectOutputGroup;
+        </LoadTimeSensitiveTargets>
+        <LoadTimeSensitiveProperties>
+            $(LoadTimeSensitiveProperties);
+            MSBuildProjectFullPath;
+            CustomBeforeMicrosoftCommonTargets;
+            MSBuildExtensionsPath;
+            FXCopTargets;
+            ReportingServicesTargets;
+            CustomAfterMicrosoftCommonTargets;
+            CompileDependsOn;
+            ResolveReferencesDependsOn;
+            ResolveAssemblyReferencesDependsOn;
+            GetFrameworkPathsDependsOn;
+            PrepareForBuildDependsOn;
+            CoreCompileDependsOn;
+            PrepareResourceNamesDependsOn;
+            CreateManifestResourceNamesDependsOn;
+            
+            BuildingProject;
+            BuildingInsideVisualStudio;
+            ResolveAssemblyReferencesStateFile;
+            CleanFile;
+            MSBuildProjectFile;
+            BaseOutputPath;
+        </LoadTimeSensitiveProperties>
+        <LoadTimeSensitiveItems>
+            $(LoadTimeSensitiveItems);
+            ResolveComReferenceCache;
+            AppConfigWithTargetPath;
+            AppConfigFileDestination;
+        </LoadTimeSensitiveItems>
+        <LoadTimeCheckItemLocation>
+            $(LoadTimeCheckItemLocation);
+            ResolveComReferenceCache;
+            AppConfigFileDestination;
+        </LoadTimeCheckItemLocation>
+    </PropertyGroup>
+
+    <!--
+    Visual Studio Macros available only from integrated builds.
+    The following properties are 'macros' that are available via Visual Studio for
+    pre and post build steps. However, they are not defined when building from
+    the command line.
+    -->
+    <PropertyGroup>
+        <DevEnvDir Condition="'$(DevEnvDir)'==''">*Undefined*</DevEnvDir>
+        <SolutionName Condition="'$(SolutionName)'==''">*Undefined*</SolutionName>              <!-- Example, MySolution -->
+        <SolutionFileName Condition="'$(SolutionFileName)'==''">*Undefined*</SolutionFileName>  <!-- Example, MySolution.sln -->
+        <SolutionPath Condition="'$(SolutionPath)'==''">*Undefined*</SolutionPath>              <!-- Example, f:\MySolutions\MySolution\MySolution.sln -->
+        <SolutionDir Condition="'$(SolutionDir)'==''">*Undefined*</SolutionDir>                 <!-- Example, f:\MySolutions\MySolution\ -->
+        <SolutionExt Condition="'$(SolutionExt)'==''">*Undefined*</SolutionExt>                 <!-- Example, .sln -->
+    </PropertyGroup>
+
+    <!-- The following properties and items are used internally by this targets file. -->
+    <PropertyGroup>
+        <AutoUnifyAssemblyReferences>true</AutoUnifyAssemblyReferences>
+        <AutoUnifyAssemblyReferences Condition="'$(OutputType)'=='exe'">false</AutoUnifyAssemblyReferences>
+        <AutoUnifyAssemblyReferences Condition="'$(OutputType)'=='winexe'">false</AutoUnifyAssemblyReferences>
+        <BaseOutputPath Condition="'$(BaseOutputPath)'==''">obj\</BaseOutputPath>
+        <CleanFile Condition="'$(CleanFile)'==''">$(MSBuildProjectFile).FileList.txt</CleanFile>
+        <RootNamespaceDot Condition="'$(RootNamespace)'!=''">$(RootNamespace).</RootNamespaceDot>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" $(IntermediateOutputPath) == '' ">
+        <IntermediateOutputPath Condition=" '$(PlatformName)' == 'AnyCPU' ">$(BaseOutputPath)$(Configuration)\</IntermediateOutputPath>
+        <IntermediateOutputPath Condition=" '$(PlatformName)' != 'AnyCPU' ">$(BaseOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <IntermediateAssembly Include="$(IntermediateOutputPath)$(TargetName)$(TargetExt)">
+            <InProject>false</InProject>
+        </IntermediateAssembly>
+
+        <FinalDocFile Include="@(DocFileItem->'$(OutDir)%(Filename)%(Extension)')">
+            <InProject>false</InProject>
+        </FinalDocFile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Create an item for entry point of the ClickOnce application (Example: WindowsApplication1.exe) -->
+        <ManifestEntryPoint Include="@(IntermediateAssembly)">
+            <TargetPath>$(TargetFileName)</TargetPath>
+            <InProject>false</InProject>
+        </ManifestEntryPoint>
+
+        <!-- Create an item for the application icon if one exists in the project (Example: app.ico) -->
+        <ManifestIconFile Include="$(ApplicationIcon)" Condition="Exists('$(ApplicationIcon)')">
+            <TargetPath>$(ApplicationIcon)</TargetPath>
+            <InProject>false</InProject>
+        </ManifestIconFile>
+
+        <!-- Create an item for the output application manifest (Example: WindowsApplication1.exe.manifeset) -->
+        <ApplicationManifest Include="$(IntermediateOutputPath)$(TargetApplicationManifestFileName)">
+            <TargetPath>$(TargetApplicationManifestFileName)</TargetPath>
+            <InProject>false</InProject>
+        </ApplicationManifest>
+
+        <!-- Create an item for the final application manifest (Example: WindowsApplication1.exe.manifeset) -->
+        <ApplicationManifestFinal Include="$(OutDir)$(TargetApplicationManifestFileName)">
+            <TargetPath>$(TargetApplicationManifestFileName)</TargetPath>
+            <InProject>false</InProject>
+        </ApplicationManifestFinal>
+
+        <!-- Create an item for the output deploy manifest (Example: WindowsApplication1.application) -->
+        <DeployManifest Include="$(IntermediateOutputPath)$(TargetDeployManifestFileName)">
+            <TargetPath>$(TargetDeployManifestFileName)</TargetPath>
+            <InProject>false</InProject>
+        </DeployManifest>
+
+        <!-- Create an item for the intermediate trust info file -->
+        <IntermediateTrustInfoFile Include="$(IntermediateOutputPath)$(TargetName).TrustInfo.xml" Condition="'$(TargetZone)'!=''">
+            <InProject>false</InProject>
+        </IntermediateTrustInfoFile>
+    </ItemGroup>
+
+    <!--
+    Determine the <deploymentProvider> (DeploymentUrl) for the ClickOnce deployment manifest.
+    Prefer the UpdateUrl, falling back to InstallUrl or PublishUrl if not specified.
+    If the UpdateUrl is specified then DeploymentUrl is always set to the UpdateUrl.
+    Otherwise, only set the DeploymentUrl if it's an installed app and updates are enabled.
+    -->
+    <PropertyGroup>
+        <DeploymentUrl Condition="'$(DeploymentUrl)'==''">$(UpdateUrl)</DeploymentUrl>
+        <DeploymentUrl Condition="'$(DeploymentUrl)'==''">$(InstallUrl)</DeploymentUrl>
+        <DeploymentUrl Condition="'$(DeploymentUrl)'==''">$(PublishUrl)</DeploymentUrl>
+        <DeploymentUrl Condition="'$(DeploymentUrl)'!=''">$(DeploymentUrl)$(TargetDeployManifestFileName)</DeploymentUrl>
+        <!--
+        Need to explicitly blank out the DeploymentUrl when it's not used. Otherwise an
+        inappropriate value may be used. For example a local path from the PublishUrl
+        is something we never want to see in the manifest because it means you could
+        only install the app from that machine.
+        -->
+        <DeploymentUrl Condition="'$(UpdateUrl)'=='' and !('$(Install)'=='true' and '$(UpdateEnabled)'=='true')"></DeploymentUrl>
+    </PropertyGroup>
+
+    <!-- Determine the URLs for the bootstrapper. -->
+    <PropertyGroup>
+        <ApplicationUrl Condition="'$(IsWebBootstrapper)'=='true'">$(InstallUrl)</ApplicationUrl>
+        <ApplicationUrl Condition="'$(IsWebBootstrapper)'=='true' and '$(InstallUrl)'==''">$(PublishUrl)</ApplicationUrl>
+        <ComponentsUrl Condition="'$(BootstrapperComponentsLocation)'=='Absolute'">$(BootstrapperComponentsUrl)</ComponentsUrl>
+    </PropertyGroup>
+    
+    <!-- Output location for publish target. -->
+    <PropertyGroup>
+        <PublishDir Condition="'$(PublishDir)'==''">publish\</PublishDir>
+    </PropertyGroup>
+
+    <!--
+    ProcessorArchitecture is the target processor architecture.
+    -->
+    <PropertyGroup Condition="'$(ProcessorArchitecture)'==''">
+        <!-- 
+        If ProcessorArchitecture is not set, set it to PlatformTarget 
+        Note: if $(PlatformTarget) is also blank resolve assembly reference defaults to msil which is the
+        desired behavior in this case 
+        -->
+        <ProcessorArchitecture>$(PlatformTarget)</ProcessorArchitecture>
+
+        <!-- 
+        If Processor architecture is not set and PlatformTarget is a known target translate the 
+        PlatformTarget into something ResolveAssemblyReference knows about 
+        -->
+        <ProcessorArchitecture Condition=" '$(PlatformTarget)' == 'AnyCpu' ">msil</ProcessorArchitecture>
+        <ProcessorArchitecture Condition=" '$(PlatformTarget)' == 'x64' ">amd64</ProcessorArchitecture>
+        <ProcessorArchitecture Condition=" '$(PlatformTarget)' == 'Itanium' ">ia64</ProcessorArchitecture>
+        <ProcessorArchitecture Condition=" '$(PlatformTarget)' == 'x86' ">x86</ProcessorArchitecture>
+    </PropertyGroup>
+
+    <!-- AvailablePlatforms is the list of platform targets available. -->
+    <PropertyGroup>
+        <AvailablePlatforms>Any CPU,x86,x64,Itanium</AvailablePlatforms>
+    </PropertyGroup>
+
+    <!-- Flavor is the project flavor. For example, Client, Smart Devices, SQL Server, etc. -->
+    <PropertyGroup>
+        <ProjectFlavor Condition="'$(ProjectFlavor)'==''">Client</ProjectFlavor>
+    </PropertyGroup>
+
+    <!--
+    The default for compilers is to not delay-sign. If $(DelaySign) is false, let the compiler
+    use its default rather than forcing a no-delay-sign flag to be passed in. This is so that
+    attributes in the source code can override this decision.
+    -->
+    <PropertyGroup>
+        <DelaySign Condition="'$(DelaySign)'!='true'"></DelaySign>
+    </PropertyGroup>
+
+    <!-- These properties control web reference proxy generation. -->
+    <PropertyGroup>
+        <WebReference_EnableProperties Condition=" '$(WebReference_EnableProperties)' == '' ">true</WebReference_EnableProperties>
+        <WebReference_EnableSQLTypes Condition=" '$(WebReference_EnableSQLTypes)' == '' ">true</WebReference_EnableSQLTypes>
+        <WebReference_EnableLegacyEventingModel Condition=" '$(WebReference_EnableLegacyEventingModel)' == '' ">false</WebReference_EnableLegacyEventingModel>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildProjectFullPath);$(MSBuildBinPath)\Microsoft.Common.targets</MSBuildAllProjects>
+        <MSBuildAllProjects Condition="Exists('$(MSBuildProjectFullPath).user')">$(MSBuildAllProjects);$(MSBuildProjectFullPath).user</MSBuildAllProjects>
+    </PropertyGroup>
+
+    <!--
+    These parameters control where to look in the registry for directories to search for
+    assemblies in the assembly resolution tasks.
+    -->
+    <PropertyGroup>
+        <FrameworkRegistryBase Condition=" '$(FrameworkRegistryBase)' == '' ">Software\Microsoft\.NetFramework</FrameworkRegistryBase>
+        <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v2.0</TargetFrameworkVersion>
+        <AssemblyFoldersSuffix Condition=" '$(AssemblyFoldersSuffix)' == '' ">AssemblyFoldersEx</AssemblyFoldersSuffix>
+    </PropertyGroup>
+
+    <!--
+    The SearchPaths property is set to find assemblies in the following order:
+
+        (1) Files from current project - indicated by {CandidateAssemblyFiles}
+        (2) $(ReferencePath) - the reference path property, which comes from the .USER file.
+        (3) The hintpath from the referenced item itself, indicated by {HintPathFromItem}.
+        (4) The directory of MSBuild's "target" runtime from GetFrameworkPath.
+            The "target" runtime folder is the folder of the runtime that MSBuild is a part of.
+        (5) Registered assembly folders, indicated by {Registry:*,*,*}
+        (6) Legacy registered assembly folders, indicated by {AssemblyFolders}
+        (7) Look in the application's output folder (like bin\debug)
+        (8) Resolve to the GAC.
+        (9) Treat the reference's Include as if it were a real file name.
+    -->
+    <PropertyGroup>
+        <AssemblySearchPaths Condition=" '$(AssemblySearchPaths)' == '' ">
+            {CandidateAssemblyFiles};
+            $(ReferencePath);
+            {HintPathFromItem};
+            {TargetFrameworkDirectory};
+            {Registry:$(FrameworkRegistryBase),$(TargetFrameworkVersion),$(AssemblyFoldersSuffix)$(AssemblyFoldersExConditions)};
+            {AssemblyFolders};
+            $(OutputPath);
+            {GAC};
+            {RawFileName}
+        </AssemblySearchPaths>
+    </PropertyGroup>
+
+    
+    
+    
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        Build
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         Build
+    ================================================================
+
+    The main build entry point.
+    -->
+    <PropertyGroup>
+        <BuildDependsOn>
+            BeforeBuild;
+            CoreBuild;
+            PostBuildEvent;
+            AfterBuild
+        </BuildDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Build"
+        Condition=" '$(InvalidConfigurationWarning)' != 'true' "
+        Outputs="$(TargetPath)"
+        DependsOnTargets="$(BuildDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforeBuild
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just before Build
+    -->
+    <Target Name="BeforeBuild"/>
+
+    <!--
+    ================================================================
+                                         AfterBuild
+    ================================================================
+
+    Redefine this target in your project in order to run tasks just after Build 
+    -->
+    <Target Name="AfterBuild"/>
+
+    <!--
+    ================================================================
+                                         CoreBuild
+    ================================================================
+
+    The core build step calls each of the build targets.
+    -->
+    <PropertyGroup>
+        <CoreBuildDependsOn>
+            BuildOnlySettings;
+            PrepareForBuild;
+            PreBuildEvent;
+            UnmanagedUnregistration;
+            ResolveReferences;
+            PrepareResources;
+            ResolveKeySource;
+            Compile;
+            SGen;
+            CreateSatelliteAssemblies;
+            GenerateManifests;
+            PrepareForRun;
+            ObjectRelationalValidator;
+            UnmanagedRegistration;
+            IncrementalClean
+        </CoreBuildDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="CoreBuild"
+        DependsOnTargets="$(CoreBuildDependsOn)">
+
+        <OnError Condition="'$(RunPostBuildEvent)'=='Always' or '$(RunPostBuildEvent)'=='OnOutputUpdated'" ExecuteTargets="TimeStampAfterCompile;PostBuildEvent"/>
+        <OnError ExecuteTargets="RecordFileWrites"/>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         Rebuild
+    ================================================================
+
+    Delete all intermediate and final build outputs, and then build the project from scratch.
+    -->
+    <PropertyGroup>
+        <RebuildDependsOn>
+            BeforeRebuild;
+            Clean;
+            $(MSBuildProjectDefaultTargets);
+            AfterRebuild;
+        </RebuildDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Rebuild"
+        Condition=" '$(InvalidConfigurationWarning)' != 'true' "
+        Outputs="$(TargetPath)"
+        DependsOnTargets="$(RebuildDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforeRebuild
+    ================================================================
+
+    Redefine this target in your project in order to run tasks just before Rebuild 
+    -->
+    <Target Name="BeforeRebuild"/>
+
+    <!--
+    ================================================================
+                                         AfterRebuild
+    ================================================================
+
+    Redefine this target in your project in order to run tasks just after Rebuild 
+    -->
+    <Target Name="AfterRebuild"/>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        BuildOnlySettings
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         BuildOnlySettings
+    ================================================================
+
+    This target is called only when doing a real build.  It is specifically not called during project load.
+    -->
+    <PropertyGroup>
+        <BuildingProject>false</BuildingProject>
+    </PropertyGroup>
+    <Target
+        Name="BuildOnlySettings">
+
+        <CreateProperty Value="true">
+            <Output TaskParameter="Value" PropertyName="BuildingProject" />
+        </CreateProperty>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        PrepareForBuild
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         PrepareForBuild
+    ================================================================
+
+    Prepare the prerequisites for building.
+    -->
+    <PropertyGroup>
+        <PrepareForBuildDependsOn>GetFrameworkPaths</PrepareForBuildDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PrepareForBuild"
+        DependsOnTargets="$(PrepareForBuildDependsOn)">
+
+        <!-- 
+        These CreateProperty calls are required because TargetDir and TargetPath are defined 
+        to contain an item list. We want that item list to be expanded so that it can be used
+        as a regular property value and not as an item-list-with-transform.
+        -->
+        <CreateProperty Value="$(TargetDir)">
+            <Output TaskParameter="Value" PropertyName="TargetDir" />
+        </CreateProperty>
+
+        <CreateProperty Value="$(TargetPath)">
+            <Output TaskParameter="Value" PropertyName="TargetPath" />
+        </CreateProperty>
+
+        <!-- 
+        Choose exactly one app.config to be the main app.config that is copied to the destination folder. 
+        
+        The search order is:
+        
+            (1) Choose the value $(AppConfig) set in the main project.
+            (2) Choose @(None) App.Config in the same folder as the project.
+            (3) Choose @(Content) App.Config in the same folder as the project.
+            (4) Choose @(None) App.Config in any subfolder in the project.
+            (5) Choose @(Content) App.Config in any subfolder in the project.
+        
+        If an app.config is not found in one of these locations then there is no app.config for this project.
+        -->
+        <CreateProperty Value="%(None.Identity)" Condition="'$(AppConfig)'=='' and '%(RelativeDir)%(Filename)%(Extension)'=='App.Config'">
+            <Output TaskParameter="Value" PropertyName="AppConfig" />
+        </CreateProperty>
+        
+        <CreateProperty Value="%(Content.Identity)" Condition="'$(AppConfig)'=='' and '%(RelativeDir)%(Filename)%(Extension)'=='App.Config'">
+            <Output TaskParameter="Value" PropertyName="AppConfig" />
+        </CreateProperty>
+        
+        <CreateProperty Value="%(None.Identity)" Condition="'$(AppConfig)'=='' and '%(Filename)%(Extension)'=='App.Config'">
+            <Output TaskParameter="Value" PropertyName="AppConfig" />
+        </CreateProperty>
+        
+        <CreateProperty Value="%(Content.Identity)" Condition="'$(AppConfig)'=='' and '%(Filename)%(Extension)'=='App.Config'">
+            <Output TaskParameter="Value" PropertyName="AppConfig" />
+        </CreateProperty>
+
+        <!-- Dump the single app.config into an item list with TargetPath set. -->
+        <CreateItem  Include="$(AppConfig)" AdditionalMetadata="TargetPath=$(TargetFileName).config">
+            <Output TaskParameter="Include" ItemName="AppConfigWithTargetPath"/>
+        </CreateItem>
+
+        <!-- Create the directories for intermediate and final build products. -->
+        <MakeDir Directories="$(OutDir);$(IntermediateOutputPath);@(DocFileItem->'%(RelativeDir)')"/>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         GetFrameworkPaths
+    ================================================================
+
+    Get the paths for the .NET Framework installation directory, and the .NET Framework
+    SDK installation directory.
+    -->
+    <PropertyGroup>
+        <FrameworkDir>@(TargetFrameworkDirectoryItem)</FrameworkDir>
+        <FrameworkSDKDir>@(TargetFrameworkSDKDirectoryItem)</FrameworkSDKDir>
+        <GetFrameworkPathsDependsOn></GetFrameworkPathsDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="GetFrameworkPaths"
+        DependsOnTargets="$(GetFrameworkPathsDependsOn)">
+
+        <!-- Get the path to the target .NET framework directory. -->
+        <GetFrameworkPath>
+            <Output TaskParameter="Path" PropertyName="TargetFrameworkDirectory"/>
+            <Output TaskParameter="Path" ItemName="TargetFrameworkDirectoryItem"/>
+        </GetFrameworkPath>
+
+        <!-- Get the path to the target .NET framework SDK directory. -->
+        <GetFrameworkSDKPath>
+            <Output TaskParameter="Path" PropertyName="TargetFrameworkSDKDirectory"/>
+            <Output TaskParameter="Path" ItemName="TargetFrameworkSDKDirectoryItem"/>
+        </GetFrameworkSDKPath>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        PreBuildEvent
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         PreBuildEvent
+    ================================================================
+
+    Run the pre-build event if there is one.
+    -->
+    <PropertyGroup>
+        <PreBuildEventDependsOn></PreBuildEventDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PreBuildEvent"
+        Condition="'$(PreBuildEvent)'!=''"
+        DependsOnTargets="$(PreBuildEventDependsOn)">
+
+        <Exec WorkingDirectory="$(OutDir)" Command="$(PreBuildEvent)" />
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        UnmanagedUnregistration
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         UnmanagedUnregistration
+    ================================================================
+    
+    If the main assembly had previously been registered for COM interop, unregister it now.
+    We will re-register the new version after it has been built.
+    -->
+    <PropertyGroup>
+        <UnmanagedUnregistrationDependsOn></UnmanagedUnregistrationDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="UnmanagedUnregistration"
+        Condition="Exists('@(UnmanagedRegistrationCache)')"
+        DependsOnTargets="$(UnmanagedUnregistrationDependsOn)">
+
+        <UnregisterAssembly StateFile="@(UnmanagedRegistrationCache)"/>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        ResolveReferences
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         ResolveReferences
+    ================================================================
+    -->
+    <PropertyGroup>
+        <ResolveReferencesDependsOn>
+            BeforeResolveReferences;
+            SplitProjectReferencesByType;
+            ResolveProjectReferences;
+            ResolveVCProjectReferences;
+            ResolveNativeReferences;
+            ResolveAssemblyReferences;
+            ResolveComReferences;
+            AfterResolveReferences
+        </ResolveReferencesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="ResolveReferences"
+        DependsOnTargets="$(ResolveReferencesDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforeResolveReferences
+    ================================================================
+
+    Redefine this target in your project in order to run tasks just before ResolveReferences 
+    -->
+    <Target Name="BeforeResolveReferences"/>
+
+    <!--
+    ================================================================
+                                         AfterResolveReferences
+    ================================================================
+
+    Redefine this target in your project in order to run tasks just after ResolveReferences 
+    -->
+    <Target Name="AfterResolveReferences"/>
+
+    <!--
+    ================================================================
+                                         SplitProjectReferencesByType
+    ================================================================
+
+    Split project references into two lists: VC project references and all others (handled by the MSBuild engine)
+
+        [IN]
+        @(ProjectReference) - the list of all project references
+
+        [OUT]
+        @(VCProjectReference) - the list of VC (managed VC++ to be exact) project references
+        @(NonVCProjectReference) - the list of non-VC project references (MSBuild and potentially VSIP projects)
+    -->
+    <Target
+        Name="SplitProjectReferencesByType"
+        Condition="'@(ProjectReference)'!=''">
+
+        <!-- Copy all VC project references to the VCProjectReference item list (using the VC project extension) -->
+        <CreateItem Include="@(ProjectReference)" Condition="'%(Extension)'=='.vcproj'">
+            <Output TaskParameter="Include" ItemName="VCProjectReference"/>
+        </CreateItem>
+
+        <!-- Copy the rest of the project references to the NonVCProjectReference item list -->
+        <CreateItem Include="@(ProjectReference)" Condition="'%(Extension)'!='.vcproj'">
+            <Output TaskParameter="Include" ItemName="NonVCProjectReference"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResolveProjectReferences
+    ================================================================
+
+    Build referenced projects:
+
+        [IN]
+        @(NonVCProjectReference) - The list of non-VC project references.
+
+        [OUT]
+        @(ResolvedProjectReferencePaths) - Paths to referenced projects.
+    -->
+    <Target
+        Name="ResolveProjectReferences"
+        Condition="'@(NonVCProjectReference)'!=''"
+        DependsOnTargets="SplitProjectReferencesByType">
+
+        <!-- 
+        Use this task for matching projects with pre-resolved project outputs set by Visual Studio 
+        if building inside the IDE.  VS only includes non-MSBuild projects in the output list.  We'll
+        use MSBuild to resolve MSBuild projects.
+        This task will resolve VSIP (3rd party) project references and create a new item list with only project references
+        to projects in the MSBuild format.
+        -->
+        <ResolveNonMSBuildProjectOutput
+            ProjectReferences="@(NonVCProjectReference)"
+            PreresolvedProjectOutputs="$(VSIDEResolvedNonMSBuildProjectOutputs)"
+            Condition="'$(BuildingInsideVisualStudio)'=='true'">
+
+            <Output TaskParameter="ResolvedOutputPaths" ItemName="ResolvedProjectReferencePaths"/>
+            <Output TaskParameter="UnresolvedProjectReferences" ItemName="MSBuildProjectReference"/>
+
+        </ResolveNonMSBuildProjectOutput>
+
+        <!--
+        If building from the command line, simply copy the NonVCProjectReference item list to MSBuildProjectReference,
+        since we have to assume all non-VC projects are in the MSBuild format. We have no way of building
+        VSIP (3rd party) projects from the command line.
+        -->
+        <CreateItem Include="@(NonVCProjectReference)" Condition="'$(BuildingInsideVisualStudio)'!='true'">
+            <Output TaskParameter="Include" ItemName="MSBuildProjectReference"/>
+        </CreateItem>
+
+        <!-- Break the project list into two lists: those that exist on disk and those that don't. -->
+        <CreateItem Include="@(MSBuildProjectReference)" Condition="Exists('%(Identity)')">
+            <Output TaskParameter="Include" ItemName="MSBuildProjectReferenceExistent"/>
+        </CreateItem>
+
+        <CreateItem Include="@(MSBuildProjectReference)" Condition="!Exists('%(Identity)')">
+            <Output TaskParameter="Include" ItemName="MSBuildProjectReferenceNonexistent"/>
+        </CreateItem>
+
+        <!--
+        Build referenced projects when doing an integrated build from VisualStudio.
+        When building from VisualStudio, just gather the referenced build outputs.
+        Visual studio will already have built the project, so there's no need to
+        do it again here.
+        -->
+        <MSBuild
+              Projects="@(MSBuildProjectReferenceExistent)"
+              Targets="MainBuiltProjectOutputGroup"
+              Condition="'$(BuildingInsideVisualStudio)'=='true' and '@(MSBuildProjectReferenceExistent)'!=''"
+              ContinueOnError="!$(BuildingProject)">
+
+            <Output TaskParameter="TargetOutputs" ItemName="ResolvedProjectReferencePaths"/>
+
+        </MSBuild>
+
+        <!--
+        Build referenced projects when building from the command line.
+        When building from the command line, always build the referenced projects.
+        -->
+        <MSBuild
+            Projects="@(MSBuildProjectReferenceExistent)"
+            Condition="'$(BuildingInsideVisualStudio)'!='true' and '@(MSBuildProjectReferenceExistent)'!=''">
+
+            <Output TaskParameter="TargetOutputs" ItemName="ResolvedProjectReferencePaths"/>
+
+        </MSBuild>
+
+        <!--
+        Get manifest items from the built project references (to feed them into ResolveNativeReference)
+        -->
+        <MSBuild 
+            Projects="@(MSBuildProjectReferenceExistent)" 
+            Targets="GetNativeManifest"
+            Condition="'$(BuildingProject)'=='true' and '@(MSBuildProjectReferenceExistent)'!=''">
+
+            <Output TaskParameter="TargetOutputs" ItemName="NativeReference"/>
+
+        </MSBuild>
+
+        <!-- Issue a warning for each non-existent project. -->
+        <Warning 
+            Text="The referenced project '%(MSBuildProjectReferenceNonexistent.Identity)' does not exist."
+            Condition="'@(MSBuildProjectReferenceNonexistent)'!=''"/>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         MainBuiltProjectOutputGroup
+    ================================================================
+
+    This stand-alone target returns the name of the build product (i.e. EXE, DLL)
+    that would be produced if we built this project.
+    -->
+    <Target
+        Name="MainBuiltProjectOutputGroup"
+        Outputs="$(TargetPath)"/>
+
+    <!--
+    ================================================================
+                                         GetNativeManifest
+    ================================================================
+
+    Compute the manifest item for this project. 
+
+        [IN]
+        $(ApplicationManifestIdentity) - the manifest identity
+        @(ApplicationManifest)         - the original application manifest item
+
+        [OUT]
+        @(ComputedApplicationManifest) - application manifest item with full hint path, if generated
+    -->
+    <Target 
+        Name="GetNativeManifest" 
+        Outputs="@(ComputedApplicationManifest)">
+
+        <CreateItem 
+            Include="$(ApplicationManifestIdentity)"
+            AdditionalMetadata="HintPath=%(ApplicationManifestFinal.FullPath)"
+            Condition="Exists('%(ApplicationManifestFinal.FullPath)')">
+
+            <Output TaskParameter="Include" ItemName="ComputedApplicationManifest"/>
+            
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResolveVCProjectReferences
+    ================================================================
+
+    Find outputs of referenced VC projects (currently we never build VC projects ourselves)
+
+        [IN]
+        @(VCProjectReference) - the list of VC project references
+
+        [OUT]
+        @(ResolvedProjectReferencePaths) - paths to projects' outputs
+    -->
+    <!--
+    This is a simplified way to guess the configuration we should look up in the VC project.
+    This will go away once we implement solution configurations properly.  UNDONE.
+    -->
+    <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'!='true'">
+        <VCConfiguration>$(Configuration)|Win32</VCConfiguration>
+    </PropertyGroup>
+    <Target
+        Name="ResolveVCProjectReferences"
+        Condition="'@(VCProjectReference)'!=''"
+        DependsOnTargets="SplitProjectReferencesByType">
+
+        <!-- 
+        Use the task for matching projects with pre-resolved project outputs set by Visual Studio 
+        if building inside the IDE 
+        -->
+        <ResolveNonMSBuildProjectOutput
+            ProjectReferences="@(VCProjectReference)"
+            PreresolvedProjectOutputs="$(VSIDEResolvedNonMSBuildProjectOutputs)"
+            Condition="'$(BuildingInsideVisualStudio)'=='true'">
+
+            <Output TaskParameter="ResolvedOutputPaths" ItemName="ResolvedVCProjectReferencePaths"/>
+
+        </ResolveNonMSBuildProjectOutput>
+
+        <!-- Use the task that uses VC project engine if building from the command line -->
+        <ResolveVCProjectOutput
+            ProjectReferences="@(VCProjectReference)"
+            Configuration="$(VCConfiguration)"
+            Condition="'$(BuildingInsideVisualStudio)'!='true'">
+
+            <Output TaskParameter="ResolvedOutputPaths" ItemName="ResolvedVCProjectReferencePaths"/>
+
+        </ResolveVCProjectOutput>
+
+        <CreateItem
+            Include="@(ResolvedVCProjectReferencePaths->'Native.%(Filename)%(Extension)')"
+            AdditionalMetadata="HintPath=%(FullPath).manifest"
+            Condition="Exists('%(FullPath).manifest')">
+
+            <Output TaskParameter="Include" ItemName="NativeReference"/>
+            
+        </CreateItem>
+
+        <CreateItem Include="@(ResolvedVCProjectReferencePaths)">
+            <Output TaskParameter="Include" ItemName="ResolvedProjectReferencePaths"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResolveNativeReferences
+    ================================================================
+
+    Resolve native references
+
+        [IN]
+        @(NativeReference) - The manifest reference (or list of manifest references)
+
+        [OUT]
+        @(NativeReferenceFile)  - List of manifest files referenced.
+        @(NetAssemblyReference) - List of .NET assemblies contained in the manifest.
+        @(ComClassReference)    - List of COM components contained in the manifest.
+        @(COMReferenceFromNative) List of type libraries contained in the manifest.
+        @(COMFileReference)     - List of loose files contained in the manifest.
+        @(LooseManifestFile)    - List of loose files contained in the manifest.
+    -->
+    <Target
+        Name="ResolveNativeReferences"
+        Condition="'@(NativeReference)'!=''"
+        DependsOnTargets="ResolveProjectReferences;ResolveVCProjectReferences">
+
+        <!-- Native references (aka regfree com) require Windows XP. -->
+        <CreateProperty Value="5.1.2600.0" Condition="'$(OSVersion)'==''">
+            <Output TaskParameter="Value" PropertyName="OSVersion" />
+        </CreateProperty>
+
+        <ResolveNativeReference NativeReferences="@(NativeReference)">
+            <Output TaskParameter="ContainingReferenceFiles" ItemName="NativeReferenceFile"/>
+            <Output TaskParameter="ContainedNetAssemblies" ItemName="NetAssemblyReference"/>
+            <Output TaskParameter="ContainedComComponents" ItemName="ComClassReference"/>
+            <Output TaskParameter="ContainedTypeLibraries" ItemName="COMReferenceFromNative"/>
+            <Output TaskParameter="ContainedLooseTlbFiles" ItemName="COMFileReference"/>
+            <Output TaskParameter="ContainedLooseEtcFiles" ItemName="LooseManifestFile"/>
+        </ResolveNativeReference>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResolveAssemblyReferences
+    ================================================================
+
+    Given the list of assemblies, find the closure of all assemblies that they depend on. These are
+    what we need to copy to the output directory.
+
+        [IN]
+        @(Reference) - List of assembly references as fusion names.
+        @(NetAssemblyReference) - List of assembly references from manifests.
+        @(ResolvedProjectReferencePaths) - List of project references produced by projects that this project depends on.
+
+            The 'Private' attribute on the reference corresponds to corresponds to the Copy Local flag in VS.
+            The 'Private' flag can have three possible values:
+                - 'True' means the reference should be Copied Local
+                - 'False' means the reference should not be Copied Local
+                - [Missing] means this task will decide whether to treat this reference as CopyLocal or not.
+
+        [OUT]
+        @(ReferencePath) - Paths to resolved primary files.
+        @(ReferenceDependencyPaths) - Paths to resolved dependency files.
+        @(ReferenceRelatedPaths) - Paths to .xmls and .pdbs.
+        @(ReferenceSatellitePaths) - Paths to satellites.
+        @(ReferenceCopyLocalPaths) - Paths to files that should be copied to the local directory.
+    -->
+    <PropertyGroup>
+        <ResolveAssemblyReferencesDependsOn>
+            GetFrameworkPaths;
+            PrepareForBuild
+        </ResolveAssemblyReferencesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="ResolveAssemblyReferences"
+        Condition="'@(Reference)'!='' or '@(NetAssemblyReference)'!='' or '@(ResolvedProjectReferencePaths)'!=''"
+        DependsOnTargets="$(ResolveAssemblyReferencesDependsOn)">
+        
+        <!--
+        Only read and write cache file at build time, skip it for load time because its more
+        expensive to write the newly created cache file.
+        -->
+        <CreateProperty Value="$(IntermediateOutputPath)ResolveAssemblyReference.cache" Condition="'$(BuildingProject)'=='true'">
+            <Output TaskParameter="Value" PropertyName="ResolveAssemblyReferencesStateFile" />
+        </CreateProperty>
+
+        <!-- Make an App.Config item that exists when AutoUnify is false. -->
+        <CreateItem Include="@(AppConfigWithTargetPath)" Condition="'$(AutoUnifyAssemblyReferences)'=='false'">
+            <Output TaskParameter="Include" ItemName="ApplicationConfigFileForExes" />
+        </CreateItem>
+
+        <!--
+        InstalledAssemblyTables item list is a list of .XML files that contain a set of assemblies that are expected to 
+        exist on the target machine.
+        -->
+        <CreateItem Include="$(TargetFrameworkDirectory)">
+            <Output TaskParameter="Include" ItemName="InstalledAssemblyDirectory" />
+        </CreateItem>
+
+        <CreateItem Include="@(InstalledAssemblyDirectory->'%(Identity)\RedistList\*.xml')" Condition="'@(InstalledAssemblyTables)' == ''">
+            <Output TaskParameter="Include" ItemName="InstalledAssemblyTables" />
+        </CreateItem>
+
+        <ResolveAssemblyReference
+            Assemblies="@(Reference);@(NetAssemblyReference)"
+            AssemblyFiles="@(ResolvedProjectReferencePaths)"
+            TargetFrameworkDirectory="@(InstalledAssemblyDirectory)"
+            InstalledAssemblyTables="@(InstalledAssemblyTables)" 
+            CandidateAssemblyFiles="@(Content);@(None)"
+            SearchPaths="$(AssemblySearchPaths)"
+            TargetProcessorArchitecture="$(ProcessorArchitecture)"
+            AppConfigFile="@(ApplicationConfigFileForExes)"
+            AutoUnify="$(AutoUnifyAssemblyReferences)"
+            FindDependencies="$(BuildingProject)"
+            FindSatellites="$(BuildingProject)"
+            FindRelatedFiles="$(BuildingProject)"
+            Silent="!$(BuildingProject)"
+            StateFile="$(ResolveAssemblyReferencesStateFile)">
+
+            <Output TaskParameter="ResolvedFiles" ItemName="ReferencePath"/>
+            <Output TaskParameter="ResolvedDependencyFiles" ItemName="ReferenceDependencyPaths"/>
+            <Output TaskParameter="RelatedFiles" ItemName="ReferenceRelatedPaths"/>
+            <Output TaskParameter="SatelliteFiles" ItemName="ReferenceSatellitePaths"/>
+            <Output TaskParameter="CopyLocalFiles" ItemName="ReferenceCopyLocalPaths"/>
+            <Output TaskParameter="SuggestedRedirects" ItemName="SuggestedBindingRedirects"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </ResolveAssemblyReference>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResolveComReferences
+    ================================================================
+
+    Resolve COM references
+
+        [IN]
+        @(COMReference) - The list of COM references
+        $(BaseOutputPath) - The output directory in which to generate wrapper assemblies
+
+        [OUT]
+        @(ReferencePath) - Paths to referenced wrappers.
+
+        If ResolveComReferences is invoked from the IDE, PrepareForBuild may need to run to create directories.
+    -->
+    <Target
+        Name="ResolveComReferences"
+        Condition="'@(COMReference)'!='' or '@(COMFileReference)'!=''"
+        DependsOnTargets="PrepareForBuild;ResolveKeySource;ResolveAssemblyReferences"
+        >
+
+        <!--
+        Note: This task should NOT be batched, since it relies on having all the COM references fed into it at once.
+        -->
+        <ResolveComReference
+              TypeLibNames="@(COMReference)"
+              TypeLibFiles="@(COMFileReference)"
+              ResolvedAssemblyReferences="@(ReferencePath)"
+              WrapperOutputDirectory="$(IntermediateOutputPath)"
+              KeyContainer="$(KeyContainerName)"
+              KeyFile="$(KeyOriginatorFile)"
+              DelaySign="$(DelaySign)"
+              StateFile="@(ResolveComReferenceCache)">
+
+            <Output TaskParameter="ResolvedFiles" ItemName="ReferencePath"/>
+            <Output TaskParameter="ResolvedFiles" ItemName="ComReferenceWrappers"/>
+            <Output TaskParameter="ResolvedFiles" ItemName="FileWrites"/>
+            <!-- This output list only includes items with Isolated attribute set to True.  It's done by the task itself. -->
+            <Output TaskParameter="ResolvedModules" ItemName="ResolvedIsolatedComModules"/>
+
+        </ResolveComReference>
+
+        <CreateItem Include="@(ResolveComReferenceCache)">
+            <Output TaskParameter="Include" ItemName="FileWrites"/>
+        </CreateItem>
+
+        <CreateItem Include="@(ComReferenceWrappers)" Condition="'%(ComReferenceWrappers.CopyLocal)'!='false'">
+            <Output TaskParameter="Include" ItemName="ReferenceComWrappersToCopyLocal"/>
+        </CreateItem>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        PrepareResources
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         PrepareResources
+    ================================================================
+
+    Prepare resources for the Compile step.
+    -->
+    <PropertyGroup>
+        <PrepareResourcesDependsOn>
+            PrepareResourceNames;
+            CopyNonResxEmbeddedResources;
+            ResGen;
+            CompileLicxFiles
+        </PrepareResourcesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PrepareResources"
+        DependsOnTargets="$(PrepareResourcesDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         PrepareResourceNames
+    ================================================================
+
+    Prepare the names of resource files.
+    -->
+    <PropertyGroup>
+        <PrepareResourceNamesDependsOn>
+            AssignTargetPaths;
+            SplitResourcesByCulture;
+            CreateManifestResourceNames
+        </PrepareResourceNamesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PrepareResourceNames"
+        DependsOnTargets="$(PrepareResourceNamesDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         AssignTargetPaths
+    ================================================================
+
+    This target creates <TargetPath> tags for items. <TargetPath> is a relative folder plus filename
+    for the destination of this item.
+    -->
+    <Target
+        Name="AssignTargetPaths">
+
+        <AssignTargetPath Files="@(EmbeddedResource)" RootFolder="$(MSBuildProjectDirectory)">
+            <Output TaskParameter="AssignedFiles" ItemName="EmbeddedResourceWithTargetPath" />
+        </AssignTargetPath>
+
+        <AssignTargetPath Files="@(EmbeddedMappingSchemaFile)" RootFolder="$(MSBuildProjectDirectory)">
+            <Output TaskParameter="AssignedFiles" ItemName="EmbeddedMappingSchemaFileWithTargetPath" />
+        </AssignTargetPath>        
+        
+        <AssignTargetPath Files="@(Content)" RootFolder="$(MSBuildProjectDirectory)">
+            <Output TaskParameter="AssignedFiles" ItemName="ContentWithTargetPath" />
+        </AssignTargetPath>
+
+        <AssignTargetPath Files="@(Compile)" RootFolder="$(MSBuildProjectDirectory)">
+            <Output TaskParameter="AssignedFiles" ItemName="CompileWithTargetPath" />
+        </AssignTargetPath>
+
+        <AssignTargetPath Files="@(None)" RootFolder="$(MSBuildProjectDirectory)">
+            <Output TaskParameter="AssignedFiles" ItemName="NoneWithTargetPath" />
+        </AssignTargetPath>
+
+        <AssignTargetPath Files="@(None)" RootFolder="$(MSBuildProjectDirectory)" Condition="'%(Extension)' == '.manifest'">
+            <Output TaskParameter="AssignedFiles" ItemName="BaseManifestWithTargetPath" />
+        </AssignTargetPath>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SplitResourcesByCulture
+    ================================================================
+
+    Split EmbeddedResource and EmbeddedMappingSchemaFile into five lists based on whether
+    they are resx files, licx files or other resources and whether they should be localized.
+
+        [IN]
+        @(EmbeddedResourceWithTargetPath) - The raw list of resources.
+        @(EmbeddedMappingSchemaFileWithTargetPath) - The raw list of embedded mapping schema file resources.
+
+        [INTERMEDIATES]
+        @(MixedResourceWithNoCulture) - The EmbeddedResource items that have no Culture property.
+        @(MixedResourceWithCulture) - The EmbeddedResource items that have a Culture property.
+
+        [OUT]
+        @(LicxFile) - The EmbeddedResource items with extension equal to '.licx'.
+        @(ResxWithNoCulture) - Those with no culture that should be passed through the GenerateResource task.
+        @(ResxWithCulture) - Those with culture that should be passed through the GenerateResource task.
+        @(NonResxWithNoCulture) - Those that should be passed directly into the compiler.
+        @(NonResxWithCulture) - Those that should be passed directly into AL for the satellite assemblies.
+    -->
+    <Target
+        Name="SplitResourcesByCulture"
+        DependsOnTargets="AssignTargetPaths">
+
+        <CreateItem Include="@(EmbeddedResourceWithTargetPath)" Condition="'%(Extension)'=='.licx'">
+            <Output TaskParameter="Include" ItemName="LicxFile"/>
+        </CreateItem>
+
+        <AssignCulture Files="@(EmbeddedResourceWithTargetPath);@(EmbeddedMappingSchemaFileWithTargetPath)" Condition="'%(Extension)'!='.licx'">
+            <!-- Create the list of culture resx and embedded resource files -->
+            <Output TaskParameter="AssignedFilesWithCulture" ItemName="MixedResourceWithCulture"/>
+            <!-- Create the list of non-culture resx and embedded resource files -->
+            <Output TaskParameter="AssignedFilesWithNoCulture" ItemName="MixedResourceWithNoCulture"/>
+        </AssignCulture>
+
+        <CreateItem Include="@(MixedResourceWithNoCulture)" Condition="'%(Extension)'=='.resx' or '%(Extension)'=='.restext'">
+            <Output TaskParameter="Include" ItemName="ResxWithNoCulture"/>
+        </CreateItem>
+
+        <CreateItem Include="@(MixedResourceWithNoCulture)" Condition="'%(Extension)'!='.resx' and '%(Extension)'!='.restext'">
+            <Output TaskParameter="Include" ItemName="NonResxWithNoCulture"/>
+        </CreateItem>
+
+        <CreateItem Include="@(MixedResourceWithCulture)" Condition="'%(Extension)'=='.resx' or '%(Extension)'=='.restext'">
+            <Output TaskParameter="Include" ItemName="ResxWithCulture"/>
+        </CreateItem>
+
+        <CreateItem Include="@(MixedResourceWithCulture)" Condition="'%(Extension)'!='.resx' and '%(Extension)'!='.restext'">
+            <Output TaskParameter="Include" ItemName="NonResxWithCulture"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopyNonResxEmbeddedResources
+    ================================================================
+
+    Copy non-resx resource files from their original name to the manifest resource name.
+    This is so that the file will be in the location expected by the compiler.
+
+    UNDONE RGoel, bug VSWhidbey 366285.  This target should go away entirely.  We shouldn't need to copy the non-RESXs
+    to their manifest name.  Instead, just stick a "LogicalName" attribute on it, and it should
+    be taken care of by the compiler automatically.
+
+        [IN]
+        @(NonResxWithNoCulture) - The list of non-culture non-resx resource files to copy.
+        @(NonResxWithCulture) - The list of culture non-resx resource files to copy.
+        @(ManifestNonResxWithNoCulture) - The manifest resource name of non-culture non-resx resource files.
+        @(ManifestNonResxWithCulture) - The manifest resource name of culture non-resx resource files.
+
+        [OUT]
+        @(ManifestNonResxWithNoCultureOnDisk) - The final location on disk of the non-culture non-resx resource files.
+        @(ManifestNonResxWithCultureOnDisk) - The final location on disk of the culture non-resx resource files.
+    -->
+    <Target
+        Name="CopyNonResxEmbeddedResources"
+        Condition="'@(NonResxWithNoCulture)'!='' or '@(NonResxWithCulture)'!='' or '@(ManifestNonResxWithNoCulture)'!='' or '@(ManifestNonResxWithCulture)'!=''">
+
+        <Copy
+            SourceFiles="@(NonResxWithNoCulture)"
+            DestinationFiles="@(ManifestNonResxWithNoCulture->'$(IntermediateOutputPath)%(Identity)')"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="ManifestNonResxWithNoCultureOnDisk"/>
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+
+        </Copy>
+
+        <MakeDir Directories="$(IntermediateOutputPath)%(ManifestNonResxWithCulture.Culture)"/>
+
+        <Copy
+            SourceFiles="@(NonResxWithCulture)"
+            DestinationFiles="@(ManifestNonResxWithCulture->'$(IntermediateOutputPath)%(Identity)')"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="ManifestNonResxWithCultureOnDisk"/>
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ResGen
+    ================================================================
+
+    Run GenerateResource on the given resx files.
+
+    This task checks timestamps internally for the .resx files as well as any linked files that are
+    referenced in the .resx file against the .resources file, so it does not need to specify Inputs
+    or Outputs in the Target.
+
+        [IN]
+        @(ResxWithNoCulture) - The names the non-culture .RESX files.
+        @(ResxWithCulture) - The names the culture .RESX files.
+        @(ManifestResourceWithNoCultureName) - The corresponding manifest resource name (.RESOURCE)
+        @(ManifestResourceWithCultureName) - The corresponding manifest resource name (.RESOURCE)
+
+        [OUT]
+        @(ManifestResourceWithNoCulture) - The path to the corresponding .RESOURCE  files
+        @(ManifestResourceWithCulture) - The path to the corresponding .RESOURCE  files
+    -->
+    <PropertyGroup>
+        <ResGenDependsOn>ResolveAssemblyReferences;BeforeResGen;CoreResGen;AfterResGen</ResGenDependsOn>
+        <CoreResGenDependsOn></CoreResGenDependsOn>
+        <UseSourcePath Condition="'$(UseSourcePath)'==''">true</UseSourcePath>
+    </PropertyGroup>
+    <Target
+        Name="ResGen"
+        DependsOnTargets="$(ResGenDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforeResGen
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just before Resgen.
+    -->
+    <Target Name="BeforeResGen"/>
+
+    <!--
+    ================================================================
+                                         AfterResGen
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just after Resgen.
+    -->
+    <Target Name="AfterResGen"/>
+
+    <!--
+    ================================================================
+                                         CoreResGen
+    ================================================================
+    -->
+    <!--
+    <Target 
+        Name="CoreResGen" 
+        DependsOnTargets="$(CoreResGenDependsOn)">
+
+        <GenerateResource
+            Condition=" '@(ResxWithNoCulture)' != '' "
+            Sources="@(ResxWithNoCulture)"
+            UseSourcePath="$(UseSourcePath)"
+            References="@(ReferencePath)"
+            NeverLockTypeAssemblies="$(GenerateResourceNeverLockTypeAssemblies)" 
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithNoCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+            
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithNoCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </GenerateResource>
+
+        <GenerateResource
+            Condition=" '@(ResxWithCulture)' != '' "
+            Sources="@(ResxWithCulture)"
+            UseSourcePath="$(UseSourcePath)"
+            References="@(ReferencePath)"
+            NeverLockTypeAssemblies="$(GenerateResourceNeverLockTypeAssemblies)" 
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </GenerateResource>
+        
+    </Target>
+    -->
+    
+    <Target 
+        Name="CoreResGen" 
+        DependsOnTargets="$(CoreResGenDependsOn)">
+        
+		<!-- Build resource files that are compatable with .NET v2.0 -->
+        
+        <GenerateResource
+            Condition=" '$(TargetFrameworkVersion)' != 'v1.0' AND '@(ResxWithNoCulture)' != '' "
+            Sources="@(ResxWithNoCulture)"
+            UseSourcePath="$(UseSourcePath)"
+            References="@(ReferencePath)"
+            NeverLockTypeAssemblies="$(GenerateResourceNeverLockTypeAssemblies)" 
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithNoCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+            
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithNoCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </GenerateResource>
+
+        <GenerateResource
+            Condition=" '$(TargetFrameworkVersion)' != 'v1.0' AND '@(ResxWithCulture)' != '' "
+            Sources="@(ResxWithCulture)"
+            UseSourcePath="$(UseSourcePath)"
+            References="@(ReferencePath)"
+            NeverLockTypeAssemblies="$(GenerateResourceNeverLockTypeAssemblies)" 
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </GenerateResource>
+
+
+
+		<!-- Build resource files that are compatable with .NET v1.0/v1.1 -->
+		
+        <ResGen
+			ToolPath="$(MSBuildBinPath)\v1.0"
+            Condition=" '$(TargetFrameworkVersion)' == 'v1.0' AND '@(ResxWithNoCulture)' != '' "
+            Sources="@(ResxWithNoCulture)"
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithNoCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+            
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithNoCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </ResGen>
+
+        <ResGen
+			ToolPath="$(MSBuildBinPath)\v1.0"
+            Condition=" '$(TargetFrameworkVersion)' == 'v1.0' AND '@(ResxWithCulture)' != '' "
+            Sources="@(ResxWithCulture)"
+            StateFile="$(IntermediateOutputPath)$(MSBuildProjectFile).GenerateResource.Cache"
+            OutputResources="@(ManifestResourceWithCultureName->'$(IntermediateOutputPath)%(Identity).resources')">
+
+            <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithCulture"/>
+            <Output TaskParameter="FilesWritten" ItemName="FileWrites"/>
+
+        </ResGen>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         CompileLicxFiles
+    ================================================================
+
+    Compile .licx files (containing information about licensed controls used by the application) into .licenses files.
+
+        [IN]
+        @(LicxFile) - The list of .licx files in the project (usually there will be just one)
+
+        [OUT]
+        @(CompiledLicenseFile) - The list of compiled .licenses files (there will be just one)
+        
+    -->
+    <PropertyGroup>
+        <CompileLicxFilesDependsOn></CompileLicxFilesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="CompileLicxFiles"
+        Condition="'@(LicxFile)'!=''"
+        Inputs="@(LicxFile);@(ReferencePath);@(ReferenceDependencyPaths)"
+        Outputs="$(IntermediateOutputPath)$(TargetFileName).licenses"
+        DependsOnTargets="$(CompileLicxFilesDependsOn)">
+
+        <LC
+            Sources="@(LicxFile)"
+            LicenseTarget="$(TargetFileName)"
+            OutputDirectory="$(IntermediateOutputPath)"
+            OutputLicense="$(IntermediateOutputPath)$(TargetFileName).licenses"
+            ReferencedAssemblies="@(ReferencePath);@(ReferenceDependencyPaths)"
+            ToolPath="$(LCToolPath)">
+
+            <Output TaskParameter="OutputLicense" ItemName="CompiledLicenseFile"/>
+            <Output TaskParameter="OutputLicense" ItemName="FileWrites"/>
+            
+        </LC>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        ResolveKeySource
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         ResolveKeySource
+    ================================================================
+
+    Resolve the strong name key used to sign the assembly as well as the certificate used to
+    sign the ClickOnce manifests.
+
+        [IN]
+        $(AssemblyOriginatorKeyFile)     - The file used to sign the assembly (.snk or .pfx)
+        $(ManifestCertificateThumbprint) - The thumbprint used to locate the certificate in the
+                                           user's certificate store.
+        $(ManifestKeyFile)               - The key file that contains the certificate in case the
+                                           certificate is not in the user's store.
+
+        [OUT]
+        $(ResolvedAssemblyKeyFile)        - Key used to sign the assembly 
+        $(ResolvedManifestCertificateThumbprint) - Certificate used to sign the manifests 
+    -->
+    <Target
+        Name="ResolveKeySource"
+        Condition="$(SignManifests) == 'true' or $(SignAssembly) == 'true'">
+
+        <ResolveKeySource
+            KeyFile="$(AssemblyOriginatorKeyFile)"
+            CertificateThumbprint="$(ManifestCertificateThumbprint)"
+            CertificateFile="$(ManifestKeyFile)"
+            SuppressAutoClosePasswordPrompt="$(BuildingInsideVisualStudio)">
+
+            <Output TaskParameter="ResolvedKeyFile" PropertyName="KeyOriginatorFile" Condition=" '$(SignAssembly)' == 'true' "/>
+            <Output TaskParameter="ResolvedKeyContainer" PropertyName="KeyContainerName" Condition=" '$(SignAssembly)' == 'true' "/>
+            <Output TaskParameter="ResolvedThumbprint" PropertyName="ResolvedManifestCertificateThumbprint" Condition=" '$(SignManifests)' == 'true' "/>
+            
+        </ResolveKeySource>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        Compile
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         Compile
+    ================================================================
+    -->
+    <PropertyGroup>
+        <CompileDependsOn>
+            ResolveReferences;
+            ResolveKeySource;
+            BeforeCompile;
+            TimeStampBeforeCompile;
+            CoreCompile;
+            TimeStampAfterCompile;
+            AfterCompile
+        </CompileDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Compile"
+        DependsOnTargets="$(CompileDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforeCompile
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just before Compile.
+    -->
+    <Target Name="BeforeCompile"/>
+
+    <!--
+    ================================================================
+                                         AfterCompile
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just after Compile.
+    -->
+    <Target Name="AfterCompile"/>
+
+    <!--
+    ================================================================
+                                         TimeStampBeforeCompile
+    ================================================================
+
+    If post-build events are set to fire "OnOutputUpdated", then take before
+    and after timestamps so that we can compare them.
+    -->
+    <Target
+        Name="TimeStampBeforeCompile"
+        Condition="'$(RunPostBuildEvent)'=='OnOutputUpdated'">
+
+        <CreateItem Include="%(IntermediateAssembly.ModifiedTime)">
+            <Output TaskParameter="Include" ItemName="IntermediateAssemblyBeforeTimeStamp"/>
+        </CreateItem>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         TimeStampAfterCompile
+    ================================================================
+
+    If post-build events are set to fire "OnOutputUpdated", then take before
+    and after timestamps so that we can compare them.
+    -->
+    <Target
+        Name="TimeStampAfterCompile"
+        Condition="'$(RunPostBuildEvent)'=='OnOutputUpdated'">
+
+        <CreateItem Include="%(IntermediateAssembly.ModifiedTime)">
+            <Output TaskParameter="Include" ItemName="IntermediateAssemblyAfterTimeStamp"/>
+        </CreateItem>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                        _ComputeNonExistentFileProperty
+
+    There are certain situations in which we want to always run the CoreCompile target (and 
+    thus the Csc task), even if the timestamps of the outputs appear to be up-to-date on disk.
+    If we're inside the IDE during design-time, then the Csc/Vbc/Vjc task is simply being used to 
+    initialize the host compiler, so we always want to run it.  Also, if we're inside the IDE, and 
+    the host compiler is responsible for doing the compilation during an actual build, we want to let 
+    the host compiler determine whether the output is up-to-date, because there may be source files
+    in the IDE's in-memory buffers that we don't know about.
+    
+    So, we always run the CoreCompile target if we're in the IDE, and either we're in design-time or
+    we're delegating to the host compiler for the actual build.
+    ================================================================
+    -->
+    <Target 
+        Name="_ComputeNonExistentFileProperty"
+        Condition="
+            ('$(BuildingInsideVisualStudio)' == 'true')
+            and 
+            (
+                ('$(BuildingProject)' == 'false') 
+                or 
+                ('$(UseHostCompilerIfAvailable)' == 'true')
+            )
+            ">
+
+        <CreateProperty Value="__NonExistentSubDir__\__NonExistentFile__">
+            <Output PropertyName="NonExistentFile" TaskParameter="Value"/>
+        </CreateProperty>
+        
+    </Target>
+
+
+
+    
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        SGen
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <PropertyGroup>
+        <SGenDllName>$(TargetName).XmlSerializers.dll</SGenDllName>
+        <SGenDllCreated>false</SGenDllCreated>
+
+        <GenerateSerializationAssembliesConfig>$(GenerateSerializationAssemblies)</GenerateSerializationAssembliesConfig>
+        <GenerateSerializationAssembliesConfig Condition="'$(GenerateSerializationAssemblies)' == ''">Auto</GenerateSerializationAssembliesConfig>
+        <GenerateSerializationAssembliesConfig Condition="'$(ConfigurationName)'=='Debug' and '$(GenerateSerializationAssembliesConfig)' == 'Auto'">Off</GenerateSerializationAssembliesConfig>
+        <ShouldGenerateSerializer>false</ShouldGenerateSerializer>
+        <ShouldGenerateSerializer Condition="'$(GenerateSerializationAssemblies)' == 'On'">true</ShouldGenerateSerializer>
+    </PropertyGroup>
+
+    <!--
+    ================================================================
+                                         SGen
+    ================================================================
+
+    Run SGen on the assembly produced by this build.
+
+        [IN]
+        @(BuildAssemblyName) - The assembly generated by this build.
+        @(BuildAssemblyPath) - The path where the assembly resides.
+        @(ReferencePath) - The list of references used by this assembly.
+        $(ShouldGenerateSerializer) - A boolean whose value can be used to decide whether or not to generate an XML serialization assembly.
+
+        [OUT]
+        @(SerializationAssembly) - The path to the serialization assembly.  Maybe we'll just append to an existing list.
+    -->
+    <Target
+        Name="SGen"
+        DependsOnTargets="SgenSettings;PerformSGen"/>
+
+    <!--
+    ================================================================
+                                         SgenSettings
+    ================================================================
+
+    Evaluate ambient properties to determine whether or not the sgen target should try to produce an
+    XML serializer.
+
+        [IN]
+        @(GenerateSerializationAssemblies) - The property that indicates the user's preference for generating this assembly.  This is NOT a required property.  If it is not present then we assume its value is Auto.
+        @(WebReferenceUrl) - A list of URL's for web references.  This list may be empty.
+
+        [OUT]
+        $(ShouldGenerateSerializer) - A boolean whose value can be used to decide whether or not to generate an XML serialization assembly.
+    -->
+    <Target
+        Name="SgenSettings">
+        
+        <!--
+        If GenerateSerializationAssemblies is either blank or Auto and WebReferenceUrl is not empty then
+        ShouldGenerateSerializer should be true.
+        -->
+        <CreateProperty Value="true" Condition="'@(WebReferenceUrl)'!='' and '$(GenerateSerializationAssembliesConfig)' == 'Auto'">
+            <Output PropertyName="ShouldGenerateSerializer" TaskParameter="Value" />
+        </CreateProperty>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         PerformSGen
+    ================================================================
+
+    Call the SGen task if and only if $(ShouldGenerateSerializer)==true as set by SgenSettings target.
+    -->
+    <Target
+        Name="PerformSGen"
+        Condition="'$(ShouldGenerateSerializer)'=='true'"
+        DependsOnTargets="AssignTargetPaths;Compile;ResolveKeySource"
+        Inputs="@(IntermediateAssembly)"
+        Outputs="$(IntermediateOutputPath)$(SGenDllName)">
+
+        <SGen
+            BuildAssemblyName="$(TargetFileName)"
+            BuildAssemblyPath="$(IntermediateOutputPath)"
+            References="@(ReferencePath)"
+            ShouldGenerateSerializer="true"
+            KeyContainer="$(KeyContainerName)"
+            KeyFile="$(KeyOriginatorFile)"
+            DelaySign="$(DelaySign)">
+
+            <Output TaskParameter="SerializationAssembly" ItemName="SerializationAssembly"/>
+
+        </SGen>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        CreateSatelliteAssemblies
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         CreateSatelliteAssemblies
+    ================================================================
+
+    Create one satellite assembly for every unique culture in the resources.
+
+        [IN]
+        @(ManifestResourceWithCulture) - The list of culture-specific resource (.RESOURCE) files.
+        @(ManifestNonResxWithCultureOnDisk) - The list of culture-specific non-.RESX resource files.
+    -->
+    <PropertyGroup>
+        <CreateSatelliteAssembliesDependsOn>
+            ComputeIntermediateSatelliteAssemblies
+        </CreateSatelliteAssembliesDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="CreateSatelliteAssemblies"
+        Condition="'@(ManifestResourceWithCulture)'!='' or '@(ManifestNonResxWithCultureOnDisk)'!=''"
+        DependsOnTargets="$(CreateSatelliteAssembliesDependsOn)"
+        Inputs="@(ManifestResourceWithCulture);@(ManifestNonResxWithCultureOnDisk);$(IntermediateOutputPath)$(TargetName)$(TargetExt)"
+        Outputs="$(IntermediateOutputPath)%(Culture)\$(TargetName).resources.dll">
+        
+        <MakeDir
+            Directories="$(IntermediateOutputPath)%(ManifestResourceWithCulture.Culture)"
+            Condition=" '@(ManifestResourceWithCulture)' != '' "/>
+
+        <MakeDir
+            Directories="$(IntermediateOutputPath)%(ManifestNonResxWithCultureOnDisk.Culture)"
+            Condition=" '@(ManifestNonResxWithCultureOnDisk)' != '' "/>
+
+        <AL
+            AlgorithmId="$(Satellite_AlgorithmId)"
+            BaseAddress="$(Satellite_BaseAddress)"
+            CompanyName="$(Satellite_CompanyName)"
+            Configuration="$(Satellite_Configuration)"
+            Copyright="$(Satellite_Copyright)"
+            Culture="%(Culture)"
+            DelaySign="$(DelaySign)"
+            Description="$(Satellite_Description)"
+            EmbedResources="@(ManifestResourceWithCulture);@(ManifestNonResxWithCultureOnDisk)"
+            EvidenceFile="$(Satellite_EvidenceFile)"
+            FileVersion="$(Satellite_FileVersion)"
+            Flags="$(Satellite_Flags)"
+            GenerateFullPaths="$(Satellite_GenerateFullPaths)"
+            KeyContainer="$(KeyContainerName)"
+            KeyFile="$(KeyOriginatorFile)"
+            LinkResources="@(Satellite_LinkResource)"
+            MainEntryPoint="$(Satellite_MainEntryPoint)"
+            OutputAssembly="$(IntermediateOutputPath)%(Culture)\$(TargetName).resources.dll"
+            Platform="$(PlatformTarget)" 
+            ProductName="$(Satellite_ProductName)"
+            ProductVersion="$(Satellite_ProductVersion)"
+            ResponseFiles="@(AlResponseFile)"
+            SourceModules="@(Satellite_SourceModule)"
+            TargetType="$(Satellite_TargetType)"
+            TemplateFile="$(IntermediateOutputPath)$(TargetName)$(TargetExt)"
+            Title="$(Satellite_Title)"
+            ToolPath="$(AlToolPath)"
+            Trademark="$(Satellite_Trademark)"
+            Version="$(Satellite_Version)"
+            Win32Icon="$(Satellite_Win32Icon)"
+            Win32Resource="$(Satellite_Win32Resource)">
+
+            <Output TaskParameter="OutputAssembly" ItemName="FileWrites"/>                    
+            
+        </AL>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ComputeIntermediateSatelliteAssemblies
+    ================================================================
+
+    Compute the paths to the intermediate satellite assemblies,
+    with culture attributes so we can copy them to the right place.
+    -->
+    <Target
+        Name="ComputeIntermediateSatelliteAssemblies"
+        Condition="'@(ManifestResourceWithCulture)'!='' or '@(ManifestNonResxWithCulture)'!=''">
+        
+        <CreateItem
+            Include="$(IntermediateOutputPath)%(Culture)\$(TargetName).resources.dll"
+            AdditionalMetadata="Culture=%(Culture)"
+            Condition="'@(ManifestResourceWithCulture)'!='' or '@(ManifestNonResxWithCulture)'!=''">
+
+            <Output TaskParameter="Include" ItemName="IntermediateSatelliteAssemblies"/>
+
+        </CreateItem>
+
+        <CreateItem 
+            Include="@(IntermediateSatelliteAssemblies)"
+            AdditionalMetadata="TargetPath=%(Culture)\$(TargetName).resources.dll">
+
+            <Output TaskParameter="Include" ItemName="IntermediateSatelliteAssembliesWithTargetPath"/>
+
+        </CreateItem>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        GenerateManifests
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         GenerateManifests
+    ================================================================
+
+    Generate manifests
+
+        [IN]
+        @(BaseManifestWithTargetPath) - The base app.manifest from project.
+        @(ResolvedIsolatedComModules) - The list of COM references to be isolated as reg-free COM dependencies for native assembly loader.
+        @(ManifestFiles) - The list of loose files (content, pdb, xml, etc.) for ClickOnce.
+        @(ManifestDependencies) - The list of application dependencies (typically this is the set of assembly dependencies in bin\) for ClickOnce.
+        @(AppConfigWithTargetPath) - App config file, if present.
+        @(ManifestIconFile) - Icon file, if present.
+        $(ManifestType) - Type of manifest to be generated, either "Native" or "ClickOnce".
+
+        [OUT]
+        @(ApplicationManifest) - Generated native or ClickOnce application manifest, i.e. WindowsApplication1.exe.manifest
+        @(DeployManifest) - Generated ClickOnce deployment manifest, i.e. WindowsApplication1.application
+    -->
+    <Target
+        Name="GenerateManifests"
+        Condition="'$(GenerateClickOnceManifests)'=='true' or '@(NativeReference)'!='' or '@(ResolvedIsolatedComModules)'!=''"
+        DependsOnTargets="GenerateApplicationManifest;GenerateDeploymentManifest"/>
+
+    <!--
+    ================================================================
+                                         GenerateApplicationManifest
+    ================================================================
+    -->
+    <Target
+        Name="GenerateApplicationManifest"
+        DependsOnTargets="
+            ComputeNativeManifestInfo;
+            ComputeClickOnceManifestInfo;
+            ResolveComReferences;
+            ResolveNativeReferences"
+        Inputs="
+            $(MSBuildAllProjects);
+            $(TargetCulture);
+            @(ApplicationManifest);
+            @(AppConfigWithTargetPath);
+            @(BaseManifestWithTargetPath);
+            @(ResolvedIsolatedComModules);
+            @(ManifestDependencies);
+            @(ManifestEntryPoint);
+            @(ManifestFiles)"
+        Outputs="@(ApplicationManifest)">
+        
+        <GenerateApplicationManifest
+            AssemblyName="$(ApplicationManifestIdentity)"
+            AssemblyVersion="$(ManifestVersion)"
+            ConfigFile="@(AppConfigWithTargetPath)"
+            ClrVersion="$(ClrVersion)"
+            Dependencies="@(ManifestDependencies)"
+            Description="$(Description)"
+            EntryPoint="@(ManifestEntryPoint)"
+            Files="@(ManifestFiles)"
+            IconFile="@(ManifestIconFile)"
+            InputManifest="@(BaseManifestWithTargetPath)"
+            IsolatedComReferences="@(ResolvedIsolatedComModules)"
+            ManifestType="$(ManifestType)"
+            MaxTargetPath="$(MaxTargetPath)"
+            OutputManifest="@(ApplicationManifest)"
+            OSVersion="$(OSVersion)"
+            Platform="$(PlatformTarget)"
+            TargetCulture="$(TargetCulture)"
+            TrustInfoFile="@(IntermediateTrustInfoFile)">
+            
+            <Output TaskParameter="OutputManifest" ItemName="FileWrites"/>
+            
+        </GenerateApplicationManifest>
+
+        <CreateProperty Value="true">
+            <Output TaskParameter="Value" PropertyName="CopyApplicationManifest" />
+        </CreateProperty>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         ComputeNativeManifestInfo
+    ================================================================
+
+    Compute info for native manifest generation
+
+        [IN]
+        @(IntermediateAssembly) - Path to built assembly, used to obtain version for generated manifest.
+
+        [OUT]
+        $(ManifestType) - Type of manifest to be generated, either "Native" or "ClickOnce".
+        $(ManifestVersion) - Version of generated manifest.
+    -->
+    <Target
+        Name="ComputeNativeManifestInfo"
+        Condition="'$(GenerateClickOnceManifests)'!='true'">
+
+        <!-- Create list of items for manifest generation -->
+        <ResolveManifestFiles NativeAssemblies="@(NativeReferenceFile)">
+            <Output TaskParameter="OutputAssemblies" ItemName="ManifestDependencies"/>
+        </ResolveManifestFiles>
+
+        <CreateProperty Value="Native">
+            <Output TaskParameter="Value" PropertyName="ManifestType"/>
+        </CreateProperty>
+
+        <!-- Obtain manifest version from the built assembly -->
+        <GetAssemblyIdentity AssemblyFiles="@(IntermediateAssembly)">
+            <Output TaskParameter="Assemblies" ItemName="IntermediateAssemblyIdentity"/>
+        </GetAssemblyIdentity>
+        
+        <CreateProperty Value="@(IntermediateAssemblyIdentity->'%(Version)')">
+            <Output TaskParameter="Value" PropertyName="ManifestVersion"/>
+        </CreateProperty>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ComputeClickOnceManifestInfo
+    ================================================================
+
+    Compute info for  ClickOnce manifest generation
+
+        [IN]
+        $(ApplicationVersion) - Application version, can be either 1.0.0.0 or 1.0.0.*.
+        $(ApplicationRevision) - Application revision, used if ApplicationVersion is 1.0.0.*.
+        $(TargetCulture) - Determines the set of sattelites to include in the manifest.
+        @(BaseManifestWithTargetPath) - The base app.manifest from project.
+        @(ReferencePath) - List of project references.
+        @(ReferenceDependencyPaths) - List of dependent project references.
+        $(IntermediateOutputPath) - Used to obtain debug symbols and documentation files for project.
+        @(ReferenceRelatedPaths) - Used to obtain debug symbols and documentation files for dependent projects.
+        @(Content) - Content files to include in manifest.
+        @(PublishFile) - List that determines whether corresponding items are flagged in the manifest with attributes such as group, optional, etc.
+        @(AppConfigWithTargetPath) - App config file, if present.
+        @(ManifestIconFile) - Icon file, if present.
+        @(IntermediateSatelliteAssembliesWithTargetPath) - List of satellites for project.
+        @(ReferenceSatellitePaths) - List of satellites for dependent projects.
+        $(DeploymentUrl) - Deployment provider url for manifest, required for all installed applications.
+        $(SupportUrl) - Support url for manifest.
+
+        [OUT]
+        @(ManifestDependencies) - List of assemblies to be expressed as dependencies in the manifest.
+        @(ManifestEntryPoint) - Identifies the manifest that defines the entry point for the application.
+        @(ManifestFiles) - List of files to be expressed in the manifest, including icon file and config file if present.
+        $(ManifestType) - Type of manifest to be generated, either "Native" or "ClickOnce".
+        $(ManifestVersion) - Version of generated manifest.
+        $(FormattedDeploymentUrl) - Formatted version of corresponding input url.
+        $(FormattedSupportUrl) - Formatted version of corresponding input url.
+    -->
+    <Target
+        Name="ComputeClickOnceManifestInfo"
+        Condition="'$(GenerateClickOnceManifests)'=='true'"
+        DependsOnTargets="GenerateTrustInfo">
+
+        <!-- Grab just the serialization assemblies for a referenced assembly.  There may also be a symbols file in ReferenceRelatedPaths -->
+        <CreateItem Include="@(ReferenceRelatedPaths)" Condition="'%(Extension)' == '.dll'">
+            <Output ItemName="SGenDllsRelatedToCurrentDll0" TaskParameter="Include"/>
+        </CreateItem>
+        <CreateItem Include="@(SGenDllsRelatedToCurrentDll0->'%(FullPath)')">
+            <Output ItemName="SGenDllsRelatedToCurrentDll" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Create list of items for manifest generation -->
+        <ResolveManifestFiles
+            EntryPoint="@(ManifestEntryPoint)"
+            ExtraFiles="$(IntermediateOutputPath)$(TargetName).pdb;$(IntermediateOutputPath)$(TargetName).xml;@(ReferenceRelatedPaths)"
+            Files="@(ContentWithTargetPath);@(ManifestIconFile);@(AppConfigWithTargetPath)"
+            ManagedAssemblies="@(ReferencePath);@(ReferenceDependencyPaths);@(SGenIntermediateAssembly);@(SGenDllsRelatedToCurrentDll)"
+            NativeAssemblies="@(NativeReferenceFile)"
+            PublishFiles="@(PublishFile)"
+            SatelliteAssemblies="@(IntermediateSatelliteAssembliesWithTargetPath);@(ReferenceSatellitePaths)"
+            TargetCulture="$(TargetCulture)">
+            
+            <Output TaskParameter="OutputAssemblies" ItemName="ManifestDependencies"/>
+            <Output TaskParameter="OutputFiles" ItemName="ManifestFiles"/>
+            
+        </ResolveManifestFiles>
+
+        <CreateProperty Value="ClickOnce">
+            <Output TaskParameter="Value" PropertyName="ManifestType"/>
+        </CreateProperty>
+
+        <!-- Obtain manifest version from ApplicationVersion and ApplicationRevision properties -->
+        <FormatVersion Version="$(ApplicationVersion)" Revision="$(ApplicationRevision)">
+            <Output TaskParameter="OutputVersion" PropertyName="ManifestVersion"/>
+        </FormatVersion>
+        
+        <FormatUrl InputUrl="$(DeploymentUrl)">
+            <Output TaskParameter="OutputUrl" PropertyName="FormattedDeploymentUrl"/>
+        </FormatUrl>
+
+        <FormatUrl InputUrl="$(SupportUrl)">
+            <Output TaskParameter="OutputUrl" PropertyName="FormattedSupportUrl"/>
+        </FormatUrl>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         GenerateTrustInfo
+    ================================================================
+    -->
+    <Target
+        Name="GenerateTrustInfo"
+        Condition="'$(TargetZone)'!=''"
+        Inputs="
+            @(BaseManifestWithTargetPath);
+            $(ExcludedPermissions);
+            $(TargetZone)"
+        Outputs="@(IntermediateTrustInfoFile)">
+        
+        <GenerateTrustInfo
+            BaseManifest="@(BaseManifestWithTargetPath)"
+            ExcludedPermissions="$(ExcludedPermissions)"
+            TargetZone="$(TargetZone)"
+            TrustInfoFile="@(IntermediateTrustInfoFile)">
+            
+            <Output TaskParameter="TrustInfoFile" ItemName="FileWrites"/>
+            
+        </GenerateTrustInfo>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         GenerateDeploymentManifest
+    ================================================================
+    -->
+    <Target
+        Name="GenerateDeploymentManifest"
+        DependsOnTargets="GenerateApplicationManifest"
+        Inputs="
+            $(MSBuildAllProjects);
+            $(TargetCulture);
+            @(ApplicationManifest)
+            "
+        Outputs="@(DeployManifest)">
+        
+        <GenerateDeploymentManifest
+            Condition="'$(GenerateClickOnceManifests)'=='true'"
+            AssemblyName="$(DeployManifestIdentity)"
+            AssemblyVersion="$(ManifestVersion)"
+            DeploymentUrl="$(FormattedDeploymentUrl)"
+            Description="$(Description)"
+            DisallowUrlActivation="$(DisallowUrlActivation)"
+            EntryPoint="@(ApplicationManifest)"
+            Install="$(Install)"
+            MapFileExtensions="$(MapFileExtensions)"
+            MaxTargetPath="$(MaxTargetPath)"
+            MinimumRequiredVersion="$(BuiltMinimumRequiredVersion)"
+            OutputManifest="@(DeployManifest)"
+            Platform="$(PlatformTarget)"
+            Product="$(ProductName)"
+            Publisher="$(PublisherName)"
+            SupportUrl="$(FormattedSupportUrl)"
+            TargetCulture="$(TargetCulture)"
+            TrustUrlParameters="$(TrustUrlParameters)"
+            UpdateEnabled="$(UpdateEnabled)"
+            UpdateInterval="$(BuiltUpdateInterval)"
+            UpdateMode="$(UpdateMode)"
+            UpdateUnit="$(BuiltUpdateIntervalUnits)">
+            
+            <Output TaskParameter="OutputManifest" ItemName="FileWrites"/>
+            
+        </GenerateDeploymentManifest>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        PrepareForRun
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         PrepareForRun
+    ================================================================
+
+    Copy the build outputs to the final directory if they have changed.
+    -->
+    <PropertyGroup>
+        <PrepareForRunDependsOn>
+            CopyFilesToOutputDirectory
+        </PrepareForRunDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PrepareForRun"
+        DependsOnTargets="$(PrepareForRunDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         CopyFilesToOutputDirectory
+    ================================================================
+
+    Copy all build outputs, satellites and other necessary files to the final directory.
+    -->
+    <Target
+        Name="CopyFilesToOutputDirectory"
+        DependsOnTargets="
+            ComputeIntermediateSatelliteAssemblies;
+            CopyCopyLocalFilesToOutputDirectory;
+            CopySourceItemsToOutputDirectory;
+            CopyAppConfigFile;
+            CopyManifestFiles;
+            CheckForCompileOutputs;
+            CheckForSGenOutputs">
+
+        <!-- Copy the build product (.dll or .exe). -->
+        <Copy
+            SourceFiles="@(IntermediateAssembly)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="MainAssembly"/>
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+        <Message Importance="High" Text="$(MSBuildProjectName) -&gt; @(MainAssembly->'%(FullPath)')" />
+
+        <!-- Copy the serialization assembly if it exists. -->
+        <Copy
+            SourceFiles="$(IntermediateOutputPath)$(SGenDllName)"
+            DestinationFiles="$(OutDir)$(SGenDllName)"
+            SkipUnchangedFiles="true"
+            Condition="'$(SGenDllCreated)'=='true'">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+        <!-- Copy the debug information file (.pdb), if any -->
+        <Copy
+            SourceFiles="$(IntermediateOutputPath)$(TargetName).pdb"
+            DestinationFiles="$(OutDir)$(TargetName).pdb"
+            SkipUnchangedFiles="true"
+            Condition="'$(DebugSymbolsProduced)'=='true'">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+        <!-- Copy the resulting XML documentation file, if any. -->
+        <Copy
+            SourceFiles="@(DocFileItem)"
+            DestinationFiles="@(FinalDocFile)"
+            SkipUnchangedFiles="true"
+            Condition="'$(DocumentationFileProduced)'=='true'">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+        <!-- Copy satellite assemblies. -->
+        <Copy
+            SourceFiles="@(IntermediateSatelliteAssemblies)"
+            DestinationFiles="@(IntermediateSatelliteAssemblies->'$(OutDir)%(Culture)\$(TargetName).resources.dll')"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+        <!-- Copy COM reference wrappers if any. -->
+        <Copy
+            SourceFiles="@(ReferenceComWrappersToCopyLocal)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+            
+        </Copy>
+
+        <!-- Copy isolated COM references, if any. -->
+        <Copy
+            SourceFiles="@(ResolvedIsolatedComModules)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+            
+        </Copy>
+
+        <!-- Copy COM references included by native (manifest) references, if any. -->
+        <Copy
+            SourceFiles="@(LooseManifestFile)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+            
+        </Copy>
+
+        <!-- Copy native (manifest) reference files themselves, if any. -->
+        <Copy
+            SourceFiles="@(NativeReferenceFile)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopyCopyLocalFilesToOutputDirectory
+    ================================================================
+
+    Copy references that are marked as "CopyLocal" and their dependencies, including .pdbs, .xmls and satellites.
+    -->
+    <Target
+        Name="CopyCopyLocalFilesToOutputDirectory">
+
+        <!-- 
+        Only Copy files from outside of the output path $(OutDir). This is to prevent the case of a file 
+        referenced directly from the output path getting itself added to the list of cleanable files.
+        -->
+        <FindUnderPath 
+            Path="$(OutDir)%(ReferenceCopyLocalPaths.DestinationSubDirectory)"
+            Files="@(ReferenceCopyLocalPaths)">
+            
+            <Output TaskParameter="OutOfPath" ItemName="ReferenceCopyLocalPathsOutsideOfOutDir"/>
+            
+        </FindUnderPath>        
+
+        <Copy
+            SourceFiles="@(ReferenceCopyLocalPathsOutsideOfOutDir)"
+            DestinationFiles="@(ReferenceCopyLocalPathsOutsideOfOutDir->'$(OutDir)%(DestinationSubDirectory)\%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopySourceItemsToOutputDirectory
+    ================================================================
+    -->
+    <Target
+        Name="CopySourceItemsToOutputDirectory"
+        DependsOnTargets="
+            CreateSourceItemsToCopyToOutputDirectory; 
+            CopyOutOfDateSourceItemsToOutputDirectory; 
+            CopyOutOfDateSourceItemsToOutputDirectoryAlways"/>
+
+    <!--
+    ================================================================
+                                         CreateSourceItemsToCopyToOutputDirectory
+    ================================================================
+
+    Create a list of items that have the CopyToOutputDirectory attribute set to 'PreserveNewest' or 'Always'.
+    -->
+    <Target
+        Name="CreateSourceItemsToCopyToOutputDirectory"
+        DependsOnTargets="AssignTargetPaths">
+        
+            <CreateItem Include="@(ContentWithTargetPath);@(EmbeddedResourceWithTargetPath);@(CompileWithTargetPath);@(NoneWithTargetPath)">
+                <Output TaskParameter="Include" ItemName="AllItemsWithTargetPath"/>
+            </CreateItem>
+
+            <CreateItem Include="@(AllItemsWithTargetPath)" Condition="'%(AllItemsWithTargetPath.CopyToOutputDirectory)'=='Always'">
+                <Output TaskParameter="Include" ItemName="SourceItemsToCopyToOutputDirectoryAlways"/>
+            </CreateItem>
+
+            <CreateItem Include="@(AllItemsWithTargetPath)" Condition="'%(AllItemsWithTargetPath.CopyToOutputDirectory)'=='PreserveNewest'">
+                <Output TaskParameter="Include" ItemName="SourceItemsToCopyToOutputDirectory"/>
+            </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopyOutOfDateSourceItemsToOutputDirectory
+    ================================================================
+
+    Copy files that have the CopyToOutputDirectory attribute set to 'PreserveNewest'.
+    -->
+    <Target
+        Name="CopyOutOfDateSourceItemsToOutputDirectory"
+        Condition=" '@(SourceItemsToCopyToOutputDirectory)' != '' "
+        Inputs="@(SourceItemsToCopyToOutputDirectory)"
+        Outputs="@(SourceItemsToCopyToOutputDirectory->'$(OutDir)%(TargetPath)')">
+
+        <!--
+        Not using SkipUnchangedFiles="true" because the application may want to change
+        one of these files and not have an incremental build replace it.
+        -->
+        <Copy
+            SourceFiles = "@(SourceItemsToCopyToOutputDirectory)"
+            DestinationFiles = "@(SourceItemsToCopyToOutputDirectory->'$(OutDir)%(TargetPath)')">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopyOutOfDateSourceItemsToOutputDirectoryAlways
+    ================================================================
+
+    Copy files that have the CopyToOutputDirectory attribute set to 'Always'.
+    -->
+    <Target
+        Name="CopyOutOfDateSourceItemsToOutputDirectoryAlways"
+        Condition=" '@(SourceItemsToCopyToOutputDirectoryAlways)' != '' ">
+
+        <!--
+        Not using SkipUnchangedFiles="true" because the application may want to change
+        one of these files and not have an incremental build replace it.
+        -->
+        <Copy
+            SourceFiles = "@(SourceItemsToCopyToOutputDirectoryAlways)"
+            DestinationFiles = "@(SourceItemsToCopyToOutputDirectoryAlways->'$(OutDir)%(TargetPath)')">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CopyAppConfigFile
+    ================================================================
+
+    Copy the application config file.    
+    -->
+    <Target
+        Name="CopyAppConfigFile"
+        Condition=" ('$(OutputType)' == 'winexe' or '$(OutputType)' == 'exe') "
+        DependsOnTargets="PrepareForBuild"
+        Inputs="@(AppConfigWithTargetPath)"
+        Outputs="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)')">
+
+        <!-- 
+        Copy the application's .config file, if any.
+        Not using SkipUnchangedFiles="true" because the application may want to change 
+        the app.config and not have an incremental build replace it.
+        -->
+        <Copy
+            SourceFiles="@(AppConfigWithTargetPath)"
+            DestinationFiles="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)')"
+            Condition="'@(AppConfigWithTargetPath)' != ''">
+            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+            
+        </Copy>
+
+    </Target>
+
+    <!--
+      Copy the built manifests (.exe.manifest, .application) to the final directory.
+    -->
+    <Target
+        Name="CopyManifestFiles"
+        DependsOnTargets="PrepareForBuild"
+        Condition=" '$(CopyApplicationManifest)'=='true' or '$(GenerateClickOnceManifests)'=='true' "
+        >
+
+        <Copy
+            Condition="'$(GenerateClickOnceManifests)'=='true' or '$(CopyApplicationManifest)'=='true'"
+            SourceFiles="@(ApplicationManifest)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true"
+            >
+            <Output TaskParameter="DestinationFiles" ItemName="MainApplicationManifest"/>            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+        </Copy>
+        <Message Importance="High" Condition="'$(CopyApplicationManifest)'=='true'" Text="$(MSBuildProjectName) -&gt; @(MainApplicationManifest->'%(FullPath)')" />
+            
+        <Copy
+            Condition="'$(GenerateClickOnceManifests)'=='true'"
+            SourceFiles="@(DeployManifest)"
+            DestinationFolder="$(OutDir)"
+            SkipUnchangedFiles="true"
+            >
+            <Output TaskParameter="DestinationFiles" ItemName="MainDeployManifest"/>            
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites"/>
+        </Copy>
+        <Message Importance="High" Condition="'$(GenerateClickOnceManifests)'=='true'" Text="$(MSBuildProjectName) -&gt; @(MainDeployManifest->'%(FullPath)')" />        
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CheckForCompileOutputs
+    ================================================================
+
+    Checks each file output from the main "Compile" target to make sure they really exist.
+    If they do, then record them in the clean cache.
+    -->
+    <Target
+        Name="CheckForCompileOutputs">
+
+        <!--Record the main compile outputs.-->
+        <CreateItem Include="@(IntermediateAssembly)" Condition="Exists('@(IntermediateAssembly)')">
+            <Output ItemName="FileWrites" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Record the .xml if one was produced. -->
+        <CreateProperty Value="false" Condition="!Exists('@(DocFileItem)')">
+            <Output TaskParameter="Value" PropertyName="DocumentationFileProduced" />
+        </CreateProperty>
+        
+        <CreateItem Include="@(DocFileItem)" Condition="'$(DocumentationFileProduced)'=='true'">
+            <Output ItemName="FileWrites" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Record the .pdb if one was produced. -->
+        <CreateProperty Value="false" Condition="!Exists('$(IntermediateOutputPath)$(TargetName).pdb')">
+            <Output TaskParameter="Value" PropertyName="DebugSymbolsProduced" />
+        </CreateProperty>
+        
+        <CreateItem Include="$(IntermediateOutputPath)$(TargetName).pdb" Condition="'$(DebugSymbolsProduced)'=='true'">
+            <Output ItemName="FileWrites" TaskParameter="Include"/>
+        </CreateItem>
+    </Target>
+
+    <!--
+    ================================================================
+                                         CheckForSGenOutputs
+    ================================================================
+
+    Checks each file output from the "SGen" target to make sure they really exist.
+    If they do, then record them in the clean cache.
+    -->
+    <Target
+        Name="CheckForSGenOutputs"
+        DependsOnTargets="SgenSettings">
+
+        <!-- Record the serializer .dll if one was produced.-->
+        <CreateProperty Value="true" Condition="'$(ShouldGenerateSerializer)'=='true'">
+            <Output PropertyName="SGenDllCreated" TaskParameter="Value"/>
+        </CreateProperty>
+
+        <CreateProperty Value="false" Condition="!Exists('$(IntermediateOutputPath)$(SGenDllName)')">
+            <Output PropertyName="SGenDllCreated" TaskParameter="Value"/>
+        </CreateProperty>
+
+        <CreateItem Include="$(IntermediateOutputPath)$(SGenDllName)" Condition="'$(SGenDllCreated)'=='true'">
+            <Output ItemName="FileWrites" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        ObjectRelationalValidator
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         ObjectRelationalValidator
+    ================================================================
+    -->
+    <Target 
+        Name="ObjectRelationalValidator"
+        Condition="'@(MappingSchemaFile)'!='' or '@(EmbeddedMappingSchemaFile)'!=''"
+        DependsOnTargets="PrepareForBuild">
+        
+        <Microsoft.VisualStudio.EnterpriseTools.MappingTool.CompileTime.ObjectRelationalValidator
+            ProjectReferences="@(ReferencePath)"
+            ProjectTarget="$(TargetPath)"
+            MappingSchemaFiles="@(MappingSchemaFile);@(EmbeddedMappingSchemaFile)"
+            ProjectDirectory="$(ProjectDir)"/>
+        
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        UnmanagedRegistration
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         UnmanagedRegistration
+    ================================================================
+    
+    Registers the main assembly for COM interop.
+    -->
+    <PropertyGroup>
+        <UnmanagedRegistrationDependsOn></UnmanagedRegistrationDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="UnmanagedRegistration"
+        Condition="'$(RegisterForComInterop)'=='true' and '$(OutputType)'=='library'"
+        DependsOnTargets="$(UnmanagedRegistrationDependsOn)"
+        >
+
+        <RegisterAssembly
+            Assemblies="@(OutputPathItem->'%(FullPath)$(TargetFileName)')"
+            TypeLibFiles="@(OutputPathItem->'%(FullPath)$(TargetName).tlb')"
+            StateFile="@(UnmanagedRegistrationCache)"
+            CreateCodeBase="true">
+
+            <Output TaskParameter="TypeLibFiles" ItemName="FileWrites"/>
+            
+        </RegisterAssembly>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        IncrementalClean
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         IncrementalClean
+    ================================================================
+
+    Remove files that were produced in a prior build but weren't produced in the current build.
+    The reason is that if, for example, the name of the .exe has changed we want to delete the
+    old copy.
+    
+        [IN]
+        @(FileWrites) - Files that can always be deleted on "Clean"
+        @(FileWritesShareable) - Files that might be shared between one or more projects 
+          and should not be cleaned when written to a common bin location.
+          
+    Leave the Clean cache file containing only the files produced in the current build.
+    -->
+    <Target
+         Name="IncrementalClean"
+         DependsOnTargets="GetCurrentAndPriorFileWrites">
+
+        <!-- Subtract list of files produced in prior builds from list of files produced in this build. -->
+        <CreateItem Include="@(PriorFileWrites)" Exclude="@(CurrentFileWrites)">
+            <Output TaskParameter="Include" ItemName="OrphanFileWrites"/>
+        </CreateItem>
+
+        <!-- Find all files in the final output directory. -->
+        <FindUnderPath Path="$(OutDir)"    Files="@(OrphanFileWrites)">
+            <Output TaskParameter="InPath" ItemName="OrphanFileWritesInOutput"/>
+        </FindUnderPath>
+
+        <!-- Find all files in the intermediate output directory. -->
+        <FindUnderPath Path="$(IntermediateOutputPath)"    Files="@(OrphanFileWrites)">
+            <Output TaskParameter="InPath" ItemName="OrphanFileWritesInIntermediate"/>
+        </FindUnderPath>
+
+        <!-- Delete the orphaned files. -->
+        <Delete 
+            Files="@(OrphanFileWritesInIntermediate);@(OrphanFileWritesInOutput)" 
+            TreatErrorsAsWarnings="true"
+            Condition="'@(OrphanFileWritesInIntermediate)'!='' or '@(OrphanFileWritesInOutput)'!='' ">
+            
+            <Output TaskParameter="DeletedFiles" ItemName="OrphanFilesDeleted"/>
+            
+        </Delete>
+
+        <!-- Create a list of everything that wasn't deleted. -->
+        <CreateItem Include="@(PriorFileWrites);@(CurrentFileWrites)" Exclude="@(OrphanFilesDeleted)">
+            <Output TaskParameter="Include" ItemName="RemainingFileWritesAfterIncrementalClean"/>
+        </CreateItem>
+
+        <!-- Remove duplicates. -->
+        <RemoveDuplicates Inputs="@(RemainingFileWritesAfterIncrementalClean)">
+            <Output TaskParameter="Filtered" ItemName="UniqueRemainingFileWritesAfterIncrementalClean"/>
+        </RemoveDuplicates>
+
+        <!-- Make sure the directory exists. -->
+        <MakeDir Directories="$(BaseOutputPath)"/>
+
+        <!-- Write new list of current files back to disk, replacing the existing list.-->
+        <WriteLinesToFile 
+            File="$(BaseOutputPath)$(CleanFile)"
+            Lines="@(UniqueRemainingFileWritesAfterIncrementalClean)"
+            Overwrite="true"/>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         GetCurrentAndPriorFileWrites
+    ================================================================
+
+    Get the list of files built in the current build and in prior builds.
+    
+        [IN]
+        @(FileWrites) - Files that can always be deleted on "Clean"
+        @(FileWritesShareable) - Files that might be shared between one or more projects 
+          and should not be cleaned when written to a common bin location.
+          
+        [OUT]
+        @(PriorFileWrites) - List of all files produced by prior builds.
+        @(CurrentFileWrites) - List of all files produced by the current build except for 
+         shareable files that were built outside of this project's directory.
+          
+    -->
+    <Target
+         Name="GetCurrentAndPriorFileWrites"
+         DependsOnTargets="CheckForCompileOutputs;CheckForSGenOutputs">
+
+        <!-- Read the list of files produced by a prior builds from disk. -->
+        <ReadLinesFromFile File="$(BaseOutputPath)$(CleanFile)">
+            <Output TaskParameter="Lines" ItemName="PriorFileWrites"/>
+        </ReadLinesFromFile>
+
+        <!-- 
+        Of shareable files, keep only those that are in the project's directory. 
+        We never clean shareable files outside of the project directory because
+        the build may be to a common output directory and other projects may need 
+        them.
+        -->
+        <FindUnderPath Path="$(MSBuildProjectDirectory)" Files="@(FileWritesShareable)">
+            <Output TaskParameter="InPath" ItemName="FileWrites"/>
+        </FindUnderPath>
+
+        <!-- Find all files in the final output directory. -->
+        <FindUnderPath Path="$(OutDir)" Files="@(FileWrites)">
+            <Output TaskParameter="InPath" ItemName="CurrentFileWritesInOutput"/>
+        </FindUnderPath>
+
+        <!-- Find all files in the intermediate output directory. -->
+        <FindUnderPath Path="$(IntermediateOutputPath)" Files="@(FileWrites)">
+            <Output TaskParameter="InPath" ItemName="CurrentFileWritesInIntermediate"/>
+        </FindUnderPath>
+
+        <!-- Remove duplicates from files produced in this build. -->
+        <RemoveDuplicates Inputs="@(CurrentFileWritesInOutput);@(CurrentFileWritesInIntermediate)">
+            <Output TaskParameter="Filtered" ItemName="CurrentFileWrites"/>
+        </RemoveDuplicates>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        Clean
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         Clean
+    ================================================================
+
+    Delete all intermediate and final build outputs.
+    -->
+    <PropertyGroup>
+        <CleanDependsOn>
+            BeforeClean;
+            CleanReferencedProjects;
+            UnmanagedUnregistration;
+            CoreClean;
+            AfterClean;
+            CleanPublishFolder
+        </CleanDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Clean"
+        Condition=" '$(InvalidConfigurationWarning)' != 'true' "
+        DependsOnTargets="$(CleanDependsOn)" />
+
+    <!--
+    ================================================================
+                                         BeforeClean
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just before Clean.
+    -->
+    <Target Name="BeforeClean"/>
+
+    <!--
+    ================================================================
+                                         AfterClean
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just after Clean.
+    -->
+    <Target Name="AfterClean"/>
+
+    <!--
+    ================================================================
+                                         CleanReferencedProjects
+    ================================================================
+
+    Call Clean target on all Referenced Projects.
+    -->
+    <Target
+        Name="CleanReferencedProjects"
+        Condition="'$(BuildingInsideVisualStudio)'!='true'"
+        DependsOnTargets="SplitProjectReferencesByType">
+
+        <!-- Break the project list into two lists: those that exist on disk and those that don't. -->
+        <CreateItem Include="@(NonVCProjectReference)" Condition="Exists('%(Identity)')">
+            <Output TaskParameter="Include" ItemName="NonVCProjectReferenceExistent"/>
+        </CreateItem>
+
+        <!--
+        Clean referenced projects when building from the command-line.
+        For integrated builds, VS takes care of this.
+        -->
+        <MSBuild Projects="@(NonVCProjectReferenceExistent)" Targets="Clean" Condition="'@(NonVCProjectReferenceExistent)'!=''"/>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CoreClean
+    ================================================================
+    -->
+    <PropertyGroup>
+        <CoreCleanDependsOn></CoreCleanDependsOn>
+    </PropertyGroup>
+    <Target 
+        Name="CoreClean"
+        DependsOnTargets="$(CoreCleanDependsOn)">
+
+        <!-- Read in list of files that were written to disk in past builds. -->
+        <ReadLinesFromFile File="$(BaseOutputPath)$(CleanFile)">
+            <Output TaskParameter="Lines" ItemName="PriorFileWrites"/>
+        </ReadLinesFromFile>
+
+        <!-- Find all files in the final output directory. -->
+        <FindUnderPath Path="$(OutDir)"    Files="@(PriorFileWrites)">
+            <Output TaskParameter="InPath" ItemName="PriorFileWritesInOutput"/>
+        </FindUnderPath>
+
+        <!-- Find all files in the intermediate output directory. -->
+        <FindUnderPath Path="$(IntermediateOutputPath)"    Files="@(PriorFileWrites)">
+            <Output TaskParameter="InPath" ItemName="PriorFileWritesInIntermediate"/>
+        </FindUnderPath>
+
+        <!-- Delete those files. -->
+        <Delete 
+            Files="@(PriorFileWritesInOutput);@(PriorFileWritesInIntermediate)"
+            TreatErrorsAsWarnings="true"
+            Condition="'@(PriorFileWritesInOutput)'!='' or '@(PriorFileWritesInIntermediate)'!=''" >
+            
+            <Output TaskParameter="DeletedFiles" ItemName="PriorFileWritesDeleted"/>
+            
+        </Delete>
+
+        <!-- Create a list of everything that wasn't deleted. -->
+        <CreateItem Include="@(PriorFileWrites)" Exclude="@(PriorFileWritesDeleted)">
+            <Output TaskParameter="Include" ItemName="RemainingFileWritesAfterClean"/>
+        </CreateItem>
+
+        <!-- Remove duplicates. -->
+        <RemoveDuplicates Inputs="@(RemainingFileWritesAfterClean)">
+            <Output TaskParameter="Filtered" ItemName="UniqueRemainingFileWrites"/>
+        </RemoveDuplicates>
+
+        <!-- Make sure the directory exists. -->
+        <MakeDir Directories="$(BaseOutputPath)"/>
+
+        <!-- Write new list of current files back to disk. -->
+        <WriteLinesToFile File="$(BaseOutputPath)$(CleanFile)" Lines="@(UniqueRemainingFileWrites)" Overwrite="true" />
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         CleanPublishFolder
+    ================================================================
+    -->
+    <Target 
+        Name="CleanPublishFolder">
+        
+        <RemoveDir Condition="'$(PublishDir)'=='publish\' and Exists('$(PublishDir)')" Directories="$(PublishDir)"/>
+        
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        PostBuildEvent
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         PostBuildEvent
+    ================================================================
+
+    Run the post-build event. This step is driven by two parameters:
+
+    (1) The $(RunPostBuildEvent) property is set by the user through VS and can be one of four values.
+
+        - OnBuildSuccess: In this case, every step of the build must succeed for the post-build step to run.
+        - <Blank>: This is the same as OnBuildSuccess.
+        - OnOutputUpdated: In this case, the post-build step will run only if the main output assembly was
+        actually updated.
+        - Always: The post-build step is always run.
+
+    (2) The @(IntermediateAssemblyBeforeTimeStamp) and @(IntermediateAssemblyAfterTimeStamp) values are
+        set by the TimeStampBeforeCompile and TimeStampAfterCompile targets.  If the assembly was actually
+        rebuilt during this build, then the two values will be different.    
+    -->
+    <PropertyGroup>
+        <PostBuildEventDependsOn></PostBuildEventDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PostBuildEvent"
+        Condition=
+        "
+            '$(PostBuildEvent)'!=''
+            and
+            (
+                '$(RunPostBuildEvent)'!='OnOutputUpdated'
+                or 
+                '@(IntermediateAssemblyBeforeTimeStamp)'!='@(IntermediateAssemblyAfterTimeStamp)'
+            )
+        "
+        DependsOnTargets="$(PostBuildEventDependsOn)">
+
+            <Exec WorkingDirectory="$(OutDir)" Command="$(PostBuildEvent)" />
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        RecordFileWrites
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         RecordFileWrites
+    ================================================================
+
+    Save the list of all files written to disk so that it can be used for "Clean" later.
+
+        [IN]
+        @(FileWrites) - Files that can always be deleted on "Clean"
+        @(FileWritesShareable) - Files that might be shared between one or more projects 
+          and should not be cleaned when written to a common bin location.
+          
+    Files written in prior builds are not removed from Clean cache.
+    -->
+    <Target
+         Name="RecordFileWrites"
+         DependsOnTargets="GetCurrentAndPriorFileWrites">
+
+        <!-- 
+        Merge list of files from prior builds with the current build and then 
+        remove duplicates. 
+        -->
+        <RemoveDuplicates Inputs="@(PriorFileWrites);@(CurrentFileWrites)">
+            <Output TaskParameter="Filtered" ItemName="UniqueFileWrites"/>
+        </RemoveDuplicates>
+
+        <!-- Make sure the directory exists. -->
+        <MakeDir Directories="$(BaseOutputPath)"/>
+
+        <!-- Write merged file list back to disk, replacing existing contents. -->
+        <WriteLinesToFile 
+            File="$(BaseOutputPath)$(CleanFile)"
+            Lines="@(UniqueFileWrites)"
+            Overwrite="true" />
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        Publish
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         Publish
+    ================================================================
+    -->
+    <PropertyGroup>
+        <PublishDependsOn Condition="'$(PublishableProject)'=='true'">
+            SetGenerateManifests;
+            Build;
+            PublishOnly
+        </PublishDependsOn>
+        <PublishDependsOn Condition="'$(PublishableProject)'!='true'">
+            Unpublishable
+        </PublishDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Publish"
+        DependsOnTargets="$(PublishDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         BeforePublish
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just before Publish.
+    -->
+    <Target Name="BeforePublish"/>
+
+    <!--
+    ================================================================
+                                         AfterPublish
+    ================================================================
+    
+    Redefine this target in your project in order to run tasks just after Publish.
+    -->
+    <Target Name="AfterPublish"/>
+
+    <!--
+    ================================================================
+                                         Unpublishable
+    ================================================================
+
+    This target is only called when doing ClickOnce publishing outside the IDE, which implicitly builds before publishing.
+    -->
+    <Target 
+        Name="Unpublishable">
+        
+        <Message Text="Skipping unpublishable project."/>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         SetGenerateManifests
+    ================================================================
+
+    This target simply assures the GenerateClickOnceManifests property is set whenever the publish target is invoked.     
+    -->
+    <Target 
+        Name="SetGenerateManifests">
+        
+        <Error Condition="'$(OutputType)'!='winexe' and '$(OutputType)'!='exe'" Text="Publish is only valid for 'Windows Application' or 'Console Application' project types."/>
+        <Error Condition="'$(ManifestCertificateThumbprint)'=='' and '$(ManifestKeyFile)'==''" Text="A signing key is required in order to publish this project. Publishing from Visual Studio 2005 will automatically configure a signing key for this project."/>
+        
+        <CreateProperty Value="true">
+            <Output TaskParameter="Value" PropertyName="GenerateClickOnceManifests" />
+        </CreateProperty>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         PublishOnly
+    ================================================================
+
+    The "PublishOnly" target is intended for ClickOnce publishing inside the IDE, where the build has already been done 
+    by the BuildManager.  Publishing from VC also uses this target. However, for VC build is handled externally. So in 
+    that case the "PublishBuildDependsOn" property is nulled to bypass the standard build steps.
+    -->
+    <PropertyGroup>
+        <PublishOnlyDependsOn Condition="'$(PublishOnlyDependsOn)'==''">
+            SetGenerateManifests;
+            PublishBuild;
+            GenerateManifests;
+            CleanPublishFolder;
+            CopyFilesToPublishFolder;
+            GenerateBootstrapper;
+            ResolveKeySource;
+            SignClickOnceDeployment
+        </PublishOnlyDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PublishOnly"
+        DependsOnTargets="$(PublishOnlyDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         PublishBuild
+    ================================================================
+    -->
+    <PropertyGroup>
+        <PublishBuildDependsOn Condition="'$(PublishBuildDependsOn)'==''">
+            BuildOnlySettings;
+            PrepareForBuild;
+            ResolveReferences;
+            PrepareResources;
+            ResolveKeySource;
+            SGen;
+            CreateSatelliteAssemblies;
+        </PublishBuildDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="PublishBuild"
+        DependsOnTargets="$(PublishBuildDependsOn)"/>
+
+    <!--
+    ================================================================
+                                         CopyFilesToPublishFolder
+    ================================================================
+    -->
+    <Target 
+        Name="CopyFilesToPublishFolder">
+
+        <!-- Compute name of application folder, which includes the assembly name plus formatted application version -->
+        <FormatVersion Version="$(ApplicationVersion)" Revision="$(ApplicationRevision)" FormatType="Path">
+            <Output TaskParameter="OutputVersion" PropertyName="ApplicationVersionFragment"/>
+        </FormatVersion>
+
+        <CreateProperty Value="$(AssemblyName)_$(ApplicationVersionFragment)">
+            <Output TaskParameter="Value" PropertyName="ApplicationFolderName" />
+        </CreateProperty>
+        
+        <CreateProperty Value="$(PublishDir)$(ApplicationFolderName)\">
+            <Output TaskParameter="Value" PropertyName="ApplicationDir" />
+        </CreateProperty>
+
+        <!-- Copy files to publish folder -->
+        <Copy
+            SourceFiles=
+                "@(ApplicationManifest);
+                @(ManifestEntryPoint);
+                @(ManifestFiles);
+                @(ReferenceComWrappersToCopyLocal);
+                @(ResolvedIsolatedComModules);
+                @(LooseManifestFile)"
+            DestinationFiles=
+                "@(ApplicationManifest->'$(ApplicationDir)%(TargetPath)');
+                @(ManifestEntryPoint->'$(ApplicationDir)%(TargetPath)$(FileMappingExtension)');
+                @(ManifestFiles->'$(ApplicationDir)%(TargetPath)$(FileMappingExtension)');
+                @(ReferenceComWrappersToCopyLocal->'$(ApplicationDir)%(FileName)%(Extension)$(FileMappingExtension)');
+                @(ResolvedIsolatedComModules->'$(ApplicationDir)%(FileName)%(Extension)$(FileMappingExtension)');
+                @(LooseManifestFile->'$(ApplicationDir)%(FileName)%(Extension)$(FileMappingExtension)')"
+            SkipUnchangedFiles="true"/>
+
+        <Copy
+            SourceFiles="@(ManifestDependencies)"
+            DestinationFiles="@(ManifestDependencies->'$(ApplicationDir)%(TargetPath)$(FileMappingExtension)')"
+            Condition="'%(ManifestDependencies.DependencyType)'=='Install'"
+            SkipUnchangedFiles="true"/>
+
+        <FormatUrl InputUrl="$(ApplicationUrl)">
+            <Output TaskParameter="OutputUrl" PropertyName="FormattedApplicationUrl"/>
+        </FormatUrl>
+
+        <FormatUrl InputUrl="$(ComponentsUrl)">
+            <Output TaskParameter="OutputUrl" PropertyName="FormattedComponentsUrl"/>
+        </FormatUrl>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         GenerateBootstrapper
+    ================================================================
+    -->
+    <Target 
+        Name="GenerateBootstrapper">
+        
+        <!-- Build setup.exe bootstrapper and copy referenced packages -->
+        <GenerateBootstrapper
+            Condition="'$(BootstrapperEnabled)'=='true'"
+            ApplicationFile="$(TargetDeployManifestFileName)"
+            ApplicationName="$(AssemblyName)"
+            ApplicationUrl="$(FormattedApplicationUrl)"
+            BootstrapperItems="@(BootstrapperPackage)"
+            ComponentsLocation="$(BootstrapperComponentsLocation)"
+            ComponentsUrl="$(FormattedComponentsUrl)"
+            Culture="$(TargetCulture)"
+            FallbackCulture="$(FallbackCulture)"
+            OutputPath="$(PublishDir)"
+            SupportUrl="$(FormattedSupportUrl)"/>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         SignClickOnceDeployment
+    ================================================================
+    -->
+    <Target 
+        Name="SignClickOnceDeployment">
+        
+        <!-- Sign manifests and the bootstrapper -->
+        <SignFile
+            CertificateThumbprint="$(ResolvedManifestCertificateThumbprint)"
+            TimestampUrl="$(ManifestTimestampUrl)"
+            SigningTarget="$(ApplicationDir)$(TargetApplicationManifestFileName)"/>
+        
+        <!-- Update entry point path in deploy manifest -->
+        <UpdateManifest
+            ApplicationPath="$(ApplicationFolderName)\$(TargetApplicationManifestFileName)"
+            ApplicationManifest="$(ApplicationDir)$(TargetApplicationManifestFileName)"
+            InputManifest="@(DeployManifest)"
+            OutputManifest="$(PublishDir)$(TargetDeployManifestFileName)">
+            
+            <Output TaskParameter="OutputManifest" ItemName="PublishedDeployManifest"/>
+            
+        </UpdateManifest>
+
+        <SignFile
+            CertificateThumbprint="$(ResolvedManifestCertificateThumbprint)"
+            TimestampUrl="$(ManifestTimestampUrl)"
+            SigningTarget="$(PublishDir)$(TargetDeployManifestFileName)"/>
+
+        <SignFile
+            Condition="'$(BootstrapperEnabled)'=='true'"
+            CertificateThumbprint="$(ResolvedManifestCertificateThumbprint)"
+            TimestampUrl="$(ManifestTimestampUrl)"
+            SigningTarget="$(PublishDir)\setup.exe"/>
+        
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        AllProjectOutputGroups
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         AllProjectOutputGroups
+    ================================================================
+
+    The targets below drive output groups, which provide generic information about a
+    project's inputs (e.g., content files, compilation sources, etc.) and built outputs
+    (e.g., built EXE/DLL, PDB, XML documentation files, etc.)
+
+    Each target may produce two kinds of items:  outputs and dependencies.  Outputs are
+    items from the current project; dependencies are items that are brought into the
+    current project as a result of referencing other projects or components.
+
+    Output items must be named "{TargetName}Output".  Dependency items must be named
+    "{TargetName}Dependency".  For both outputs and dependencies, the Include attribute
+    specifies the location of the output/dependency; it must be a full path.  Any number
+    of additional attributes may be placed on an output/dependency item.
+    -->
+    <Target 
+        Name="AllProjectOutputGroups"
+        DependsOnTargets="
+            PrepareForBuild;
+            AssignTargetPaths;
+            BuiltProjectOutputGroup;
+            DebugSymbolsProjectOutputGroup;
+            DocumentationProjectOutputGroup;
+            SatelliteDllsProjectOutputGroup;
+            SourceFilesProjectOutputGroup;
+            ContentFilesProjectOutputGroup;
+            SGenFilesOutputGroup"/>
+
+    <!-- This is the key output for the BuiltProjectOutputGroup -->
+    <ItemGroup>
+        <BuiltProjectOutputGroupKeyOutput Include="@(IntermediateAssembly->'%(FullPath)')">
+            <IsKeyOutput>true</IsKeyOutput>
+            <InProject>false</InProject>
+            <OUTPUTLOC>$(TargetPath)</OUTPUTLOC>
+            <TargetPath>$(TargetFileName)</TargetPath>
+            <COM2REG Condition="'$(RegisterForComInterop)'=='true' and '$(OutputType)'=='library'">true</COM2REG>
+        </BuiltProjectOutputGroupKeyOutput>
+    </ItemGroup>
+
+    <!--
+    ================================================================
+                                         BuiltProjectOutputGroup
+    ================================================================
+    -->
+    <Target 
+        Name="BuiltProjectOutputGroup"
+        Outputs="@(BuiltProjectOutputGroupOutput)">
+
+        <CreateItem Include="@(BuiltProjectOutputGroupKeyOutput)">
+            <Output ItemName="BuiltProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- This item represents the app.config file -->
+        <CreateItem Include="@(AppConfigWithTargetPath)" AdditionalMetadata="OUTPUTLOC=$(TargetDir)%(TargetPath)">
+            <Output ItemName="BuiltProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <CreateItem Include="@(COMReference)" Condition=" '%(COMReference.Isolated)' == 'true' ">
+            <Output ItemName="IsolatedComReference" TaskParameter="Include"/>
+        </CreateItem>
+        
+        <CreateItem Include="@(COMFileReference)" Condition=" '%(COMFileReference.Isolated)' == 'true' ">
+            <Output ItemName="IsolatedComReference" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- This item represents the native manifest, example: WindowsApplication1.exe.manifest or Native.ClassLibrary1.manifest -->
+        <CreateItem 
+            Include="$(OutDir)$(TargetApplicationManifestFileName)"
+            AdditionalMetadata="TargetPath=$(TargetApplicationManifestFileName)"
+            Condition="'@(NativeReference)'!='' or '@(IsolatedComReference)'!=''">
+            
+            <Output ItemName="BuiltProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+            
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item -->
+        <CreateItem Include="@(BuiltProjectOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="BuiltProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         DebugSymbolsProjectOutputGroup
+    ================================================================
+
+    This target performs population of the Debug Symbols project output group.
+    -->
+    <Target
+        Name="DebugSymbolsProjectOutputGroup"
+        Condition="'$(DebugSymbolsProduced)'!='false'"
+        DependsOnTargets="SGenFileItems"
+        Outputs="@(DebugSymbolsProjectOutputGroupOutput)">
+
+        <!-- This item represents the PDB built by the project -->
+
+        <CreateItem 
+            Include="$(IntermediateOutputPath)$(TargetName).pdb" 
+            AdditionalMetadata="OUTPUTLOC=@(OutputPathItem->'%(FullPath)$(TargetName).pdb');TargetPath=$(TargetName).pdb">
+            
+            <Output ItemName="DebugSymbolsProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+            
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item -->
+        <CreateItem Include="@(DebugSymbolsProjectOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="DebugSymbolsProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SGenFileItems
+    ================================================================
+
+    This target creates items for the serialization assembly.  SGen files are those 
+    generated by the SGen target and task.  These items are used in the output groups
+    and manifest generation.
+    -->
+    <Target
+        Name="SGenFileItems"
+        DependsOnTargets="PrepareForBuild; SgenSettings">
+
+        <!-- This represents the serialization assembly dll -->
+        <CreateItem Include="$(TargetDir)$(SGenDllName)" AdditionalMetadata="OUTPUTLOC=$(TargetDir)$(SGenDllName);TargetPath=$(SGenDllName)">
+            <Output ItemName="SGenTargetAssembly1" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Intermediate assembly -->
+        <CreateItem Include="$(IntermediateOutputPath)$(SGenDllName)" AdditionalMetadata="OUTPUTLOC=$(TargetDir)$(SGenDllName);TargetPath=$(SGenDllName)">
+            <Output ItemName="SGenIntermediateAssembly1" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Add the Serialization assembly dll only if it's appropriate -->
+        <CreateItem Include="@(SGenTargetAssembly1->'%(FullPath)')" Condition="'$(ShouldGenerateSerializer)' == 'true'">
+            <Output ItemName="SGenTargetAssembly" TaskParameter="Include" />
+        </CreateItem>
+
+        <CreateItem Include="@(SGenIntermediateAssembly1->'%(FullPath)')" Condition="'$(ShouldGenerateSerializer)' == 'true'">
+            <Output ItemName="SGenIntermediateAssembly" TaskParameter="Include" />
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         DocumentationProjectOutputGroup
+    ================================================================
+
+    This target performs population of the Documentation project output group.
+    -->
+    <Target
+        Name="DocumentationProjectOutputGroup"
+        Condition="'$(DocumentationFile)'!=''"
+        Outputs="@(DocumentationProjectOutputGroupOutput)">
+
+        <!-- This item represents the XML file built by the project -->
+        <CreateItem 
+            Include="@(DocFileItem)" 
+            AdditionalMetadata="OUTPUTLOC=@(FinalDocFile);IsKeyOutput=true;InProject=false;TargetPath=@(DocFileItem->'%(Filename)%(Extension)')">
+            
+            <Output ItemName="DocumentationProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+            
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item -->
+        <CreateItem Include="@(DocumentationProjectOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="DocumentationProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SatelliteDllsProjectOutputGroup
+    ================================================================
+
+    This target performs population of the Satellite Files project output group.
+    -->
+    <Target
+        Name="SatelliteDllsProjectOutputGroup"
+        DependsOnTargets="PrepareResourceNames"
+        Outputs="@(SatelliteDllsProjectOutputGroupOutput)">
+
+        <CreateItem
+            Include="$(IntermediateOutputPath)%(ResxWithCulture.Culture)\$(TargetName).resources.dll"
+            AdditionalMetadata="TargetPath=%(ResxWithCulture.Culture)\$(TargetName).resources.dll"
+            Condition="'@(ResxWithCulture)' != ''">
+
+           <Output ItemName="SatelliteDllsProjectOutputGroupOutputIntermediate" TaskParameter="Include" />
+
+        </CreateItem>
+
+        <CreateItem
+            Include="$(IntermediateOutputPath)%(NonResxWithCulture.Culture)\$(TargetName).resources.dll"
+            AdditionalMetadata="TargetPath=%(NonResxWithCulture.Culture)\$(TargetName).resources.dll"
+            Condition="'@(NonResxWithCulture)' != ''">
+
+            <Output ItemName="SatelliteDllsProjectOutputGroupOutputIntermediate" TaskParameter="Include" />
+
+        </CreateItem>
+
+        <CreateItem Include="$(IntermediateOutputPath)">
+            <Output ItemName="SatelliteDllsProjectOutputGroupRootRelativeUrlBaseIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item. -->
+        <CreateItem Include="@(SatelliteDllsProjectOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="SatelliteDllsProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SourceFilesProjectOutputGroup
+    ================================================================
+
+    This target performs population of the Source Files project output group.
+    Source files are items in the project whose type is "Compile" and "EmbeddedResource".
+
+    Note:  the source files output group also includes the project file as well
+    as the Application Config File - but only provided that the application configuration
+    file's type is "None".
+    -->
+    <Target
+        Name="SourceFilesProjectOutputGroup"
+        Outputs="@(SourceFilesProjectOutputGroupOutput)">
+
+        <!-- First we deal with Compile, EmbeddedResource and AppConfig -->
+        <CreateItem Include="@(CompileWithTargetPath);@(EmbeddedResourceWithTargetPath);@(AppConfigWithTargetPath)">
+            <Output ItemName="SourceFilesProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Include the project file -->
+        <CreateItem Include="$(ProjectPath)" AdditionalMetadata="TargetPath=$(ProjectFileName)">
+            <Output ItemName="SourceFilesProjectOutputGroupOutputIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item -->
+        <CreateItem Include="@(SourceFilesProjectOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="SourceFilesProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         ContentFilesProjectOutputGroup
+    ================================================================
+
+    This target performs population of the Content Files project output group.
+    Content files are items in the project whose type is "Content".
+    -->
+    <Target
+        Name="ContentFilesProjectOutputGroup"
+        Outputs="@(ContentFilesProjectOutputGroupOutput)">
+
+        <!-- Convert items into final items; this way we can get the full path for each item. -->
+        <CreateItem Include="@(ContentWithTargetPath->'%(FullPath)')">
+            <Output ItemName="ContentFilesProjectOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SGenFilesOutputGroup
+    ================================================================
+
+    This target performs population of the SGen Files project output group.
+    SGen files are those generated by the SGen target and task.
+    -->
+    <Target
+        Name="SGenFilesOutputGroup"
+        DependsOnTargets="SgenSettings;SGenFileItems"
+        Outputs="@(SGenFilesOutputGroupOutput)">
+
+        <CreateItem Include="@(SGenTargetAssembly)" AdditionalMetadata="TargetPath=$(SGenDllName)">
+            <Output ItemName="SGenFilesOutputGroupOutputIntermediate" TaskParameter="Include"/>
+        </CreateItem>
+
+        <!-- Convert intermediate items into final items; this way we can get the full path for each item -->
+        <CreateItem Include="@(SGenFilesOutputGroupOutputIntermediate->'%(FullPath)')">
+            <Output ItemName="SGenFilesOutputGroupOutput" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        AllProjectOutputGroupsDependencies
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         AllProjectOutputGroupsDependencies
+    ================================================================
+    -->
+    <Target 
+        Name="AllProjectOutputGroupsDependencies"
+        DependsOnTargets="
+            BuildOnlySettings;
+            PrepareForBuild;
+            AssignTargetPaths;
+            BuiltProjectOutputGroupDependencies;
+            DebugSymbolsProjectOutputGroupDependencies;
+            SatelliteDllsProjectOutputGroupDependencies;
+            DocumentationProjectOutputGroupDependencies;
+            SGenFilesOutputGroupDependencies"/>
+
+    <!--
+    ================================================================
+                                         BuiltProjectOutputGroupDependencies
+    ================================================================
+
+    This target performs population of the Built project output group dependencies.
+    -->
+    <Target 
+        Name="BuiltProjectOutputGroupDependencies"
+        DependsOnTargets="ResolveReferences"
+        Outputs="@(BuiltProjectOutputGroupDependency)">
+
+        <!-- This item represents dependencies (resolved references) -->
+        <CreateItem Include="@(ReferencePath->'%(FullPath)');@(ReferenceDependencyPaths->'%(FullPath)')">
+            <Output ItemName="BuiltProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+        <CreateItem Include="@(NativeReferenceFile->'%(FullPath)')">
+            <Output ItemName="BuiltProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+        <CreateItem Include="@(LooseManifestFile->'%(FullPath)')">
+            <Output ItemName="BuiltProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+        <CreateItem Include="@(ResolvedIsolatedComModules->'%(FullPath)')">
+            <Output ItemName="BuiltProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         DebugSymbolsProjectOutputGroupDependencies
+    ================================================================
+
+    This target performs population of the dependencies for the debug symbols project output group.
+    -->
+    <Target
+        Name="DebugSymbolsProjectOutputGroupDependencies"
+        Condition="'$(DebugSymbols)'!='false'"
+        DependsOnTargets="ResolveReferences"
+        Outputs="@(DebugSymbolsProjectOutputGroupDependency)">
+
+        <!-- This item represents dependent PDB's -->
+        <CreateItem Include="@(ReferenceRelatedPaths->'%(FullPath)')" Condition="'%(Extension)' == '.pdb'">
+            <Output ItemName="DebugSymbolsProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SatelliteDllsProjectOutputGroupDependencies
+    ================================================================
+
+    This target performs population of the dependencies for the satellite files project output group.
+    -->
+    <Target
+        Name="SatelliteDllsProjectOutputGroupDependencies"
+        DependsOnTargets="ResolveReferences"
+        Outputs="@(SatelliteDllsProjectOutputGroupDependency)">
+
+        <!-- This item represents dependent satellites -->
+        <CreateItem Include="@(ReferenceSatellitePaths->'%(FullPath)')">
+            <Output ItemName="SatelliteDllsProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         DocumentationProjectOutputGroupDependencies
+    ================================================================
+
+    This target performs population of the dependencies for the documentation project output group.
+    -->
+    <Target
+        Name="DocumentationProjectOutputGroupDependencies"
+        Condition="'$(DocumentationFile)'!=''"
+        DependsOnTargets="ResolveReferences"
+        Outputs="@(DocumentationProjectOutputGroupDependency)">
+
+        <!-- This item represents dependent XMLs -->
+        <CreateItem Include="@(ReferenceRelatedPaths->'%(FullPath)')" Condition="'%(Extension)' == '.xml'">
+            <Output ItemName="DocumentationProjectOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+    <!--
+    ================================================================
+                                         SGenFilesOutputGroupDependencies
+    ================================================================
+
+    This target performs population of the dependencies for the SGen project output group.
+    -->
+    <Target
+        Name="SGenFilesOutputGroupDependencies"
+        DependsOnTargets="ResolveReferences">
+
+        <!-- This item represents sgen xml serializer dll's -->
+        <CreateItem Include="@(ReferenceRelatedPaths)" Condition="'%(Extension)' == '.dll'"> 
+            <Output ItemName="SGenFilesOutputGroupDependency" TaskParameter="Include"/>
+        </CreateItem>
+
+    </Target>
+
+
+
+
+    <!--
+    ***********************************************************************************************
+    ***********************************************************************************************
+                                                                        Miscellaneous
+    ***********************************************************************************************
+    ***********************************************************************************************
+    -->
+
+    <!--
+    ================================================================
+                                         CopyRunEnvironmentFiles
+    ================================================================
+
+    Copy environment files necessary to run the user's app to the final directory.
+    This is a public target that can be invoked by an IDE.
+    -->
+    <Target
+        Name="CopyRunEnvironmentFiles"
+        DependsOnTargets="CopyAppConfigFile;RecordFileWrites"/>
+
+    <!--
+    ================================================================
+                                         Run
+    ================================================================
+
+    Run the final build output if it is a .EXE
+    -->
+    <PropertyGroup>
+        <RunDependsOn></RunDependsOn>
+    </PropertyGroup>
+    <Target
+        Name="Run"
+        DependsOnTargets="$(RunDependsOn)">
+        
+        <Error Text="Cannot run '$(TargetPath)' because project output type is not '.exe'" Condition="'$(TargetExt)'!='.exe'"/>
+        <Exec Command="$(TargetPath) $(StartArguments)" WorkingDirectory="$(OutDir)" Condition=" '$(StartWorkingDirectory)' == '' "/>
+        <Exec Command="$(TargetPath) $(StartArguments)" WorkingDirectory="$(StartWorkingDirectory)" Condition=" '$(StartWorkingDirectory)' != '' "/>
+        
+    </Target>
+
+    <!--
+    ================================================================
+                                         DumpSpecialMacros
+    ================================================================
+
+    Dump the names of certain important properties.
+    -->
+    <Target
+        Name="DumpSpecialMacros">
+        
+        <Message 
+            Importance="Low" 
+            Text="ConfigurationName  =$(ConfigurationName)
+DevEnvDir          =$(DevEnvDir)
+OutDir             =$(OutDir)
+PlatformName       =$(PlatformName)
+ProjectExt         =$(ProjectExt)
+ProjectFileName    =$(ProjectFileName)
+ProjectName        =$(ProjectName)
+SolutionDir        =$(SolutionDir)
+SolutionExt        =$(SolutionExt)
+SolutionFileName   =$(SolutionFileName)
+SolutionName       =$(SolutionName)
+SolutionPath       =$(SolutionPath)
+TargetExt          =$(TargetExt)
+TargetFileName     =$(TargetFileName)
+TargetName         =$(TargetName)
+MSBuildAllProjects =$(MSBuildAllProjects)
+ProjectDir         =$(ProjectDir)
+ProjectPath        =$(ProjectPath)
+TargetDir          =$(TargetDir)
+TargetPath         =$(TargetPath)"/>
+    </Target>
+
+
+
+
+    <PropertyGroup>
+        <FXCopTargets Condition="'$(FXCopTargets)'==''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\CodeAnalysis\Microsoft.CodeAnalysis.targets</FXCopTargets>
+    </PropertyGroup>
+
+    <Import Project="$(FXCopTargets)" Condition="Exists('$(FXCopTargets)')"/>
+    <PropertyGroup>
+        <RunFxcopTarget Condition="'$(RunFxCop)'=='true'">
+            RunFxcop
+        </RunFxcopTarget>
+    </PropertyGroup>
+
+    <Import Project="$(ReportingServicesTargets)" Condition="Exists('$(ReportingServicesTargets)')"/>
+    <Import Project="$(CustomAfterMicrosoftCommonTargets)" Condition="Exists('$(CustomAfterMicrosoftCommonTargets)')"/>
+
+</Project>
