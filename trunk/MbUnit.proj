@@ -2,8 +2,10 @@
 
 	<PropertyGroup>
         <MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
-        <v1_0_Properties>ReferencePath=$(windir)\Microsoft.NET\Framework\v1.0.3705;CscToolPath=$(windir)\Microsoft.NET\Framework\v1.0.3705;TargetFrameworkVersion=v1.0</v1_0_Properties>
-        <v1_1_Properties>ReferencePath=$(windir)\Microsoft.NET\Framework\v1.1.4322;CscToolPath=$(windir)\Microsoft.NET\Framework\v1.1.4322;TargetFrameworkVersion=v1.0</v1_1_Properties>
+        
+		<MSBuildExtensionsPath>$(MSBuildProjectDirectory)\bin\MSBuildExtensions</MSBuildExtensionsPath>
+		<v1_0_Properties>TargetFrameworkVersion=v1.0;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_0_Properties>
+		<v1_1_Properties>TargetFrameworkVersion=v1.1;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_1_Properties>
 		<OutputPath>$(MSBuildProjectDirectory)\build\</OutputPath>
 	</PropertyGroup>
 	
