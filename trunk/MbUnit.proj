@@ -16,7 +16,7 @@
 	</Target>
 	
 	<Target Name="MbUnit_AddIn" DependsOnTargets="MbUnit;MbUnit_1_1">
-		<MSBuild Projects="MbUnit\MbUnit.AddIn.sln" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+		<MSBuild Projects="MbUnit\MbUnit.AddIn.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
 	</Target>
 
 	<Target Name="Build" DependsOnTargets="MbUnit_AddIn;MbUnit;MbUnit_1_1;Refly;QuickGraph" />

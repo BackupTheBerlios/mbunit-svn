@@ -61,19 +61,19 @@ namespace MbUnit.AddIn
         public MbUnitTestRunner()
 		{}
 
-        public TestResultSummary RunAssembly(ITestListener testListener, Assembly assembly)
+        public TestRunResult RunAssembly(ITestListener testListener, Assembly assembly)
         {
             AnyFixtureFilter filter = new AnyFixtureFilter();
             return Run(testListener, assembly, filter);
         }
 
-        public TestResultSummary RunNamespace(ITestListener testListener, Assembly assembly, string ns)
+        public TestRunResult RunNamespace(ITestListener testListener, Assembly assembly, string ns)
         {
             NamespaceFixtureFilter filter = new NamespaceFixtureFilter(ns);
             return Run(testListener, assembly, filter);
         }
 
-        public TestResultSummary RunMember(ITestListener testListener, Assembly assembly, MemberInfo member)
+        public TestRunResult RunMember(ITestListener testListener, Assembly assembly, MemberInfo member)
         {
             Type type = member as Type;
             if (type != null)
@@ -92,7 +92,7 @@ namespace MbUnit.AddIn
             }
         }
 
-        protected TestResultSummary Run(
+        protected TestRunResult Run(
             ITestListener testListener, 
             Assembly assembly, 
             IFixtureFilter filter
@@ -101,7 +101,7 @@ namespace MbUnit.AddIn
             return Run(testListener,assembly,filter, new AnyRunPipeFilter(), TypeFilters.Any);
         }
 
-        protected TestResultSummary Run(
+        protected TestRunResult Run(
             ITestListener testListener, 
             Assembly assembly, 
             IFixtureFilter filter,
@@ -138,7 +138,7 @@ namespace MbUnit.AddIn
                     if (testCount==0)
                     {
                         testListener.WriteLine("No tests found",Category.Info);
-                        return null;
+                        return TestRunResult.NoTests;
                     }
 
                     testListener.WriteLine(String.Format("Found {0} tests", testCount),Category.Info);
@@ -167,10 +167,19 @@ namespace MbUnit.AddIn
 
                     testListener.WriteLine("[reports] generating HTML report",Category.Info);
                     this.GenerateReports(testListener, assembly, domain.TestEngine.Report.Result);
-                    TestResultSummary summary = new TestResultSummary();
-                    summary.TotalTests = domain.TestEngine.Report.Result.Counter.RunCount;
-                    summary.IsExecuted = true;                  
-                    return summary;
+
+                    if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
+                    {
+                        return TestRunResult.Failure;
+                    }
+                    else if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
+                    {
+                        return TestRunResult.Success;
+                    }
+                    else
+                    {
+                        return TestRunResult.NoTests;
+                    }
                 }
             }
 			catch(Exception ex)
