@@ -13,7 +13,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
-		TestDriven.NET = 1;Zero Friction Unit Testing for Visual Studio .NET;TestDriven.NET
-	EndGlobalSection
 EndGlobal
