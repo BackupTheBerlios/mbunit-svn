@@ -168,13 +168,16 @@ namespace MbUnit.AddIn
                     testListener.WriteLine("[reports] generating HTML report",Category.Info);
                     this.GenerateReports(testListener, assembly, domain.TestEngine.Report.Result);
 
-                    if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
+                    if (domain.TestEngine.Report.Result.Counter.RunCount > 0)
                     {
-                        return TestRunResult.Failure;
-                    }
-                    else if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
-                    {
-                        return TestRunResult.Success;
+                        if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
+                        {
+                            return TestRunResult.Failure;
+                        }
+                        else
+                        {
+                            return TestRunResult.Success;
+                        }
                     }
                     else
                     {
@@ -212,9 +215,16 @@ namespace MbUnit.AddIn
         void RenderSetUpOrTearDownFailure(string context, ReportSetUpAndTearDown setup)
         {
             TestResultSummary summary = new TestResultSummary();
-            summary.IsExecuted = true;
-            summary.IsFailure = setup.Result == ReportRunResult.Failure;
-            summary.IsSuccess = setup.Result == ReportRunResult.Success;
+            switch (setup.Result)
+            {
+                case ReportRunResult.Failure:
+                    summary.Result = TestResult.Failure;
+                    break;
+                case ReportRunResult.Success:
+                    summary.Result = TestResult.Success;
+                    break;
+            }
+
             summary.TotalTests = this.testCount;
             summary.Name = String.Format("{0} {1}",context, setup.Name);
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(setup.Duration * 1000));
@@ -271,9 +281,7 @@ namespace MbUnit.AddIn
             this.successCount++;
 
             TestResultSummary summary = new TestResultSummary();
-            summary.IsExecuted = true;
-            summary.IsFailure = false;
-            summary.IsSuccess = true;
+            summary.Result = TestResult.Success;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));
@@ -287,9 +295,7 @@ namespace MbUnit.AddIn
             this.failureCount++;
 
             TestResultSummary summary = new TestResultSummary();
-            summary.IsExecuted = true;
-            summary.IsFailure = true;
-            summary.IsSuccess = false;
+            summary.Result = TestResult.Failure;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));
@@ -311,9 +317,7 @@ namespace MbUnit.AddIn
             this.skipCount++;
 
             TestResultSummary summary = new TestResultSummary();
-            summary.IsExecuted = true;
-            summary.IsFailure = false;
-            summary.IsSuccess = false;
+            summary.Result = TestResult.Ignored;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, 0);
@@ -335,9 +339,7 @@ namespace MbUnit.AddIn
             this.ignoreCount++;
 
             TestResultSummary summary = new TestResultSummary();
-            summary.IsExecuted = false;
-            summary.IsFailure = false;
-            summary.IsSuccess = false;
+            summary.Result = TestResult.Ignored;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));

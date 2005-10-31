@@ -135,7 +135,9 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="TestDriven.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=50ecb853f8c6b8d2" />
+    <Reference Include="TestDriven.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=50ecb853f8c6b8d2">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="TestFu, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <HintPath>..\TestFu\obj\Debug\TestFu.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
