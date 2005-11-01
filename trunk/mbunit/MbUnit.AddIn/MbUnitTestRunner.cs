@@ -29,6 +29,7 @@ using System.IO;
 using System.Reflection;
 
 using TestDriven.Framework;
+using TDF = TestDriven.Framework;
 
 using MbUnit.Core;
 using MbUnit.Core.Framework;
@@ -61,19 +62,19 @@ namespace MbUnit.AddIn
         public MbUnitTestRunner()
 		{}
 
-        public TestRunResult RunAssembly(ITestListener testListener, Assembly assembly)
+        public TestRunState RunAssembly(ITestListener testListener, Assembly assembly)
         {
             AnyFixtureFilter filter = new AnyFixtureFilter();
             return Run(testListener, assembly, filter);
         }
 
-        public TestRunResult RunNamespace(ITestListener testListener, Assembly assembly, string ns)
+        public TestRunState RunNamespace(ITestListener testListener, Assembly assembly, string ns)
         {
             NamespaceFixtureFilter filter = new NamespaceFixtureFilter(ns);
             return Run(testListener, assembly, filter);
         }
 
-        public TestRunResult RunMember(ITestListener testListener, Assembly assembly, MemberInfo member)
+        public TestRunState RunMember(ITestListener testListener, Assembly assembly, MemberInfo member)
         {
             Type type = member as Type;
             if (type != null)
@@ -92,7 +93,7 @@ namespace MbUnit.AddIn
             }
         }
 
-        protected TestRunResult Run(
+        protected TestRunState Run(
             ITestListener testListener, 
             Assembly assembly, 
             IFixtureFilter filter
@@ -101,7 +102,7 @@ namespace MbUnit.AddIn
             return Run(testListener,assembly,filter, new AnyRunPipeFilter(), TypeFilters.Any);
         }
 
-        protected TestRunResult Run(
+        protected TestRunState Run(
             ITestListener testListener, 
             Assembly assembly, 
             IFixtureFilter filter,
@@ -138,7 +139,7 @@ namespace MbUnit.AddIn
                     if (testCount==0)
                     {
                         testListener.WriteLine("No tests found",Category.Info);
-                        return TestRunResult.NoTests;
+                        return TestRunState.NoTests;
                     }
 
                     testListener.WriteLine(String.Format("Found {0} tests", testCount),Category.Info);
@@ -168,21 +169,7 @@ namespace MbUnit.AddIn
                     testListener.WriteLine("[reports] generating HTML report",Category.Info);
                     this.GenerateReports(testListener, assembly, domain.TestEngine.Report.Result);
 
-                    if (domain.TestEngine.Report.Result.Counter.RunCount > 0)
-                    {
-                        if (domain.TestEngine.Report.Result.Counter.FailureCount > 0)
-                        {
-                            return TestRunResult.Failure;
-                        }
-                        else
-                        {
-                            return TestRunResult.Success;
-                        }
-                    }
-                    else
-                    {
-                        return TestRunResult.NoTests;
-                    }
+                    return toTestRunState(domain.TestEngine.Report.Result);
                 }
             }
 			catch(Exception ex)
@@ -192,6 +179,21 @@ namespace MbUnit.AddIn
                 throw new Exception("Test execution failed", ex);
             }
 		}
+
+        static TestRunState toTestRunState(ReportResult reportResult)
+        {
+            if (reportResult.Counter.FailureCount > 0)
+            {
+                return TestRunState.Failure;
+            }
+
+            if (reportResult.Counter.RunCount > 0)
+            {
+                return TestRunState.Success;
+            }
+
+            return TestRunState.NoTests;
+        }
 
         private void GenerateReports(ITestListener testListener, Assembly assembly,ReportResult result)
         {
@@ -214,14 +216,14 @@ namespace MbUnit.AddIn
 
         void RenderSetUpOrTearDownFailure(string context, ReportSetUpAndTearDown setup)
         {
-            TestResultSummary summary = new TestResultSummary();
+            TestResult summary = new TestResult();
             switch (setup.Result)
             {
                 case ReportRunResult.Failure:
-                    summary.Result = TestResult.Failure;
+                    summary.State = TDF.TestState.Failed;
                     break;
                 case ReportRunResult.Success:
-                    summary.Result = TestResult.Success;
+                    summary.State = TDF.TestState.Passed;
                     break;
             }
 
@@ -280,8 +282,8 @@ namespace MbUnit.AddIn
         {
             this.successCount++;
 
-            TestResultSummary summary = new TestResultSummary();
-            summary.Result = TestResult.Success;
+            TestResult summary = new TestResult();
+            summary.State = TDF.TestState.Passed;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));
@@ -294,8 +296,8 @@ namespace MbUnit.AddIn
         {
             this.failureCount++;
 
-            TestResultSummary summary = new TestResultSummary();
-            summary.Result = TestResult.Failure;
+            TestResult summary = new TestResult();
+            summary.State = TDF.TestState.Failed;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));
@@ -316,8 +318,8 @@ namespace MbUnit.AddIn
         {
             this.skipCount++;
 
-            TestResultSummary summary = new TestResultSummary();
-            summary.Result = TestResult.Ignored;
+            TestResult summary = new TestResult();
+            summary.State = TDF.TestState.Ignored;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, 0);
@@ -338,8 +340,8 @@ namespace MbUnit.AddIn
         {
             this.ignoreCount++;
 
-            TestResultSummary summary = new TestResultSummary();
-            summary.Result = TestResult.Ignored;
+            TestResult summary = new TestResult();
+            summary.State = TDF.TestState.Ignored;
             summary.TotalTests = this.testCount;
             summary.Name = run.Name;
             summary.TimeSpan = new TimeSpan(0, 0, 0, 0, (int)(run.Duration * 1000));
