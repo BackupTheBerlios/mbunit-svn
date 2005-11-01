@@ -110,36 +110,17 @@
     <WarningLevel>1</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Cons, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Cons\obj\Debug\MbUnit.Cons.exe</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
     <Reference Include="MbUnit.Framework, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
       <HintPath>..\MbUnit.Framework\obj\Debug\MbUnit.Framework.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="MbUnit.GUI, Version=2.21.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.GUI\obj\Debug\MbUnit.GUI.exe</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
-    <Reference Include="MbUnit.Tasks, Version=2.21.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Tasks\obj\Debug\MbUnit.Tasks.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
     <Reference Include="TestDriven.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=50ecb853f8c6b8d2">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="TestFu, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
-      <HintPath>..\TestFu\obj\Debug\TestFu.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
@@ -153,60 +134,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\QuickGraph\NGraphviz\NGraphviz.dll">
-      <Link>NGraphviz.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\NGraphviz\NGraphviz.Helpers.dll">
-      <Link>NGraphviz.Helpers.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\NGraphviz\NGraphviz.Layout.dll">
-      <Link>NGraphviz.Layout.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\QuickGraph.Algorithms.Graphviz\obj\Debug\QuickGraph.Algorithms.Graphviz.dll">
-      <Link>QuickGraph.Algorithms.Graphviz.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\QuickGraph.Algorithms\obj\Debug\QuickGraph.Algorithms.dll">
-      <Link>QuickGraph.Algorithms.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\QuickGraph.Algorithms\obj\Debug\QuickGraph.Algorithms.pdb">
-      <Link>QuickGraph.Algorithms.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\QuickGraph\obj\Debug\QuickGraph.dll">
-      <Link>QuickGraph.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\QuickGraph\QuickGraph\obj\Debug\QuickGraph.pdb">
-      <Link>QuickGraph.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\Refly\Refly\obj\Debug\Refly.dll">
-      <Link>Refly.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\MbUnit.Framework.1.1\obj\Debug\MbUnit.Framework.1.1.dll">
-      <Link>MbUnit.Framework.1.1.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\MbUnit.Framework.1.1\obj\Debug\MbUnit.Framework.1.1.pdb">
-      <Link>MbUnit.Framework.1.1.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="..\..\build\MbUnit.Framework.dll">
+      <Link>lib\MbUnit.Framework.dll</Link>
     </Content>
     <Content Include="..\MbUnit.Framework\Core\Reports\mbunit-report.cruisecontrol.xsl">
       <Link>CruiseControl\mbunit-report.cruisecontrol.xsl</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\MbUnit.GUI\MbUnit.GUI.exe.config">
-      <Link>MbUnit.GUI.exe.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\MbUnit.ico">
-      <Link>MbUnit.ico</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Snippets\VSSnippets\autorunner.xml">
