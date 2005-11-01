@@ -4,7 +4,7 @@
 
       <Media Id="1" Cabinet="product.cab" EmbedCab="yes"></Media>
 
-	<Icon Id="I__MbUnit" src="MbUnit.ico"></Icon>
+	<Icon Id="I__MbUnit" src="mbunit\MbUnit.ico"></Icon>
   
       <Directory Id="TARGETDIR" Name="SourceDir">
       
