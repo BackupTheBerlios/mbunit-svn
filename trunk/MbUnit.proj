@@ -9,17 +9,16 @@
 		<v1_0_Properties>TargetFrameworkVersion=v1.0;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_0_Properties>
 		<v1_1_Properties>TargetFrameworkVersion=v1.1;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_1_Properties>
 		<OutputPath>$(MSBuildProjectDirectory)\build\</OutputPath>
-		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).msi</MsiFileName>
+		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
 		<NXslt>bin\nxslt\nxslt.exe</NXslt>
 		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
 	</PropertyGroup>
 	
 	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
-		<Exec Command="candle MbUnit.Feature.wxs -out $(OutputPath)MbUnit.Feature.wixobj" />
-		<Exec Command="candle MbUnit.Package.wxs -out $(OutputPath)MbUnit.Package.wixobj" />
-		<Exec Command="light $(OutputPath)MbUnit.Feature.wixobj $(OutputPath)MbUnit.Package.wixobj -out $(OutputPath)MbUnit.msi" />
-		<Copy SourceFiles="build\MbUnit.msi" DestinationFiles="$(MsiFileName)" />
-		<Delete Files="build\MbUnit.msi" />
+
+		<Exec Command="makensis MbUnitBuild.nsi" />
+		<Copy SourceFiles="Setup.exe" DestinationFiles="$(MsiFileName)" />
+		<Delete Files="SetUp.exe" />
 		<!-- CCNet Artifacts -->
 		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
 	</Target>
