@@ -89,12 +89,8 @@ Section "MainSection" SEC01
   WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "AssemblyPath" "$PROGRAMFILES\MbUnit\MbUnit.AddIn.dll"
   WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "TypeName" "MbUnit.AddIn.MbUnitTestRunner"
   WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "TargetFrameworkAssemblyName" "MbUnit.Framework"
+  WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "Application" "$PROGRAMFILES\MbUnit\MbUnit.GUI.exe"
 
-
-;  <Registry Id="R__MbUnit" Root="HKMU" Key="SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" Type="string" Value="10"></Registry>
-;				<Registry Id="R__MbUnit_AssemblyPath" Root="HKMU" Key="SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" Name="AssemblyPath" Type="string" Value="[MbUnitInstallDir]MbUnit.AddIn.dll"></Registry>
-;				<Registry Id="R__MbUnit_TypeName" Root="HKMU" Key="SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" Name="TypeName" Type="string" Value="MbUnit.AddIn.MbUnitTestRunner"></Registry>
-;				<Registry Id="R__MbUnit_TargetFrameworkAssemblyName" Root="HKMU" Key="SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" Name="TargetFrameworkAssemblyName" Type="string" Value="MbUnit.Framework"></Registry>
 
   SetOutPath "$INSTDIR\VSSnippets"
   SetOverwrite try
