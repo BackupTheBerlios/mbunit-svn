@@ -1,0 +1,63 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Import Project="Version.properties" />
+
+	<PropertyGroup>
+        <MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
+        
+		<MSBuildExtensionsPath>$(MSBuildProjectDirectory)\bin\MSBuildExtensions</MSBuildExtensionsPath>
+		<v1_0_Properties>TargetFrameworkVersion=v1.0;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_0_Properties>
+		<v1_1_Properties>TargetFrameworkVersion=v1.1;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_1_Properties>
+		<OutputPath>$(MSBuildProjectDirectory)\build\</OutputPath>
+		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
+		<NXslt>bin\nxslt\nxslt.exe</NXslt>
+		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
+	</PropertyGroup>
+	
+	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
+
+		<Exec Command="makensis MbUnitBuild.nsi" />
+		<Copy SourceFiles="Setup.exe" DestinationFiles="$(MsiFileName)" />
+		<Delete Files="SetUp.exe" />
+		<!-- CCNet Artifacts -->
+		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
+	</Target>
+	
+	<Target Name="MbUnit_AddIn" DependsOnTargets="MbUnit;MbUnit_1_1">
+		<MSBuild Projects="MbUnit\MbUnit.AddIn.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+	</Target>
+
+	<Target Name="Build" DependsOnTargets="Increment;MbUnit_AddIn;MbUnit;MbUnit_1_1;Refly;QuickGraph;Package" />
+	
+	<Target Name="Refly">
+		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+	</Target>
+	
+	<Target Name="QuickGraph">
+		<MSBuild Projects="QuickGraph\QuickGraph.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+	</Target>
+	
+	<Target Name="MbUnit" DependsOnTargets="QuickGraph;Refly">
+		<MSBuild Projects="MbUnit\MbUnit.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+	</Target>
+	
+	<Target Name="MbUnit_1_1" DependsOnTargets="MbUnit">
+		<MSBuild Projects="MbUnit\MbUnit.1.1.sln" Targets="Clean;Rebuild" Properties="$(v1_1_Properties);OutputPath=$(OutputPath)" />
+	</Target>
+	
+	<Target Name="Increment">
+		<Exec Command="$(NXslt) Version.properties IncrementBuild.xslt -o NewVersion.properties VersionMajor=$(VersionMajor) VersionMinor=$(VersionMinor) VersionBuild=$(VersionBuild) VersionRevision=$(VersionRevision)" />
+		<Copy SourceFiles="NewVersion.properties" DestinationFiles="Version.properties" />
+	</Target>
+	
+		
+		
+	
+<!-- TODO: Execute MbUnit tests !!!
+	<Target Name="MbUnit_Tests" DependsOnTargets="MbUnit;MbUnit_1_1">
+		<MSBuild Projects="MbUnit\MbUnit.Tests.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
+		<Exec Command='"$(OutputPath)MbUnit.Cons.exe" "$(OutputPath)MbUnit.Tests.exe" "$(OutputPath)TestFu.Tests.exe" -report-type:Xml -report-name-format:MbUnit.TestFu.Tests-results' />
+	</Target>
+-->
+		
+</Project>
