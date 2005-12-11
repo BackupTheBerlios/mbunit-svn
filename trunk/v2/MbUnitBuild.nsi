@@ -81,6 +81,7 @@ Section "MainSection" SEC01
   File "C:\source\MbUnit\v2\build\MbUnit.Demo.1.1.pdb"
   File "C:\source\MbUnit\v2\build\MbUnit.Demo.1.1.dll"
   File "C:\source\MbUnit\v2\build\MbUnit.Cons.pdb"
+  File "C:\source\MbUnit\v2\build\MbUnit.Cons.exe"
   File "C:\source\MbUnit\v2\build\MbUnit.AddIn.pdb"
   File "C:\source\MbUnit\v2\build\MbUnit.AddIn.dll"
   File "C:\source\MbUnit\v2\build\log4net.dll"
