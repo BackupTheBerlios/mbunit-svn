@@ -8,6 +8,7 @@
 		<MSBuildExtensionsPath>$(MSBuildProjectDirectory)\bin\MSBuildExtensions</MSBuildExtensionsPath>
 		<v1_0_Properties>TargetFrameworkVersion=v1.0;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_0_Properties>
 		<v1_1_Properties>TargetFrameworkVersion=v1.1;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v1_1_Properties>
+		<v2_0_Properties>TargetFrameworkVersion=v2.0;MSBuildExtensionsPath=$(MSBuildExtensionsPath);CustomAfterMicrosoftCommonTargets=$(MSBuildExtensionsPath)\CrossCompile.CSharp.targets</v2_0_Properties>
 		<OutputPath>$(MSBuildProjectDirectory)\build\</OutputPath>
 		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
 		<NXslt>bin\nxslt\nxslt.exe</NXslt>
@@ -44,7 +45,11 @@
 	<Target Name="MbUnit_1_1" DependsOnTargets="MbUnit">
 		<MSBuild Projects="MbUnit\MbUnit.1.1.sln" Targets="Clean;Rebuild" Properties="$(v1_1_Properties);OutputPath=$(OutputPath)" />
 	</Target>
-	
+
+	<Target Name="MbUnitMsBuild" DependsOnTargets="MbUnit">
+		<MSBuild Projects="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)" />
+	</Target>	
+
 	<Target Name="Increment">
 		<Exec Command="$(NXslt) Version.properties IncrementBuild.xslt -o NewVersion.properties VersionMajor=$(VersionMajor) VersionMinor=$(VersionMinor) VersionBuild=$(VersionBuild) VersionRevision=$(VersionRevision)" />
 		<Copy SourceFiles="NewVersion.properties" DestinationFiles="Version.properties" />

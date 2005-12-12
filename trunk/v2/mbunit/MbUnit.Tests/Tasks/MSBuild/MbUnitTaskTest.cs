@@ -41,20 +41,20 @@ namespace MbUnit.Tests.Tasks.MSBuild
             tester.Run();
         }
 
-        [Test]
-        public void MultiAssemblyProject()
-        {
-            // load project file
-            ConsoleTester tester = new ConsoleTester(
-                this.msbuildPath,
-                @"Tasks\MSBuild\msbuild.sample2.xml"
-                );
-            tester.Run();
+        //[Test]
+        //public void MultiAssemblyProject()
+        //{
+        //    // load project file
+        //    ConsoleTester tester = new ConsoleTester(
+        //        this.msbuildPath,
+        //        @"Tasks\MSBuild\msbuild.sample2.xml"
+        //        );
+        //    tester.Run();
 
-            FileAssert.Exists(@"CustomFolder\CustomNameFormat.xml");
-            FileAssert.Exists(@"CustomFolder\CustomNameFormat.html");
-            FileAssert.Exists(@"CustomFolder\CustomNameFormat.txt");
-            FileAssert.Exists(@"CustomFolder\CustomNameFormat.dox.txt");
-        }
+        //    FileAssert.Exists(@"CustomFolder\CustomNameFormat.xml");
+        //    FileAssert.Exists(@"CustomFolder\CustomNameFormat.html");
+        //    FileAssert.Exists(@"CustomFolder\CustomNameFormat.txt");
+        //    FileAssert.Exists(@"CustomFolder\CustomNameFormat.dox.txt");
+        //}
     }
 }

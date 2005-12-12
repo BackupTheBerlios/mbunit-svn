@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50215</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{18108D47-1DAB-4C42-87AC-47F251AA5C72}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -24,9 +24,9 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=2.23.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Framework\bin\Debug\MbUnit.Framework.dll</HintPath>
+    <Reference Include="MbUnit.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

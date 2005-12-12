@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50215</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CFE084BE-4067-499F-8BA9-E36517C4C6F6}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -110,14 +110,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Cons, Version=2.23.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Cons\obj\Debug\MbUnit.Cons.exe</HintPath>
+    <Reference Include="MbUnit.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
-    <Reference Include="MbUnit.Framework, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Framework\obj\Debug\MbUnit.Framework.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
     </Reference>
     <Reference Include="MbUnit.GUI, Version=2.22.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\MbUnit.GUI\obj\Debug\MbUnit.GUI.exe</HintPath>
