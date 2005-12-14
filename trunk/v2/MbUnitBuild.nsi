@@ -81,6 +81,8 @@ Section "MainSection" SEC01
   File "C:\source\MbUnit\v2\build\MbUnit.AddIn.pdb"
   File "C:\source\MbUnit\v2\build\MbUnit.AddIn.dll"
   File "C:\source\MbUnit\v2\build\log4net.dll"
+  File "C:\source\MbUnit\v2\build\MbUnit.MSBuild.Tasks.dll"
+  File "C:\source\MbUnit\v2\build\MbUnit.MSBuild.Tasks.pdp"
   
   WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "" "10"
   WriteRegStr HKCU "SOFTWARE\MutantDesign\TestDriven.NET\TestRunners\MbUnit" "AssemblyPath" "$PROGRAMFILES\MbUnit\MbUnit.AddIn.dll"
