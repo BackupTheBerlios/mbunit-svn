@@ -43,9 +43,6 @@ Section "MainSection" SEC01
   SetOverwrite ifnewer
   File "C:\source\MbUnit\v2\build\XsdTidy.pdb"
   File "C:\source\MbUnit\v2\build\XsdTidy.exe"
-  ;CreateDirectory "$SMPROGRAMS\\"
-  ;CreateShortCut "$SMPROGRAMS\\MbUnit.lnk" "$INSTDIR\XsdTidy.exe"
-  ;CreateShortCut "$DESKTOP\MbUnit.lnk" "$INSTDIR\XsdTidy.exe"
   File "C:\source\MbUnit\v2\build\TestFu.pdb"
   File "C:\source\MbUnit\v2\build\TestFu.dll"
   File "C:\source\MbUnit\v2\build\TestDriven.Framework.dll"
@@ -181,9 +178,8 @@ Section Uninstall
   Delete "$INSTDIR\TestFu.pdb"
   Delete "$INSTDIR\XsdTidy.exe"
   Delete "$INSTDIR\XsdTidy.pdb"
-
-  ;Delete "$DESKTOP\MbUnit.lnk"
-  ;Delete "$SMPROGRAMS\\MbUnit.lnk"
+  Delete "$INSTDIR\MbUnit.Cons.exe"
+  Delete "$INSTDIR\MbUnit.Cons.exe.config"
 
   RMDir "$SMPROGRAMS\\"
   RMDir "$INSTDIR\VSSnippets"
