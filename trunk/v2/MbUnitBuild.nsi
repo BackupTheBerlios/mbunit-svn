@@ -142,7 +142,7 @@ Section Uninstall
   Delete "$INSTDIR\NGraphviz.Helpers.dll"
   Delete "$INSTDIR\NGraphviz.Layout.dll"
   Delete "$INSTDIR\QuickGraph.Algorithms.dll"
-  Delete "$INSTDIR\QuickGraph.Algorithms.Graphviz.dll"b"
+  Delete "$INSTDIR\QuickGraph.Algorithms.Graphviz.dll"
   Delete "$INSTDIR\QuickGraph.dll"
   Delete "$INSTDIR\Refly.dll"
   Delete "$INSTDIR\TestDriven.Framework.dll"
