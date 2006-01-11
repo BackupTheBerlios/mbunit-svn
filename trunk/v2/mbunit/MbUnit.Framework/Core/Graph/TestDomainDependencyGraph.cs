@@ -47,6 +47,7 @@ namespace MbUnit.Core.Graph
         private Hashtable assemblyNameVertices = new Hashtable();
         private StringCollection assemblyPaths = new StringCollection();
         private AdjacencyGraph graph;
+        private bool verbose;
 
         public TestDomainDependencyGraph()
         {
@@ -100,6 +101,17 @@ namespace MbUnit.Core.Graph
 
             // load domain
             domain.Load();
+
+            /*
+             * MLS 12/21/05 - Tell the test engine to add a console listener, 
+             * if started from console app with verbose option.
+             * Note that the test engine is actually a remoting proxy to the remote test engine at this point.
+             */
+            if (this.verbose)
+            {
+                domain.TestEngine.AddConsoleListener();
+            }
+            
 
             // adding path
             foreach (string assemblyPath in this.AssemblyPaths)
@@ -242,20 +254,28 @@ namespace MbUnit.Core.Graph
         public static TestDomainDependencyGraph BuildGraph(
             string[] testAssemblies,
             string[] assemblyPaths,
-            IFixtureFilter fixtureFilter
+            IFixtureFilter fixtureFilter,
+            bool verbose
             )
         {
+            // MLS 12/21/05 - adding verbose parameter to fix MBUNIT-28 (verbose command line option not working).
+            // IDEA: A more flexible solution might be to pass in a collection of IRunPipeListeners.
+
             return BuildGraph(testAssemblies, assemblyPaths, fixtureFilter,
-                new AnyRunPipeFilter());
+                new AnyRunPipeFilter(), verbose);
         }
 
         public static TestDomainDependencyGraph BuildGraph(
             string[] testAssemblies, 
             string[] assemblyPaths,
             IFixtureFilter fixtureFilter,
-            IRunPipeFilter runPipeFilter
+            IRunPipeFilter runPipeFilter,
+            bool verbose
             )
         {
+            // MLS 12/21/05 - adding verbose parameter to fix MBUNIT-28 (verbose command line option not working).
+            // IDEA: A more flexible solution might be to pass in a collection of IRunPipeListeners.
+
             if (testAssemblies == null)
                 throw new ArgumentNullException("testAssemblies");
             if (testAssemblies.Length == 0)
@@ -270,6 +290,7 @@ namespace MbUnit.Core.Graph
             try
             {
                 graph = new TestDomainDependencyGraph();
+                graph.verbose = verbose;
                 if (assemblyPaths != null)
                     graph.AssemblyPaths.AddRange(assemblyPaths);
                 foreach (string testAssembly in testAssemblies)

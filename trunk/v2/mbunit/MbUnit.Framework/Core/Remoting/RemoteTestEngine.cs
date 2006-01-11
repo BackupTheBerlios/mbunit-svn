@@ -243,5 +243,25 @@ namespace MbUnit.Core.Remoting
         {
             this.FixtureRunner.Run(this.Explorer, this.Report);
         }
+
+        /// <summary>
+        /// Supports verbose output option of console app. 
+        /// Added as part of fix to issue MBUNIT-28.
+        /// </summary>
+        /// <author>Marc Stober</author>
+        /// <date>December 21, 2005</date>
+        public void AddConsoleListener()
+        {
+            foreach (Fixture f in Explorer.FixtureGraph.Fixtures)
+            {
+                System.Diagnostics.Debug.Print(f.ToString());
+                foreach (RunPipeStarter s in f.Starters)
+                {
+                    s.Listeners.Add(new MbUnit.Core.Cons.ConsoleRunPipeListener());
+                }
+            }
+
+        }
+
     }
 }

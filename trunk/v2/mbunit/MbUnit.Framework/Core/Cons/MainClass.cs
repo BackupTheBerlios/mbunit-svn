@@ -152,7 +152,7 @@ namespace MbUnit.Core.Cons
                         TestDomainDependencyGraph.BuildGraph(
                             this.Arguments.Files, 
                             this.Arguments.AssemblyPath, 
-                            filter))
+                            filter, this.Arguments.Verbose))
                     {
                         graph.Log += new ErrorReporter(graph_Log);
                         consoleOut.WriteLine("[info] Starting execution");

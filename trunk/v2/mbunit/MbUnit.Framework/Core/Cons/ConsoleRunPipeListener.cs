@@ -50,17 +50,23 @@ namespace MbUnit.Core.Cons
 		public void Start(RunPipe pipe)
 		{}
 
+        // MLS 12/21/05 - changing some of the messages below to give details more like the AutoRunner,
+        //      although it still doesn't show all the details that the AutoRunner does.
+        // TOOD: Refactor so that this is exactly like the AutoRunner, and remove duplicate code.
+        
         public void Success(RunPipe pipe, ReportRun result)
-        {}
+        {
+            Writer.WriteLine("[success] {0}", pipe.Name);
+        }
 
         public void Ignore(RunPipe pipe, ReportRun result)
         {
-			Writer.WriteLine("[ignore] {0}",pipe.Name);
+			Writer.WriteLine("[ignored] {0}", pipe.Name);
 		}
 
         public void Failure(RunPipe pipe, ReportRun result)
         {
-			Writer.WriteLine("[failure] {0}",pipe.Name);
+			Writer.WriteLine("[failure] {0}: {1}", pipe.Name, result.Exception.Message);
 		}
 
         public void Skip(RunPipe pipe, ReportRun result)
