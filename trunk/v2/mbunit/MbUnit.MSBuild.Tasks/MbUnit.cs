@@ -107,7 +107,7 @@ namespace MbUnit.MSBuild.Tasks
             // load and execute
             using (
                     TestDomainDependencyGraph graph =
-                    TestDomainDependencyGraph.BuildGraph(this.Assemblies, this.AssemblyPaths, FixtureFilters.Any))
+                    TestDomainDependencyGraph.BuildGraph(this.Assemblies, this.AssemblyPaths, FixtureFilters.Any, false))
             {
                 graph.Log+=new ErrorReporter(graph_Log);
                 ReportResult r = graph.RunTests();

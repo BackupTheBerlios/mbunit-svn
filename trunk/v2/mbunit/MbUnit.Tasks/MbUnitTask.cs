@@ -10,7 +10,7 @@ using log4net;
 using QuickGraph.Representations;
 
 namespace MbUnit.Tasks
-{
+{    
     using MbUnit.Core;
     using MbUnit.Framework;
     using MbUnit.Core.Invokers;
@@ -187,7 +187,7 @@ namespace MbUnit.Tasks
             {
                 using (
                     TestDomainDependencyGraph graph =
-                    TestDomainDependencyGraph.BuildGraph(assemblieNames, dirNames, FixtureFilters.Any))
+                    TestDomainDependencyGraph.BuildGraph(assemblieNames, dirNames, FixtureFilters.Any, false))                 
                 {
                     graph.Log += new MbUnit.Core.Cons.CommandLine.ErrorReporter(graph_Log);
                     try
