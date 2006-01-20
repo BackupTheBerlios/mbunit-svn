@@ -254,7 +254,6 @@ namespace MbUnit.Core.Remoting
         {
             foreach (Fixture f in Explorer.FixtureGraph.Fixtures)
             {
-                System.Diagnostics.Debug.WriteLine(f.ToString());
                 foreach (RunPipeStarter s in f.Starters)
                 {
                     s.Listeners.Add(new MbUnit.Core.Cons.ConsoleRunPipeListener());
