@@ -97,19 +97,23 @@ namespace MbUnit.Core.Reports
 		/// <param name="fileName">Report output file name </param>
 		public virtual void Render(ReportResult result, string fileName)
 		{
-            if (result == null)
-                throw new ArgumentNullException("result");
-            if (fileName == null)
-                throw new ArgumentNullException("fileName");
-            if (fileName.Length == 0)
-                throw new ArgumentException("Length is 0", "fileName");
+              bool isProfiling = Environment.GetEnvironmentVariable("cor_enable_profiling") == "1";
+              if (!isProfiling)
+              {
+                  if (result == null)
+                      throw new ArgumentNullException("result");
+                  if (fileName == null)
+                      throw new ArgumentNullException("fileName");
+                  if (fileName.Length == 0)
+                      throw new ArgumentException("Length is 0", "fileName");
 
-            using (StreamWriter writer = new StreamWriter(fileName)) 
-            { 
-				// this will create a UTF-8 format with no preamble. 
-				// We might need to change that if it create a problem with internationalization
-				Render(result, writer);
-			}
+                  using (StreamWriter writer = new StreamWriter(fileName))
+                  {
+                      // this will create a UTF-8 format with no preamble. 
+                      // We might need to change that if it create a problem with internationalization
+                      Render(result, writer);
+                  }
+              }
 		}
 
 		/// <summary>
@@ -122,20 +126,29 @@ namespace MbUnit.Core.Reports
 		/// <returns>File name of the report</returns>
 		public virtual string Render(ReportResult result, string outputPath, string nameFormat, string extension)
 		{
-            if (result == null)
-                throw new ArgumentNullException("result");
-            if (nameFormat == null)
-                throw new ArgumentNullException("nameFormat");
-            if (nameFormat.Length == 0)
-                throw new ArgumentException("Length is 0", "nameFormat");
-            if (extension == null)
-                throw new ArgumentNullException("extension");
-            if (extension.Length == 0)
-                throw new ArgumentNullException("Length is 0", "extension");
+             bool isProfiling = Environment.GetEnvironmentVariable("cor_enable_profiling") == "1";
+             if (!isProfiling)
+             {
+                 if (result == null)
+                     throw new ArgumentNullException("result");
+                 if (nameFormat == null)
+                     throw new ArgumentNullException("nameFormat");
+                 if (nameFormat.Length == 0)
+                     throw new ArgumentException("Length is 0", "nameFormat");
+                 if (extension == null)
+                     throw new ArgumentNullException("extension");
+                 if (extension.Length == 0)
+                     throw new ArgumentNullException("Length is 0", "extension");
 
-            string fileName = GetFileName(result, outputPath, nameFormat, extension);
-            Render(result, fileName);
-            return fileName;
+                 string fileName = GetFileName(result, outputPath, nameFormat, extension);
+                 Render(result, fileName);
+                 return fileName;
+             }
+             else
+             {
+                 return "";
+             }
+
 		}
 
 		/// <summary>
@@ -147,19 +160,35 @@ namespace MbUnit.Core.Reports
 		/// <returns>File name of the report</returns>
 		public virtual string Render(ReportResult result, string outputPath, string nameFormat)
 		{
-            if (result == null)
-                throw new ArgumentNullException("result");
+            bool isProfiling = Environment.GetEnvironmentVariable("cor_enable_profiling") == "1";
+            if (!isProfiling)
+            {
+                if (result == null)
+                    throw new ArgumentNullException("result");
 
-            if (nameFormat == null) 
-				nameFormat = DefaultNameFormat;
-			return Render(result, outputPath, nameFormat, DefaultExtension);
+                if (nameFormat == null)
+                    nameFormat = DefaultNameFormat;
+                return Render(result, outputPath, nameFormat, DefaultExtension);
+            }
+            else
+            {
+                return "";
+            }
 		}
 
-		public virtual string Render(ReportResult result)
-		{
-            if (result == null)
-                throw new ArgumentNullException("result");
-            return Render(result, "", null);
+        public virtual string Render(ReportResult result)
+        {
+            bool isProfiling = Environment.GetEnvironmentVariable("cor_enable_profiling") == "1";
+            if (!isProfiling)
+            {
+                if (result == null)
+                    throw new ArgumentNullException("result");
+                return Render(result, "", null);
+            }
+            else
+            {
+                return "";
+            }
         }
 
 	}

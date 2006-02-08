@@ -194,9 +194,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\TestDriven.Framework.dll" />
-    <None Include="..\..\MbUnit.Feature.wxs">
-      <Link>MbUnit.Feature.wxs</Link>
-    </None>
     <None Include="..\Doc\MbUnit.Documentation.chm">
       <Link>Doc\MbUnit.Documentation.chm</Link>
       <CopyToOutputDirectory>True</CopyToOutputDirectory>

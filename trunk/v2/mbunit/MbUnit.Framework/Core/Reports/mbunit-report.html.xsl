@@ -149,25 +149,25 @@
 
 	<xsl:template name="assembly-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">Populator.png</xsl:with-param>
+			<xsl:with-param name="src">../Populator.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="fixture-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">Fixture.png</xsl:with-param>
+			<xsl:with-param name="src">../Fixture.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="namespace-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">Category.png</xsl:with-param>
+			<xsl:with-param name="src">../Category.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="run-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">Test.png</xsl:with-param>
+			<xsl:with-param name="src">../Test.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -184,6 +184,7 @@
     MbUnit.Cons.exe -filter-type:<xsl:value-of select="@type" disable-output-escaping="yes" /> "<xsl:value-of select="ancestor::assembly/@location" disable-output-escaping="yes"/>"
     </xsl:template>
 	<xsl:template match="report-result">
+    <xsl:comment> saved from url=(0022)http://www.mbunit.org/ </xsl:comment>
 		<html>
 			<head>
 				<title>MbUnit Test Report</title>
@@ -238,10 +239,10 @@
 					fixture = new Image();
 					category = new Image();
 					test = new Image();
-					fixture.src = "Fixture.png";
-					test.src = "Test.png"
-					category.src = "Category.png"
-					populator.src = "Populator.png"
+					fixture.src = "../Fixture.png";
+					test.src = "../Test.png"
+					category.src = "../Category.png"
+					populator.src = "../Populator.png"
 				}
 
 				function ExpandAll()
@@ -252,7 +253,7 @@
 				]]></script>
 			</head>
 			<body>
-				<img src="mbunitlogo.png"/><br/>
+				<img src="../mbunitlogo.png"/><br/>
 				<h1>Test Summary</h1>
 				<ul>
 				<li><strong>Date:</strong>
@@ -272,7 +273,7 @@
 				<h1>Test result details</h1>
 				<xsl:call-template name="assemblies" />
 				<br/>
-				<p><img src="mbuniticon.gif"/>
+				<p><img src="../mbuniticon.gif"/>
 					This report was generated using <a href="http://www.mbunit.org">MbUnit</a>.
 				</p>
 			</body>

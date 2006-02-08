@@ -204,8 +204,15 @@ namespace MbUnit.AddIn
 
                 string file = HtmlReport.RenderToHtml(result, outputPath, nameFormat);
 
-                Uri uri = new Uri("file:" + Path.GetFullPath(file));
-                testListener.TestResultsUrl(uri.AbsoluteUri);
+                if (file != "")
+                {
+                    Uri uri = new Uri("file:" + Path.GetFullPath(file));
+                    testListener.TestResultsUrl(uri.AbsoluteUri);
+                }
+                else
+                {
+                    testListener.WriteLine("Skipping report generation", Category.Info);
+                }
             }
             catch (Exception ex)
             {
