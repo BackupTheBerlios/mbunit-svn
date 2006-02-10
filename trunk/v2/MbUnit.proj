@@ -1,7 +1,11 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<Import Project="Version.properties" />
-
+	
+	<PropertyGroup>
+		<VersionBuild Condition="'$(CCNetLabel)' != ''">$(CCNetLabel)</VersionBuild>
+	</PropertyGroup>
+	  
 	<PropertyGroup>
         <MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
         
