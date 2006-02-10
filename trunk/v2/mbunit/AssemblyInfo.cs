@@ -8,12 +8,12 @@ using System.Runtime.CompilerServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MbUnit Framework for .Net 1.1 features")]
+[assembly: AssemblyTitle("MbUnit 2.3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MbUnit.Framework.1.1")]
-[assembly: AssemblyCopyright("Jonathan de Halleux")]
+[assembly: AssemblyProduct("MbUnit 2.3")]
+[assembly: AssemblyCopyright("Copyright @ 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -26,7 +26,4 @@ using System.Runtime.CompilerServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2.22.0.0")]
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile(@"..\PublicPrivateMbUnit.snk")]
-[assembly: AssemblyKeyName("")]
+[assembly: AssemblyVersion("1.0.*")]

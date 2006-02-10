@@ -133,8 +133,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs">
-      <SubType>Code</SubType>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="MbUnitTask.cs">
       <SubType>Code</SubType>

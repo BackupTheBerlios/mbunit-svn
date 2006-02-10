@@ -138,8 +138,8 @@
     <Content Include="App.ico">
       <CopyToOutputDirectory>True</CopyToOutputDirectory>
     </Content>
-    <Compile Include="AssemblyInfo.cs">
-      <SubType>Code</SubType>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="MainClass.cs">
       <SubType>Code</SubType>

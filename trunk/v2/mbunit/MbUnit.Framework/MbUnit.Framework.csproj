@@ -137,12 +137,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ArrayAssert.cs" />
     <Compile Include="AssemblyCleanupAttribute.cs" />
     <Compile Include="AssemblyDependsOnAttribute.cs" />
-    <Compile Include="AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="AssemblyResolverAttribute.cs" />
     <Compile Include="Assert.cs" />
     <Compile Include="AuthorAttribute.cs" />
