@@ -165,7 +165,7 @@ namespace MbUnit.Core.Cons
                 this.GenerateReport(arguments, result);
                 timer.Stop();
                 consoleOut.WriteLine("[info] MbUnit execution finished in {0}s.", timer.Duration);
-		return 0;
+		return (0==result.Counter.FailureCount) ? 0 : -1;
             }
             catch (Exception ex)
             {
