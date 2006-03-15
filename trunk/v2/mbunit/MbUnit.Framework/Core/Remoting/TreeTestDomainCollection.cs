@@ -81,7 +81,7 @@ namespace MbUnit.Core.Remoting
 				throw new ArgumentException("File "+testFilePath+" already loaded");
 
 			TreeTestDomain domain = new TreeTestDomain(testFilePath,this.factory);
-            domain.ShadowCopyFiles = false;
+            domain.ShadowCopyFiles = true;
 
             this.identifierDomains.Add(domain.Identifier, domain);
 			this.list.Add(domain);
