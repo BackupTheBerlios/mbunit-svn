@@ -189,51 +189,86 @@
 			<head>
 				<title>MbUnit Test Report</title>
 				<style>
-				h1 				{ font-family:Verdana; font-weight:Bold; font-size:14pt; margin-bottom:0pt; }
-				h2 				{ font-family:Verdana; font-weight:Bold; font-size:12pt; margin-bottom:0pt; }
-				p,li			{ font-family:Verdana; font-size:9pt;}
-			    table 			{ font-family:Verdana; font-weight:normal; font-size:8pt; color:black; }
-				tr.heading    	{ background-color:#D0D0FF; font-weight:Bold; font-size:12pt; }
-				tr.titles     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
-				tr.assemblysetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
-				tr.fixture     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
-				tr.fixturesetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
-				tr.assemblySummary { font-weight:Bold; }
-				tr.fixtureSummary  {}
-                tr.fixtureReplay { font-size:7pt; background-color:#D0D0FF;}
-				tr.successEven  { background-color:#EFFFEF; }
-				tr.successOdd   { background-color:#C0FFC0; }
-				tr.failureEven  { background-color:#FFEEDE; font-weight:Bold; }
-				tr.failureOdd   { background-color:#FFD0C0; font-weight:bold; }
-				tr.skippedEven 	{ background-color:#FFEEEE; }
-				tr.skippedOdd  	{ background-color:#FFD0D0; }
-				tr.exceptionType  { background-color:#DDDDDD; font-weight:Bold; }
-				tr.notRunEven 	{ background-color:#F0F0FF; }
-				tr.notRunOdd  	{ background-color:#D8D8FF; }
-				tr.ignoreEven 	{ background-color:#FFFFEF; }
-				tr.ignoreOdd  	{ background-color:#FFFFC0; }
-				td.smallLeft  	{ font-size:7pt; font-weight: normal; text-align:left; vertical-align:top; }
-				td.smallRight 	{ font-size:7pt; font-weight: normal; text-align:right; vertical-align:top; }
-				pre.console     { }
-				pre.stackTrace  { }
-				counter         { font-size:7pt;}
-                time            { font-size:8pt;}
-				</style>
-				<script language="JavaScript"><![CDATA[
-				function toggle (field)
-				{ field.style.display = (field.style.display == "block") ? "none" : "block"; }
+          h1 				{ font-family:Verdana; font-weight:Bold; font-size:14pt; margin-bottom:0pt; }
+          h2 				{ font-family:Verdana; font-weight:Bold; font-size:12pt; margin-bottom:0pt; }
+          p,li			{ font-family:Verdana; font-size:9pt;}
+          table 			{ font-family:Verdana; font-weight:normal; font-size:8pt; color:black; }
+          tr.heading    	{ background-color:#D0D0FF; font-weight:Bold; font-size:12pt; }
+          tr.titles     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
+          tr.assemblysetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
+          tr.fixture     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
+          tr.fixturesetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
+          tr.assemblySummary { font-weight:Bold; }
+          tr.fixtureSummary  {}
+          tr.fixtureReplay { font-size:7pt; background-color:#D0D0FF;}
+          tr.successEven  { background-color:#E0FFE0; }
+          tr.successOdd   { background-color:#C0FFC0; }
+          tr.failureEven  { background-color:#FFEEDE; font-weight:Bold; }
+          tr.failureOdd   { background-color:#FFD0C0; font-weight:bold; }
+          tr.skippedEven 	{ background-color:#FFEEEE; }
+          tr.skippedOdd  	{ background-color:#FFD0D0; }
+          tr.exceptionType  { background-color:#DDDDDD; font-weight:Bold; }
+          tr.notRunEven 	{ background-color:#F0F0FF; }
+          tr.notRunOdd  	{ background-color:#D8D8FF; }
+          tr.ignoreEven 	{ background-color:#FFFFE0; }
+          tr.ignoreOdd  	{ background-color:#FFFFC0; }
+          td.smallLeft  	{ font-size:7pt; font-weight: normal; text-align:left; vertical-align:top; }
+          td.smallRight 	{ font-size:7pt; font-weight: normal; text-align:right; vertical-align:top; }
+          pre.console     { }
+          pre.stackTrace  { }
+          counter         { font-size:7pt;}
+          time            { font-size:8pt;}
+          button.expandCollapse { height:20px; width:20px; line-height:80%; }
+        </style>
+				<script language="JavaScript">
+            <![CDATA[
 
-				function SwitchAll(how)
-				{	var len = document.all.length-1;
-					for(i=0;i!=len;i++)	{
-						var block = document.all[i];
-						if (block != null)
-							if (block.id != '')
-								block.style.display=how;
-					}
-				}
+        function expandCollapse(button, id) 
+        {
+          area = document.getElementById(id);
+          if (area.style.display == "none") {
+            area.style.display = "block";
+            button.innerHTML = "-";
+          }
+          else 
+          {
+            area.style.display = "none";
+            button.innerHTML = "+";
+          }
+        }
+        
+        function expandAll() 
+        {
+          expandCollapseAll("-", "block");
+        }
+        
+        function collapseAll() 
+        {
+          expandCollapseAll("+", "none");
+        }
 
-				if (document.images)
+        function expandCollapseAll(buttonHTML, disp) 
+        {
+          items = document.getElementsByTagName("table");
+          for (i = 0; i < items.length; i++) 
+          {
+            if (items[i].className == "expandCollapse")
+            {
+              items[i].style.display = disp;
+            }
+          }
+
+          items = document.getElementsByTagName("button");
+          for (i = 0; i < items.length; i++) 
+          {
+            if (items[i].className == "expandCollapse")
+            {
+              items[i].innerHTML = buttonHTML;
+            }
+          }
+        }
+
+        if (document.images)
 				{
 					populator = new Image();
 					fixture = new Image();
@@ -244,16 +279,11 @@
 					category.src = "../Category.png"
 					populator.src = "../Populator.png"
 				}
-
-				function ExpandAll()
-				{SwitchAll('block');}
-
-				function CollapseAll()
-				{SwitchAll('none');}
 				]]></script>
 			</head>
 			<body>
-				<img src="../mbunitlogo.png"/><br/>
+				<img src="../mbunitlogo.png" />
+        <br/>
 				<h1>Test Summary</h1>
 				<ul>
 				<li><strong>Date:</strong>
@@ -271,7 +301,11 @@
 				<xsl:call-template name="warnings" />
                 </xsl:if>
 				<h1>Test result details</h1>
-				<xsl:call-template name="assemblies" />
+        <div style="float: right">
+          <button onclick="expandAll()" >Expand All</button>
+          <button onclick="collapseAll()">Collapse All</button>
+        </div>
+        <xsl:call-template name="assemblies" />
 				<br/>
 				<p><img src="../mbuniticon.gif"/>
 					This report was generated using <a href="http://www.mbunit.org">MbUnit</a>.
@@ -348,7 +382,7 @@
 	</xsl:template>
 
     <xsl:template name="warnings">
-<table> 
+<table>  
 <xsl:for-each select="//warning">
 <tr>
     <xsl:attribute name="class">
@@ -464,9 +498,11 @@
 		</tr>
 	</xsl:template>
 	<xsl:template match="runs">
-		<table width="100%" border="0" cellpadding="1" cellspacing="1">
-			<xsl:apply-templates select="*" />
-		</table>
+		<!-- table width="100%" border="0" cellpadding="1" cellspacing="1" -->
+    <tr>
+      <xsl:apply-templates select="*" />
+    </tr>
+		<!-- /table -->
 	</xsl:template>
 
 <xsl:template match="set-up">
@@ -537,15 +573,24 @@
 					<xsl:when test="@result = 'ignore'">
 						<xsl:choose>
 							<xsl:when test="position() mod 2 = 1">ignoreOdd</xsl:when>
-							<xsl:otherwise>ignoreEvent</xsl:otherwise>
+							<xsl:otherwise>ignoreEven</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 				</xsl:choose>
 			</xsl:attribute>
-			<td>
-				<xsl:call-template name="run-icon"/>
-				<xsl:value-of select="@name"/>
-			</td>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <button class="expandCollapse" onclick="expandCollapse(this, '{generate-id(.)}')">-</button>
+                <xsl:call-template name="run-icon"/>
+            </td>
+            <td>
+              <xsl:value-of select="@name"/>
+            </td>
+          </tr>
+        </table>
+      </td>
 			<td>
 				<xsl:call-template name="display-time">
 					<xsl:with-param name="value" select="@duration"/>
@@ -557,12 +602,19 @@
 				</xsl:call-template>, <xsl:value-of select="@assert-count" />
 			</td>
 		</tr>
-		<!-- Adding execption log -->
-		<xsl:if test="@result = 'failure'">
-			<xsl:call-template name="exception-log"/>
-		</xsl:if>
-		<!-- Adding console out, error -->
-		<xsl:call-template name="console-output" />
+    <tr>
+      <td>
+        <!-- This nested table is theoretically not needed, but lets me avoid rewriting exception-log and console-output templates -MLS 6/27/06 -->
+        <table id="{generate-id(.)}" class="expandCollapse">
+          <!-- Adding exception log -->
+          <xsl:if test="@result = 'failure'">
+            <xsl:call-template name="exception-log"/>
+          </xsl:if>
+          <!-- Adding console out, error -->
+          <xsl:call-template name="console-output" />
+        </table>
+      </td>
+    </tr>
 	</xsl:template>
 	<xsl:template name="exception-log">
 		<tr class="failure-exception">
