@@ -149,6 +149,7 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyInfoKey.cs" />
     <Compile Include="Data\Adapters\DataAdapt.cs">
       <SubType>Code</SubType>
     </Compile>
