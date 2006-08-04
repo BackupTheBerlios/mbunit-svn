@@ -112,9 +112,13 @@ namespace MbUnit.Core
             }
 		}
 
+        /// <summary>
+        /// Creates and saves the images in the directory with the specified path.
+        /// </summary>
+        /// <param name="path">The directory path in which to save the images</param>
         public static void CreateImages(string path)
         {
-            string directory = Path.GetDirectoryName(Path.GetFullPath(path));
+            string directory = Path.GetFullPath(path);
             if (directory.Length > 0)
             {
                 if (!Directory.Exists(directory))

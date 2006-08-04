@@ -149,25 +149,25 @@
 
 	<xsl:template name="assembly-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">../Populator.png</xsl:with-param>
+			<xsl:with-param name="src">Populator.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="fixture-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">../Fixture.png</xsl:with-param>
+			<xsl:with-param name="src">Fixture.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="namespace-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">../Category.png</xsl:with-param>
+			<xsl:with-param name="src">Category.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="run-icon">
 		<xsl:call-template name="icon">
-			<xsl:with-param name="src">../Test.png</xsl:with-param>
+			<xsl:with-param name="src">Test.png</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -220,7 +220,7 @@
           time            { font-size:8pt;}
           button.expandCollapse { height:20px; width:20px; line-height:80%; }
         </style>
-				<script language="JavaScript">
+				<script language="JavaScript" type="text/javascript">
             <![CDATA[
 
         function expandCollapse(button, id) 
@@ -250,7 +250,7 @@
         function expandCollapseAll(buttonHTML, disp) 
         {
           items = document.getElementsByTagName("table");
-          for (i = 0; i < items.length; i++) 
+          for (i = 0; i != items.length; i++) 
           {
             if (items[i].className == "expandCollapse")
             {
@@ -259,7 +259,7 @@
           }
 
           items = document.getElementsByTagName("button");
-          for (i = 0; i < items.length; i++) 
+          for (i = 0; i != items.length; i++) 
           {
             if (items[i].className == "expandCollapse")
             {
@@ -274,15 +274,15 @@
 					fixture = new Image();
 					category = new Image();
 					test = new Image();
-					fixture.src = "../Fixture.png";
-					test.src = "../Test.png"
-					category.src = "../Category.png"
-					populator.src = "../Populator.png"
+					fixture.src = "Fixture.png";
+					test.src = "Test.png"
+					category.src = "Category.png"
+					populator.src = "Populator.png"
 				}
 				]]></script>
 			</head>
 			<body>
-				<img src="../mbunitlogo.png" />
+				<img src="mbunitlogo.png" />
         <br/>
 				<h1>Test Summary</h1>
 				<ul>
@@ -307,7 +307,7 @@
         </div>
         <xsl:call-template name="assemblies" />
 				<br/>
-				<p><img src="../mbuniticon.gif"/>
+				<p><img src="mbuniticon.gif"/>
 					This report was generated using <a href="http://www.mbunit.org">MbUnit</a>.
 				</p>
 			</body>
