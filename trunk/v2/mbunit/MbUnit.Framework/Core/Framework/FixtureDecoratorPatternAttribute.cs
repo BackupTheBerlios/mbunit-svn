@@ -34,7 +34,7 @@ namespace MbUnit.Core.Framework
 	/// <summary>
 	/// This is the base class for attributes that can decorate fixtures.
 	/// </summary>
-	/// <include file="MbUnit.Core.Framework.Doc.xml" path="doc/remarkss/remarks[@name='FixturePatternAttribute']"/>	
+	/// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='FixturePatternAttribute']"/>	
 	[AttributeUsage(AttributeTargets.Class,AllowMultiple=true,Inherited=true)]
 	public abstract class FixtureDecoratorPatternAttribute : PatternAttribute
 	{

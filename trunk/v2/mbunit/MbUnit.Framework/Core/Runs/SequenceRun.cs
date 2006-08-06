@@ -40,12 +40,6 @@ namespace MbUnit.Core.Runs
 	/// <summary>
 	/// A sequence of IRuns
 	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// This class does not have particular linking to the 
-	/// <see cref="SequenceAttribute"/>.
-	/// </para>
-	/// </remarks>
 	public sealed class SequenceRun : IRun
 	{
 		private RunCollection runs = new RunCollection();		
@@ -82,7 +76,6 @@ namespace MbUnit.Core.Runs
 		/// </summary>
 		/// <remarks>
 		/// Inherited method from base class Run
-		/// 
 		/// </remarks>
 		/// <param name='t'>TODO - add parameter description</param>
 		public void Reflect(

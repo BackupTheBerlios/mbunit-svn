@@ -50,12 +50,12 @@ namespace MbUnit.Framework
 		#endregion
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.Count"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCountEqual(
@@ -73,12 +73,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.Count"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCountEqual(
@@ -93,12 +93,12 @@ namespace MbUnit.Framework
 		}		
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.SyncRoot"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSyncRootEqual(
@@ -116,12 +116,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.SyncRoot"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSyncRootEqual(
@@ -142,7 +142,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsSynchronized(
@@ -158,7 +158,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsNotynchronized(
@@ -172,12 +172,12 @@ namespace MbUnit.Framework
 
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsSynchronizedEqual(
@@ -195,12 +195,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsSynchronizedEqual(
@@ -218,10 +218,10 @@ namespace MbUnit.Framework
 		/// Verifies that <paramref name="expected"/> and <paramref name="actual"/>
 		/// are equal collections. Element count and element wize equality is verified.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreEqual(
@@ -242,10 +242,10 @@ namespace MbUnit.Framework
 		/// Verifies that <paramref name="expected"/> and <paramref name="actual"/>
 		/// are equal collections. Element count and element wize equality is verified.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreElementsEqual(

@@ -40,7 +40,7 @@ namespace MbUnit.Core
 	/// <summary>
 	/// Helper static class for Type related tasks
 	/// </summary>
-	/// <include file="MbUnit.Core.Doc.xml" path="doc/remarkss/remarks[@name='TypeHelper']"/>
+	/// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='TypeHelper']"/>
 	public sealed class TypeHelper
 	{
 		internal TypeHelper()
@@ -55,7 +55,7 @@ namespace MbUnit.Core
 		/// You can use this method to display the methods of a class or struct
 		/// type. Mainly for debugging purpose.
 		/// </remarks>
-		/// <include file="MbUnit.Core.Doc.xml" path="doc/examples/example[@name='TypeHelper.ShowMethodAttributes']"/>
+		/// <include file="MbUnit.Framework.Doc.xml" path="doc/examples/example[@name='TypeHelper.ShowMethodAttributes']"/>
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="t"/>
 		/// is a null reference
@@ -110,7 +110,7 @@ namespace MbUnit.Core
 		/// <param name="t">type to test</param>
 		/// <param name="customAttributeType">custom attribute type to search</param>
 		/// <returns>
-		/// true if class type <param name="t"/> has a method tagged by a <paramref name="customAttributeType"/>
+		/// true if class type <paramref name="t"/> has a method tagged by a <paramref name="customAttributeType"/>
 		/// attribute, false otherwise.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
@@ -142,7 +142,7 @@ namespace MbUnit.Core
 		/// <param name="t">method to test</param>
 		/// <param name="customAttributeType">custom attribute type to search</param>
 		/// <returns>
-		/// true if <param name="t"/> is tagged by a <paramref name="customAttributeType"/>
+		/// true if <paramref name="t"/> is tagged by a <paramref name="customAttributeType"/>
 		/// attribute, false otherwise.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
@@ -170,7 +170,7 @@ namespace MbUnit.Core
 		/// <param name="t">method to test</param>
 		/// <param name="customAttributeType">custom attribute type to search</param>
 		/// <returns>
-		/// true if <param name="t"/> is tagged by a <paramref name="customAttributeType"/>
+		/// true if <paramref name="t"/> is tagged by a <paramref name="customAttributeType"/>
 		/// attribute, false otherwise.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
@@ -362,7 +362,7 @@ namespace MbUnit.Core
 		/// Retreives the <see cref="MethodInfo"/> that matches the signature.
 		/// </summary>		
 		/// <param name="t">type to test</param>
-		/// <param name="args">Method signature</param>
+		/// <param name="types">Method parameter types</param>
 		/// <returns>
 		/// The <see cref="MethodInfo"/> instance of <paramref name="t"/> matching
 		/// the signature.
@@ -394,14 +394,14 @@ namespace MbUnit.Core
 		/// given the list of arguments.
 		/// </summary>		
 		/// <param name="t">type to test</param>
-		/// <param name="types">Method arguments from which the signature
+		/// <param name="args">Method arguments from which the signature
 		/// is deduced</param>
 		/// <returns>
 		/// The <see cref="MethodInfo"/> instance of <paramref name="t"/> matching
 		/// the signature defined by the list of arguments.
 		/// </returns>
 		/// <exception cref="ArgumentNullException"><paramref name="t"/> is a null reference</exception>
-		/// <exception cref="ArguementNullException">
+		/// <exception cref="ArgumentNullException">
 		/// One of the args item is a null reference
 		/// </exception>
 		/// <exception cref="MethodNotFoundException">

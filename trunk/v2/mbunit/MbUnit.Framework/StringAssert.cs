@@ -60,7 +60,7 @@ namespace MbUnit.Framework
 		/// <summary>
 		/// Asserts that the string is non null and empty
 		/// </summary>
-		/// <param name="s>
+		/// <param name="s">
 		/// String to test.
 		/// </param>
 		public static void IsEmpty(String s)
@@ -73,7 +73,7 @@ namespace MbUnit.Framework
 		/// <summary>
 		/// Asserts that the string is non null and non empty
 		/// </summary>
-		/// <param name="s>
+		/// <param name="s">
 		/// String to test.
 		/// </param>
 		public static void IsNonEmpty(String s)
@@ -89,7 +89,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="reg">
 		/// Regular expression
 		/// </param>
 		public static void FullMatch(String s, string reg)
@@ -105,7 +105,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="regex">
 		/// Regular expression
 		/// </param>
 		public static void FullMatch(String s, Regex regex)
@@ -123,7 +123,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="reg">
 		/// Regular expression
 		/// </param>
 		public static void Like(String s, string reg)
@@ -138,7 +138,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="regex">
 		/// A <see cref="Regex"/> instance. 
 		/// </param>
 		public static void Like(String s, Regex regex)
@@ -155,7 +155,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="reg">
 		/// Regular expression
 		/// </param>
 		public static void NotLike(String s, string reg)
@@ -170,7 +170,7 @@ namespace MbUnit.Framework
 		/// <param name="s">
 		/// String to test.
 		/// </param>
-		/// <param name="ref">
+		/// <param name="regex">
 		/// A <see cref="Regex"/> instance. 
 		/// </param>
 		public static void NotLike(String s, Regex regex)

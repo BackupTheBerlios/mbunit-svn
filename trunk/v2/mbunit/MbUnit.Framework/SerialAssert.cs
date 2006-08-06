@@ -57,9 +57,6 @@ namespace MbUnit.Framework
 		/// <param name="o">
 		/// Object to test
 		/// </param>
-		/// <param name="comparer">
-		/// Compare to check that object is the same
-		/// </param>
 		public static void TwoWaySerialization(Object o)
 		{
 			Assert.IsNotNull(o);

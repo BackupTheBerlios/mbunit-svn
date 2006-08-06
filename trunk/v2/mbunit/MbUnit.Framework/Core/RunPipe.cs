@@ -37,7 +37,7 @@ namespace MbUnit.Core
 	/// This class represents the execution pipe of a test. It contains a 
 	/// sequence of <see cref="IRunInvoker"/>.
 	/// </summary>
-	/// <include file="MbUnit.Core.Doc.xml" path="doc/remarkss/remarks[@name='RunPipe']"/>
+	/// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='RunPipe']"/>
 	public class RunPipe
 	{
 		private Guid identifier = Guid.NewGuid();

@@ -7,7 +7,7 @@ namespace TestFu.Data
 	/// An abstract base class for test fixtures involving database testing.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DbFixture")]'
 	///		/>
 	/// <seealso cref="SqlFixture"/>

@@ -125,9 +125,9 @@ the <see cref="IndexerProviderAttribute"/> attribute.
 </remarkss>
 
 <summaries>
-<summary name="GUnit.Framework">
+<summary name="MbUnit.Framework">
 <para>
-The <b>GUnit.Framework</b> contains fixture that implement <b>Unit Test Patterns</b> 
+The <b>MbUnit.Framework</b> contains fixture that implement <b>Unit Test Patterns</b> 
 as defined in the Marc Clifton article.
 </para>
 </summary>

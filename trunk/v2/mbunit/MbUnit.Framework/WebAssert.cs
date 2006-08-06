@@ -85,7 +85,7 @@ namespace MbUnit.Framework
 		}
 		
 		/// <summary>
-		/// Verifies that <paramref name="ctrl"/> ID is equal to <param name="id"/>.
+		/// Verifies that <paramref name="ctrl"/> ID is equal to <paramref name="id"/>.
 		/// </summary>		
 		public static void IsIDEqual(Control ctrl, string id)
 		{
@@ -118,7 +118,7 @@ namespace MbUnit.Framework
 		}
 
 		/// <summary>
-		/// Verifies that the <see cref="Control.TemplaceSourceDirectory"/>
+		/// Verifies that the <see cref="Control.TemplateSourceDirectory"/>
 		/// property of <paramref name="expected"/> and <paramref name="actual"/>
  		/// are equal.
 		/// </summary>
@@ -130,7 +130,7 @@ namespace MbUnit.Framework
 		}
 
 		/// <summary>
-		/// Verifies that the <see cref="Control.TemplaceSourceDirectory"/>
+		/// Verifies that the <see cref="Control.TemplateSourceDirectory"/>
 		/// property of <paramref name="actual"/> is equal to <paramref name="expected"/>
  		/// are equal.
 		/// </summary>

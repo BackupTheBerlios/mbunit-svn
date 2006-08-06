@@ -9,7 +9,8 @@ namespace TestFu.Data.Generators
 	/// <remarks>
 	/// <para>
 	/// This <see cref="Generate"/> method generates int values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
-	/// </para>
+    /// </para>
+    /// </remarks>
 	public class Int32Generator : DataGeneratorBase
 	{
 		private System.Int32 minValue = 0;

@@ -10,7 +10,8 @@ namespace TestFu.Data.Generators
 	/// <remarks>
 	/// <para>
 	/// This <see cref="Generate"/> method generates float values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
-	/// </para>
+    /// </para>
+    /// </remarks>
 	public class MoneyGenerator : DataGeneratorBase
 	{
 		private SqlMoney minValue = SqlMoney.MinValue;

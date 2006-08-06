@@ -43,6 +43,7 @@ namespace MbUnit.Core.Remoting
 	/// which are accessed by the client and those
 	/// client objects which are called back by the
 	/// remote test domain.
+    /// </para>
 	/// <para>
 	/// Objects in this category that already inherit
 	/// from some other class (e.g. from TextWriter)

@@ -49,7 +49,6 @@ namespace MbUnit.Framework
 		/// </summary> 
 		/// <param name="expected">Expected <see cref="DataColumn"/> instance.</param>
 		/// <param name="actual">Actual <see cref="DataColumn"/> instance.</param>
-		/// <remarks>		
 		public static void AreEqual(DataColumn expected, DataColumn actual)
 		{
 			// null case, trivial comparaison

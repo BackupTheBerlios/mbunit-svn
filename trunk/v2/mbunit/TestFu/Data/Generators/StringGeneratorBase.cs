@@ -16,7 +16,7 @@ namespace TestFu.Data.Generators
         private int maxLength = 255;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="StringGenerator"/>.
+        /// Initializes a new instance of <see cref="StringGeneratorBase"/>.
         /// </summary>
         /// <param name="column"></param>
         public StringGeneratorBase(DataColumn column)

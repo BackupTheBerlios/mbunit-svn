@@ -7,12 +7,12 @@ using System.IO;
 namespace TestFu.Data.Generators
 {
 	/// <summary>
-	/// A random data generator for <see cref="Size"/> values.
+	/// A random data generator for <see cref="Bitmap"/> binary values.
 	/// </summary>
 	/// <remarks>
 	/// <para>
-	/// This <see cref="Generate"/> method generates Size values in a range 
-	/// [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates a bitmap of size
+    /// [<see cref="MaxLength"/> by <see cref="MaxLength"/>].
 	/// </para>
 	/// </remarks>
 	public class ImageBinaryGenerator : BinaryGeneratorBase,

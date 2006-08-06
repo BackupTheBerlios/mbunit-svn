@@ -11,7 +11,7 @@ namespace TestFu.Data
 	/// </para>
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example'
 	///		/>
 	internal sealed class NamespaceDoc

@@ -219,13 +219,13 @@ namespace TestFu.Grammars
 		}
 		
 		/// <summary>
-		/// Creates a <see cref="IRule"/> that executes an <see cref="DefaultMethodDelegate"/>.
+        /// Creates a <see cref="IRule"/> that executes an <see cref="MethodInvoker"/>.
 		/// </summary>
 		/// <param name="del">
-		/// <see cref="DefaultMethodDelegate"/> to execute
+        /// <see cref="MethodInvoker"/> to execute
 		/// </param>
 		/// <returns>
-		/// <see cref="DefaultMethodDelegateRule"/> instance that contains 
+        /// <see cref="MethodInvokerRule"/> instance that contains 
 		/// <paramref name="del"/>
 		/// </returns>
 		public static MethodInvokerRule Method(MethodInvoker del)

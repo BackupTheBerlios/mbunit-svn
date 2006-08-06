@@ -10,6 +10,7 @@ namespace TestFu.Data.Generators
 	/// <para>
 	/// This <see cref="Generate"/> method generates byte values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
 	/// </para>
+    /// </remarks>
 	public class ByteGenerator : DataGeneratorBase
 	{
 		private System.Byte minValue = System.Byte.MinValue;

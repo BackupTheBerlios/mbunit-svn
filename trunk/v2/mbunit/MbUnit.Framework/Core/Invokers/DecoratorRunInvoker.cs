@@ -35,8 +35,8 @@ namespace MbUnit.Core.Invokers
 	
 	/// <summary>
 	/// Decorator invorkers are used to modify the way a fixute method is executed.
-	/// Popular examples of such is the <see cref="ExpectedExceptionInvoker"/>
-	/// or the <see cref="RepeatExceptionInvoker"/>.
+	/// Popular examples of such is the <see cref="ExpectedExceptionRunInvoker"/>
+	/// or the <see cref="RepeatRunInvoker"/>.
 	/// </summary>
 	public abstract class DecoratorRunInvoker : IRunInvoker 
 	{

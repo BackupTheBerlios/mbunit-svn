@@ -13,7 +13,7 @@ namespace MbUnit.Framework.Testers
 	using System;
 	
 	
-	/// <include file="GUnit.Framework.Testers.Doc.xml" path="doc/summaries/summary[@name='GUnit.Framework.Testers']"/>
+	/// <include file="MbUnit.Framework.Doc.xml" path="doc/summaries/summary[@name='MbUnit.Framework.Testers']"/>
 	internal class NamespaceDoc
 	{
 	}

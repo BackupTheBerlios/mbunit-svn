@@ -50,12 +50,12 @@ namespace MbUnit.Framework
 			
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleDefaultActionDescription"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleDefaultActionDescriptionEqual(
@@ -72,12 +72,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleDefaultActionDescription"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleDefaultActionDescriptionEqual(
@@ -94,12 +94,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleDescription"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleDescriptionEqual(
@@ -116,12 +116,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleDescription"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleDescriptionEqual(
@@ -138,12 +138,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleName"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleNameEqual(
@@ -160,12 +160,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleName"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleNameEqual(
@@ -181,12 +181,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleRole"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleRoleEqual(
@@ -203,12 +203,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AccessibleRole"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAccessibleRoleEqual(
@@ -225,7 +225,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.AllowDrop"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void AllowDrop(
@@ -241,7 +241,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.AllowDrop"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotAllowDrop(
@@ -256,12 +256,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AllowDrop"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAllowDropEqual(
@@ -278,12 +278,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.AllowDrop"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAllowDropEqual(
@@ -299,12 +299,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Anchor"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAnchorEqual(
@@ -321,12 +321,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Anchor"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreAnchorEqual(
@@ -342,12 +342,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BackColor"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBackColorEqual(
@@ -364,12 +364,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BackColor"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBackColorEqual(
@@ -385,12 +385,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BackgroundImage"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBackgroundImageEqual(
@@ -407,12 +407,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BackgroundImage"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBackgroundImageEqual(
@@ -430,12 +430,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.DataBindings"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDataBindingsEqual(
@@ -452,12 +452,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.DataBindings"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDataBindingsEqual(
@@ -474,12 +474,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BindingContext"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBindingContextEqual(
@@ -496,12 +496,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.BindingContext"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBindingContextEqual(
@@ -518,12 +518,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Bottom"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBottomEqual(
@@ -540,12 +540,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Bottom"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBottomEqual(
@@ -561,12 +561,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Bounds"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBoundsEqual(
@@ -583,12 +583,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Bounds"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreBoundsEqual(
@@ -605,7 +605,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CanFocus"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void CanFocus(
@@ -621,7 +621,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CanFocus"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotCanFocus(
@@ -636,12 +636,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CanFocus"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCanFocusEqual(
@@ -658,12 +658,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CanFocus"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCanFocusEqual(
@@ -680,7 +680,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CanSelect"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void CanSelect(
@@ -696,7 +696,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CanSelect"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotCanSelect(
@@ -711,12 +711,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CanSelect"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCanSelectEqual(
@@ -733,12 +733,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CanSelect"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCanSelectEqual(
@@ -755,7 +755,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Capture"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Capture(
@@ -771,7 +771,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Capture"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotCapture(
@@ -786,12 +786,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Capture"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCaptureEqual(
@@ -808,12 +808,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Capture"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCaptureEqual(
@@ -830,7 +830,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CausesValidation"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void CausesValidation(
@@ -846,7 +846,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.CausesValidation"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotCausesValidation(
@@ -861,12 +861,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CausesValidation"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCausesValidationEqual(
@@ -883,12 +883,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CausesValidation"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCausesValidationEqual(
@@ -904,12 +904,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ClientRectangle"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreClientRectangleEqual(
@@ -926,12 +926,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ClientRectangle"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreClientRectangleEqual(
@@ -947,12 +947,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ClientSize"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreClientSizeEqual(
@@ -969,12 +969,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ClientSize"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreClientSizeEqual(
@@ -990,12 +990,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CompanyName"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCompanyNameEqual(
@@ -1012,12 +1012,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.CompanyName"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCompanyNameEqual(
@@ -1035,7 +1035,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.ContainsFocus"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void ContainsFocus(
@@ -1051,7 +1051,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.ContainsFocus"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotContainsFocus(
@@ -1066,12 +1066,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ContainsFocus"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContainsFocusEqual(
@@ -1088,12 +1088,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ContainsFocus"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContainsFocusEqual(
@@ -1109,12 +1109,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ContextMenu"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContextMenuEqual(
@@ -1131,12 +1131,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ContextMenu"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContextMenuEqual(
@@ -1154,12 +1154,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Controls"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreControlsEqual(
@@ -1176,12 +1176,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Controls"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreControlsEqual(
@@ -1199,7 +1199,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Created"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Created(
@@ -1215,7 +1215,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Created"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotCreated(
@@ -1230,12 +1230,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Created"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCreatedEqual(
@@ -1252,12 +1252,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Created"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCreatedEqual(
@@ -1273,12 +1273,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Cursor"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCursorEqual(
@@ -1295,12 +1295,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Cursor"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreCursorEqual(
@@ -1318,12 +1318,12 @@ namespace MbUnit.Framework
 
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.DisplayRectangle"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDisplayRectangleEqual(
@@ -1340,12 +1340,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.DisplayRectangle"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDisplayRectangleEqual(
@@ -1362,7 +1362,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsDisposed"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsDisposed(
@@ -1378,7 +1378,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsDisposed"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsNotisposed(
@@ -1393,12 +1393,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsDisposed"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsDisposedEqual(
@@ -1415,12 +1415,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsDisposed"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsDisposedEqual(
@@ -1437,7 +1437,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Disposing"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Disposing(
@@ -1453,7 +1453,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Disposing"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotDisposing(
@@ -1468,12 +1468,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Disposing"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDisposingEqual(
@@ -1490,12 +1490,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Disposing"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDisposingEqual(
@@ -1511,12 +1511,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Dock"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDockEqual(
@@ -1533,12 +1533,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Dock"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreDockEqual(
@@ -1555,7 +1555,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Enabled"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Enabled(
@@ -1571,7 +1571,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Enabled"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotEnabled(
@@ -1586,12 +1586,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Enabled"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreEnabledEqual(
@@ -1608,12 +1608,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Enabled"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreEnabledEqual(
@@ -1630,7 +1630,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Focused"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Focused(
@@ -1646,7 +1646,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Focused"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotFocused(
@@ -1661,12 +1661,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Focused"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreFocusedEqual(
@@ -1683,12 +1683,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Focused"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreFocusedEqual(
@@ -1704,12 +1704,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Font"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreFontEqual(
@@ -1726,12 +1726,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Font"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreFontEqual(
@@ -1749,12 +1749,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ForeColor"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreForeColorEqual(
@@ -1771,12 +1771,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ForeColor"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreForeColorEqual(
@@ -1792,12 +1792,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Handle"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHandleEqual(
@@ -1814,12 +1814,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Handle"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHandleEqual(
@@ -1836,7 +1836,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.HasChildren"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void HasChildren(
@@ -1852,7 +1852,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.HasChildren"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotHasChildren(
@@ -1867,12 +1867,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.HasChildren"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHasChildrenEqual(
@@ -1889,12 +1889,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.HasChildren"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHasChildrenEqual(
@@ -1910,12 +1910,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Height"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHeightEqual(
@@ -1932,12 +1932,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Height"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreHeightEqual(
@@ -1954,7 +1954,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsHandleCreated"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsHandleCreated(
@@ -1970,7 +1970,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsHandleCreated"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsNotandleCreated(
@@ -1985,12 +1985,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsHandleCreated"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsHandleCreatedEqual(
@@ -2007,12 +2007,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsHandleCreated"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsHandleCreatedEqual(
@@ -2028,12 +2028,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ImeMode"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreImeModeEqual(
@@ -2050,12 +2050,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ImeMode"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreImeModeEqual(
@@ -2072,7 +2072,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.InvokeRequired"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void InvokeRequired(
@@ -2088,7 +2088,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.InvokeRequired"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotInvokeRequired(
@@ -2103,12 +2103,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.InvokeRequired"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreInvokeRequiredEqual(
@@ -2125,12 +2125,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.InvokeRequired"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreInvokeRequiredEqual(
@@ -2147,7 +2147,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsAccessible"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsAccessible(
@@ -2163,7 +2163,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.IsAccessible"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void IsNotccessible(
@@ -2178,12 +2178,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsAccessible"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsAccessibleEqual(
@@ -2200,12 +2200,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.IsAccessible"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreIsAccessibleEqual(
@@ -2221,12 +2221,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Left"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreLeftEqual(
@@ -2243,12 +2243,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Left"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreLeftEqual(
@@ -2264,12 +2264,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Location"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreLocationEqual(
@@ -2286,12 +2286,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Location"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreLocationEqual(
@@ -2307,12 +2307,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Name"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreNameEqual(
@@ -2329,12 +2329,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Name"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreNameEqual(
@@ -2351,12 +2351,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Parent"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreParentEqual(
@@ -2373,12 +2373,12 @@ namespace MbUnit.Framework
 			
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ProductName"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreProductNameEqual(
@@ -2395,12 +2395,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ProductName"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreProductNameEqual(
@@ -2417,12 +2417,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ProductVersion"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreProductVersionEqual(
@@ -2439,12 +2439,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.ProductVersion"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreProductVersionEqual(
@@ -2462,7 +2462,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.RecreatingHandle"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void RecreatingHandle(
@@ -2478,7 +2478,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.RecreatingHandle"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotRecreatingHandle(
@@ -2493,12 +2493,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.RecreatingHandle"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRecreatingHandleEqual(
@@ -2515,12 +2515,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.RecreatingHandle"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRecreatingHandleEqual(
@@ -2536,12 +2536,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Region"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRegionEqual(
@@ -2558,12 +2558,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Region"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRegionEqual(
@@ -2581,12 +2581,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Right"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRightEqual(
@@ -2603,12 +2603,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Right"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRightEqual(
@@ -2624,12 +2624,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.RightToLeft"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRightToLeftEqual(
@@ -2646,12 +2646,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.RightToLeft"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreRightToLeftEqual(
@@ -2667,12 +2667,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Site"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSiteEqual(
@@ -2689,12 +2689,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Site"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSiteEqual(
@@ -2712,12 +2712,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Size"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSizeEqual(
@@ -2734,12 +2734,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Size"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreSizeEqual(
@@ -2755,12 +2755,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.TabIndex"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTabIndexEqual(
@@ -2777,12 +2777,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.TabIndex"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTabIndexEqual(
@@ -2799,7 +2799,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.TabStop"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void TabStop(
@@ -2815,7 +2815,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.TabStop"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotTabStop(
@@ -2830,12 +2830,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.TabStop"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTabStopEqual(
@@ -2852,12 +2852,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.TabStop"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTabStopEqual(
@@ -2873,12 +2873,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Tag"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTagEqual(
@@ -2895,12 +2895,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Tag"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTagEqual(
@@ -2918,12 +2918,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Text"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTextEqual(
@@ -2940,12 +2940,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Text"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTextEqual(
@@ -2962,12 +2962,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Top"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTopEqual(
@@ -2984,12 +2984,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Top"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTopEqual(
@@ -3005,12 +3005,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.TopLevelControl"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreTopLevelControlEqual(
@@ -3029,7 +3029,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Visible"/>
 		/// is true.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void Visible(
@@ -3045,7 +3045,7 @@ namespace MbUnit.Framework
 		/// Verifies that the property value <see cref="Control.Visible"/>
 		/// is false.
 		/// </summary>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the expected value.
 		/// </param>
 		public static void NotVisible(
@@ -3060,12 +3060,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Visible"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreVisibleEqual(
@@ -3082,12 +3082,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Visible"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreVisibleEqual(
@@ -3103,12 +3103,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Width"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreWidthEqual(
@@ -3125,12 +3125,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Width"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreWidthEqual(
@@ -3146,12 +3146,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.WindowTarget"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreWindowTargetEqual(
@@ -3168,12 +3168,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.WindowTarget"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreWindowTargetEqual(
@@ -3191,12 +3191,12 @@ namespace MbUnit.Framework
 	
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Container"/>
-		/// of <paramref name="expected"/> and <paramref="actual"/> are equal.
+		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Instance containing the expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContainerEqual(
@@ -3213,12 +3213,12 @@ namespace MbUnit.Framework
 		
 		/// <summary>
 		/// Verifies that the property value <see cref="Control.Container"/>
-		/// of <paramref name="actual"/> is equal to <paramref="expected"/>.
+		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
-		/// <param name="expected"/>
+		/// <param name="expected">
 		/// Expected value.
 		/// </param>
-		/// <param name="actual"/>
+		/// <param name="actual">
 		/// Instance containing the tested value.
 		/// </param>
 		public static void AreContainerEqual(

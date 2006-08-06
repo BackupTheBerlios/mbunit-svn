@@ -9,7 +9,7 @@ namespace TestFu.Data.Populators
 	/// Base class for <see cref="IUniqueValidator"/> implementation.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"UniqueValidatorBase")]'
 	///		/>
 	public abstract class UniqueValidatorBase : IUniqueValidator

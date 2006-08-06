@@ -8,7 +8,7 @@ namespace TestFu.Data
 	/// Enumeration of available SQL backup devices
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DbBackupDevice")]'
 	///		/>
 	public enum DbBackupDevice

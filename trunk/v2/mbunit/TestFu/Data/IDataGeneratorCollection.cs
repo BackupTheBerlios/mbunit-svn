@@ -8,7 +8,7 @@ namespace TestFu.Data
 	/// A collection of <see cref="IDataGenerator"/>.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"IDataGeneratorCollection")]'
 	///		/>
 	public interface IDataGeneratorCollection  : ICollection
@@ -39,7 +39,7 @@ namespace TestFu.Data
 		/// <param name="dataGenerator">
 		/// <see cref="IDataGenerator"/> to add to the collection.
 		/// </param>
-		/// <exception cref="ArgumentNullException"/>
+		/// <exception cref="ArgumentNullException">
 		/// <paramref name="dataGenerator"/> is a null reference
 		/// (Nothing in Visual Basic)
 		/// </exception>
@@ -51,7 +51,7 @@ namespace TestFu.Data
 		/// <param name="dataGenerator">
 		/// <see cref="IDataGenerator"/> to remove from the collection.
 		/// </param>
-		/// <exception cref="ArgumentNullException"/>
+		/// <exception cref="ArgumentNullException">
 		/// <paramref name="dataGenerator"/> is a null reference
 		/// (Nothing in Visual Basic)
 		/// </exception>		
@@ -64,7 +64,7 @@ namespace TestFu.Data
 		/// <param name="dataGenerator">
 		/// <see cref="DataColumn"/> whose generator is to be removed from the collection.
 		/// </param>
-		/// <exception cref="ArgumentNullException"/>
+		/// <exception cref="ArgumentNullException">
 		/// <paramref name="column"/> is a null reference
 		/// (Nothing in Visual Basic)
 		/// </exception>				
@@ -77,7 +77,7 @@ namespace TestFu.Data
 		/// <param name="dataGenerator">
 		/// Column named <paramref name="columnName"/> whose generator is to be removed from the collection.
 		/// </param>
-		/// <exception cref="ArgumentNullException"/>
+		/// <exception cref="ArgumentNullException">
 		/// <paramref name="column"/> is a null reference
 		/// (Nothing in Visual Basic)
 		/// </exception>						

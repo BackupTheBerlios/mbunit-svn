@@ -7,7 +7,7 @@ namespace TestFu.Data
 	/// A validator for <see cref="UniqueConstraint"/> constraints.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"IUniqueValidator")]'
 	///		/>
 	public interface IUniqueValidator

@@ -8,7 +8,7 @@ namespace TestFu.Data
 	/// Abstract class to perform administrative tasks on a database
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DbAdministratorBase")]'
 	///		/>
 	public abstract class DbAdministratorBase : IDbAdministratorBase

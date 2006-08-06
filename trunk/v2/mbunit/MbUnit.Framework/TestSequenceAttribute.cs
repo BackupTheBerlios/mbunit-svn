@@ -46,7 +46,7 @@ namespace MbUnit.Framework
 		private int order;
 		
 		/// <summary>
-		/// Initializes a new instance of <see cref="SequenceAttribute"/> with the given order.
+        /// Initializes a new instance of <see cref="TestSequenceAttribute"/> with the given order.
 		/// </summary>
 		/// <param name="order">order of execution</param>
 		public TestSequenceAttribute(int order)
@@ -55,7 +55,7 @@ namespace MbUnit.Framework
 		}
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="SequenceAttribute"/> with the given order
+        /// Initializes a new instance of <see cref="TestSequenceAttribute"/> with the given order
 		/// and description.
 		/// </summary>
 		/// <param name="order">order of execution</param>

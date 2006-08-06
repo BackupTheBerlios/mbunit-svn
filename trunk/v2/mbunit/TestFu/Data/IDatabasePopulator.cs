@@ -8,7 +8,7 @@ namespace TestFu.Data
 	/// A database populator instance.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"IDatabasePopulator")]'
 	///		/>
 	public interface IDatabasePopulator

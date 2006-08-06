@@ -37,7 +37,7 @@ namespace MbUnit.Core.Runs
 	
 	/// <summary>
 	/// This interface defines a type of test/non test run that is used
-	/// to define the <see cref="TestFixturePatternAttribute"/> logic.
+	/// to define the <see cref="MbUnit.Core.Framework.TestFixturePatternAttribute"/> logic.
 	/// </summary>
 	public interface IRun
 	{

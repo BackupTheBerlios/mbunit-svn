@@ -8,7 +8,7 @@ namespace TestFu.Data
 	/// of a given <see cref="DataTable"/>.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"ITablePopulator")]'
 	///		/>
 	public interface ITablePopulator

@@ -39,7 +39,6 @@ namespace MbUnit.Core.Cons.CommandLine
 	/// Parser for command line arguments.
 	/// </summary>
 	/// <remarks>
-	/// </remarks>
 	/// <para>
 	/// The parser specification is infered from the instance fields of the object
 	/// specified as the destination of the parse.

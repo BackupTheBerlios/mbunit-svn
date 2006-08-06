@@ -16,12 +16,16 @@
     <Optimize>false</Optimize>
     <OutputPath>.\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Debug\MbUnit.Framework.1.1.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <Optimize>true</Optimize>
     <OutputPath>.\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Release\MbUnit.Framework.1.1.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MbUnit.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">

@@ -46,7 +46,8 @@ namespace MbUnit.Core.Monitoring
 	/// timer.Stop();
 	/// 
 	/// Console.WriteLine("Duration: {0}",timer.Duration);
-	/// </example>
+    /// </code>
+    /// </example>
 	public sealed class TimeMonitor : IMonitor
 	{
         private long startTicks;

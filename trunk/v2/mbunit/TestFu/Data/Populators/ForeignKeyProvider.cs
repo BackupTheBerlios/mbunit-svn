@@ -7,7 +7,7 @@ namespace TestFu.Data.Populators
 	/// Default implementation of <see cref="IForeignKeyProvider"/>
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"ForeignKeyProvider")]'
 	///		/>
 	public class ForeignKeyProvider : ForeignKeyProviderBase

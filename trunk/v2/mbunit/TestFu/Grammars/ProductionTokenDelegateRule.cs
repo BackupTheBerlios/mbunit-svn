@@ -12,11 +12,11 @@ namespace TestFu.Grammars
 		/// <summary>
 		/// Creates a new instance around a <see cref="ProductionTokenDelegate"/>
 		/// </summary>
-		/// <param name="methodDelegate">
+        /// <param name="productionTokenDelegate">
 		/// <see cref="ProductionTokenDelegateRule"/> to attach.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="methodDelegate"/> is a null reference.
+        /// <paramref name="productionTokenDelegate"/> is a null reference.
 		/// </exception>
 		public ProductionTokenDelegateRule(ProductionTokenDelegate productionTokenDelegate)
 			:base(true)

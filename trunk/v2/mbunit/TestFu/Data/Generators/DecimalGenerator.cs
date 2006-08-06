@@ -10,6 +10,7 @@ namespace TestFu.Data.Generators
 	/// <para>
 	/// This <see cref="Generate"/> method generates decimal values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
 	/// </para>
+    /// </remarks>
 	public class DecimalGenerator : DataGeneratorBase
 	{
 		private System.Decimal minValue = 0;

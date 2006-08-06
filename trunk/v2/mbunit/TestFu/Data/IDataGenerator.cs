@@ -6,7 +6,7 @@ namespace TestFu.Data
 	/// An random data generator.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"IDataGenerator")]'
 	///		/>
 	public interface IDataGenerator

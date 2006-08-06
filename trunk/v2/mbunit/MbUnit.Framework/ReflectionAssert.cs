@@ -68,8 +68,8 @@ namespace MbUnit.Framework
 		/// Asserts whether <paramref name="child"/> is an instance of the 
 		/// <paramref name="type"/>.
 		/// </summary>
-		/// <param name="parent">
-		/// <see cref="Type"/> instance.
+		/// <param name="type">
+        /// <see cref="Type"/> instance.
 		/// </param>
 		/// <param name="child">
 		/// Child instance.

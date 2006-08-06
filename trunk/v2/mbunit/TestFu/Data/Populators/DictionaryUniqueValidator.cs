@@ -9,7 +9,7 @@ namespace TestFu.Data.Populators
 	/// A <see cref="IUniqueValidator"/> based on a <see cref="IDictionary"/>.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DictionaryUniqueValidator")]'
 	///		/>
 	public class DictionaryUniqueValidator : UniqueValidatorBase

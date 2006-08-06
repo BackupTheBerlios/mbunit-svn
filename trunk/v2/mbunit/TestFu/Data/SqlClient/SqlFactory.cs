@@ -8,7 +8,7 @@ namespace TestFu.Data.SqlClient
 	/// A <see cref="IDbFactory"/> implementation for MSSQL server.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
     ///		path='//example[contains(descendant-or-self::*,"SqlFactory")]'
     ///		/>
 	public sealed class SqlFactory : DbFactoryBase

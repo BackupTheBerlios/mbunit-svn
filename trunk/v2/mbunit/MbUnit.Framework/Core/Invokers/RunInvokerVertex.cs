@@ -102,7 +102,7 @@ namespace MbUnit.Core.Invokers
 		}
 
 		/// <summary>
-		/// Serializes informations to the <see cref="IGraphSerialization"/> instance.
+		/// Serializes informations to the <see cref="IGraphSerializationInfo"/> instance.
 		/// </summary>		
 		/// <param name="info">serialization device</param>
 		/// <exception cref="ArgumentNullException">info is a null reference</exception>

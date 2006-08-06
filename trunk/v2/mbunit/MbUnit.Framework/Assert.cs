@@ -159,7 +159,7 @@ namespace MbUnit.Framework
 		/// </param>
 		/// <remarks>
 		/// <para>
-		/// The error message is formatted using <see cref="String.Format"/>.
+		/// The error message is formatted using <see cref="String.Format(string, object[])"/>.
 		/// </para>
 		/// </remarks>
 		static public void IsTrue(bool condition, string format, params object[] args) 
@@ -200,7 +200,7 @@ namespace MbUnit.Framework
 		/// </param>
 		/// <remarks>
 		/// <para>
-		/// The error message is formatted using <see cref="String.Format"/>.
+		/// The error message is formatted using <see cref="String.Format(string, object[])"/>.
 		/// </para>
 		/// </remarks>
 		static public void IsFalse(bool condition, string format, params object[] args) 
@@ -239,7 +239,8 @@ namespace MbUnit.Framework
 		/// <param name="actual">The actual value</param>
 		/// <param name="delta">The maximum acceptable difference between the
 		/// the expected and the actual</param>
-		static public void AreEqual(double expected, 
+        /// <param name="message">The message printed out upon failure</param>
+        static public void AreEqual(double expected, 
 			double actual, double delta, string message) 
 		{
             Assert.IncrementAssertCount();
@@ -346,9 +347,20 @@ namespace MbUnit.Framework
         /// they are not equals then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
-        /// <param name="message">The message printed out upon failure</param>
         /// <param name="expected">The expected value</param>
         /// <param name="actual">The actual value</param>
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
         static public void AreEqual(decimal expected, decimal actual,
                                     string format, params object[] args)
         {
@@ -390,9 +402,20 @@ namespace MbUnit.Framework
         /// they are not equals then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
-        /// <param name="message">The message printed out upon failure</param>
         /// <param name="expected">The expected value</param>
         /// <param name="actual">The actual value</param>
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
         static public void AreEqual(int expected, int actual,
                                     string format, params object[] args)
         {
@@ -417,12 +440,23 @@ namespace MbUnit.Framework
 		/// Verifies that two objects are equal.  Two objects are considered
 		/// equal if both are null, or if both have the same value.  All
 		/// non-numeric types are compared by using the <c>Equals</c> method.
-		/// If they are not equal an <see cref="AssertionFailedError"/> is thrown.
+		/// If they are not equal an <see cref="AssertionException"/> is thrown.
 		/// </summary>
 		/// <param name="expected">The value that is expected</param>
 		/// <param name="actual">The actual value</param>
-		/// <param name="message">The message to display if objects are not equal</param>
-		static public void AreEqual(Object expected, Object actual,
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void AreEqual(Object expected, Object actual,
 		                            string format, params object[] args)
 		{
             AreEqual(expected, actual, String.Format(format, args));
@@ -432,7 +466,7 @@ namespace MbUnit.Framework
         /// Verifies that two objects are equal.  Two objects are considered
         /// equal if both are null, or if both have the same value.  All
         /// non-numeric types are compared by using the <c>Equals</c> method.
-        /// If they are not equal an <see cref="AssertionFailedError"/> is thrown.
+        /// If they are not equal an <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="expected">The value that is expected</param>
         /// <param name="actual">The actual value</param>
@@ -458,7 +492,7 @@ namespace MbUnit.Framework
 		/// Verifies that two objects are equal.  Two objects are considered
 		/// equal if both are null, or if both have the same value.  All
 		/// non-numeric types are compared by using the <c>Equals</c> method.
-		/// If they are not equal an <see cref="AssertionFailedError"/> is thrown.
+		/// If they are not equal an <see cref="AssertionException"/> is thrown.
 		/// </summary>
 		/// <param name="expected">The value that is expected</param>
 		/// <param name="actual">The actual value</param>
@@ -511,9 +545,20 @@ namespace MbUnit.Framework
 		/// If the object is not <code>null</code> then an <see cref="AssertionException"/>
 		/// is thrown.
 		/// </summary>
-		/// <param name="message">The message to be printed when the object is null</param>
 		/// <param name="anObject">The object that is to be tested</param>
-		static public void IsNotNull(Object anObject, string format, params object[] args) 
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void IsNotNull(Object anObject, string format, params object[] args) 
 		{
 			Assert.IsTrue(anObject != null, format, args); 
 		}
@@ -539,9 +584,20 @@ namespace MbUnit.Framework
 		/// If the object is <code>null</code> then an <see cref="AssertionException"/>
 		/// is thrown.
 		/// </summary>
-		/// <param name="message">The message to be printed when the object is not null</param>
 		/// <param name="anObject">The object that is to be tested</param>
-		static public void IsNull(Object anObject, string format, params object[] args) 
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void IsNull(Object anObject, string format, params object[] args) 
 		{
 			Assert.IsTrue(anObject == null, format, args); 
 		}
@@ -583,9 +639,20 @@ namespace MbUnit.Framework
         /// Asserts that two objects refer to the same object. If they
         /// are not the same an <see cref="AssertionException"/> is thrown.
         /// </summary>
-        /// <param name="message">The message to be printed when the two objects are not the same object.</param>
         /// <param name="expected">The expected object</param>
         /// <param name="actual">The actual object</param>
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
         static public void AreSame(Object expected, Object actual, string format, params object[] args)
         {
             AreSame(expected, actual, String.Format(format, args));
@@ -625,8 +692,18 @@ namespace MbUnit.Framework
 		/// Throws an <see cref="AssertionException"/> with the message that is 
 		/// passed in. This is used by the other Assert functions. 
 		/// </summary>
-		/// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
-		static public void Fail(string format, params object[] args) 
+        /// <param name="format">
+        /// The format of the message to initialize the <see cref="AssertionException"/> with. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void Fail(string format, params object[] args) 
 		{
             Fail(string.Format(format, args));
 		}
@@ -653,21 +730,20 @@ namespace MbUnit.Framework
 		
         #region Ignore
         /// <summary>
-        /// Makes the current test ignored using <see cref="String.Format"/> like
+        /// Makes the current test ignored using <see cref="String.Format(string, object[])"/> like
         /// formatting
         /// </summary>
         /// <param name="format"></param>
-        /// <param name="parameters"></param>
+        /// <param name="args"></param>
         public static void Ignore(string format, params object[] args)
         {
             Ignore(String.Format(format, args));
         }
         /// <summary>
-        /// Makes the current test ignored using <see cref="String.Format"/> like
+        /// Makes the current test ignored using <see cref="String.Format(string, object[])"/> like
         /// formatting
         /// </summary>
-        /// <param name="format"></param>
-        /// <param name="parameters"></param>
+        /// <param name="message"></param>
         public static void Ignore(string message)
         {
             if (message == null)
@@ -679,7 +755,7 @@ namespace MbUnit.Framework
         #region LowerThan
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>
 		static public void LowerThan(int left, int right)
         {
@@ -691,7 +767,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(int left, int right, 
             string message)
@@ -703,7 +779,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(int left, int right,
             string format, params object[] args)
@@ -713,7 +789,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(short left, short right)
         {
@@ -724,7 +800,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(short left, short right,
             string message)
@@ -736,7 +812,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(short left, short right,
             string format, params object[] args)
@@ -746,7 +822,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(byte left, byte right)
         {
@@ -757,7 +833,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(byte left, byte right,
             string message)
@@ -769,7 +845,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(byte left, byte right,
             string format, params object[] args)
@@ -779,7 +855,7 @@ namespace MbUnit.Framework
 
         /// <summary>
 		/// Verifies that <paramref name="left"/> is strictly lower than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>        
 		static public void LowerThan(long left, long right)
         {
@@ -790,7 +866,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void LowerThan(long left, long right,
             string message)
@@ -802,7 +878,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void LowerThan(long left, long right,
             string format, params object[] args)
@@ -812,7 +888,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(double left, double right)
         {
@@ -823,7 +899,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(double left, double right,
             string message)
@@ -835,7 +911,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(double left, double right,
             string format, params object[] args)
@@ -845,7 +921,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(float left, float right)
         {
@@ -856,7 +932,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(float left, float right,
             string message)
@@ -868,7 +944,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(float left, float right,
             string format, params object[] args)
@@ -878,7 +954,7 @@ namespace MbUnit.Framework
 
         /// <summary>
 		/// Verifies that <paramref name="left"/> is strictly lower than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>
 		static public void LowerThan(IComparable left, IComparable right)
 		{
@@ -891,7 +967,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(IComparable left, IComparable right,
             string message)
@@ -905,7 +981,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerThan(IComparable left, IComparable right,
             string format, params object[] args)
@@ -917,7 +993,7 @@ namespace MbUnit.Framework
         #region LowerEqualThan
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(int left, int right)
         {
@@ -928,7 +1004,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(int left, int right,
             string message)
@@ -940,7 +1016,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(int left, int right,
             string format, params object[] args)
@@ -950,7 +1026,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(short left, short right)
         {
@@ -961,7 +1037,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(short left, short right,
             string message)
@@ -973,7 +1049,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(short left, short right,
             string format, params object[] args)
@@ -983,7 +1059,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(byte left, byte right)
         {
@@ -994,7 +1070,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(byte left, byte right,
             string message)
@@ -1006,7 +1082,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(byte left, byte right,
             string format, params object[] args)
@@ -1016,7 +1092,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void LowerEqualThan(long left, long right)
         {
@@ -1027,7 +1103,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void LowerEqualThan(long left, long right,
             string message)
@@ -1039,7 +1115,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void LowerEqualThan(long left, long right,
             string format, params object[] args)
@@ -1049,7 +1125,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(double left, double right)
         {
@@ -1060,7 +1136,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(double left, double right,
             string message)
@@ -1073,7 +1149,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(double left, double right,
             string format, params object[] args)
@@ -1083,7 +1159,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(float left, float right)
         {
@@ -1094,7 +1170,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(float left, float right,
             string message)
@@ -1106,7 +1182,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void LowerEqualThan(float left, float right,
             string format, params object[] args)
@@ -1116,7 +1192,7 @@ namespace MbUnit.Framework
 
         /// <summary>
 		/// Verifies that <paramref name="left"/> is lower equal than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>		
 		static public void LowerEqualThan(IComparable left, IComparable right)
 		{
@@ -1129,7 +1205,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is lower equal than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>		
         static public void LowerEqualThan(IComparable left, IComparable right,
             string message)
@@ -1143,7 +1219,7 @@ namespace MbUnit.Framework
 
         /// <summary>
 		/// Verifies that <paramref name="left"/> is lower equal than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>		
 		static public void LowerEqualThan(IComparable left, IComparable right,
             string format, params object[] args)
@@ -1155,7 +1231,7 @@ namespace MbUnit.Framework
         #region GreaterThan
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(int left, int right)
         {
@@ -1166,7 +1242,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(int left, int right, string message)
         {
@@ -1177,7 +1253,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(int left, int right, string format, params object[] args)
         {
@@ -1186,7 +1262,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(short left, short right)
         {
@@ -1197,7 +1273,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(short left, short right, string message)
         {
@@ -1208,7 +1284,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(short left, short right, string format, params object[] args)
         {
@@ -1217,7 +1293,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(byte left, byte right)
         {
@@ -1228,7 +1304,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(byte left, byte right,string message)
         {
@@ -1239,7 +1315,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(byte left, byte right, string format, params object[] args)
         {
@@ -1248,7 +1324,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterThan(long left, long right)
         {
@@ -1259,7 +1335,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterThan(long left, long right, string message)
         {
@@ -1271,7 +1347,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterThan(long left, long right, string format, params object[] args)
         {
@@ -1280,7 +1356,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(double left, double right)
         {
@@ -1291,7 +1367,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(double left, double right, string message)
         {
@@ -1302,7 +1378,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(double left, double right, string format, params object[] args)
         {
@@ -1311,7 +1387,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(float left, float right)
         {
@@ -1322,7 +1398,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(float left, float right, string message)
         {
@@ -1334,7 +1410,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterThan(float left, float right, string format, params object[] args)
         {
@@ -1343,7 +1419,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>		
 		static public void GreaterThan(IComparable left, IComparable right)
 		{
@@ -1356,7 +1432,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>		
         static public void GreaterThan(IComparable left, IComparable right, string message)
         {
@@ -1369,7 +1445,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>		
         static public void GreaterThan(IComparable left, IComparable right, 
             string format, params object[] args)
@@ -1381,7 +1457,7 @@ namespace MbUnit.Framework
         #region GreateEqualThan
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(int left, int right)
         {
@@ -1392,7 +1468,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(int left, int right, string message)
         {
@@ -1403,7 +1479,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(int left, int right, 
             string format, params object[] args)
@@ -1413,7 +1489,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(short left, short right)
         {
@@ -1424,7 +1500,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(short left, short right, string message)
         {
@@ -1435,7 +1511,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(short left, short right, 
             string format, params object[] args)
@@ -1445,7 +1521,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(byte left, byte right)
         {
@@ -1456,7 +1532,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(byte left, byte right, string message)
         {
@@ -1468,7 +1544,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(byte left, byte right, 
             string format, params object[] args)
@@ -1478,7 +1554,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterEqualThan(long left, long right)
         {
@@ -1489,7 +1565,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterEqualThan(long left, long right, string message)
         {
@@ -1500,7 +1576,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>        
         static public void GreaterEqualThan(long left, long right, 
             string format, params object[] args)
@@ -1510,7 +1586,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(double left, double right)
         {
@@ -1521,7 +1597,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(double left, double right, string message)
         {
@@ -1532,7 +1608,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(double left, double right, 
             string format, params object[] args)
@@ -1542,7 +1618,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(float left, float right)
         {
@@ -1553,7 +1629,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(float left, float right, string message)
         {
@@ -1565,7 +1641,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>
         static public void GreaterEqualThan(float left, float right, 
             string format, params object[] args)
@@ -1575,7 +1651,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-		/// <see cref="right"/>.
+		/// <paramref name="right"/>.
 		/// </summary>		
 		static public void GreaterEqualThan(IComparable left, IComparable right)
 		{
@@ -1588,7 +1664,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>		
         static public void GreaterEqualThan(IComparable left, IComparable right, string message)
         {
@@ -1601,7 +1677,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-        /// <see cref="right"/>.
+        /// <paramref name="right"/>.
         /// </summary>		
         static public void GreaterEqualThan(IComparable left, IComparable right, 
             string format, params object[] args)
@@ -2181,10 +2257,21 @@ namespace MbUnit.Framework
 		/// This method is called when two objects have been compared and found to be
 		/// different. This prints a nice message to the screen. 
 		/// </summary>
-		/// <param name="message">The message that is to be printed prior to the comparison failure</param>
 		/// <param name="expected">The expected object</param>
 		/// <param name="actual">The actual object</param>
-		static private void FailNotEquals(Object expected, Object actual, string format, params object[] args) 
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static private void FailNotEquals(Object expected, Object actual, string format, params object[] args) 
 		{
 			throw new NotEqualAssertionException(expected,actual,
 				String.Format(format,args));
@@ -2193,10 +2280,21 @@ namespace MbUnit.Framework
 		/// <summary>
 		///  This method is called when the two objects are not the same. 
 		/// </summary>
-		/// <param name="message">The message to be printed on the screen</param>
 		/// <param name="expected">The expected object</param>
 		/// <param name="actual">The actual object</param>
-		static private void FailNotSame(Object expected, Object actual, string format, params object[] args) 
+        /// <param name="format">
+        /// The format of the message to display if the assertion fails,
+        /// containing zero or more format items. 
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static private void FailNotSame(Object expected, Object actual, string format, params object[] args) 
 		{
 			string formatted=string.Empty;
 			if (format != null)

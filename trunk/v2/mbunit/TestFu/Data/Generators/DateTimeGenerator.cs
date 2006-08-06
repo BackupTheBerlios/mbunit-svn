@@ -10,6 +10,7 @@ namespace TestFu.Data.Generators
 	/// <para>
 	/// This <see cref="Generate"/> method generates DateTime values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
 	/// </para>
+    /// </remarks>
 	public class DateTimeGenerator : DataGeneratorBase
 	{
 		private DateTime minValue = DateTime.MinValue;

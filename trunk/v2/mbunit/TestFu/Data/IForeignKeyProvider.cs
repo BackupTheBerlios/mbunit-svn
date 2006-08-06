@@ -9,7 +9,7 @@ namespace TestFu.Data
 	/// given <see cref="ForeignKeyConstraint"/>.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"IForeignKeyProvider")]'
 	///		/>
 	public interface IForeignKeyProvider

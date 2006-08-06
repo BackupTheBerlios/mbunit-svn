@@ -9,7 +9,7 @@ namespace TestFu.Data.Populators
 	/// A <see cref="IUniqueValidator"/> querying the databse.
 	/// </summary>
 	/// <include 
-	///		file='TestFu/Data/TestFu.Data.Doc.xml' 
+	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DbCommandUniqueValidator")]'
 	///		/>
 	public abstract class DbCommandUniqueValidatorBase : UniqueValidatorBase

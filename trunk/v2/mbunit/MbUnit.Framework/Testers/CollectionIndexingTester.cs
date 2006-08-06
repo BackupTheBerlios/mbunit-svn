@@ -11,7 +11,7 @@ namespace MbUnit.Framework.Testers
 	/// <summary>
 	/// Collection indexing test class
 	/// </summary>
-	/// <include file="MbUnit.Framework.Testers.Doc.xml" path="dot/remarkss/remarks[@name='CollectionIndexingTester']"/>
+	/// <include file="MbUnit.Framework.Doc.xml" path="dot/remarkss/remarks[@name='CollectionIndexingTester']"/>
 	public class CollectionIndexingTester
 	{
 		private IndexerProviderAttribute attribute;

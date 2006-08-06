@@ -51,7 +51,7 @@ namespace MbUnit.Core.Invokers
 		/// the invoker.
 		/// </summary>
 		/// <value>
-		/// Reference to the <see cref="iRun"/> instance that generated
+		/// Reference to the <see cref="IRun"/> instance that generated
 		/// the invoker.
 		/// </value>
 		IRun Generator {get;}

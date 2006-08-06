@@ -10,6 +10,7 @@ namespace TestFu.Data.Generators
 	/// <para>
 	/// This <see cref="Generate"/> method generates double values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
 	/// </para>
+    /// </remarks>
 	public class DoubleGenerator : DataGeneratorBase
 	{
 		private double minValue = 0;

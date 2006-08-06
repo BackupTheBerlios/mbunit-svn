@@ -36,10 +36,10 @@ namespace MbUnit.Framework
 	/// </para>
 	/// <para>
 	/// Use the static methods of <see cref="Assert"/> to test your assertions. You can also
-	/// do security related assertion using <see cref="SecuAssert"/>, 
+	/// do security related assertion using <see cref="SecurityAssert"/>, 
 	/// data related assertions using <see cref="DataAssert"/> and
 	/// XML related assertions using <see cref="XmlAssert"/> (which comes from XmlUnit, http://xmlunit.sourceforge.net)
-	/// , Reflection based assertion <see cref="RefleAssert"/> and
+	/// , Reflection based assertion <see cref="ReflectionAssert"/> and
 	/// String and text based assertion <see cref="StringAssert"/>.
 	/// </para>
 	/// </summary>

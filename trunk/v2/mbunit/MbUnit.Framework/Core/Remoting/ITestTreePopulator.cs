@@ -49,7 +49,7 @@ namespace MbUnit.Core.Remoting
 		/// <param name="nodes">
 		/// node dictionary
 		/// </param>
-		/// <param name="parent"/> or <paramref name="pipes"/> is a null
+		/// <paramref name="parent"/> or <paramref name="pipes"/> is a null
 		/// reference (Nothing in Visual Basic)
 		/// </exception>
 		void Populate(GuidTestTreeNodeDictionary nodes, TestTreeNode root, RunPipeStarterCollection pipes);

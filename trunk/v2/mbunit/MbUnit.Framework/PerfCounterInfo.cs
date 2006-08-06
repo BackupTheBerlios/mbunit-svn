@@ -57,7 +57,7 @@ namespace MbUnit.Framework
                 private NbofExcepsThrown() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -87,7 +87,7 @@ namespace MbUnit.Framework
                 private NbofExcepsThrownsec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -117,7 +117,7 @@ namespace MbUnit.Framework
                 private NbofFilterssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -147,7 +147,7 @@ namespace MbUnit.Framework
                 private NbofFinallyssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -177,7 +177,7 @@ namespace MbUnit.Framework
                 private ThrowToCatchDepthsec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -222,7 +222,7 @@ namespace MbUnit.Framework
                 private RemoteCallssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -252,7 +252,7 @@ namespace MbUnit.Framework
                 private TotalRemoteCalls() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -282,7 +282,7 @@ namespace MbUnit.Framework
                 private Channels() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -312,7 +312,7 @@ namespace MbUnit.Framework
                 private ContextProxies() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -342,7 +342,7 @@ namespace MbUnit.Framework
                 private ContextBoundClassesLoaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -372,7 +372,7 @@ namespace MbUnit.Framework
                 private ContextBoundObjectsAllocsec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -402,7 +402,7 @@ namespace MbUnit.Framework
                 private Contexts() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -447,7 +447,7 @@ namespace MbUnit.Framework
                 private ConnectionsEstablished() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -477,7 +477,7 @@ namespace MbUnit.Framework
                 private BytesReceived() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -507,7 +507,7 @@ namespace MbUnit.Framework
                 private BytesSent() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -537,7 +537,7 @@ namespace MbUnit.Framework
                 private DatagramsReceived() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -567,7 +567,7 @@ namespace MbUnit.Framework
                 private DatagramsSent() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -612,7 +612,7 @@ namespace MbUnit.Framework
                 private NbGen0Collections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -642,7 +642,7 @@ namespace MbUnit.Framework
                 private NbGen1Collections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -672,7 +672,7 @@ namespace MbUnit.Framework
                 private NbGen2Collections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -702,7 +702,7 @@ namespace MbUnit.Framework
                 private PromotedMemoryfromGen0() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -732,7 +732,7 @@ namespace MbUnit.Framework
                 private PromotedMemoryfromGen1() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -762,7 +762,7 @@ namespace MbUnit.Framework
                 private Gen0PromotedBytesSec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -792,7 +792,7 @@ namespace MbUnit.Framework
                 private Gen1PromotedBytesSec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -822,7 +822,7 @@ namespace MbUnit.Framework
                 private PromotedFinalizationMemoryfromGen0() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -852,7 +852,7 @@ namespace MbUnit.Framework
                 private PromotedFinalizationMemoryfromGen1() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -882,7 +882,7 @@ namespace MbUnit.Framework
                 private Gen0heapsize() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -912,7 +912,7 @@ namespace MbUnit.Framework
                 private Gen1heapsize() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -942,7 +942,7 @@ namespace MbUnit.Framework
                 private Gen2heapsize() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -972,7 +972,7 @@ namespace MbUnit.Framework
                 private LargeObjectHeapsize() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1002,7 +1002,7 @@ namespace MbUnit.Framework
                 private FinalizationSurvivors() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1032,7 +1032,7 @@ namespace MbUnit.Framework
                 private NbGcHandles() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1062,7 +1062,7 @@ namespace MbUnit.Framework
                 private AllocatedBytessec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1092,7 +1092,7 @@ namespace MbUnit.Framework
                 private NbInducedGc() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1122,7 +1122,7 @@ namespace MbUnit.Framework
                 private TimeinGc() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1152,7 +1152,7 @@ namespace MbUnit.Framework
                 private NotDisplayed() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1182,7 +1182,7 @@ namespace MbUnit.Framework
                 private NbBytesinallHeaps() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1212,7 +1212,7 @@ namespace MbUnit.Framework
                 private NbTotalcommittedBytes() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1242,7 +1242,7 @@ namespace MbUnit.Framework
                 private NbTotalreservedBytes() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1272,7 +1272,7 @@ namespace MbUnit.Framework
                 private NbofPinnedObjects() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1302,7 +1302,7 @@ namespace MbUnit.Framework
                 private NbofSinkBlocksinuse() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1347,7 +1347,7 @@ namespace MbUnit.Framework
                 private NbofCcws() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1377,7 +1377,7 @@ namespace MbUnit.Framework
                 private NbofStubs() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1407,7 +1407,7 @@ namespace MbUnit.Framework
                 private Nbofmarshalling() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1437,7 +1437,7 @@ namespace MbUnit.Framework
                 private NbofTlbimportssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1467,7 +1467,7 @@ namespace MbUnit.Framework
                 private NbofTlbexportssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -1512,7 +1512,7 @@ namespace MbUnit.Framework
                 private HardConnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1536,7 +1536,7 @@ namespace MbUnit.Framework
                 private HardDisconnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1560,7 +1560,7 @@ namespace MbUnit.Framework
                 private SoftConnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1584,7 +1584,7 @@ namespace MbUnit.Framework
                 private SoftDisconnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1608,7 +1608,7 @@ namespace MbUnit.Framework
                 private NumberOfNonPooledConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1632,7 +1632,7 @@ namespace MbUnit.Framework
                 private NumberOfPooledConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1656,7 +1656,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnectionPoolGroups() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1680,7 +1680,7 @@ namespace MbUnit.Framework
                 private NumberOfInactiveConnectionPoolGroups() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1704,7 +1704,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnectionPools() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1728,7 +1728,7 @@ namespace MbUnit.Framework
                 private NumberOfInactiveConnectionPools() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1752,7 +1752,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1776,7 +1776,7 @@ namespace MbUnit.Framework
                 private NumberOfFreeConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1800,7 +1800,7 @@ namespace MbUnit.Framework
                 private NumberOfStasisConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1824,7 +1824,7 @@ namespace MbUnit.Framework
                 private NumberOfReclaimedConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1863,7 +1863,7 @@ namespace MbUnit.Framework
                 private SqlClientCurrentNbpooledandnonpooledconnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1887,7 +1887,7 @@ namespace MbUnit.Framework
                 private SqlClientCurrentNbpooledconnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1911,7 +1911,7 @@ namespace MbUnit.Framework
                 private SqlClientCurrentNbconnectionpools() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1935,7 +1935,7 @@ namespace MbUnit.Framework
                 private SqlClientPeakNbpooledconnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1959,7 +1959,7 @@ namespace MbUnit.Framework
                 private SqlClientTotalNbfailedconnects() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -1983,7 +1983,7 @@ namespace MbUnit.Framework
                 private SqlClientTotalNbfailedcommands() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -2022,7 +2022,7 @@ namespace MbUnit.Framework
                 private CurrentClassesLoaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2052,7 +2052,7 @@ namespace MbUnit.Framework
                 private TotalClassesLoaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2082,7 +2082,7 @@ namespace MbUnit.Framework
                 private RateofClassesLoaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2112,7 +2112,7 @@ namespace MbUnit.Framework
                 private Currentappdomains() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2142,7 +2142,7 @@ namespace MbUnit.Framework
                 private TotalAppdomains() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2172,7 +2172,7 @@ namespace MbUnit.Framework
                 private Rateofappdomains() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2202,7 +2202,7 @@ namespace MbUnit.Framework
                 private CurrentAssemblies() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2232,7 +2232,7 @@ namespace MbUnit.Framework
                 private TotalAssemblies() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2262,7 +2262,7 @@ namespace MbUnit.Framework
                 private RateofAssemblies() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2292,7 +2292,7 @@ namespace MbUnit.Framework
                 private TimeLoading() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2322,7 +2322,7 @@ namespace MbUnit.Framework
                 private AssemblySearchLength() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2352,7 +2352,7 @@ namespace MbUnit.Framework
                 private TotalNbofLoadFailures() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2382,7 +2382,7 @@ namespace MbUnit.Framework
                 private RateofLoadFailures() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2412,7 +2412,7 @@ namespace MbUnit.Framework
                 private BytesinLoaderHeap() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2442,7 +2442,7 @@ namespace MbUnit.Framework
                 private Totalappdomainsunloaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2472,7 +2472,7 @@ namespace MbUnit.Framework
                 private Rateofappdomainsunloaded() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2517,7 +2517,7 @@ namespace MbUnit.Framework
                 private TotalRuntimeChecks() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2547,7 +2547,7 @@ namespace MbUnit.Framework
                 private TimeSigAuthenticating() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2577,7 +2577,7 @@ namespace MbUnit.Framework
                 private NbLinkTimeChecks() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2607,7 +2607,7 @@ namespace MbUnit.Framework
                 private TimeinRtchecks() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2637,7 +2637,7 @@ namespace MbUnit.Framework
                 private NotDisplayed() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2667,7 +2667,7 @@ namespace MbUnit.Framework
                 private StackWalkDepth() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2712,7 +2712,7 @@ namespace MbUnit.Framework
                 private NbofMethodsJitted() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2742,7 +2742,7 @@ namespace MbUnit.Framework
                 private NbofIlBytesJitted() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2772,7 +2772,7 @@ namespace MbUnit.Framework
                 private TotalNbofIlBytesJitted() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2802,7 +2802,7 @@ namespace MbUnit.Framework
                 private IlBytesJittedsec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2832,7 +2832,7 @@ namespace MbUnit.Framework
                 private StandardJitFailures() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2862,7 +2862,7 @@ namespace MbUnit.Framework
                 private TimeinJit() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2892,7 +2892,7 @@ namespace MbUnit.Framework
                 private NotDisplayed() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2937,7 +2937,7 @@ namespace MbUnit.Framework
                 private TotalNbofContentions() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2967,7 +2967,7 @@ namespace MbUnit.Framework
                 private ContentionRatesec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -2997,7 +2997,7 @@ namespace MbUnit.Framework
                 private CurrentQueueLength() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3027,7 +3027,7 @@ namespace MbUnit.Framework
                 private QueueLengthPeak() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3057,7 +3057,7 @@ namespace MbUnit.Framework
                 private QueueLengthsec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3087,7 +3087,7 @@ namespace MbUnit.Framework
                 private NbofcurrentlogicalThreads() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3117,7 +3117,7 @@ namespace MbUnit.Framework
                 private NbofcurrentphysicalThreads() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3147,7 +3147,7 @@ namespace MbUnit.Framework
                 private Nbofcurrentrecognizedthreads() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3177,7 +3177,7 @@ namespace MbUnit.Framework
                 private Nboftotalrecognizedthreads() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3207,7 +3207,7 @@ namespace MbUnit.Framework
                 private rateofrecognizedthreadssec() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>
                 /// for the current instance.
@@ -3252,7 +3252,7 @@ namespace MbUnit.Framework
                 private HardConnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3276,7 +3276,7 @@ namespace MbUnit.Framework
                 private HardDisconnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3300,7 +3300,7 @@ namespace MbUnit.Framework
                 private SoftConnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3324,7 +3324,7 @@ namespace MbUnit.Framework
                 private SoftDisconnectsPerSecond() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3348,7 +3348,7 @@ namespace MbUnit.Framework
                 private NumberOfNonPooledConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3372,7 +3372,7 @@ namespace MbUnit.Framework
                 private NumberOfPooledConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3396,7 +3396,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnectionPoolGroups() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3420,7 +3420,7 @@ namespace MbUnit.Framework
                 private NumberOfInactiveConnectionPoolGroups() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3444,7 +3444,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnectionPools() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3468,7 +3468,7 @@ namespace MbUnit.Framework
                 private NumberOfInactiveConnectionPools() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3492,7 +3492,7 @@ namespace MbUnit.Framework
                 private NumberOfActiveConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3516,7 +3516,7 @@ namespace MbUnit.Framework
                 private NumberOfFreeConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3540,7 +3540,7 @@ namespace MbUnit.Framework
                 private NumberOfStasisConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
@@ -3564,7 +3564,7 @@ namespace MbUnit.Framework
                 private NumberOfReclaimedConnections() { }
                 /// <summary>
                 /// Gets the value of the <see cref="PerformanceCounter"/>.
-                /// <summary>
+                /// </summary>
                 /// <returns>
                 /// Value returned by <see cref="PerformanceCounter.NextValue"/>.
                 /// </returns>
