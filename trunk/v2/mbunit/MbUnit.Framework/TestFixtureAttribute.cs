@@ -19,9 +19,9 @@ namespace MbUnit.Framework
     [RunFactory(typeof(CombinatorialRun))]
 	public sealed class TestFixtureAttribute : TestFixturePatternAttribute 
 	{
-        private static volatile Object syncRoot = new Object();
-        private static SequenceRun runs = null;
-        private static ParallelRun testRuns = null;
+        private static readonly Object syncRoot = new Object();
+        private static IRun runs = null;
+
         /// <summary>
 		/// Default constructor
 		/// </summary>
@@ -53,52 +53,12 @@ namespace MbUnit.Framework
 		/// <include file="MbUnit.Framework.doc.xml" path="doc/examples/example[@name='GraphicsBitmap']"/>
 		public override IRun GetRun()
 		{
-            if (runs != null)
-                    return runs;
             lock (syncRoot)
             {
-                CreateRun();
+                if (runs == null)
+                    runs = new TestFixtureRun();
+                return runs;
             }
-            return runs;
-        }
-
-        public static ParallelRun TestRuns
-        {
-            get
-            {
-                lock (syncRoot)
-                {
-                    if (runs == null)
-                        CreateRun();
-                    return testRuns;
-                }
-            }
-        }
-
-        private static SequenceRun CreateRun()
-        {
-            runs = new SequenceRun();
-
-            // setup
-            OptionalMethodRun setup = new OptionalMethodRun(typeof(SetUpAttribute), false);
-            runs.Runs.Add(setup);
-
-            testRuns = new ParallelRun();
-            runs.Runs.Add(testRuns);
-
-            foreach (RunFactoryAttribute runFactory in
-                typeof(TestFixtureAttribute).GetCustomAttributes(typeof(RunFactoryAttribute), true)
-                )
-            {
-                IRun run = runFactory.CreateRun();
-                testRuns.Runs.Add(run);
-            }
-
-            // tear down
-            OptionalMethodRun tearDown = new OptionalMethodRun(typeof(TearDownAttribute), false);
-            runs.Runs.Add(tearDown);
-
-            return runs;
         }
     }
 }

@@ -401,6 +401,9 @@
     <Compile Include="Core\Runs\RunTree.cs" />
     <Compile Include="Core\Runs\RunVertex.cs" />
     <Compile Include="Core\Runs\SequenceRun.cs" />
+    <Compile Include="Core\Runs\TestFixtureRun.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Core\SSCLIFixtureFactory.cs" />
     <Compile Include="Core\TestNodeType.cs" />
     <Compile Include="Core\TestState.cs" />
@@ -483,6 +486,9 @@
     <Compile Include="TestAttribute.cs" />
     <Compile Include="TestCategoryAttribute.cs" />
     <Compile Include="Core\Framework\TestFixturePatternAttribute.cs" />
+    <Compile Include="TestFixtureExtensionAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TestFixtureSetUpAttribute.cs" />
     <Compile Include="TestFixtureTearDownAttribute.cs" />
     <Compile Include="Core\Framework\TestPatternAttribute.cs" />
@@ -660,7 +666,9 @@
     <EmbeddedResource Include="Core\Reports\mbunit-report.txt.xsl">
       <CopyToOutputDirectory>True</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Reports\mbunit-report.xsd" />
+    <EmbeddedResource Include="Core\Reports\mbunit-report.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Test.png" />
     <Content Include="MbUnit.Framework.doc.xml" />
     <AppDesigner Include="Properties\" />
