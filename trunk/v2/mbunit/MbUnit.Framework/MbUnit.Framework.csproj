@@ -652,8 +652,6 @@
     <EmbeddedResource Include="Core\Invoker.png" />
     <Content Include="Core\Invokers\MbUnit.Core.Invokers.Doc.xml" />
     <EmbeddedResource Include="Core\Populator.png" />
-    <EmbeddedResource Include="Core\Reports\mbuniticon.gif" />
-    <EmbeddedResource Include="Core\Reports\mbunitlogo.png" />
     <EmbeddedResource Include="Core\Reports\mbunit-report.cruisecontrol.xsl">
       <CopyToOutputDirectory>True</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -667,6 +665,8 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Test.png" />
+    <EmbeddedResource Include="Core\Reports\mbuniticon.gif" />
+    <EmbeddedResource Include="Core\Reports\mbunitlogo.png" />
     <Content Include="MbUnit.Framework.doc.xml" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>

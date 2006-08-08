@@ -137,8 +137,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App.ico" />
-    <Content Include="mbuniticon.gif" />
-    <Content Include="mbuniticonblue.gif" />
     <Compile Include="..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
@@ -151,6 +149,7 @@
     <Compile Include="MbUnitForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MbUnitFormArguments.cs" />
     <Compile Include="ReflectorTreeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
