@@ -199,6 +199,25 @@ namespace MbUnit.Core.Remoting
             }
         }
 
+        /// <summary> 
+        /// This method is used to provide assembly location resolver. It is called on event as needed by the CLR. 
+        /// Refer to document related to AppDomain.CurrentDomain.AssemblyResolve 
+        /// </summary> 
+        private Assembly AssemblyResolveHandler(object sender, ResolveEventArgs e)
+        {
+            try
+            {
+                string[] assemblyDetail = e.Name.Split(',');
+                string assemblyBasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Assembly assembly = Assembly.LoadFrom(assemblyBasePath + @"\" + assemblyDetail[0] + ".dll");
+                return assembly;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Failed resolving assembly", ex);
+            }
+        } 
+
         /// <summary>
         /// Creates an AppDomain for the Test Assembly
         /// </summary>
@@ -211,6 +230,9 @@ namespace MbUnit.Core.Remoting
         {
             try
             {
+                //define an assembly resolver routine in case the CLR cannot find our assemblies. 
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolveHandler);
+
                 Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
                 Evidence evidence = new Evidence(baseEvidence);
 
