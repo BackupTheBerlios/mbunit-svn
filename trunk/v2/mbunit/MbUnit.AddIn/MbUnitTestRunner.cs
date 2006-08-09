@@ -102,6 +102,25 @@ namespace MbUnit.AddIn
             return Run(testListener,assembly,filter, new AnyRunPipeFilter(), TypeFilters.Any);
         }
 
+        /// <summary> 
+        /// This method is used to provide assembly location resolver. It is called on event as needed by the CLR. 
+        /// Refer to document related to AppDomain.CurrentDomain.AssemblyResolve 
+        /// </summary> 
+        private Assembly AssemblyResolveHandler(object sender, ResolveEventArgs e)
+        {
+            try
+            {
+                string[] assemblyDetail = e.Name.Split(',');
+                string assemblyBasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Assembly assembly = Assembly.LoadFrom(assemblyBasePath + @"\" + assemblyDetail[0] + ".dll");
+                return assembly;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Failed resolving assembly", ex);
+            }
+        } 
+
         protected TestRunState Run(
             ITestListener testListener, 
             Assembly assembly, 
@@ -122,7 +141,7 @@ namespace MbUnit.AddIn
             skipCount = 0;
 
             string assemblyPath = new Uri(assembly.CodeBase).LocalPath;
-			testListener.WriteLine("Test Execution", Category.Info);
+            testListener.WriteLine("Starting the MbUnit Test Execution", Category.Info);
 			testListener.WriteLine("Exploring " + assembly.FullName, Category.Info);
             testListener.WriteLine(String.Format("MbUnit {0} Addin", typeof(RunPipe).Assembly.GetName().Version),Category.Info);
 
@@ -130,6 +149,9 @@ namespace MbUnit.AddIn
 			{
                 using (AssemblyTestDomain domain = new AssemblyTestDomain(assembly))
                 {
+                    //define an assembly resolver routine in case the CLR cannot find our assemblies. 
+                    AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolveHandler);
+            
                     domain.TypeFilter = typeFilter;
                     domain.Filter = filter;
                     domain.RunPipeFilter = runPipeFilter;
