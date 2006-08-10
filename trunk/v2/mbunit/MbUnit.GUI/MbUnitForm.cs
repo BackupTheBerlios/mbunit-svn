@@ -736,10 +736,14 @@ namespace MbUnit.GUI
 
 		private void statusBarTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			if(this.InvokeRequired)
-				this.Invoke(new MethodInvoker(this.UpdateStatusBar));
-			else
-				this.UpdateStatusBar();
+            try
+            {
+                if (this.InvokeRequired)
+                    this.Invoke(new MethodInvoker(this.UpdateStatusBar));
+                else
+                    this.UpdateStatusBar();
+            }
+            catch { }
 		}
 	}
 }

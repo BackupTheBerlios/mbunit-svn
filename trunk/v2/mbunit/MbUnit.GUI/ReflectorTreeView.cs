@@ -113,7 +113,7 @@ namespace MbUnit.Forms
 				}
 				if (this.workerThread!=null)
 				{
-					this.workerThread.Abort();
+					this.workerThread.Abort();       
 				}
 			}
             if (this.testDomains != null)
@@ -526,6 +526,9 @@ namespace MbUnit.Forms
             }
             catch(Exception ex)
 			{
+                if (ex is System.Threading.ThreadAbortException)
+                    return;
+
 				MessageBox.Show(ex.ToString());
 			}
         }
@@ -678,13 +681,21 @@ namespace MbUnit.Forms
 		{
 			if (this.workerThread!=null)
 			{
-				this.MessageOnStatusBar("Aborting worker thread");
-                this.testDomains.Stop();
-                this.workerThread.Join(1000);
-                this.workerThread.Abort();
-                this.workerThread.Join(2000);
-				this.workerThread=null;
-				this.MessageOnStatusBar("Worker thread aborted");
+                try
+                {
+                    this.MessageOnStatusBar("Aborting worker thread");
+                    this.testDomains.Stop();
+                    this.workerThread.Join(1000);
+                    this.workerThread.Abort();
+                    this.workerThread.Join(2000);
+                    this.workerThread = null;
+                    this.MessageOnStatusBar("Worker thread aborted");
+                }
+                catch (Exception ex)
+                {
+                    if (ex is System.Threading.ThreadAbortException)
+                        return;
+                }
 			}
 		}
 
@@ -864,6 +875,9 @@ namespace MbUnit.Forms
 			}
 			catch(Exception ex)
 			{
+                if (ex is System.Threading.ThreadAbortException)
+                    return;
+
 				MessageBox.Show(ex.ToString());
 			}
 		}
