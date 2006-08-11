@@ -245,9 +245,10 @@ namespace MbUnit.Framework.Xml
         
         private void DifferenceFound(Difference difference, DiffResult result) {
             result.DifferenceFound(this, difference);
-            if (!ContinueComparison(difference)) {
-                throw new FlowControlException(difference);
-            }
+            
+            //if (!ContinueComparison(difference)) {
+            //    throw new FlowControlException(difference);
+            //}
         }
         
         private void DifferenceFound(DifferenceType differenceType, 
