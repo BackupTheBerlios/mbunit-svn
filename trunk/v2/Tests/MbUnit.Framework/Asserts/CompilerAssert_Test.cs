@@ -14,10 +14,10 @@ namespace MbUnit.Framework.Tests.Asserts
     {
         protected Stream GetCSharpSample()
         {
-                   
-            Stream stream = File.Open("Asserts\\CsSample.cs", FileMode.Open);
-            Assert.IsNotNull(stream);
-            return stream;
+            Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                            "MbUnit.Framework.Tests.Asserts.CsSample.cs");
+            Assert.IsNotNull(s);
+            return s;
         }
 
         #region CSharpCompiler, VBCompiler

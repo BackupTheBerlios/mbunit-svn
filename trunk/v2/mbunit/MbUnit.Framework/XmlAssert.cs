@@ -106,9 +106,9 @@ namespace MbUnit.Framework
             XmlEquals(xmlDiff, false);
         }
 
-        private static void XmlEquals(XmlDiff xmlDiff, bool equalOrNot) 
+        private static void XmlEquals(XmlDiff xmlDiff, bool equal) 
 		{
-			if (equalOrNot)
+			if (equal)
 				xmlDiff.Compare();
 			else
 			{
@@ -132,9 +132,9 @@ namespace MbUnit.Framework
             XmlIdentical(xmlDiff, false);
         }
         
-        private static void XmlIdentical(XmlDiff xmlDiff, bool identicalOrNot) {
+        private static void XmlIdentical(XmlDiff xmlDiff, bool identical) {
             DiffResult diffResult = xmlDiff.Compare();
-            Assert.AreEqual(identicalOrNot, diffResult.Identical,xmlDiff.OptionalDescription);
+            Assert.AreEqual(identical, diffResult.Identical,xmlDiff.OptionalDescription);
         }
         
         public static void XmlValid(string someXml) {
@@ -192,11 +192,10 @@ namespace MbUnit.Framework
         }
         
         public static void XslTransformResults(string xslTransform, string xmlToTransform, string expectedResult) {
-        	XslTransformResults(
-				new XmlInput(xmlToTransform), 
-				new XmlInput(expectedResult),
-				new XmlInput(xslTransform)
-				);
+            XmlInput xsl = new XmlInput(xslTransform);
+            XmlInput xml2 = new XmlInput(xmlToTransform);
+            XmlInput xmlEx = new XmlInput(expectedResult);
+        	XslTransformResults(xsl, xml2, xmlEx);
         }
         
         public static void XslTransformResults(XmlInput xslTransform, XmlInput xmlToTransform, XmlInput expectedResult) {

@@ -12,9 +12,8 @@ namespace MbUnit.Framework.Tests.Asserts.XmlUnit {
 
 		public static Stream GetTestFile(string file)
 		{
-            //Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-            //        "MbUnit.Framework.Tests.Asserts.XmlUnit.etc." + file);
-            Stream s = File.Open("Asserts/XmlUnitTests/etc/" + file, FileMode.Open);
+            Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                    "MbUnit.Framework.Tests.Asserts.XmlUnitTests.etc." + file);
 			Assert.IsNotNull(s);
 			return s;
 		}

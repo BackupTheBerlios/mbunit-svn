@@ -49,7 +49,8 @@ namespace MbUnit.Framework.Tests.Asserts.XmlUnit {
             }
         }
         
-        [Test] public void AssertXmlValidTrueForValidFile() {
+        [Test] 
+        public void AssertXmlValidTrueForValidFile() {
             StreamReader reader = new StreamReader(ValidatorTests.ValidFile);
             try {
                 XmlAssert.XmlValid(reader);
@@ -109,13 +110,15 @@ namespace MbUnit.Framework.Tests.Asserts.XmlUnit {
                                                 "False");
         }
         
-        [Test] public void AssertXslTransformResultsWorksWithStrings() {
+        [Test] 
+        public void AssertXslTransformResultsWorksWithStrings() {
         	string xslt = XsltTests.IDENTITY_TRANSFORM;
         	string someXml = "<a><b>c</b><b/></a>";
         	XmlAssert.XslTransformResults(xslt, someXml, someXml);
         }
         
-        [Test] public void AssertXslTransformResultsWorksWithXmlInput() {
+        [Test] 
+        public void AssertXslTransformResultsWorksWithXmlInput() {
         	StreamReader xsl = ValidatorTests.GetTestReader("animal.xsl");
         	XmlInput xslt = new XmlInput(xsl);
         	StreamReader xml = ValidatorTests.GetTestReader("testAnimal.xml");
@@ -124,7 +127,8 @@ namespace MbUnit.Framework.Tests.Asserts.XmlUnit {
         	XmlAssert.XslTransformResults(xslt, xmlToTransform, expectedXml);
         }
         
-        [Test] public void AssertXslTransformResultsCatchesFalsePositive() {
+        [Test] 
+        public void AssertXslTransformResultsCatchesFalsePositive() {
         	StreamReader xsl = ValidatorTests.GetTestReader("animal.xsl");
         	XmlInput xslt = new XmlInput(xsl);
         	StreamReader xml = ValidatorTests.GetTestReader("testAnimal.xml");
@@ -137,7 +141,7 @@ namespace MbUnit.Framework.Tests.Asserts.XmlUnit {
         		Assert.Fail("Expected dog not cat!");
         	} catch (AssertionException e) {
         		AvoidUnusedVariableCompilerWarning(e);
-        		if (!exceptionExpected) {
+        		if (exceptionExpected) {
         			throw e;
         		}
         	}

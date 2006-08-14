@@ -29,9 +29,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=1.0.2414.27960, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+    <Reference Include="MbUnit.Framework, Version=1.0.2414.41211, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
+      <HintPath>C:\Program Files\MbUnit\MbUnit.Framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
@@ -39,17 +39,29 @@
     </Reference>
     <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\QuickGraph.dll</HintPath>
+      <HintPath>C:\Program Files\MbUnit\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Algorithms, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\MbUnit\QuickGraph.Algorithms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestFu, Version=1.0.2414.41210, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\MbUnit\TestFu.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\Assert_Test.cs" />
     <Compile Include="Asserts\CombinationalFixture_Test.cs" />
-    <Compile Include="Asserts\CompilerAssert_Test.cs" />
-    <Compile Include="Asserts\CsSample.cs" />
+    <Compile Include="Asserts\CompilerAssert_Test.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <EmbeddedResource Include="Asserts\CsSample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Compile Include="Asserts\DurationAttributeTest.cs" />
     <Compile Include="Asserts\IgnoreTest.cs" />
     <Compile Include="Asserts\ReflectionAssertTest.cs" />
@@ -115,48 +127,52 @@
     <Compile Include="Samples\TestFixtureSample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Asserts\XmlUnitTests\etc\animal.xsl">
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\animal.xsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\BookXsdGenerated.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\BookXsdGenerated.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\controlDetail.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\controlDetail.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\controlNamespaces.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\controlNamespaces.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\invalidBook.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\invalidBook.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\test.blame.html">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test.blame.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\test1.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\test2.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\testAnimal.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\testAnimal.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\testDetail.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\testDetail.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Asserts\XmlUnitTests\etc\testNamespaces.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\testNamespaces.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Asserts\XmlUnitTests\etc\Book.xsd">
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\Book.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Asserts\XmlUnitTests\etc\test.dtd">
+    </EmbeddedResource>
+    <None Include="Asserts\XmlUnitTests\etc\Book.xsx">
+      <DependentUpon>Book.xsd</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test.dtd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\AssemblyResolving\" />
