@@ -124,6 +124,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MbUnit.Framework, Version=1.0.2417.18896, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -145,11 +149,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MbUnit.Framework\MbUnit.Framework.csproj">
-      <Project>{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-      <Name>MbUnit.Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestFu\TestFu.csproj">
       <Project>{A88D4337-9198-4095-B889-63D6F11F3894}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>

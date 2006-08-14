@@ -29,9 +29,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=1.0.2414.41211, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+    <Reference Include="MbUnit.Framework, Version=1.0.2265.31914, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\MbUnit\MbUnit.Framework.dll</HintPath>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
@@ -39,18 +39,18 @@
     </Reference>
     <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\MbUnit\QuickGraph.dll</HintPath>
+      <HintPath>..\..\build\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph.Algorithms, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\MbUnit\QuickGraph.Algorithms.dll</HintPath>
+      <HintPath>..\..\build\QuickGraph.Algorithms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestFu, Version=1.0.2414.41210, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+    <Reference Include="TestFu, Version=1.0.2265.31910, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\MbUnit\TestFu.dll</HintPath>
+      <HintPath>..\..\build\TestFu.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
