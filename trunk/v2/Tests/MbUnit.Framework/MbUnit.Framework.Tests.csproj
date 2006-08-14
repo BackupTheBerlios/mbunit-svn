@@ -162,15 +162,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\Book.xsd">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test.dtd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Asserts\XmlUnitTests\etc\Book.xsx">
-      <DependentUpon>Book.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\test.dtd">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Asserts\XmlUnitTests\etc\Book.xsd">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
