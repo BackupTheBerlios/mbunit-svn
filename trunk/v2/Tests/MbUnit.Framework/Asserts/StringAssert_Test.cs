@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using MbUnit.Framework;
+using System.Text.RegularExpressions;
 
 namespace MbUnit.Framework.Tests.Asserts
 {
@@ -23,6 +24,22 @@ namespace MbUnit.Framework.Tests.Asserts
             StringAssert.DoesNotContain("hello", 'k');
         }
 
+        [Test]
+        public void StartWith()
+        {
+            string s = "frame work";
+            string pattern = @"fra";
+            StringAssert.StartsWith(s, pattern);
+        }
+
+        [Test]
+        public void EndsWith()
+        {
+            string s = "framework";
+            string pattern = @"ork";
+            StringAssert.EndsWith(s, pattern);
+        }
+
         #endregion
 
         #region Emptiness
@@ -37,6 +54,38 @@ namespace MbUnit.Framework.Tests.Asserts
         {
             StringAssert.IsNonEmpty(" ");
         }
+
+        #endregion
+
+        #region RegEx
+        [Test]
+        public void FullMatchString()
+        {
+            string s = "Testing";
+            string pattern = @"^Testing$";
+
+            StringAssert.FullMatch(s, pattern);
+        }
+
+        [Test]
+        public void LikeString()
+        {
+            string s = "Testing";
+            string regEx = @"(?<Test>\w{3})$";
+
+            StringAssert.Like(s, regEx);
+        }
+
+        [Test]
+        [Ignore("Don't know RegEx for NotLike")]
+        public void NotLikeString()
+        {
+            string s = "Testing";
+            string regEx = @"";
+
+            StringAssert.NotLike(s, regEx);
+        }
+
 
         #endregion
     }
