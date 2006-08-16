@@ -525,8 +525,9 @@
 					<xsl:when test="@result = 'failure'">failureEven</xsl:when>
 				</xsl:choose>
 			</xsl:attribute>
-			<td>
-				<xsl:value-of select="@name"/>
+      <td>
+        <button class="expandCollapse" onclick="expandCollapse(this, '{generate-id(.)}')">-</button>
+        <xsl:value-of select="@name"/>
 			</td>
 			<td>
 				<xsl:call-template name="display-time">
@@ -539,12 +540,20 @@
 				</xsl:call-template>
 			</td>
 		</tr>
-		<!-- Adding execption log -->
-		<xsl:if test="@result = 'failure'">
-			<xsl:call-template name="exception-log"/>
-		</xsl:if>
-		<!-- Adding console out, error -->
-		<xsl:call-template name="console-output" />
+		<!-- Adding exception log -->
+  <tr>
+    <td>
+      <!-- This nested table is theoretically not needed, but lets me avoid rewriting exception-log and console-output templates -MLS -->
+      <table id="{generate-id(.)}" class="expandCollapse">
+
+        <xsl:if test="@result = 'failure'">
+          <xsl:call-template name="exception-log"/>
+        </xsl:if>
+        <!-- Adding console out, error -->
+        <xsl:call-template name="console-output" />
+      </table>
+    </td>
+  </tr>
 </xsl:template>
 
 	<!--
