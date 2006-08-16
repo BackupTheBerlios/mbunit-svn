@@ -221,6 +221,9 @@
           button.expandCollapse { height:20px; width:20px; line-height:80%; }
         </style>
 				<script language="JavaScript" type="text/javascript">
+          <!-- put the JavaScript in a comment so it can include greater-than and less-than characters,
+            and the result is still valid XHTML -->
+          <xsl:comment>
             <![CDATA[
 
         function expandCollapse(button, id) 
@@ -279,7 +282,9 @@
 					category.src = "Category.png"
 					populator.src = "Populator.png"
 				}
-				]]></script>
+				]]>
+          </xsl:comment>
+        </script>
 			</head>
 			<body>
 				<img src="mbunitlogo.png" />
