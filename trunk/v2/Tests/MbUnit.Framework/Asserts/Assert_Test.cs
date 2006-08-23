@@ -127,6 +127,57 @@ namespace MbUnit.Framework.Tests.Asserts
         }
         #endregion
 
+        #region AreNotEqual
+//NUnit Tests
+        [Test]
+        public void NotEqual()
+        {
+            Assert.AreNotEqual(5, 3);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void NotEqualFails()
+        {
+            Assert.AreNotEqual(5, 5);
+        }
+
+        [Test]
+        public void NullNotEqualToNonNull()
+        {
+            Assert.AreNotEqual(null, 3);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void NullEqualsNull()
+        {
+            Assert.AreNotEqual(null, null);
+        }
+
+        [Test]
+        public void ArraysNotEqual()
+        {
+            Assert.AreNotEqual(new object[] { 1, 2, 3 }, new object[] { 1, 3, 2 });
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void ArraysNotEqualFails()
+        {
+            Assert.AreNotEqual(new object[] { 1, 2, 3 }, new object[] { 1, 2, 3 });
+        }
+
+        [Test]
+        public void UInt()
+        {
+            uint u1 = 5;
+            uint u2 = 8;
+            Assert.AreNotEqual(u1, u2);
+        }
+
+        #endregion
+
         #region Between
 
         #region int
@@ -476,6 +527,42 @@ namespace MbUnit.Framework.Tests.Asserts
 
         #endregion
 
+        #region Less
+        [Test]
+        public void LessInt()
+        {
+            Assert.Less(0, 1);
+        }
+        [Test]
+        public void LessShort()
+        {
+            Assert.Less((short)0, (short)1);
+        }
+
+        [Test]
+        public void LessByte()
+        {
+            Assert.Less((byte)0, (byte)1);
+        }
+        [Test]
+        public void LessLong()
+        {
+            Assert.Less((long)0, (long)1);
+        }
+
+        [Test]
+        public void LessDouble()
+        {
+            Assert.Less((double)0, (double)1);
+        }
+
+        [Test]
+        public void LessFloat()
+        {
+            Assert.Less((float)0, (float)1);
+        }
+        #endregion
+
         #region GreaterThan
         [Test]
         public void GreaterThanInt()
@@ -511,6 +598,45 @@ namespace MbUnit.Framework.Tests.Asserts
         public void GreaterThanFloat()
         {
             Assert.GreaterThan((float)1, (float)0);
+        }
+
+        #endregion
+
+        #region Greater
+        [Test]
+        public void GreaterInt()
+        {
+            Assert.Greater(1, 0);
+        }
+
+        [Test]
+        public void GreaterShort()
+        {
+            Assert.Greater((short)1, (short)0);
+        }
+
+        [Test]
+        public void GreaterByte()
+        {
+            Assert.Greater((byte)1, (byte)0);
+        }
+
+        [Test]
+        public void GreaterLong()
+        {
+            Assert.Greater((long)1, (long)0);
+        }
+
+        [Test]
+        public void GreaterDouble()
+        {
+            Assert.Greater((double)1, (double)0);
+        }
+
+        [Test]
+        public void GreaterFloat()
+        {
+            Assert.Greater((float)1, (float)0);
         }
 
         #endregion
@@ -699,5 +825,89 @@ namespace MbUnit.Framework.Tests.Asserts
 
         #endregion
 
+        #region IsEmpty
+        //NUnit Code
+        [Test]
+        public void IsEmpty()
+        {
+            Assert.IsEmpty("", "Failed on empty String");
+            Assert.IsEmpty(new int[0], "Failed on empty Array");
+            Assert.IsEmpty(new ArrayList(), "Failed on empty ArrayList");
+            Assert.IsEmpty(new Hashtable(), "Failed on empty Hashtable");
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsEmptyFailsOnString()
+        {
+            Assert.IsEmpty("Hi!");
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsEmptyFailsOnNullString()
+        {
+            Assert.IsEmpty((string)null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsEmptyFailsOnNonEmptyArray()
+        {
+            Assert.IsEmpty(new int[] { 1, 2, 3 });
+        }
+
+
+        #endregion
+
+        #region IsNotEmpty
+        [Test]
+        public void IsNotEmpty()
+        {
+            ArrayList arr = new ArrayList();
+            arr.Add("Testing");
+
+            Hashtable hash = new Hashtable();
+            hash.Add("MbUnit", "Testing");
+
+            Assert.IsNotEmpty("MbUnit", "Failed on non empty String");
+            Assert.IsNotEmpty(new int[1] { 1 }, "Failed on non empty Array");
+            Assert.IsNotEmpty(arr, "Failed on non empty ArrayList");
+            Assert.IsNotEmpty(hash, "Failed on empty Hashtable");
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsNotEmptyFailsOnString()
+        {
+            Assert.IsNotEmpty(string.Empty);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsNotEmptyFailsOnNonEmptyArray()
+        {
+            Assert.IsNotEmpty(new int[0] { });
+        }
+
+
+        #endregion
+
+        #region IsNan
+        //Nunit Code
+        [Test]
+        public void IsNaN()
+        {
+            Assert.IsNaN(double.NaN);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AssertionException))]
+        public void IsNaNFails()
+        {
+            Assert.IsNaN(10.0);
+        }
+
+        #endregion
     }
 }

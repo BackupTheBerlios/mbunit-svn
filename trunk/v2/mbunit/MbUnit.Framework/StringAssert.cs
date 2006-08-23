@@ -208,7 +208,7 @@ namespace MbUnit.Framework
 
         public static void EndsWith(String s, string pattern)
         {
-            Assert.IsTrue(s.EndsWith(pattern), "String [[{0}]] does not start with [[{1}]]",
+            Assert.IsTrue(s.EndsWith(pattern), "String [[{0}]] does not end with [[{1}]]",
                 s, pattern);
         }
     }
