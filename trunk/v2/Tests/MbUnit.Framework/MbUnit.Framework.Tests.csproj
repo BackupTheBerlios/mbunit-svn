@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\Assert_Test.cs" />
+    <Compile Include="Asserts\CollectionAssert_Test.cs" />
     <Compile Include="Asserts\CombinationalFixture_Test.cs" />
     <Compile Include="Asserts\CompilerAssert_Test.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
