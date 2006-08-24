@@ -3360,6 +3360,176 @@ namespace MbUnit.Framework
 
         #endregion
 
+        #region TypeAssert
+        //Type Asserts modified from NUnit Code.
+        #region IsAssignableFrom
+        /// <summary>
+        /// Asserts that an object may be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        static public void IsAssignableFrom(System.Type expected, object actual)
+        {
+            IsAssignableFrom(expected, actual, "");
+        }
+
+        /// <summary>
+        /// Asserts that an object may be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        /// <param name="message">The messge to display in case of failure</param>
+        static public void IsAssignableFrom(System.Type expected, object actual, string message)
+        {
+            IsAssignableFrom(expected, actual, message, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object may be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        /// <param name="message">The message to display in case of failure</param>
+        /// <param name="args">Array of objects to be used in formatting the message</param>
+        static public void IsAssignableFrom(System.Type expected, object actual, string message, params object[] args)
+        {
+            if(!actual.GetType().IsAssignableFrom(expected))
+            {
+                Assert.Fail(message);
+            }
+        }
+        #endregion
+
+        #region IsNotAssignableFrom
+        /// <summary>
+        /// Asserts that an object may not be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        static public void IsNotAssignableFrom(System.Type expected, object actual)
+        {
+            IsNotAssignableFrom(expected, actual, "");
+        }
+
+        /// <summary>
+        /// Asserts that an object may not be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        /// <param name="message">The messge to display in case of failure</param>
+        static public void IsNotAssignableFrom(System.Type expected, object actual, string message)
+        {
+            IsNotAssignableFrom(expected, actual, message, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object may not be assigned a  value of a given Type.
+        /// </summary>
+        /// <param name="expected">The expected Type.</param>
+        /// <param name="actual">The object under examination</param>
+        /// <param name="message">The message to display in case of failure</param>
+        /// <param name="args">Array of objects to be used in formatting the message</param>
+        static public void IsNotAssignableFrom(System.Type expected, object actual, string message, params object[] args)
+        {
+            try
+            {
+                IsAssignableFrom(expected, actual, message, args);
+
+                //Do fail before now...
+                Assert.Fail(message);
+            }
+            catch (Core.Exceptions.AssertionException ex)
+            {
+                //Do Nothing as expected
+            }
+        }
+        #endregion
+
+        #region IsInstanceOfType
+        /// <summary>
+        /// Asserts that an object is an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        public static void IsInstanceOfType(System.Type expected, object actual)
+        {
+            IsInstanceOfType(expected, actual, string.Empty, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object is an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        /// <param name="message">A message to display in case of failure</param>
+        public static void IsInstanceOfType(System.Type expected, object actual, string message)
+        {
+            IsInstanceOfType(expected, actual, message, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object is an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        /// <param name="message">A message to display in case of failure</param>
+        /// <param name="args">An array of objects to be used in formatting the message</param>
+        public static void IsInstanceOfType(System.Type expected, object actual, string message, params object[] args)
+        {
+            if(!expected.IsInstanceOfType(actual))
+            {
+                Assert.Fail(message);
+            }
+        }
+        #endregion
+
+        #region IsNotInstanceOfType
+        /// <summary>
+        /// Asserts that an object is not an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        public static void IsNotInstanceOfType(System.Type expected, object actual)
+        {
+            IsNotInstanceOfType(expected, actual, string.Empty, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object is not an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        /// <param name="message">A message to display in case of failure</param>
+        public static void IsNotInstanceOfType(System.Type expected, object actual, string message)
+        {
+            IsNotInstanceOfType(expected, actual, message, null);
+        }
+
+        /// <summary>
+        /// Asserts that an object is not an instance of a given type.
+        /// </summary>
+        /// <param name="expected">The expected Type</param>
+        /// <param name="actual">The object being examined</param>
+        /// <param name="message">A message to display in case of failure</param>
+        /// <param name="args">An array of objects to be used in formatting the message</param>
+        public static void IsNotInstanceOfType(System.Type expected, object actual, string message, params object[] args)
+        {
+            try
+            {
+                IsInstanceOfType(expected, actual, message, args);
+
+                //Do fail before now...
+                Assert.Fail(message);
+            }
+            catch (Core.Exceptions.AssertionException ex)
+            {
+                //Do Nothing as expected
+            }
+        }
+        #endregion
+
+        #endregion
+
         #region Assert Count
         public static int AssertCount
         {
