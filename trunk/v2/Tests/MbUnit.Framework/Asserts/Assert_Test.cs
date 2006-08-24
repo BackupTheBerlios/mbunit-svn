@@ -909,5 +909,17 @@ namespace MbUnit.Framework.Tests.Asserts
         }
 
         #endregion
+
+        #region Contains
+
+        [Test]
+        public void Contains()
+        {
+            string s = "MbUnit";
+            string contain = "Unit";
+            Assert.Contains(s, contain);
+        }
+
+        #endregion
     }
 }

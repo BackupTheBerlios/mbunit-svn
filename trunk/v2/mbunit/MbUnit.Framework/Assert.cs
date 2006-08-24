@@ -3360,6 +3360,16 @@ namespace MbUnit.Framework
 
         #endregion
 
+        #region Contains
+
+        static public void Contains(string s, string contain)
+        {
+            Assert.IsTrue(s.Contains(contain), "String [[{0}]] does not contain [[{1}]]",
+                s, contain);
+        }
+
+        #endregion
+
         #region TypeAssert
         //Type Asserts modified from NUnit Code.
         #region IsAssignableFrom

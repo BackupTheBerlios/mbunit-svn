@@ -67,6 +67,7 @@
     <Compile Include="Asserts\IgnoreTest.cs" />
     <Compile Include="Asserts\ReflectionAssertTest.cs" />
     <Compile Include="Asserts\SerialAssertTest.cs" />
+    <Compile Include="Asserts\TypeAssert_Test.cs" />
     <Compile Include="Core\DecoratedFixtureTest.cs" />
     <Compile Include="Core\DifferentApartementStateFixture.cs" />
     <Compile Include="Core\EnvironmentTest.cs" />

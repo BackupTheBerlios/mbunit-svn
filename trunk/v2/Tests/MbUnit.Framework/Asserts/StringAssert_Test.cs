@@ -40,6 +40,14 @@ namespace MbUnit.Framework.Tests.Asserts
             StringAssert.EndsWith(s, pattern);
         }
 
+        [Test]
+        public void Contains()
+        {
+            string s = "framework";
+            string contain = "ork";
+            StringAssert.Contains(s, contain);
+        }
+
         #endregion
 
         #region Emptiness

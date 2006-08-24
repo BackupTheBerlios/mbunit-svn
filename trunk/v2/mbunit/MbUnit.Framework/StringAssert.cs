@@ -211,5 +211,11 @@ namespace MbUnit.Framework
             Assert.IsTrue(s.EndsWith(pattern), "String [[{0}]] does not end with [[{1}]]",
                 s, pattern);
         }
+
+        public static void Contains(String s, string contain)
+        {
+            Assert.IsTrue(s.Contains(contain), "String [[{0}]] does not contain [[{1}]]",
+                s, contain);
+        }
     }
 }
