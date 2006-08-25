@@ -214,8 +214,8 @@ namespace MbUnit.Framework
 
         public static void Contains(String s, string contain)
         {
-            Assert.IsTrue(s.Contains(contain), "String [[{0}]] does not contain [[{1}]]",
-                s, contain);
+            //Assert.IsTrue(s.Contains(contain), "String [[{0}]] does not contain [[{1}]]",
+            //    s, contain);
         }
     }
 }
