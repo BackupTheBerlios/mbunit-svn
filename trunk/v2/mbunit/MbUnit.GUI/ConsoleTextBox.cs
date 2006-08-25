@@ -130,11 +130,17 @@ namespace MbUnit.Forms
 			}
 			set
 			{
-				if (this.tree!=null && value!=this.tree)
-					this.tree.AfterSelect-=new TreeViewEventHandler(AfterSelect);
+                if (this.tree != null && value != this.tree)
+                {
+                    this.tree.AfterSelect -= new TreeViewEventHandler(treeView_AfterSelect);
+                    this.tree.FinishTests -= new EventHandler(treeView_FinishTests);
+                }
 				this.tree = value;
-				if (this.tree!=null)
-					this.tree.AfterSelect+=new TreeViewEventHandler(AfterSelect);
+                if (this.tree != null)
+                {
+                    this.tree.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+                    this.tree.FinishTests += new EventHandler(treeView_FinishTests);
+                }
 			}
 		}
 
@@ -151,28 +157,57 @@ namespace MbUnit.Forms
 			}
 		}
 
-		private void AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+		private void treeView_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
 		{
-			this.textBox.Text = "";
-			UnitTreeNode node = this.tree.TypeTree.SelectedNode as UnitTreeNode;
-			if (node==null)
-				return;
+            SafelyDisplaySelectedNodeResult();
+        }
 
-			ReportRun result = this.tree.TestDomains.GetResult(node);
-			if (result!=null)
-			{		
-				switch(this.consoleStream)
-				{
-					case ConsoleStream.Out:
-						this.textBox.Text = result.ConsoleOut;
-						break;
-					case ConsoleStream.Error:
-						this.textBox.Text = result.ConsoleError;
-						break;
-				}
-			}
-			this.Refresh();
-		}
+        private void treeView_FinishTests( object sender, EventArgs e )
+        {
+            SafelyDisplaySelectedNodeResult();
+        }
+
+        private void SafelyDisplaySelectedNodeResult()
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(this.DisplaySelectedNodeResult));
+                }
+                else
+                {
+                    DisplaySelectedNodeResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
+        private void DisplaySelectedNodeResult()
+        {
+            this.textBox.Text = "";
+            UnitTreeNode node = this.tree.TypeTree.SelectedNode as UnitTreeNode;
+            if (node == null)
+                return;
+
+            ReportRun result = this.tree.TestDomains.GetResult(node);
+            if (result != null)
+            {
+                switch (this.consoleStream)
+                {
+                    case ConsoleStream.Out:
+                        this.textBox.Text = result.ConsoleOut;
+                        break;
+                    case ConsoleStream.Error:
+                        this.textBox.Text = result.ConsoleError;
+                        break;
+                }
+            }
+            this.Refresh();
+        }
 
 		private void menuItem1_Click(object sender, System.EventArgs e)
 		{

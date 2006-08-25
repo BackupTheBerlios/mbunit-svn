@@ -16,7 +16,7 @@ namespace MbUnit.Forms
 	public sealed class ExceptionBrowser : System.Windows.Forms.UserControl
 	{
 		private ReflectorTreeView tree = null;
-		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.TreeView exceptionTreeView;
 		private System.Windows.Forms.Splitter splitter1;
 		private System.Windows.Forms.RichTextBox textBox1;
 		/// <summary> 
@@ -55,19 +55,19 @@ namespace MbUnit.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.exceptionTreeView = new System.Windows.Forms.TreeView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
 // 
-// treeView1
+// exceptionTreeView
 // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(500, 56);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.exceptionTreeView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.exceptionTreeView.Location = new System.Drawing.Point(0, 0);
+            this.exceptionTreeView.Name = "exceptionTreeView";
+            this.exceptionTreeView.Size = new System.Drawing.Size(500, 56);
+            this.exceptionTreeView.TabIndex = 0;
+            this.exceptionTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.exceptionTreeView_AfterSelect);
 // 
 // splitter1
 // 
@@ -94,7 +94,7 @@ namespace MbUnit.Forms
 // 
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.exceptionTreeView);
             this.Name = "ExceptionBrowser";
             this.Size = new System.Drawing.Size(500, 288);
             this.ResumeLayout(false);
@@ -110,17 +110,23 @@ namespace MbUnit.Forms
 			}
 			set
 			{
-				if (this.tree!=null && value!=this.tree)
-					this.tree.AfterSelect-=new TreeViewEventHandler(AfterSelect);
+                if (this.tree != null && value != this.tree)
+                {
+                    this.tree.AfterSelect -= new TreeViewEventHandler(treeView_AfterSelect);
+                    this.tree.FinishTests -= new EventHandler(treeView_FinishTests);
+                }
 				this.tree = value;
-				if (this.tree!=null)
-					this.tree.AfterSelect+=new TreeViewEventHandler(AfterSelect);
+                if (this.tree != null)
+                {
+                    this.tree.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+                    this.tree.FinishTests += new EventHandler(treeView_FinishTests);
+                }
 			}
 		}
 
 		public void AddException(ReportException ex)
 		{
-			this.treeView1.Nodes.Clear();
+			this.exceptionTreeView.Nodes.Clear();
 
 			// adding recursively the exceptions
 			ReportException current = ex;
@@ -132,8 +138,8 @@ namespace MbUnit.Forms
 
 				if (parent==null)
 				{
-					this.treeView1.Nodes.Add(node);
-					this.treeView1.SelectedNode = node;
+					this.exceptionTreeView.Nodes.Add(node);
+					this.exceptionTreeView.SelectedNode = node;
 					parent = node;
 				}
 				else
@@ -145,7 +151,7 @@ namespace MbUnit.Forms
 				current = current.Exception;
 			}
 
-			this.treeView1.ExpandAll();
+			this.exceptionTreeView.ExpandAll();
 			this.RefreshException();
 			this.Refresh();
 		}
@@ -153,13 +159,13 @@ namespace MbUnit.Forms
 		public void RefreshException()
 		{
 			this.textBox1.Text="";
-			if (this.treeView1.SelectedNode==null)
+			if (this.exceptionTreeView.SelectedNode==null)
 			{
 				this.textBox1.Text="";
 				return;
 			}
 
-			ReportException ex = (ReportException)this.treeView1.SelectedNode.Tag;
+			ReportException ex = (ReportException)this.exceptionTreeView.SelectedNode.Tag;
 			Font boldFont = new Font(this.Font.FontFamily,this.Font.SizeInPoints,FontStyle.Bold);
 			Font font = new Font(this.Font.FontFamily,this.Font.SizeInPoints);
 
@@ -175,25 +181,54 @@ namespace MbUnit.Forms
             this.textBox1.SelectedText = String.Format("{0}",ex.StackTrace);
 		}
 
-		private void AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
-		{
-			// retreive current exceptoin
-			this.treeView1.Nodes.Clear();
-			this.textBox1.Text = "";
-			UnitTreeNode node = this.tree.TypeTree.SelectedNode as UnitTreeNode;
-			if (node==null)
-				return;
+        private void treeView_AfterSelect( object sender, System.Windows.Forms.TreeViewEventArgs e )
+        {
+            SafelyDisplaySelectedNodeResult();
+        }
 
-			ReportRun result = this.Tree.TestDomains.GetResult(node);
-			if (result!=null && result.Result == ReportRunResult.Failure)
-			{
-				AddException(result.Exception);
-			}
-		}
+        private void treeView_FinishTests( object sender, EventArgs e )
+        {
+            SafelyDisplaySelectedNodeResult();
+        }
 
-		private void treeView1_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
-		{
-			RefreshException();
-		}
+        private void SafelyDisplaySelectedNodeResult()
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(this.DisplaySelectedNodeResult));
+                }
+                else
+                {
+                    DisplaySelectedNodeResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DisplaySelectedNodeResult()
+        {
+            // retreive current exceptoin
+            this.exceptionTreeView.Nodes.Clear();
+            this.textBox1.Text = "";
+            UnitTreeNode node = this.tree.TypeTree.SelectedNode as UnitTreeNode;
+            if (node == null)
+                return;
+
+            ReportRun result = this.Tree.TestDomains.GetResult(node);
+            if (result != null && result.Result == ReportRunResult.Failure)
+            {
+                AddException(result.Exception);
+            }
+        }
+
+        private void exceptionTreeView_AfterSelect( object sender, System.Windows.Forms.TreeViewEventArgs e )
+        {
+            RefreshException();
+        }
 	}
 }
