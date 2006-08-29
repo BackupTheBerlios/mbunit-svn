@@ -3364,8 +3364,8 @@ namespace MbUnit.Framework
 
         static public void Contains(string s, string contain)
         {
-            //Assert.IsTrue(s.Contains(contain), "String [[{0}]] does not contain [[{1}]]",
-            //    s, contain);
+            Assert.IsTrue(s.IndexOf(contain) >= 0, "String [[{0}]] does not contain [[{1}]]",
+                s, contain);
         }
 
         #endregion
