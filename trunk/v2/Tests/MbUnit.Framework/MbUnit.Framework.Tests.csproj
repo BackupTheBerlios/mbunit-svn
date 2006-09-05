@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="TestFu, Version=1.0.2428.25644, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
@@ -54,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asserts\ArrayAssert_Test.cs" />
     <Compile Include="Asserts\Assert_Test.cs" />
     <Compile Include="Asserts\CollectionAssert_Test.cs" />
     <Compile Include="Asserts\CombinationalFixture_Test.cs" />
@@ -63,11 +65,14 @@
     <EmbeddedResource Include="Asserts\CsSample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Compile Include="Asserts\DataAssert_Test.cs" />
     <Compile Include="Asserts\DurationAttributeTest.cs" />
+    <Compile Include="Asserts\FileAssert_Test.cs" />
     <Compile Include="Asserts\IgnoreTest.cs" />
     <Compile Include="Asserts\ReflectionAssertTest.cs" />
     <Compile Include="Asserts\SerialAssertTest.cs" />
     <Compile Include="Asserts\TypeAssert_Test.cs" />
+    <Compile Include="Asserts\WebAssert_Test.cs" />
     <Compile Include="Core\DecoratedFixtureTest.cs" />
     <Compile Include="Core\DifferentApartementStateFixture.cs" />
     <Compile Include="Core\EnvironmentTest.cs" />
