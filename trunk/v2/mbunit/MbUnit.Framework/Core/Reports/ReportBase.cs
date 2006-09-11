@@ -30,9 +30,12 @@ using System.IO;
 namespace MbUnit.Core.Reports
 {
 	using MbUnit.Core.Reports.Serialization;
+    using System.IO.IsolatedStorage;
 
 	public abstract class ReportBase
 	{
+        private const string AppPathRootName = "MbUnit";
+        private const string AppPathReportsName = "Reports";
 		public ReportBase()
 		{
 		}
@@ -68,20 +71,31 @@ namespace MbUnit.Core.Reports
 				, result.Date.ToShortDateString()
 				, result.Date.ToShortTimeString()
 				);
-            outputFileName = outputFileName
-                .Replace('/', '_')
-                .Replace('\\', '_')
-                .Replace(':', '_')
-                .Replace(' ', '_');
 
-            if (outputPath!=null && outputPath.Length != 0)
+            outputFileName = outputFileName
+                                .Replace('/', '_')
+                                .Replace('\\', '_')
+                                .Replace(':', '_')
+                                .Replace(' ', '_');
+
+            if (outputPath == null || outputPath.Length == 0)
             {
-                if (!Directory.Exists(outputPath))
-                    Directory.CreateDirectory(outputPath);
-                outputFileName = Path.Combine(outputPath, outputFileName);
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                outputPath = Path.Combine(appDataPath, AppPathRootName + @"\" + AppPathReportsName);
             }
+
+            DirectoryCheckCreate(outputPath);
+
+            outputFileName = Path.Combine(outputPath, outputFileName);
+
             return outputFileName;
 		}
+
+        private static void DirectoryCheckCreate(string outputPath)
+        {
+            if (!Directory.Exists(outputPath))
+                Directory.CreateDirectory(outputPath);
+        }
 
 		/// <summary>
 		/// Render the report result to the specified writer
