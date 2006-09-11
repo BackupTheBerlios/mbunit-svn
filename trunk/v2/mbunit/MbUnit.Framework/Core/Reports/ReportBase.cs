@@ -34,8 +34,8 @@ namespace MbUnit.Core.Reports
 
 	public abstract class ReportBase
 	{
-        private const string AppPathRootName = "MbUnit";
-        private const string AppPathReportsName = "Reports";
+        protected const string AppPathRootName = "MbUnit";
+        protected const string AppPathReportsName = "Reports";
 		public ReportBase()
 		{
 		}
@@ -78,11 +78,7 @@ namespace MbUnit.Core.Reports
                                 .Replace(':', '_')
                                 .Replace(' ', '_');
 
-            if (outputPath == null || outputPath.Length == 0)
-            {
-                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                outputPath = Path.Combine(appDataPath, AppPathRootName + @"\" + AppPathReportsName);
-            }
+            outputPath = GetAppDataPath(outputPath);
 
             DirectoryCheckCreate(outputPath);
 
@@ -90,6 +86,16 @@ namespace MbUnit.Core.Reports
 
             return outputFileName;
 		}
+
+        protected static string GetAppDataPath(string outputPath)
+        {
+            if (outputPath == null || outputPath.Length == 0)
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                outputPath = Path.Combine(appDataPath, AppPathRootName + @"\" + AppPathReportsName);
+            }
+            return outputPath;
+        }
 
         private static void DirectoryCheckCreate(string outputPath)
         {

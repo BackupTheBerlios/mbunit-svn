@@ -57,7 +57,7 @@ namespace MbUnit.Core.Reports
                 throw new ArgumentNullException("result");
 
             HtmlReport htmlReport = new HtmlReport();
-            ResourceHelper.CreateImages(".");
+            ResourceHelper.CreateImages(GetAppDataPath(""));
             return htmlReport.Render(result);
 		}
 
@@ -71,10 +71,11 @@ namespace MbUnit.Core.Reports
                 throw new ArgumentNullException("Length is zero", "nameFormat");
 
             HtmlReport htmlReport = new HtmlReport();
-            if (outputPath!=null && outputPath.Length>0)
-                ResourceHelper.CreateImages(outputPath);
-            else
-                ResourceHelper.CreateImages(".");
+
+            outputPath = GetAppDataPath(outputPath);
+            
+            ResourceHelper.CreateImages(outputPath);
+
             return htmlReport.Render(result, outputPath, nameFormat);
         }
 	}
