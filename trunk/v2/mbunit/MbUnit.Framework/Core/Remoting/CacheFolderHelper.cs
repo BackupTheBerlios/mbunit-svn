@@ -60,7 +60,14 @@ namespace MbUnit.Core.Remoting
 					fileInfo.Attributes &= ~FileAttributes.ReadOnly;
 				}
 
-				cacheDir.Delete(true);
+                try
+                {
+                    cacheDir.Delete(true);
+                }
+                finally
+                {
+                    //Do Nothing
+                }
 			}
 		}
 	}
