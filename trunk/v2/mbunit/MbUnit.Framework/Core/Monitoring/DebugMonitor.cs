@@ -24,7 +24,17 @@ namespace MbUnit.Core.Monitoring
                 Debug.Listeners.Remove(this.defaultListener);
 
             // adding custom
-            Debug.Listeners.Add(this.listener);
+            if (Debug.Listeners.Count > 0)
+            {
+                if (Debug.Listeners[0].GetType() != typeof(DebugMonitorTraceListener))
+                {
+                    Debug.Listeners.Add(this.listener);
+                }
+            }
+            else
+            {
+                Debug.Listeners.Add(this.listener);
+            }
         }
 
         public void Stop()

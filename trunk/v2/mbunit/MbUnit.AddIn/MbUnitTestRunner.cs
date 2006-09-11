@@ -48,6 +48,9 @@ namespace MbUnit.AddIn
 	[Serializable]
 	public class MbUnitTestRunner : ITestRunner
 	{
+        protected const string AppPathRootName = "MbUnit";
+        protected const string AppPathReportsName = "Reports";
+
         private ITestListener testListener = null;
         private int assemblySetUpCount = 0;
         private int assemblyTearDownCount = 0;
@@ -221,7 +224,7 @@ namespace MbUnit.AddIn
         {
             try
             {
-                string outputPath = Path.GetDirectoryName(assembly.Location);
+                string outputPath = GetAppDataPath("");
                 string nameFormat = assembly.GetName().Name + ".Tests";
 
                 string file = HtmlReport.RenderToHtml(result, outputPath, nameFormat);
@@ -241,6 +244,22 @@ namespace MbUnit.AddIn
                 testListener.WriteLine("failed to create reports",Category.Error);
                 testListener.WriteLine(ex.ToString(), Category.Error);
             }
+        }
+
+        private static string GetAppDataPath(string outputPath)
+        {
+            if (outputPath == null || outputPath.Length == 0)
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                outputPath = Path.Combine(appDataPath, AppPathRootName + @"\" + AppPathReportsName);
+            }
+            return outputPath;
+        }
+
+        private static void DirectoryCheckCreate(string outputPath)
+        {
+            if (!Directory.Exists(outputPath))
+                Directory.CreateDirectory(outputPath);
         }
 
         void RenderSetUpOrTearDownFailure(string context, ReportSetUpAndTearDown setup)
