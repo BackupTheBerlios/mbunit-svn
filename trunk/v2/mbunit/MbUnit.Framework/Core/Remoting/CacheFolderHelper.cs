@@ -64,7 +64,7 @@ namespace MbUnit.Core.Remoting
                 {
                     cacheDir.Delete(true);
                 }
-                finally
+                catch
                 {
                     //Do Nothing
                 }

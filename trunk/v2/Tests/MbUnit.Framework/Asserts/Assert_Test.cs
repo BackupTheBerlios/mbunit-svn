@@ -158,7 +158,7 @@ namespace MbUnit.Framework.Tests.Asserts
         [Test]
         public void ArraysNotEqual()
         {
-            Assert.AreNotEqual(new object[] { 1, 2, 3 }, new object[] { 1, 3, 2 });
+            Assert.AreNotEqual(new object[] { 1, 2, 3 }, new int[] { 1, 3, 2 });
         }
 
         [Test]

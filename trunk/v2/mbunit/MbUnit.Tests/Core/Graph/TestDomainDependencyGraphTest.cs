@@ -40,7 +40,7 @@ namespace MbUnit.Tests.Core.Graph
 
             string[] files = new string[] { name + ".dll", secondName + ".dll", thirdName + ".dll" };
 
-            using (TestDomainDependencyGraph graph = TestDomainDependencyGraph.BuildGraph(files,null, MbUnit.Core.Filters.FixtureFilters.Any))
+            using (TestDomainDependencyGraph graph = TestDomainDependencyGraph.BuildGraph(files,null, MbUnit.Core.Filters.FixtureFilters.Any, false))
             {
                 ReportResult result = graph.RunTests();
                 Assert.AreEqual(successCount, result.Counter.SuccessCount);

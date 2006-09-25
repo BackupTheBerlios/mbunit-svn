@@ -39,7 +39,7 @@
 
 	<Target Name="MbUnit_Tests" DependsOnTargets="MbUnit;MbUnit_1_1">
 		<MSBuild Projects="Tests\MbUnit.Framework\MbUnit.Framework.Tests.sln" Targets="Clean;Rebuild" Properties="$(v1_0_Properties);OutputPath=$(OutputPath)" />
-		<Exec Command='$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Framework.Tests.dll /rt:Xml /rnf:MbUnit_Tests_results /rf:$(OutputPath)' />
+		<Exec Command='"$(OutputPath)\MbUnit.Cons.exe" "$(OutputPath)\MbUnit.Framework.Tests.dll" /rt:Xml /rnf:MbUnit_Tests_results /rf:"$(OutputPath)"' />
 	</Target>
 
 		

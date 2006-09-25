@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.WebControls;
 using System.Web.UI;
@@ -159,7 +158,6 @@ namespace MbUnit.Framework.Tests.Asserts
         {
             Page pg = new Page();
             pg.SmartNavigation = true;
-            pg.MaintainScrollPositionOnPostBack = true;
             WebAssert.IsSmartNavigation(pg);
         }
 

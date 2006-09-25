@@ -154,6 +154,10 @@ namespace MbUnit.Core.Cons
                             this.Arguments.AssemblyPath, 
                             filter, this.Arguments.Verbose))
                     {
+                        //define an assembly resolver routine in case the CLR cannot find our assemblies. 
+                        AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolveHandler);
+
+
                         graph.Log += new ErrorReporter(graph_Log);
                         consoleOut.WriteLine("[info] Starting execution");
                         ReportResult r = graph.RunTests();
@@ -174,6 +178,26 @@ namespace MbUnit.Core.Cons
             }
         }
 
+
+        /// <summary> 
+        /// This method is used to provide assembly location resolver. It is called on event as needed by the CLR. 
+        /// Refer to document related to AppDomain.CurrentDomain.AssemblyResolve 
+        /// </summary> 
+        private Assembly AssemblyResolveHandler(object sender, ResolveEventArgs e)
+        {
+            try
+            {
+                string[] assemblyDetail = e.Name.Split(',');
+                string assemblyBasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Assembly assembly = Assembly.LoadFrom(assemblyBasePath + @"\" + assemblyDetail[0] + ".dll");
+                return assembly;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Failed resolving assembly", ex);
+            }
+        } 
+
         private void ShowHelp()
         {
             consoleOut.WriteLine("MbUnit {0} Console Application (running on .Net {1})",
@@ -181,7 +205,7 @@ namespace MbUnit.Core.Cons
                 typeof(Object).Assembly.GetName().Version
                 );
             consoleOut.WriteLine("Author: Jonathan de Halleux");
-            consoleOut.WriteLine("Get the latest at http://www.testdriven.net");
+            consoleOut.WriteLine("Get the latest at http://www.mbunit.com");
             consoleOut.WriteLine("------------------------------------------");
 
             consoleOut.Write(CommandLineUtility.CommandLineArgumentsUsage(typeof(MainArguments)));
