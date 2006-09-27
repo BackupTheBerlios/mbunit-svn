@@ -843,7 +843,7 @@ namespace MbUnit.Framework
         /// <param name="args">Arguments to be used in formatting the message</param>
         static public void AreNotEqual(double expected, double actual, string message, params object[] args)
         {
-            if (actual != expected)
+            if (actual == expected)
                 if (args != null)
                     Assert.FailSame(expected, actual, message, args);
                 else
