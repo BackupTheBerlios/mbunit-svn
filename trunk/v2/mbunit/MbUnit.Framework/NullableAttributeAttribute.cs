@@ -24,7 +24,7 @@ namespace MbUnit.Framework
 			}
 			set
 			{
-				this.nullableType=nullableType;				
+				this.nullableType=value;				
 			}
 		}
 
