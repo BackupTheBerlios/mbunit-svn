@@ -8,6 +8,7 @@ namespace MbUnit.Framework.Tests.Attributes
     [TestFixture]
     public class RowTestFixture_Test
     {
+        [RowTest]
         [Row(1000, 10, 100.0000)]
         [Row(-1000, 10, -100.0000)]
         [Row(1000, 7, 142.85715)]
@@ -17,6 +18,5 @@ namespace MbUnit.Framework.Tests.Attributes
         {
             Assert.AreEqual(result, numerator / denominator, 0.00001);
         }
-
     }
 }
