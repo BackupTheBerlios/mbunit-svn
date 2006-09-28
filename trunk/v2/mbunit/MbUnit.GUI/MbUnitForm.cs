@@ -71,6 +71,8 @@ namespace MbUnit.GUI
 
 		private System.Timers.Timer statusBarTimer;
 
+        private string windowTitle = string.Empty;
+        
 		public MbUnitForm()
 		{
 			// set title.
@@ -90,10 +92,19 @@ namespace MbUnit.GUI
 			this.ResumeLayout(true);
 			InitializeComponent();
 
-            this.Text = String.Format("MbUnit {0} (on .Net {1})", 
-                typeof(MbUnit.Core.TypeHelper).Assembly.GetName().Version,
-                typeof(Object).GetType().Assembly.GetName().Version
-                );
+            Assembly exeAssembly = Assembly.GetExecutingAssembly();
+
+            foreach (Attribute a in exeAssembly.GetCustomAttributes(true))
+            {
+                if (a is AssemblyTitleAttribute)
+                    windowTitle = (a as AssemblyTitleAttribute).Title;
+            }
+
+            this.Text = String.Format("{0} (on .Net {1})", 
+                                        windowTitle,
+                                        typeof(Object).GetType().Assembly.GetName().Version
+                                        );
+
             this.testResult.TreeView = this.treeView;
 
             this.statusBarTimer = new System.Timers.Timer(100);

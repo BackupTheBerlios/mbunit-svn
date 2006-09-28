@@ -1,4 +1,5 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask AssemblyFile="$(OutputPath)\EditAssemblyInfo\EditAssemblyInfo.dll" TaskName="MbUnit.EditAssemblyInfo.UpdateAssemblyTitleTask" />
 
 	<Import Project="Version.properties" />
 	
@@ -18,7 +19,7 @@
 		<NXslt>bin\nxslt\nxslt.exe</NXslt>
 		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
 	</PropertyGroup>
-	
+		
 	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
 
 		<Exec Command="makensis MbUnitBuild.nsi" />
@@ -54,12 +55,15 @@
 		<MSBuild Projects="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)" />
 	</Target>	
 
-	<Target Name="Increment">
+	<Target Name="Increment" DependsOnTargets="BeforeBuild">
 		<Exec Command="$(NXslt) Version.properties IncrementBuild.xslt -o NewVersion.properties VersionMajor=$(VersionMajor) VersionMinor=$(VersionMinor) VersionBuild=$(VersionBuild) VersionRevision=$(VersionRevision)" />
 		<Copy SourceFiles="NewVersion.properties" DestinationFiles="Version.properties" />
 	</Target>
 	
-		
+	<Target Name="BeforeBuild">	  
+		<MSBuild Projects="EditAssemblyInfo\EditAssemblyInfo.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\EditAssemblyInfo" />
+		<UpdateAssemblyTitleTask FilePath="$(MSBuildProjectDirectory)\MbUnit\" VersionMajor="$(VersionMajor)" VersionMinor="$(VersionMinor)" VersionBuild="$(VersionBuild)" />
+ 	</Target>
 		
 	
 <!-- TODO: Execute MbUnit tests !!!
