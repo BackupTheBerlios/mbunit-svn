@@ -61,7 +61,7 @@ namespace TestFu.Data
 		/// Removes a <see cref="IDataGenerator"/> associated to
 		/// <paramref name="column"/> from the collection.
 		/// </summary>
-		/// <param name="dataGenerator">
+		/// <param name="column">
 		/// <see cref="DataColumn"/> whose generator is to be removed from the collection.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -74,11 +74,11 @@ namespace TestFu.Data
 		/// Removes a <see cref="IDataGenerator"/> associated to
 		/// <paramref name="column"/> from the collection.
 		/// </summary>
-		/// <param name="dataGenerator">
+		/// <param name="columnName">
 		/// Column named <paramref name="columnName"/> whose generator is to be removed from the collection.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="column"/> is a null reference
+		/// <paramref name="columnName"/> is a null reference
 		/// (Nothing in Visual Basic)
 		/// </exception>						
 		void Remove(String columnName);

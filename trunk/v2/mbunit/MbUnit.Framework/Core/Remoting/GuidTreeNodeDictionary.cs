@@ -63,9 +63,6 @@ namespace MbUnit.Core.Remoting
 		/// <summary>
 		/// Adds an element with the specified key and value to this GuidTreeNodeDictionary.
 		/// </summary>
-		/// <param name="key">
-		/// The Guid key of the element to add.
-		/// </param>
 		/// <param name="value">
 		/// The TreeNode value of the element to add.
 		/// </param>

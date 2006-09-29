@@ -724,7 +724,7 @@ namespace MbUnit.GUI
                 this.arguments = new MbUnitFormArguments();
                 CommandLineUtility.ParseCommandLineArguments(args, arguments);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 consoleMonitor.Stop();
                 MessageBox.Show(consoleMonitor.Out + consoleMonitor.Error);

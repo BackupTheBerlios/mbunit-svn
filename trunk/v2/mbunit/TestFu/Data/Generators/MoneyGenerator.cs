@@ -5,11 +5,11 @@ using System.Data.SqlTypes;
 namespace TestFu.Data.Generators
 {
 	/// <summary>
-	/// A random data generator for <see cref="Money"/> values.
+	/// A random data generator for <see cref="SqlMoney"/> values.
 	/// </summary>
 	/// <remarks>
 	/// <para>
-	/// This <see cref="Generate"/> method generates float values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates float values in a range [<see cref="MinValue"/>, <see cref="MaxValue"/>].
     /// </para>
     /// </remarks>
 	public class MoneyGenerator : DataGeneratorBase

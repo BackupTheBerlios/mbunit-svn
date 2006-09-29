@@ -46,8 +46,8 @@ namespace MbUnit.Core.Remoting
 		/// Populates the node using the <see cref="RunPipe"/> instance
 		/// contained in <paramref name="pipes"/>.
 		/// </summary>
-		/// <exception cref="ArguemtNullException">
-		/// <param name="parent"/> or <paramref name="pipes"/> is a null
+		/// <exception cref="ArgumentNullException">
+		/// <param name="root"/> or <paramref name="pipes"/> is a null
 		/// reference (Nothing in Visual Basic)
 		/// </exception>
 		public abstract void Populate(GuidTestTreeNodeDictionary nodes, TestTreeNode root, RunPipeStarterCollection pipes);

@@ -61,13 +61,8 @@ namespace TestFu.Grammars
 		public class Factory : IProductionFactory
 		{
 			/// <summary>
-			/// Creates a factory of <see cref="CountedProduction"/>
-			/// with <paramref name="maxTokenCount"/> possible tokens.
+			/// Creates a factory of <see cref="CountedProduction"/>.
 			/// </summary>
-			/// <param name="maxTokenCount">
-			/// Maximum number of terminal <see cref="IRule"/> execution
-			/// per production.
-			/// </param>
 			public Factory()
 			{}			
 

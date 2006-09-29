@@ -62,7 +62,7 @@ namespace TestFu.Data.SqlClient
 		/// and <paramref name="destination"/>.
 		/// </summary>
 		/// <param name="device">
-		/// A <see cref="SqlBackupDevice"/> defining the type of output device.
+		/// A <see cref="DbBackupDevice"/> defining the type of output device.
 		/// </param>
 		/// <param name="destination">
 		/// Device path.
@@ -102,7 +102,7 @@ namespace TestFu.Data.SqlClient
 		/// and <paramref name="destination"/>.
 		/// </summary>
 		/// <param name="device">
-		/// A <see cref="SqlBackupDevice"/> defining the type of output device.
+		/// A <see cref="DbBackupDevice"/> defining the type of output device.
 		/// </param>
 		/// <param name="destination">
 		/// Device path.

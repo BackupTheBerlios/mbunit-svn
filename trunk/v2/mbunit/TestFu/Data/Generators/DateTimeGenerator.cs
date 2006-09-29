@@ -8,7 +8,7 @@ namespace TestFu.Data.Generators
 	/// </summary>
 	/// <remarks>
 	/// <para>
-	/// This <see cref="Generate"/> method generates DateTime values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates DateTime values in a range [<see cref="MinValue"/>, <see cref="MaxValue"/>].
 	/// </para>
     /// </remarks>
 	public class DateTimeGenerator : DataGeneratorBase

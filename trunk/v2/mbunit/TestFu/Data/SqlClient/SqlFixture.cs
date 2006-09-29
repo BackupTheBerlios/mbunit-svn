@@ -62,7 +62,7 @@ namespace TestFu.Data.SqlClient
 		/// Gets the current transaction.
 		/// </summary>
 		/// <value>
-		/// A <see cref="SqlTransaction" instance if <see cref="BeginTransaction"/> was called
+		/// A <see cref="SqlTransaction"/> instance if <see cref="DbFixture.BeginTransaction"/> was called
 		/// and the connection not closed; otherwise, a null reference (Nothing in Visual Basic)
 		/// </value>
 		public new SqlTransaction Transaction

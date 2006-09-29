@@ -4,11 +4,10 @@ using System.Data;
 namespace TestFu.Data.Generators
 {
 	/// <summary>
-	/// A random data generator for <see cref="single"/> values.
 	/// </summary>
 	/// <remarks>
 	/// <para>
-	/// This <see cref="Generate"/> method generates float values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates float values in a range [<see cref="MinValue"/>, <see cref="MaxValue"/>].
     /// </para>
     /// </remarks>
 	public class SingleGenerator : DataGeneratorBase
@@ -38,7 +37,7 @@ namespace TestFu.Data.Generators
 		/// Gets or sets the minimum generated value
 		/// </summary>
 		/// <value>
-		/// Minimum generated value. Default is <see cref="float.MinValue"/>
+		/// Minimum generated value. Default is 0
 		/// </value>
 		public System.Single MinValue
 		{
@@ -56,7 +55,7 @@ namespace TestFu.Data.Generators
 		/// Gets or sets the maximum generated value
 		/// </summary>
 		/// <value>
-		/// Maximum generated value. Default is <see cref="float.MaxValue"/>
+		/// Maximum generated value. Default is 0
 		/// </value>
 		public System.Single MaxValue
 		{

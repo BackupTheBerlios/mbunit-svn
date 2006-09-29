@@ -178,7 +178,7 @@ namespace MbUnit.Core.Remoting
         /// <summary>
         /// Set the location for caching and delete any old cache info
         /// </summary>
-        /// <param name="domain">Our domain</param>
+		/// <param name="setup">Our domain</param>
         protected void ConfigureCachePath(AppDomainSetup setup)
         {
             try

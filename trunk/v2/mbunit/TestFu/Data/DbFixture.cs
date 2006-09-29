@@ -10,7 +10,7 @@ namespace TestFu.Data
 	///		file='Data/TestFu.Data.Doc.xml' 
 	///		path='//example[contains(descendant-or-self::*,"DbFixture")]'
 	///		/>
-	/// <seealso cref="SqlFixture"/>
+	/// <seealso cref="TestFu.Data.SqlClient.SqlFixture"/>
 	public abstract class DbFixture
 	{
 		private string connectionString;
@@ -77,7 +77,7 @@ namespace TestFu.Data
 		/// Gets the current transaction.
 		/// </summary>
 		/// <value>
-		/// A <see cref="IDbTransaction" instance if <see cref="BeginTransaction"/> was called
+		/// A <see cref="IDbTransaction"/> instance if <see cref="BeginTransaction"/> was called
 		/// and the connection not closed; otherwise, a null reference (Nothing in Visual Basic)
 		/// </value>
 		public IDbTransaction Transaction

@@ -2,8 +2,8 @@
 <examples>
 <example name="SqlAdministrator">
 <para>
-This example shows some usage of the <see cref="DbAdministrator"/> class. This class can be used to easily backup, restore, create or drop
-databases on a server. <see cref="SqlAdministrator"/> is the implementation for the MSSQL server:
+This example shows some usage of the <see cref="TestFu.Data.DbAdministratorBase"/> class. This class can be used to easily backup, restore, create or drop
+databases on a server. <see cref="TestFu.Data.SqlClient.SqlAdministrator"/> is the implementation for the MSSQL server:
 <code>[C#]
 using System;
 using TestFu.Data;
@@ -62,7 +62,7 @@ public class DatabaseTest : SqlFixture
 <example>
 <para>
 This example shows how the data generator can be used to create unit tests on database. In this example,
-we setup the dummy <see cref="DataSet"/> <c>UserOrderProductDatabase</c> and
+we setup the dummy <see cref="System.Data.DataSet"/> <c>UserOrderProductDatabase</c> and
 the populator in the <c>SetUp</c> method.
 </para>
 <code>

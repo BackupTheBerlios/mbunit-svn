@@ -11,13 +11,13 @@ namespace TestFu.Grammars
 		private MethodInvoker methodInvoker;
 		
 		/// <summary>
-		/// Creates a new instance around a <see cref="MethodInvokerRule"/>
+		/// Creates a new instance around a <see cref="MethodInvoker"/>
 		/// </summary>
-		/// <param name="methodDelegate">
-		/// <see cref="MethodInvokerRule"/> to attach.
+		/// <param name="methodInvoker">
+		/// <see cref="MethodInvoker"/> to attach.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="methodDelegate"/> is a null reference.
+		/// <paramref name="methodInvoker"/> is a null reference.
 		/// </exception>
 		public MethodInvokerRule(MethodInvoker methodInvoker)
 			:base(true)

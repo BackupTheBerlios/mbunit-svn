@@ -66,7 +66,7 @@ namespace MbUnit.Core.Invokers
 		/// Method arguments
 		/// </param>
 		/// <returns>
-		/// Return value of the inkoqued method. If the method returns void, null
+		/// Return value of the invoked method. If the method returns void, null
 		/// is returned.
 		/// </returns>
 		Object Execute(Object o, IList args);

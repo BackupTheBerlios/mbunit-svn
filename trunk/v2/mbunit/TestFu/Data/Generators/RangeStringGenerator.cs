@@ -15,7 +15,7 @@ namespace TestFu.Data.Generators
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         /// <summary>
-		/// Initializes a new instance of <see cref="StringGenerator"/>.
+		/// Initializes a new instance of <see cref="RangeStringGenerator"/>.
 		/// </summary>
 		/// <param name="column"></param>
 		public RangeStringGenerator(DataColumn column)

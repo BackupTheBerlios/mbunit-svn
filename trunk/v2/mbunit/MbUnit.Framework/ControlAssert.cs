@@ -3190,7 +3190,7 @@ namespace MbUnit.Framework
 		}		
 	
 		/// <summary>
-		/// Verifies that the property value <see cref="Control.Container"/>
+		/// Verifies that the property value <see cref="System.ComponentModel.Component.Container"/>
 		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
 		/// </summary>
 		/// <param name="expected">
@@ -3212,7 +3212,7 @@ namespace MbUnit.Framework
 		}
 		
 		/// <summary>
-		/// Verifies that the property value <see cref="Control.Container"/>
+		/// Verifies that the property value <see cref="System.ComponentModel.Component.Container"/>
 		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
 		/// </summary>
 		/// <param name="expected">

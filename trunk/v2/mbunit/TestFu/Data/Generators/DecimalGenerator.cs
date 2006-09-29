@@ -8,7 +8,7 @@ namespace TestFu.Data.Generators
 	/// </summary>
 	/// <remarks>
 	/// <para>
-	/// This <see cref="Generate"/> method generates decimal values in a range [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates decimal values in a range [<see cref="MinValue"/>, <see cref="MaxValue"/>].
 	/// </para>
     /// </remarks>
 	public class DecimalGenerator : DataGeneratorBase

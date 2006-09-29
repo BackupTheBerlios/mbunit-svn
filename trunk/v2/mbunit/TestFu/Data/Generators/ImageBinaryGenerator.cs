@@ -12,7 +12,7 @@ namespace TestFu.Data.Generators
 	/// <remarks>
 	/// <para>
 	/// This <see cref="IDataGenerator"/> method generates a bitmap of size
-    /// [<see cref="MaxLength"/> by <see cref="MaxLength"/>].
+	/// [<see cref="BinaryGeneratorBase.MaxLength"/> by <see cref="BinaryGeneratorBase.MaxLength"/>].
 	/// </para>
 	/// </remarks>
 	public class ImageBinaryGenerator : BinaryGeneratorBase,

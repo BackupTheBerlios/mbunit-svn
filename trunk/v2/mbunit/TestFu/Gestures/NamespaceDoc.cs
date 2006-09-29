@@ -44,8 +44,8 @@ namespace TestFu.Gestures
     /// </para>
     /// <para>
     /// The gestures should not be executed in the main thread but in a worker thread. Otherwize,
-    /// you will miss message notifications. All gesture methods on <see cref="Control"/>
-    /// and <see cref="Form"/> are thread safe.
+    /// you will miss message notifications. All gesture methods on <see cref="System.Windows.Forms.Control"/>
+	/// and <see cref="System.Windows.Forms.Form"/> are thread safe.
     /// </para>
     /// </summary>
     internal sealed class NamespaceDoc

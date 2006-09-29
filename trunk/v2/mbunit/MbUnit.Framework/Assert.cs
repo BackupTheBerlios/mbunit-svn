@@ -3448,7 +3448,7 @@ namespace MbUnit.Framework
                 //Do fail before now...
                 Assert.Fail(message);
             }
-            catch (Core.Exceptions.AssertionException ex)
+            catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
@@ -3531,7 +3531,7 @@ namespace MbUnit.Framework
                 //Do fail before now...
                 Assert.Fail(message);
             }
-            catch (Core.Exceptions.AssertionException ex)
+            catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }

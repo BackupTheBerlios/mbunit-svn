@@ -7,12 +7,12 @@ using System.IO;
 namespace TestFu.Data.Generators
 {
     /// <summary>
-    /// A random data generator for <see cref="Size"/> values.
+    /// A random data generator for <see cref="Byte"/> values.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This <see cref="Generate"/> method generates Size values in a range 
-    /// [<see cref="MinValue"/>, <see cref="MaxVAlue"/>].
+	/// This <see cref="IDataGenerator"/> method generates Byte arrays with length in the range
+	/// [<see cref="MinLength"/>, <see cref="MaxLength"/>].
     /// </para>
     /// </remarks>
     public abstract class BinaryGeneratorBase : DataGeneratorBase,
@@ -42,7 +42,9 @@ namespace TestFu.Data.Generators
         /// <summary>
         /// Gets or sets the minimum length of the generated value
         /// </summary>
-        /// <value></value>
+        /// <value>
+		/// Minimum generated length. Default is 16. 
+		/// </value>
         public int MinLength
         {
             get
@@ -59,7 +61,7 @@ namespace TestFu.Data.Generators
         /// Gets or sets the maximum generated value
         /// </summary>
         /// <value>
-        /// Maximum generated value. Default is <see cref="Size.MaxValue"/>
+		/// Maximum generated length. Default is 16.
         /// </value>
         public int MaxLength
         {

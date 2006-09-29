@@ -6,7 +6,7 @@ using System.IO;
 namespace MbUnit.Framework.Exceptions
 {
     /// <summary>
-    /// Could not find <see cref="DbInfoAttribute"/>.
+	/// Could not find <see cref="DbRestoreInfoAttribute"/>.
     /// </summary>
     [Serializable]
     public class MissingDbInfoException : Exception
@@ -18,10 +18,10 @@ namespace MbUnit.Framework.Exceptions
         }
 
         /// <summary>
-        /// Creates an exception with a message
+        /// Creates an exception with a type
         /// and an inner exception.
         /// </summary>
-        /// <param name="message">Error message</param>
+        /// <param name="type">Error type</param>
         /// <param name="ex">Inner exception</param>
         public MissingDbInfoException(Type type, Exception ex)
 			:base("",ex)

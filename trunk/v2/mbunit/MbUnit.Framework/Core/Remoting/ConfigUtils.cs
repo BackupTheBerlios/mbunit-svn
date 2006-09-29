@@ -46,7 +46,7 @@ namespace MbUnit.Core.Remoting
 		/// before the new entry is merged.
 		/// </summary>
 		/// <param name="doc">The config document to merge</param>
-		/// <param name="assembly">The Assembly that should be used</param>
+		/// <param name="assemblyName">The Assembly that should be used</param>
 		/// <param name="versionRange">The range of compatable versions (eg. "1.0.0.0-3.0.0.0")</param>
 		public static void MergeDependentAssembly(XmlDocument doc, AssemblyName assemblyName, string versionRange, string codeBase)
 		{
