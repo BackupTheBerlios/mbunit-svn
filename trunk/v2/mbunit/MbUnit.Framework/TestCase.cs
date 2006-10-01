@@ -9,7 +9,8 @@ using MbUnit.Core.Runs;
 namespace MbUnit.Framework
 {
     /// <summary>
-    /// A single test case of a <see cref="TestSuite"/>.    /// </summary>
+    /// A single test case of a <see cref="TestSuite"/>.
+    /// </summary>
     public class TestCase : ITestCase
     {
         private string name;
@@ -92,7 +93,8 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Invokes <see cref="Test"/> using the parameters returned by 
-        /// <see cref="GetParameters"/>.        /// </summary>
+        /// <see cref="GetParameters"/>.
+        /// </summary>
         /// <returns></returns>
         public virtual object Invoke(Object o, IList args)
         {
