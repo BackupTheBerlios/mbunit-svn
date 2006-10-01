@@ -26,14 +26,14 @@ namespace MbUnit.Framework
         /// <param name="name">
         /// Name of the test case
         /// </param>
-        /// <param name="test">
+        /// <param name="testDelegate">
         /// Delegate called by the test case
         /// </param>
         /// <param name="parameters">
         /// Parameters of the delegate
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="name"/> or <paramref name="test"/>
+        /// <paramref name="name"/> or <paramref name="testDelegate"/>
         /// is a null reference (Nothing in Visual Basic)
         /// </exception>
         /// <exception cref="ArgumentException">
@@ -46,7 +46,7 @@ namespace MbUnit.Framework
             if (name.Length == 0)
                 throw new ArgumentException("name is empty");
             if (testDelegate == null)
-                throw new ArgumentNullException("test");
+                throw new ArgumentNullException("testDelegate");
             this.name = name;
             this.testDelegate = testDelegate;
             this.parameters = parameters;
