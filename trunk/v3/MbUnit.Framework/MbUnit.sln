@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUnit.Framework", "MbUnit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUnit.Framework.Tests", "..\MbUnit.Framework.Tests\MbUnit.Framework.Tests.csproj", "{9673298A-2E7B-4024-9261-00E4A9FF13EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUnit.Framework.Runners", "..\MbUnit.Framework.Runners\MbUnit.Framework.Runners.csproj", "{97A1C587-509D-4BA7-A4B0-1AA2640F3C1E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +19,6 @@ Global
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97A1C587-509D-4BA7-A4B0-1AA2640F3C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97A1C587-509D-4BA7-A4B0-1AA2640F3C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97A1C587-509D-4BA7-A4B0-1AA2640F3C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97A1C587-509D-4BA7-A4B0-1AA2640F3C1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
