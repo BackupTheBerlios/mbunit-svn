@@ -59,6 +59,7 @@
     <Compile Include="Asserts\CollectionAssert.cs" />
     <Compile Include="Asserts\CompilerAssert.cs" />
     <Compile Include="Exceptions\CompilationException.cs" />
+    <Compile Include="ExpectedExceptionAttribute.cs" />
     <Compile Include="ExplicitAttribute.cs" />
     <Compile Include="FactoryAttribute.cs" />
     <Compile Include="IgnoreAttribute.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Operations\Tuple.cs" />
     <Compile Include="Operations\UniformPairWizeProductDomainTupleEnumerable.cs" />
     <Compile Include="Operations\UniformTWizeProductDomainTupleEnumerable.cs" />
+    <Compile Include="PatternAttribute.cs" />
     <Compile Include="SetUpAttribute.cs" />
     <Compile Include="SetUpTearDownTestCaseDecorator.cs" />
     <Compile Include="Asserts\StringAssert.cs" />
