@@ -155,6 +155,7 @@
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyCleanUp.cs" />
+    <Compile Include="AssemblyInfoAdditional.cs" />
     <Compile Include="AutoRunTest.cs">
       <SubType>Code</SubType>
     </Compile>

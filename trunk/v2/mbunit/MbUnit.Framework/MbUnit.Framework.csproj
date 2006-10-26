@@ -140,6 +140,7 @@
     <Compile Include="ArrayAssert.cs" />
     <Compile Include="AssemblyCleanupAttribute.cs" />
     <Compile Include="AssemblyDependsOnAttribute.cs" />
+    <Compile Include="AssemblyInfoAdditional.cs" />
     <Compile Include="AssemblyInfoKey.cs" />
     <Compile Include="AssemblyResolverAttribute.cs" />
     <Compile Include="Assert.cs" />

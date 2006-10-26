@@ -136,6 +136,7 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyInfoAdditional.cs" />
     <Compile Include="MbUnitTask.cs">
       <SubType>Code</SubType>
     </Compile>

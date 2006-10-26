@@ -124,9 +124,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=1.0.2417.18867, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
+    <Reference Include="MbUnit.Framework, Version=1.0.2417.18896, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MbUnit.Framework\bin\Debug\MbUnit.Framework.dll</HintPath>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -143,6 +143,7 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyInfoAdditional.cs" />
     <Compile Include="MainClass.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -62,43 +62,47 @@ namespace MbUnit.EditAssemblyInfo
 
         public override bool Execute()
         {
-            string pathFileName = Path.Combine(FilePath, @"AssemblyInfo.cs");
-            if (File.Exists(pathFileName))
+            DirectoryInfo directoryRoot = new DirectoryInfo(FilePath);
+
+            foreach (DirectoryInfo dir in directoryRoot.GetDirectories())
             {
-                string assemblyInfo;
-                try
-                {
-                    StreamReader sr = new StreamReader(pathFileName);
-                    assemblyInfo = sr.ReadToEnd();
-                    sr.Close();
-                }
-                catch
-                {
-                    return false;
-                }
+                string dirName = dir.Name;
+                string pathFileName = Path.Combine(dirName, @"AssemblyInfoAdditional.cs");
+                pathFileName = Path.Combine(filePath, pathFileName);
 
-                string regexPattern = "AssemblyTitle\\(\"([^\"]*)\"\\)";
-                Regex assemblyTitle = new Regex(regexPattern);
-
-                string result = Regex.Replace(assemblyInfo, regexPattern, string.Format("AssemblyTitle(\"MbUnit {0}.{1}.{2}\")", VersionMajor, VersionMinor, VersionBuild));
-
-                try
+                if (File.Exists(pathFileName))
                 {
-                    StreamWriter sw = new StreamWriter(pathFileName, false);
-                    sw.Write(result);
-                    sw.Close();
-                }
-                catch
-                {
-                    return false;
-                }
+                    string assemblyInfo;
+                    try
+                    {
+                        StreamReader sr = new StreamReader(pathFileName);
+                        assemblyInfo = sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    catch
+                    {
+                        return false;
+                    }
 
-                return true;
+                    string regexPattern = "AssemblyTitle\\(\"([^\"]*)\"\\)";
+                    Regex assemblyTitle = new Regex(regexPattern);
+
+                    string result = Regex.Replace(assemblyInfo, regexPattern, string.Format("AssemblyTitle(\"{3} {0}.{1}.{2}\")", VersionMajor, VersionMinor, VersionBuild, dirName));
+
+                    try
+                    {
+                        StreamWriter sw = new StreamWriter(pathFileName, false);
+                        sw.Write(result);
+                        sw.Close();
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                }
             }
-            else
-            {
-                return false;
-            }
+
+            return true;
         }
 
     }
