@@ -109,10 +109,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.1.40796, Culture=neutral, PublicKeyToken=aaa0f432407c68df" />
-    <Reference Include="MbUnit.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral" />
     <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,6 +145,12 @@
     <Content Include="..\..\bin\nant\NAnt.Core.dll">
       <Link>NAnt.Core.dll</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MbUnit.Framework\MbUnit.Framework.csproj">
+      <Project>{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}</Project>
+      <Name>MbUnit.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
