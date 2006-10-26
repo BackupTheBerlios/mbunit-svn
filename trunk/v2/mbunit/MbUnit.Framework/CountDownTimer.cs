@@ -43,9 +43,9 @@ namespace MbUnit.Framework
 		public void Stop()
 		{
 			timer.Stop();
-			
-			Assert.IsTrue(timer.Duration < this.maxDuration,
-			       "Timer duration {0}s is longer that maximum duration {2}s",
+
+      Assert.IsTrue(timer.Duration < this.maxDuration,
+			       "Timer duration {0}s is longer that maximum duration {1}s",
 			       timer.Duration,
 			       this.maxDuration
 			       );
