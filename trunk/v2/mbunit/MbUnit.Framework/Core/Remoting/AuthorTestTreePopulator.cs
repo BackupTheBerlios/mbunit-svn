@@ -59,7 +59,7 @@ namespace MbUnit.Core.Remoting
 			)
 		{
 			if (rootNode==null)
-				throw new ArgumentNullException("parent");
+				throw new ArgumentNullException("rootNode");
 			if (pipes==null)
 				throw new ArgumentNullException("pipes");
 

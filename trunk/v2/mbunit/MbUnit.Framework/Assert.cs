@@ -1084,7 +1084,7 @@ namespace MbUnit.Framework
         public static void Ignore(string message)
         {
             if (message == null)
-                throw new ArgumentNullException("format");
+				throw new ArgumentNullException("message");
             throw new IgnoreRunException(message);
         }
         #endregion

@@ -98,7 +98,7 @@ namespace MbUnit.Core.Remoting
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("typeFilter");
+					throw new ArgumentNullException("value");
                 this.typeFilter = value;
             }
         }
@@ -112,7 +112,7 @@ namespace MbUnit.Core.Remoting
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("filter");
+					throw new ArgumentNullException("value");
                 this.filter = value;
             }
         }
@@ -126,7 +126,7 @@ namespace MbUnit.Core.Remoting
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("RunPipeFilter");
+					throw new ArgumentNullException("value");
                 this.runPipeFilter = value;
             }
         }

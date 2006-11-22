@@ -32,7 +32,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("xpath");
+					throw new ArgumentNullException("value");
 				this.xpath = value;
 			}
 		}
@@ -46,7 +46,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("resourceName");
+					throw new ArgumentNullException("value");
 				this.resourceName = value;
 			}
 		}

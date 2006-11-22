@@ -71,7 +71,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("typeToAssembly");
+					throw new ArgumentNullException("value");
 				this.typeToAssembly = value;
 			}
 		}
@@ -85,7 +85,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("factoredType");
+					throw new ArgumentNullException("value");
 				this.factoredType = value;
 			}
 		}

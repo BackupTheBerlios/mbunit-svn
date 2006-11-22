@@ -558,7 +558,7 @@ namespace MbUnit.Core
 			if (name==null)
 				throw new ArgumentNullException("name");
 			if (name.Length==0)
-				throw new ArgumentNullException("name is empty");
+				throw new ArgumentException("name is empty", "name");
 
 			MethodInfo mi = t.GetMethod(name,parameters);
             if (mi == null)

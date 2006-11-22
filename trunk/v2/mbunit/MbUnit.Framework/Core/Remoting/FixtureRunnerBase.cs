@@ -108,7 +108,7 @@ namespace MbUnit.Core.Remoting
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("FixtureFilter");
+					throw new ArgumentNullException("value");
                 fixtureFilter = value;
             }
         }
@@ -121,7 +121,7 @@ namespace MbUnit.Core.Remoting
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("RunPipeFilter");
+					throw new ArgumentNullException("value");
                 this.runPipeFilter = value;
             }
         }
@@ -180,7 +180,7 @@ namespace MbUnit.Core.Remoting
             if (explorer == null)
                 throw new ArgumentNullException("explorer");
             if (reportListener == null)
-                throw new ArgumentNullException("report");
+				throw new ArgumentNullException("reportListener");
 
             this.explorer = explorer;
             this.report = reportListener;

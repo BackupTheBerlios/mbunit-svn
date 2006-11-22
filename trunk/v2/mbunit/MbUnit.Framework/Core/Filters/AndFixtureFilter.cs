@@ -43,7 +43,7 @@ namespace MbUnit.Core.Filters
         public override bool Filter(Type fixture)
         {
             if (fixture == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("fixture");
             return this.Left.Filter(fixture) && this.Right.Filter(fixture);
         }
     }

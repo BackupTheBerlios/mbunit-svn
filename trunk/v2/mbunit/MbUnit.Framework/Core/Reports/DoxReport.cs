@@ -73,7 +73,7 @@ namespace MbUnit.Core.Reports
 		public static string RenderToDox(ReportResult result, string outputPath, string nameFormat)
 		{
             if (result == null)
-                throw new ArgumentNullException("report");
+				throw new ArgumentNullException("result");
             DoxReport textReport = new DoxReport();
             return textReport.Render(result, outputPath, nameFormat);
         }

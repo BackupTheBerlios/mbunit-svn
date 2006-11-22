@@ -64,7 +64,7 @@ namespace MbUnit.Core.Runs
 			if (t==null)
 				throw new ArgumentNullException("t");
 			if (!TypeHelper.HasCustomAttribute(t,typeof(TestFixturePatternAttribute)))
-				throw new ArgumentNullException("type is not tagged by TestFixturePattern");
+				throw new ArgumentException("type is not tagged by TestFixturePattern", "t");
 			
 			TestFixturePatternAttribute pattern = 
 				(TestFixturePatternAttribute)

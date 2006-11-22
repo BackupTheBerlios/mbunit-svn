@@ -35,12 +35,12 @@ namespace MbUnit.Core.Filters
         private FixtureFilterBase left;
         private FixtureFilterBase right;
 
-        public BinaryFixtureFilter()
+		protected BinaryFixtureFilter()
         { }
-        public BinaryFixtureFilter(FixtureFilterBase left, FixtureFilterBase right)
+		protected BinaryFixtureFilter(FixtureFilterBase left, FixtureFilterBase right)
         {
             if (left==null)
-                throw new ArgumentNullException("left)");
+                throw new ArgumentNullException("left");
             if (right==null)
                 throw new ArgumentNullException("right");
 

@@ -95,7 +95,7 @@ namespace MbUnit.Core.Remoting
             try
             {
     			if (rfacade==null)
-	    			throw new ArgumentNullException("facade");
+					throw new ArgumentNullException("rfacade");
                 if (this.facade != null)
                 {
                     this.facade.Changed -= new ResultEventHandler(rfacade.Changed);
@@ -177,7 +177,7 @@ namespace MbUnit.Core.Remoting
         public void RunPipes(UnitTreeNode node)
 		{
 			if (node==null)
-				throw new ArgumentException("node");
+				throw new ArgumentNullException("node");
 
             // get test tree node
 			TestTreeNode testNode = this.guidNodes[node.TestIdentifier];

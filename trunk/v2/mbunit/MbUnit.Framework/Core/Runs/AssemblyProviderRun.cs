@@ -56,7 +56,7 @@ namespace MbUnit.Core.Runs
 			if (factoredType == null)
 				throw new ArgumentNullException("factoredType");
 			if (_namespace==null)
-				throw new ArgumentNullException("namespace");
+				throw new ArgumentNullException("_namespace");
 			if (decoratedType ==null)
 				throw new ArgumentNullException("decoratedType");
 

@@ -13,9 +13,9 @@ namespace MbUnit.Framework
         public UsingEnumAttribute(Type enumType)
         {
             if (enumType == null)
-                throw new ArgumentNullException("emumType");
+				throw new ArgumentNullException("enumType");
             if (!enumType.IsEnum)
-                throw new ArgumentException("Type "+enumType.FullName+" is not a enum");
+                throw new ArgumentException("Type "+enumType.FullName+" is not a enum", "enumType");
             this.enumType = enumType;
         }
 

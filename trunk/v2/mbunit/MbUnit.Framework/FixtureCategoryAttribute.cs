@@ -48,7 +48,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("category");
+					throw new ArgumentNullException("value");
 				this.category = value;
 			}
 		}

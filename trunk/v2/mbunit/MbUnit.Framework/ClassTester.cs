@@ -27,7 +27,7 @@ namespace MbUnit.Framework
 			set
 			{
 				if (value==null)
-					throw new ArgumentNullException("suite");
+					throw new ArgumentNullException("value");
 				this.suite=value;
 			}
 		}

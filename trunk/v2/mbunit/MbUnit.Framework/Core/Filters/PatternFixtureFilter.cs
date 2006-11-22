@@ -56,7 +56,7 @@ namespace MbUnit.Core.Filters
             {
                 this.pattern = value;
                 if (this.pattern == null)
-                    throw new ArgumentNullException("pattern");
+                    throw new ArgumentNullException("value");
             }
         }
     }

@@ -57,7 +57,7 @@ namespace MbUnit.Core.Remoting
 			TestTreeNode rootNode, RunPipeStarterCollection pipes)
 		{
 			if (rootNode==null)
-				throw new ArgumentNullException("parent");
+				throw new ArgumentNullException("rootNode");
 			if (pipes==null)
 				throw new ArgumentNullException("pipes");
 

@@ -74,7 +74,7 @@ namespace MbUnit.Core.Cons
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("consoleOut");
+					throw new ArgumentNullException("value");
                 this.consoleOut = value;
             }
         }

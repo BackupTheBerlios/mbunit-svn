@@ -33,7 +33,7 @@ namespace MbUnit.Framework
 		:base()
 		{
 			if (fixtureType==null)
-				throw new ArgumentNullException("testedType");
+				throw new ArgumentNullException("fixtureType");
 			this.fixtureType = fixtureType;
 		}
 		
@@ -51,7 +51,7 @@ namespace MbUnit.Framework
 		:base(description)
 		{
 			if (fixtureType==null)
-				throw new ArgumentNullException("testedType");
+				throw new ArgumentNullException("fixtureType");
 			this.fixtureType = fixtureType;
 		}
 		

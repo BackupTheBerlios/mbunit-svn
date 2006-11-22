@@ -96,11 +96,11 @@ namespace MbUnit.Framework
 			if (indexType==null)
 				throw new ArgumentNullException("indexType");
 			if (iteratorType==null)
-				throw new ArgumentNullException("incrementorType");
+				throw new ArgumentNullException("iteratorType");
 			if (!TypeHelper.HasIndexer(this.ProviderType,indexType))
 				throw new ArgumentException(
 					providerType.Name + " does not have an indexer with index of type " 
-					+ indexType.Name);
+					+ indexType.Name, "indexType");
 			
 			if (first==null)
 				throw new ArgumentNullException("first");

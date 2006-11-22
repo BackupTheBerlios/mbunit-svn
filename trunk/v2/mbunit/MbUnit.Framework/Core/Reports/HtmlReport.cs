@@ -68,7 +68,7 @@ namespace MbUnit.Core.Reports
             if (nameFormat == null)
                 throw new ArgumentNullException("nameFormat");
             if (nameFormat.Length == 0)
-                throw new ArgumentNullException("Length is zero", "nameFormat");
+                throw new ArgumentException("Length is zero", "nameFormat");
 
             HtmlReport htmlReport = new HtmlReport();
 

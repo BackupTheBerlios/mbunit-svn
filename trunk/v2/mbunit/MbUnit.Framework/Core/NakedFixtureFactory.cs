@@ -60,7 +60,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("fixtureNameSuffix");
+					throw new ArgumentNullException("value");
                 this.fixtureNameSuffix = value;
             }
         }
@@ -74,7 +74,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("TestFixtureSetUpName");
+					throw new ArgumentNullException("value");
                 testFixtureSetUpName = value;
             }
         }
@@ -88,7 +88,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("TestFixtureTearDownName");
+					throw new ArgumentNullException("value");
                 testFixtureTearDownName = value;
             }
         }
@@ -102,7 +102,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("SetUpName");
+					throw new ArgumentNullException("value");
                 setUpName = value;
             }
         }
@@ -116,7 +116,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("TearDownName");
+					throw new ArgumentNullException("value");
                 tearDownName = value;
             }
         }
@@ -130,7 +130,7 @@ namespace MbUnit.Core
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("TestNameSuffix");
+					throw new ArgumentNullException("value");
                 testNameSuffix = value;
             }
         }

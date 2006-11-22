@@ -65,7 +65,7 @@ namespace MbUnit.Core.Reports
             if (extension == null)
                 throw new ArgumentNullException("extension");
             if (extension.Length == 0)
-                throw new ArgumentNullException("Length is 0", "extension");
+                throw new ArgumentException("Length is 0", "extension");
 
             string outputFileName = String.Format(nameFormat + extension
 				, result.Date.ToShortDateString()
@@ -158,7 +158,7 @@ namespace MbUnit.Core.Reports
                  if (extension == null)
                      throw new ArgumentNullException("extension");
                  if (extension.Length == 0)
-                     throw new ArgumentNullException("Length is 0", "extension");
+                     throw new ArgumentException("Length is 0", "extension");
 
                  string fileName = GetFileName(result, outputPath, nameFormat, extension);
                  Render(result, fileName);
