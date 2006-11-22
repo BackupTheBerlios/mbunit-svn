@@ -162,8 +162,8 @@ namespace MbUnit.Core.Invokers
 
             // decorate with fixture decorators if needed
             IRunInvoker invoker = child;
-            if (invoker.Generator.IsTest)
-                invoker = this.DecorateInvokerWithFixtureDecorators(invoker);
+            //if (invoker.Generator.IsTest)
+            invoker = this.DecorateInvokerWithFixtureDecorators(invoker);
             v.Invoker = invoker;
 			
 			// add edge

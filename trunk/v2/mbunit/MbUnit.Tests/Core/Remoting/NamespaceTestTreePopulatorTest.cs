@@ -72,8 +72,8 @@ namespace MbUnit.Core.Remoting
                 t,
                 new MockRun(),
                 null,
-                null
-                );
+                null,
+                false);
             RunPipeStarterCollection pipes = new RunPipeStarterCollection(fixture1);
             pipes.Add(new RunPipeStarter(new RunPipe(fixture1)));
 

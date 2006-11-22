@@ -102,16 +102,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\MbUnit.Framework\MbUnit.Framework.csproj">
-      <Project>{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-      <Name>MbUnit.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestFu\TestFu.csproj">
-      <Project>{A88D4337-9198-4095-B889-63D6F11F3894}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-      <Name>TestFu</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs">
@@ -226,6 +216,16 @@
       <DependentUpon>ComponentFixtureTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sample.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MbUnit.Framework\MbUnit.Framework.csproj">
+      <Project>{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}</Project>
+      <Name>MbUnit.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFu\TestFu.csproj">
+      <Project>{A88D4337-9198-4095-B889-63D6F11F3894}</Project>
+      <Name>TestFu</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

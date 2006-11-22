@@ -44,11 +44,12 @@ namespace MbUnit.Core
 		private IRun run;
         private MethodInfo setUp = null;
         private MethodInfo tearDown = null;
+        private bool ignored;
         private RunPipeStarterCollection starters;
         private TimeSpan timeOut = new TimeSpan(0, 5, 0);
         private ApartmentState apartmentState = ApartmentState.Unknown;
 
-        public Fixture(Type type, IRun run, MethodInfo setUp, MethodInfo tearDown)
+        public Fixture(Type type, IRun run, MethodInfo setUp, MethodInfo tearDown, bool ignored)
 		{
 			if (type==null)
 				throw new ArgumentNullException("type");
@@ -60,6 +61,7 @@ namespace MbUnit.Core
             this.run = run;
             this.setUp = setUp;
             this.tearDown = tearDown;
+            this.ignored = ignored;
             this.starters = new RunPipeStarterCollection(this);
         }
 
@@ -116,6 +118,17 @@ namespace MbUnit.Core
             get
             {
                 return this.tearDown;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the entire test fixture is ignored.
+        /// </summary>
+        public bool IsIgnored
+        {
+            get
+            {
+                return this.ignored;
             }
         }
 
@@ -207,7 +220,7 @@ namespace MbUnit.Core
         {
             if (fixture == null)
                 throw new ArgumentNullException("fixture");
-            if (this.setUp!=null)
+            if (this.setUp!=null && ! ignored)
                 this.setUp.Invoke(fixture,null);
         }
 
@@ -215,7 +228,7 @@ namespace MbUnit.Core
         {
             if (fixture==null)
                 throw new ArgumentNullException("fixture");
-            if (this.tearDown!=null)
+            if (this.tearDown!=null && ! ignored)
                 this.tearDown.Invoke(fixture,null);
             IDisposable disposable = fixture as IDisposable;
             if (disposable != null)

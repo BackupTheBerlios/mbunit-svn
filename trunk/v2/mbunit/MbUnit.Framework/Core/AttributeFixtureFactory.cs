@@ -42,6 +42,8 @@ namespace MbUnit.Core
             bool setUpSearched = false;
             bool tearDownSearched=false;
 
+            bool ignored = TypeHelper.HasCustomAttribute(t, typeof(IgnoreAttribute));
+
             foreach (TestFixturePatternAttribute attr in t.GetCustomAttributes(typeof(TestFixturePatternAttribute), true))
             {
                 IRun run = null;
@@ -64,7 +66,7 @@ namespace MbUnit.Core
                     tearDownSearched = true;
                 }
 
-                Fixture fixture = new Fixture(t, run, setUp, tearDown);
+                Fixture fixture = new Fixture(t, run, setUp, tearDown, ignored);
                 fixture.TimeOut = attr.GetTimeOut();
                 fixture.ApartmentState = attr.ApartmentState;
                 fixtures.Add(fixture);

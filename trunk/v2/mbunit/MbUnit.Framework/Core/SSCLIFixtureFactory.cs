@@ -47,7 +47,7 @@ namespace MbUnit.Core
 
             // create run
 			SSCLIRun run = new SSCLIRun(mi, this.successReturnCode);
-			Fixture fixture = new Fixture(t,run,null,null);
+			Fixture fixture = new Fixture(t,run,null,null, false);
             fixtures.Add(fixture);
         }
 

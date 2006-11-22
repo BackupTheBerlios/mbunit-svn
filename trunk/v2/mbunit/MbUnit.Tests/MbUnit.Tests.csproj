@@ -110,23 +110,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="MbUnit.GUI, Version=2.22.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.GUI\obj\Debug\MbUnit.GUI.exe</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
-    <Reference Include="MbUnit.MSBuild.Tasks, Version=1.0.1778.18742, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.MSBuild.Tasks\obj\Debug\MbUnit.MSBuild.Tasks.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="MbUnit.Tasks, Version=2.22.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\MbUnit.Tasks\obj\Debug\MbUnit.Tasks.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d, processorArchitecture=MSIL">
       <HintPath>..\..\QuickGraph\QuickGraph\obj\Debug\QuickGraph.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -144,10 +127,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
-    </Reference>
-    <Reference Include="TestFu, Version=2.21.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
-      <HintPath>..\TestFu\obj\Debug\TestFu.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +169,7 @@
     <Compile Include="Core\Framework\ConditionalExceptionAttributeTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Framework\FixtureIgnoreTest.cs" />
     <Compile Include="Core\Framework\DurationAttributeTest.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -366,6 +346,28 @@
     <Content Include="Tasks\NAnt\nant.sample3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MbUnit.Framework\MbUnit.Framework.csproj">
+      <Project>{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}</Project>
+      <Name>MbUnit.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MbUnit.GUI\MbUnit.GUI.csproj">
+      <Project>{D555D4C7-28A4-44D7-8F2E-88ADC1C1A992}</Project>
+      <Name>MbUnit.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.csproj">
+      <Project>{B96783DD-B93A-4EC7-B037-99A34D2487E6}</Project>
+      <Name>MbUnit.MSBuild.Tasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MbUnit.Tasks\MbUnit.Tasks.csproj">
+      <Project>{1230E770-11F1-4DB8-8176-B1978231BCE3}</Project>
+      <Name>MbUnit.Tasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFu\TestFu.csproj">
+      <Project>{A88D4337-9198-4095-B889-63D6F11F3894}</Project>
+      <Name>TestFu</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\AssemblyResolving\" />

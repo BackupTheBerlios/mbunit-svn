@@ -149,7 +149,7 @@ namespace MbUnit.Core
             MethodInfo setup = t.GetMethod(this.testFixtureSetUpName, Type.EmptyTypes);
             MethodInfo tearDown = t.GetMethod(this.testFixtureTearDownName, Type.EmptyTypes);
 
-            Fixture fixture = new Fixture(t, this.run, setup, tearDown);
+            Fixture fixture = new Fixture(t, this.run, setup, tearDown, false);
             fixtures.Add(fixture);
         }
 

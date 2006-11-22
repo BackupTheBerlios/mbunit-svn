@@ -53,10 +53,11 @@ namespace MbUnit.Core.FrameworkBridges
                 return;
 
             // create run
+            bool ignored = TypeHelper.HasCustomAttribute(t, framework.IgnoreAttributeType);
             MethodInfo setUp = TypeHelper.GetAttributedMethod(t, framework.TestFixtureSetUpAttributeType);
             MethodInfo tearDown = TypeHelper.GetAttributedMethod(t, framework.TestFixtureTearDownAttributeType);
 
-            Fixture fixture = new Fixture(t, this.CreateRun(framework),setUp,tearDown);
+            Fixture fixture = new Fixture(t, this.CreateRun(framework),setUp,tearDown, ignored);
             fixtures.Add(fixture);
         }
 
