@@ -11,7 +11,7 @@ namespace MbUnit.Framework.Security
         {
             private bool permitOnly = false;
 
-            public DenyPermissionDecoratorRunInvoker(IRunInvoker invoker)
+			protected DenyPermissionDecoratorRunInvoker(IRunInvoker invoker)
                 :base(invoker)
             {}
 

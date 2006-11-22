@@ -36,7 +36,7 @@ namespace MbUnit.Core.Reports
 	{
         protected const string AppPathRootName = "MbUnit";
         protected const string AppPathReportsName = "Reports";
-		public ReportBase()
+		protected ReportBase()
 		{
 		}
 

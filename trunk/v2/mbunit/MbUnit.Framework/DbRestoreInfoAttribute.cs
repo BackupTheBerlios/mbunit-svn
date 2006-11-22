@@ -15,7 +15,7 @@ namespace MbUnit.Framework
         private DbBackupDevice backupDevice;
         private Type factoryType;
 
-        public DbRestoreInfoAttribute(
+		protected DbRestoreInfoAttribute(
             string connectionString,
             string databaseName,
             string backupDestination,
@@ -30,7 +30,7 @@ namespace MbUnit.Framework
                 )
         { }
 
-        public DbRestoreInfoAttribute(
+		protected DbRestoreInfoAttribute(
             string connectionString,
             string databaseName,
             string backupDestination,

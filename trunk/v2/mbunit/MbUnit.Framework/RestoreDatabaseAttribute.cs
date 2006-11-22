@@ -12,7 +12,7 @@ namespace MbUnit.Framework
     {
         private TestSchedule schedule;
 
-        public RestoreDatabaseAttribute(TestSchedule schedule)
+		protected RestoreDatabaseAttribute(TestSchedule schedule)
         {
             this.schedule = schedule;
         }

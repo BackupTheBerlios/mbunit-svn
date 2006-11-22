@@ -48,7 +48,7 @@ namespace MbUnit.Core.Remoting
         private string cachePath = null;
         private bool sandBox = false;
 
-        public SeparateTestDomain()
+        protected SeparateTestDomain()
         {}
 
         public override AppDomain Domain

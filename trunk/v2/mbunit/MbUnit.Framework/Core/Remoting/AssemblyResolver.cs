@@ -59,7 +59,7 @@ namespace MbUnit.Core.Remoting
                 throw new ArgumentNullException("hintDirectory");
 
             string directory = Path.GetDirectoryName(hintDirectory);
-            if (directory == "")
+            if (directory.Length == 0)
                 directory = ".";
             directory = Path.GetFullPath(directory);
             if (this.hintDirectories.Contains(directory))

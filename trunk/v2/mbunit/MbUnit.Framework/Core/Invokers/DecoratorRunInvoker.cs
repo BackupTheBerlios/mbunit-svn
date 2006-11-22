@@ -43,11 +43,11 @@ namespace MbUnit.Core.Invokers
 		private IRunInvoker invoker;
         private string description;
 
-        public DecoratorRunInvoker(IRunInvoker invoker)
+		protected DecoratorRunInvoker(IRunInvoker invoker)
             :this(invoker,null)
         { }
 
-        public DecoratorRunInvoker(IRunInvoker invoker, string description) 
+		protected DecoratorRunInvoker(IRunInvoker invoker, string description) 
 		{
 			if (invoker == null)
 				throw new ArgumentNullException("invoker");

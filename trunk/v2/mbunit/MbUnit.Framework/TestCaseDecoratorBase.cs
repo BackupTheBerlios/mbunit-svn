@@ -7,7 +7,7 @@ namespace MbUnit.Framework
     {
         private ITestCase testCase;
 
-        public TestCaseDecoratorBase(ITestCase testCase)
+		protected TestCaseDecoratorBase(ITestCase testCase)
         {
             if (testCase == null)
                 throw new ArgumentNullException("testCase");

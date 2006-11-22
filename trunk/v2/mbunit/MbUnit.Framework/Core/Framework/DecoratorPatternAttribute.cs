@@ -39,10 +39,10 @@ namespace MbUnit.Core.Framework
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public abstract class DecoratorPatternAttribute : PatternAttribute
 	{
-		public DecoratorPatternAttribute()
+		protected DecoratorPatternAttribute()
 		{}
-		
-		public DecoratorPatternAttribute(string description)
+
+		protected DecoratorPatternAttribute(string description)
 			:base(description)
 		{}
 				

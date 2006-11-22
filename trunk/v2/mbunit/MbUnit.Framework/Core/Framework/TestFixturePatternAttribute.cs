@@ -41,10 +41,10 @@ namespace MbUnit.Core.Framework
         private int timeOut = 10;
         private ApartmentState apartmentState = ApartmentState.Unknown;
 
-        public TestFixturePatternAttribute()
+		protected TestFixturePatternAttribute()
 		{}
-		
-		public TestFixturePatternAttribute(string description)
+
+		protected TestFixturePatternAttribute(string description)
 		:base(description)
 		{}
 

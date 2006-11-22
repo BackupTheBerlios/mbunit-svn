@@ -42,10 +42,10 @@ namespace MbUnit.Core.Runs
 		private string name=null;
 		private bool isTest = true;
 		
-		public Run()
+		protected Run()
 		{}
-		
-		public Run(string name, bool isTest)
+
+		protected Run(string name, bool isTest)
 		{
 			this.name =name;
 			this.isTest = isTest;

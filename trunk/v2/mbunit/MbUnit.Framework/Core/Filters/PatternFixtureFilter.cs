@@ -34,10 +34,10 @@ namespace MbUnit.Core.Filters
     {
         private string pattern = "";
 
-        public PatternFixtureFilter()
+		protected PatternFixtureFilter()
         { }
 
-        public PatternFixtureFilter(string pattern)
+		protected PatternFixtureFilter(string pattern)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");

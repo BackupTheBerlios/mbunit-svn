@@ -35,10 +35,10 @@ namespace MbUnit.Framework
 	public abstract class ProviderFixtureDecoratorPatternAttribute
 		: FixtureDecoratorPatternAttribute
 	{
-		public ProviderFixtureDecoratorPatternAttribute()
+		protected ProviderFixtureDecoratorPatternAttribute()
 		{}
-		
-		public ProviderFixtureDecoratorPatternAttribute(string description)
+
+		protected ProviderFixtureDecoratorPatternAttribute(string description)
 			:base(description)
 		{}	
 	}

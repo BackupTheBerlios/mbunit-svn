@@ -38,10 +38,10 @@ namespace MbUnit.Core.Framework
 	[AttributeUsage(AttributeTargets.Class,AllowMultiple=true,Inherited=true)]
 	public abstract class FixtureDecoratorPatternAttribute : PatternAttribute
 	{
-		public FixtureDecoratorPatternAttribute()
+		protected FixtureDecoratorPatternAttribute()
 		{}
-		
-		public FixtureDecoratorPatternAttribute(string description)
+
+		protected FixtureDecoratorPatternAttribute(string description)
 			:base(description)
 		{}
 		

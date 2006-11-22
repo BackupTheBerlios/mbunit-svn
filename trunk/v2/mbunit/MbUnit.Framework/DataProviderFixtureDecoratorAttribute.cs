@@ -11,7 +11,7 @@ namespace MbUnit.Framework
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple=false, Inherited=true)]
 	public abstract class DataProviderFixtureDecoratorAttribute : Attribute
 	{
-		public DataProviderFixtureDecoratorAttribute()
+		protected DataProviderFixtureDecoratorAttribute()
 		{}
 		
 		public abstract XmlNodeList GetData();

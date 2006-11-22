@@ -12,10 +12,10 @@ namespace MbUnit.Framework
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple=false, Inherited=true)]
 	public abstract class TestFixtureExtensionAttribute : PatternAttribute
 	{
-        public TestFixtureExtensionAttribute()
+		protected TestFixtureExtensionAttribute()
 		{}
 
-        public TestFixtureExtensionAttribute(string description)
+		protected TestFixtureExtensionAttribute(string description)
 			: base(description)
 		{}
 

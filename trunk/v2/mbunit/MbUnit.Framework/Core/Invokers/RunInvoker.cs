@@ -35,7 +35,7 @@ namespace MbUnit.Core.Invokers
 	public abstract class RunInvoker : IRunInvoker
 	{
 		private IRun generator;
-		public RunInvoker(IRun generator)
+		protected RunInvoker(IRun generator)
 		{
 			Assert.IsNotNull(generator);
 			this.generator = generator;

@@ -50,7 +50,7 @@ namespace MbUnit.Core.Remoting
         private IFixtureFilter filter = FixtureFilters.Any;
         private IRunPipeFilter runPipeFilter = new AnyRunPipeFilter();
 
-        public TestDomainBase()
+        protected TestDomainBase()
         {}
 
         public virtual void Dispose()

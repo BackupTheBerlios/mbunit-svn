@@ -54,7 +54,7 @@ namespace MbUnit.Core.Reports
 			}
 		}
 
-		public XslTransformReport()
+		protected XslTransformReport()
 		{
 			this.transform = ResourceHelper.ReportHtmlTransform;
 		}
