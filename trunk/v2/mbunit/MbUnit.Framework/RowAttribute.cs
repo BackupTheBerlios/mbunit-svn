@@ -20,7 +20,17 @@ namespace MbUnit.Framework
         /// <param name="row">The row of values to bind</param>
         public RowAttribute(params object[] row)
         {
-            this.row = row;
+            if (row == null)
+            {
+                // This resolves bug MBUNIT-45 that has to do with issues passing
+                // null as a single parameter value.  Under other circumstances the
+                // array reference could never be null.
+                this.row = new object[] { null };
+            }
+            else
+            {
+                this.row = row;
+            }
         }
 
         /// <summary>
