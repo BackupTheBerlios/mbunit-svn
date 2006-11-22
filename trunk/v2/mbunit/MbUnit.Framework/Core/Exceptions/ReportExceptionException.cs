@@ -45,6 +45,7 @@ namespace MbUnit.Core.Exceptions
 		}
 
 		protected ReportExceptionException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
 		{
 			this.exception = (ReportException)info.GetValue("Exception",typeof(ReportException));
 		}
