@@ -31,7 +31,7 @@ using System.ComponentModel;
 
 namespace MbUnit.Framework
 {
-	[AttributeUsage(AttributeTargets.All,AllowMultiple=true,Inherited=true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
 	public class PelikhanAttribute : AuthorAttribute
 	{
 		public PelikhanAttribute()
@@ -40,10 +40,10 @@ namespace MbUnit.Framework
 	}
 
 	/// <summary>
-	/// This attribute collects the test author informations.
+	/// This attribute identifies the author of a test fixture.
 	/// </summary>
 	/// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='AuthorAttribute']"/>
-	[AttributeUsage(AttributeTargets.All,AllowMultiple=true,Inherited=true)]
+	[AttributeUsage(AttributeTargets.Class,AllowMultiple=true,Inherited=true)]
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	public class AuthorAttribute : InformationAttribute
 	{
