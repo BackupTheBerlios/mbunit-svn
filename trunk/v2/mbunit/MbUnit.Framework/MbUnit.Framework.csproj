@@ -286,6 +286,7 @@
     <Compile Include="Core\Invokers\DurationRunInvoker.cs" />
     <Compile Include="Core\Invokers\ExpectedExceptionRunInvoker.cs" />
     <Compile Include="Core\Invokers\FailedLoadingRunInvoker.cs" />
+    <Compile Include="Core\Invokers\IgnoredLoadingRunInvoker.cs" />
     <Compile Include="Core\Invokers\IgnoreRunInvoker.cs" />
     <Compile Include="Core\Invokers\InvokerEventArgs.cs" />
     <Compile Include="Core\Invokers\IRunInvoker.cs" />
