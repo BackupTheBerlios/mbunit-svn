@@ -23,12 +23,19 @@ namespace MbUnit.Core.Runs
             object fixture = null;
             try
             {
+                // Check if fixture is ignored
+                IgnoreAttribute ignore = null;
+                if (TypeHelper.HasCustomAttribute(t, typeof(IgnoreAttribute)))
+                {
+                    ignore = TypeHelper.GetFirstCustomAttribute(t, typeof(IgnoreAttribute)) as IgnoreAttribute;
+                }
+
                 foreach (MethodInfo method in TypeHelper.GetAttributedMethods(t, typeof(CombinatorialTestAttribute)))
                 {
                     if (fixture == null)
                         fixture = TypeHelper.CreateInstance(t);
 
-                    this.ReflectTestMethod(tree, parent, fixture, method);
+                    this.ReflectTestMethod(tree, parent, fixture, method, ignore);
                 }
             }
             finally
@@ -43,94 +50,109 @@ namespace MbUnit.Core.Runs
             RunInvokerTree tree, 
             RunInvokerVertex parent, 
             object fixture, 
-            MethodInfo method)
+            MethodInfo method,
+            IgnoreAttribute ignore)
         {
-            CombinatorialTestAttribute testAttribute =
-                TypeHelper.GetFirstCustomAttribute(method, typeof(CombinatorialTestAttribute))
-                as CombinatorialTestAttribute;
-
-            ParameterInfo[] parameters = method.GetParameters();
-            if (parameters.Length == 0)
+            // Check if fixture or method is ignored
+            if (ignore == null && TypeHelper.HasCustomAttribute(method, typeof(IgnoreAttribute)))
             {
-                Exception ex = new Exception("Combinatorial test method " + method.Name + "has no parameters");
-                MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
+                ignore = TypeHelper.GetFirstCustomAttribute(method, typeof(IgnoreAttribute)) as IgnoreAttribute;
+            }
+
+            if (ignore != null)
+            {
+                // Do not generate unnecessary test cases
+                IgnoredLoadingRunInvoker invoker = new IgnoredLoadingRunInvoker(this, method, ignore.Description);
                 tree.AddChild(parent, invoker);
-                return;
             }
-
-            // create the models
-            DomainCollection domains = new DomainCollection();
-            Type[] parameterTypes = new Type[parameters.Length];
-            int index = 0;
-            foreach (ParameterInfo parameter in parameters)
+            else
             {
-                parameterTypes[index] = parameter.ParameterType;
+                CombinatorialTestAttribute testAttribute = TypeHelper.GetFirstCustomAttribute(method, typeof(CombinatorialTestAttribute))
+                    as CombinatorialTestAttribute;
 
-                DomainCollection pdomains = new DomainCollection();
-                foreach (UsingBaseAttribute usingAttribute in parameter.GetCustomAttributes(typeof(UsingBaseAttribute), true))
+                ParameterInfo[] parameters = method.GetParameters();
+                if (parameters.Length == 0)
                 {
-                    try
+                    Exception ex = new Exception("No parameters");
+                    MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
+                    tree.AddChild(parent, invoker);
+                    return;
+                }
+
+                // create the models
+                DomainCollection domains = new DomainCollection();
+                Type[] parameterTypes = new Type[parameters.Length];
+                int index = 0;
+                foreach (ParameterInfo parameter in parameters)
+                {
+                    parameterTypes[index] = parameter.ParameterType;
+
+                    DomainCollection pdomains = new DomainCollection();
+                    foreach (UsingBaseAttribute usingAttribute in parameter.GetCustomAttributes(typeof(UsingBaseAttribute), true))
                     {
-                        usingAttribute.GetDomains(pdomains, parameter, fixture);
+                        try
+                        {
+                            usingAttribute.GetDomains(pdomains, parameter, fixture);
+                        }
+                        catch (Exception ex)
+                        {
+                            Exception pex = new Exception("Failed while loading domains from parameter " + parameter.Name,
+                                ex);
+                            MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, pex, method);
+                            tree.AddChild(parent, invoker);
+                        }
                     }
-                    catch (Exception ex)
+                    if (pdomains.Count == 0)
                     {
-                        Exception pex = new Exception("Failed while loading domains from parameter " + parameter.Name,
-                            ex);
-                        MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, pex, method);
+                        Exception ex = new Exception("Could not find domain for argument " + parameter.Name);
+                        MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
                         tree.AddChild(parent, invoker);
+                        return;
                     }
-                }
-                if (pdomains.Count == 0)
-                {
-                    Exception ex = new Exception("Could not find domain for argument " + parameter.Name);
-                    MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
-                    tree.AddChild(parent, invoker);
-                    return;
-                }
-                domains.Add(Domains.ToDomain(pdomains));
+                    domains.Add(Domains.ToDomain(pdomains));
 
-                index++;
-            }
-
-            // get the validaor method if any
-            MethodInfo validator = null;
-            if (testAttribute.TupleValidatorMethod != null)
-            {
-                validator = fixture.GetType().GetMethod(testAttribute.TupleValidatorMethod, parameterTypes);
-                if (validator == null)
-                {
-                    Exception ex = new Exception("Could not find validator method " + testAttribute.TupleValidatorMethod);
-                    MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
-                    tree.AddChild(parent, invoker);
-                    return;
-                }
-            }
-
-            // we make a cartesian product of all those
-            foreach (ITuple tuple in Products.Cartesian(domains))
-            {
-                // create data domains
-                DomainCollection tdomains = new DomainCollection();
-                for (int i = 0; i < tuple.Count; ++i)
-                {
-                    IDomain dm = (IDomain)tuple[i];
-                    tdomains.Add(dm);
+                    index++;
                 }
 
-                // computing the pairwize product
-                foreach (ITuple ptuple in testAttribute.GetProduct(tdomains))
+                // get the validator method if any
+                MethodInfo validator = null;
+                if (testAttribute.TupleValidatorMethod != null)
                 {
-                    if (validator != null)
+                    validator = fixture.GetType().GetMethod(testAttribute.TupleValidatorMethod, parameterTypes);
+                    if (validator == null)
                     {
-                        bool isValid = (bool)validator.Invoke(fixture, ptuple.ToObjectArray());
-                        if (!isValid)
-                            continue;
+                        Exception ex = new Exception("Could not find validator method " + testAttribute.TupleValidatorMethod);
+                        MethodFailedLoadingRunInvoker invoker = new MethodFailedLoadingRunInvoker(this, ex, method);
+                        tree.AddChild(parent, invoker);
+                        return;
+                    }
+                }
+
+                // we make a cartesian product of all those
+                foreach (ITuple tuple in Products.Cartesian(domains))
+                {
+                    // create data domains
+                    DomainCollection tdomains = new DomainCollection();
+                    for (int i = 0; i < tuple.Count; ++i)
+                    {
+                        IDomain dm = (IDomain)tuple[i];
+                        tdomains.Add(dm);
                     }
 
-                    TupleRunInvoker invoker = new TupleRunInvoker(this, method, tuple, ptuple);
-                    IRunInvoker dinvoker = DecoratorPatternAttribute.DecoreInvoker(method, invoker);
-                    tree.AddChild(parent, dinvoker);
+                    // computing the pairwize product
+                    foreach (ITuple ptuple in testAttribute.GetProduct(tdomains))
+                    {
+                        if (validator != null)
+                        {
+                            bool isValid = (bool)validator.Invoke(fixture, ptuple.ToObjectArray());
+                            if (!isValid)
+                                continue;
+                        }
+
+                        TupleRunInvoker invoker = new TupleRunInvoker(this, method, tuple, ptuple);
+                        IRunInvoker dinvoker = DecoratorPatternAttribute.DecoreInvoker(method, invoker);
+                        tree.AddChild(parent, dinvoker);
+                    }
                 }
             }
         }
