@@ -62,7 +62,6 @@ Section "MainSection" SEC01
   File "build\MbUnit.Framework.xml"
   File "build\MbUnit.Framework.1.1.dll"
   File "build\MbUnit.Framework.1.1.xml"
-  File "build\MbUnit.Demo.1.1.dll"
   File "build\MbUnit.Cons.exe"
   File "build\MbUnit.Cons.exe.config"
   File "build\MbUnit.AddIn.dll"
