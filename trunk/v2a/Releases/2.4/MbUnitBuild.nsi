@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "MbUnit"
-!define PRODUCT_VERSION "2.3"
+!define PRODUCT_VERSION "2.4"
 !define PRODUCT_WEB_SITE "http://www.mbunit.org"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\XsdTidy.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -62,7 +62,6 @@ Section "MainSection" SEC01
   File "build\MbUnit.Framework.xml"
   File "build\MbUnit.Framework.1.1.dll"
   File "build\MbUnit.Framework.1.1.xml"
-  File "build\MbUnit.Demo.1.1.dll"
   File "build\MbUnit.Cons.exe"
   File "build\MbUnit.Cons.exe.config"
   File "build\MbUnit.AddIn.dll"

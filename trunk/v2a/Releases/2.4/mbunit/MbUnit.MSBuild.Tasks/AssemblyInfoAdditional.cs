@@ -5,4 +5,4 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-[assembly: AssemblyTitle("MbUnit.MSBuild.Tasks 2.3.1040")]
+[assembly: AssemblyTitle("MbUnit.MSBuild.Tasks 2.4.1040")]
