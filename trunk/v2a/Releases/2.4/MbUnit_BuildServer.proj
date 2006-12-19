@@ -8,7 +8,8 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-        	<MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
+		<MSBuildExtensionsPath>$(MSBuildProjectDirectory)\bin\MSBuildExtensions</MSBuildExtensionsPath>
+        <MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
 		<OutputPath>$(MSBuildProjectDirectory)\build</OutputPath>
 		<DisableRecursiveBuildProperties>ProjectReferenceBuildTargets=GetTargetPath;</DisableRecursiveBuildProperties>        
 		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
