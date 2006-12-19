@@ -29,30 +29,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=1.0.2459.29428, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\TestDriven.NET 2.0\NUnit\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\QuickGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Algorithms, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\QuickGraph.Algorithms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestFu, Version=1.0.2459.29426, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\TestFu.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\ArrayAssert_Test.cs" />
