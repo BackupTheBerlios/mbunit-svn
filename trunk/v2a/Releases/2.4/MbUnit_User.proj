@@ -4,14 +4,11 @@
 	<PropertyGroup>
         	<MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
 		<OutputPath>$(MSBuildProjectDirectory)\build</OutputPath>
+		<DisableRecursiveBuildProperties>ProjectReferenceBuildTargets=GetTargetPath;</DisableRecursiveBuildProperties>        
 	</PropertyGroup>
 	
 	
-	<Target Name="MbUnit_AddIn">
-		<MSBuild Projects="MbUnit\MbUnit.AddIn.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
-	</Target>
-
-	<Target Name="Build" DependsOnTargets="Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnitMsBuild;MbUnit_Tests" />
+	<Target Name="Build" DependsOnTargets="Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_Tests" />
 	
 	<Target Name="Refly">
 		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
@@ -21,21 +18,46 @@
 		<MSBuild Projects="QuickGraph\QuickGraph.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
 	</Target>
 	
-	<Target Name="MbUnit">
-		<MSBuild Projects="MbUnit\MbUnit.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	<ItemGroup>
+		<MbUnit_1_0 Include="MbUnit\TestFu\TestFu.csproj" />
+		<MbUnit_1_0 Include="MbUnit\MbUnit.Framework\MbUnit.Framework.csproj" />
+		<MbUnit_1_0 Include="MbUnit\MbUnit.Cons\MbUnit.Cons.csproj" />
+		<MbUnit_1_0 Include="MbUnit\MbUnit.GUI\MbUnit.GUI.csproj" />
+		<MbUnit_1_0 Include="MbUnit\MbUnit.Tasks\MbUnit.Tasks.csproj" />
+
+		<MbUnit_1_1 Include="MbUnit\MbUnit.Framework.1.1\MbUnit.Framework.1.1.csproj" />
+
+		<MbUnit_AddIn Include="MbUnit\MbUnit.AddIn\MbUnit.AddIn.csproj" />
+
+		<MbUnit_MSBuild Include="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.csproj" />
+
+		<MbUnit_Tests Include="MbUnit\TestFu.Tests\TestFu.Tests.csproj" />
+		<MbUnit_Tests Include="MbUnit\MbUnit.Tests\MbUnit.Tests.csproj" />
+		<MbUnit_Tests Include="MbUnit\MbUnit.Tests.1.1\MbUnit.Tests.1.1.csproj" />
+	</ItemGroup>
+
+	<Target Name="MbUnit" DependsOnTargets="QuickGraph;Refly">
+		<MSBuild Projects="@(MbUnit_1_0)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 	
-	<Target Name="MbUnit_1_1">
-		<MSBuild Projects="MbUnit\MbUnit.1.1.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	<Target Name="MbUnit_1_1" DependsOnTargets="MbUnit">
+		<MSBuild Projects="@(MbUnit_1_1)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 
-	<Target Name="MbUnitMsBuild">
-		<MSBuild Projects="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	<Target Name="MbUnit_AddIn" DependsOnTargets="MbUnit">
+		<MSBuild Projects="@(MbUnit_AddIn)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 
-	<Target Name="MbUnit_Tests">
-		<MSBuild Projects="Tests\MbUnit.Framework\MbUnit.Framework.Tests.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
-		<!--<Exec Command='"$(OutputPath)\MbUnit.Cons.exe" "$(OutputPath)\MbUnit.Framework.Tests.dll" /rt:Xml /rnf:MbUnit_Tests_results /rf:"$(OutputPath)"' />-->
+	<Target Name="MbUnit_MSBuild" DependsOnTargets="MbUnit">
+		<MSBuild Projects="@(MbUnit_MSBuild)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
+	</Target>
+
+	<Target Name="MbUnit_Tests" DependsOnTargets="MbUnit;MbUnit_1_1">
+		<MSBuild Projects="@(MbUnit_Tests)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
+
+<!-- TODO: Execute MbUnit tests !!!
+		<Exec Command='"$(OutputPath)MbUnit.Cons.exe" "$(OutputPath)MbUnit.Tests.exe" "$(OutputPath)TestFu.Tests.exe" -report-type:Xml -report-name-format:MbUnit.TestFu.Tests-results' />
+-->
 	</Target>
 
 		
