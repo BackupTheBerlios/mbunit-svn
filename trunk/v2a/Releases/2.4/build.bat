@@ -1,2 +1,2 @@
 call vars.bat
-msbuild MbUnit.proj
+msbuild mbunit_buildserver.proj /p:TargetFX1_1=true
