@@ -1,0 +1,73 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	
+	<PropertyGroup>
+	
+			<!-- Setting the ProjectReferenceBuildTargets property to something innocuous like GetTargetPath
+		     effectively disables recursive building of projects.  We want to do that to ensure that we
+		     build some projects with 1.0 settings and others with 1.1 settings even though there may
+		     be project references from the 1.1 projects to the 1.0 projects.  This is much more convenient
+		     than the previous hack which used binary references instead which complicated testing of
+		     code within Visual Studio.  -->
+			<DisableRecursiveBuildProperties>ProjectReferenceBuildTargets=GetTargetPath;</DisableRecursiveBuildProperties>
+		
+        	<MbUnitConsole>MbUnit\MbUnit.Cons\bin\Debug\MbUnit.Cons.exe</MbUnitConsole>
+			<OutputPath>$(MSBuildProjectDirectory)\build</OutputPath>
+			<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
+			<NXslt>bin\nxslt\nxslt.exe</NXslt>
+			<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
+	</PropertyGroup>
+	
+	
+	<Target Name="MbUnit_AddIn">
+		<MSBuild Projects="MbUnit\MbUnit.AddIn.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+
+	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnitMsBuild;MbUnit_Tests;Package" />
+	
+	<Target Name="Refly">
+		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+	
+	<Target Name="QuickGraph">
+		<MSBuild Projects="QuickGraph\QuickGraph.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+	
+	<Target Name="MbUnit">
+		<MSBuild Projects="MbUnit\MbUnit.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+	
+	<Target Name="MbUnit_1_1">
+		<MSBuild Projects="MbUnit\MbUnit.1.1.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+
+	<Target Name="MbUnitMsBuild">
+		<MSBuild Projects="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+	</Target>
+
+	<Target Name="MbUnit_Tests">
+		<MSBuild Projects="Tests\MbUnit.Framework\MbUnit.Framework.Tests.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
+		<!--<Exec Command='"$(OutputPath)\MbUnit.Cons.exe" "$(OutputPath)\MbUnit.Framework.Tests.dll" /rt:Xml /rnf:MbUnit_Tests_results /rf:"$(OutputPath)"' />-->
+	</Target>
+	
+	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
+
+		<Exec Command="makensis MbUnitBuild.nsi" />
+		<Copy SourceFiles="Setup.exe" DestinationFiles="$(MsiFileName)" />
+		<Delete Files="SetUp.exe" />
+		<!-- CCNet Artifacts -->
+		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
+	</Target>
+	
+		<Target Name="Increment" DependsOnTargets="BeforeBuild">
+		<Exec Command="$(NXslt) Version.properties IncrementBuild.xslt -o NewVersion.properties VersionMajor=$(VersionMajor) VersionMinor=$(VersionMinor) VersionBuild=$(VersionBuild) VersionRevision=$(VersionRevision)" />
+		<Copy SourceFiles="NewVersion.properties" DestinationFiles="Version.properties" />
+	</Target>
+	
+	<Target Name="BeforeBuild">	  
+		<MSBuild Projects="EditAssemblyInfo\EditAssemblyInfo.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\EditAssemblyInfo" />
+		<UpdateAssemblyTitleTask FilePath="$(MSBuildProjectDirectory)\MbUnit\" VersionMajor="$(VersionMajor)" VersionMinor="$(VersionMinor)" VersionBuild="$(VersionBuild)" />
+ 	</Target>
+		
+		
+</Project>
