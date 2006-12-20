@@ -15,6 +15,7 @@
 		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
 		<NXslt>bin\nxslt\nxslt.exe</NXslt>
 		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
+		<ReportsDir>C:\Program Files\CruiseControl.NET\server\MBUnit\Artifacts\</ReportsDir>
 	</PropertyGroup>
 		
 	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
@@ -52,6 +53,9 @@
 		<MbUnit_Tests Include="MbUnit\TestFu.Tests\TestFu.Tests.csproj" />
 		<MbUnit_Tests Include="MbUnit\MbUnit.Tests\MbUnit.Tests.csproj" />
 		<MbUnit_Tests Include="MbUnit\MbUnit.Tests.1.1\MbUnit.Tests.1.1.csproj" />
+
+		<MbUnit_2_0 Include="MbUnit\MbUnit.Framework.2.0\MbUnit.Framework.2.0.csproj" />
+		<MbUnit_2_0 Include="Tests\MbUnit.Framework.Tests20\MbUnit.Framework.Tests20.csproj" />
 	</ItemGroup>
 
 	<Target Name="MbUnit" DependsOnTargets="QuickGraph;Refly">
@@ -70,14 +74,16 @@
 		<MSBuild Projects="@(MbUnit_MSBuild)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 
-	<Target Name="MbUnit_Tests" DependsOnTargets="MbUnit;MbUnit_1_1">
+	<Target Name="MbUnit_Tests">
 		<MSBuild Projects="@(MbUnit_Tests)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 
-<!-- TODO: Execute MbUnit tests !!!
-		<Exec Command='"$(OutputPath)MbUnit.Cons.exe" "$(OutputPath)MbUnit.Tests.exe" "$(OutputPath)TestFu.Tests.exe" -report-type:Xml -report-name-format:MbUnit.TestFu.Tests-results' />
--->
+		<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll /rt:Xml /rf:$(ReportsDir) /rnf:mbunittestreport" />
+		
 	</Target>
 
+	<Target Name="MbUnit_2_0">
+		<MSBuild Projects="@(MbUnit_2_0)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
+	</Target>
 
 	<Target Name="Increment" DependsOnTargets="BeforeBuild">
 		<Exec Command="$(NXslt) Version.properties IncrementBuild.xslt -o NewVersion.properties VersionMajor=$(VersionMajor) VersionMinor=$(VersionMinor) VersionBuild=$(VersionBuild) VersionRevision=$(VersionRevision)" />
