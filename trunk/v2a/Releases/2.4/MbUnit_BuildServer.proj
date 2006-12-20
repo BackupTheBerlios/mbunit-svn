@@ -14,8 +14,7 @@
 		<DisableRecursiveBuildProperties>ProjectReferenceBuildTargets=GetTargetPath;</DisableRecursiveBuildProperties>        
 		<MsiFileName>build\MbUnit-$(VersionMajor).$(VersionMinor).$(VersionBuild).exe</MsiFileName>
 		<NXslt>bin\nxslt\nxslt.exe</NXslt>
-		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>
-		<ReportsDir>C:\Program Files\CruiseControl.NET\server\MBUnit\Artifacts\</ReportsDir>
+		<CCNetArtifactDirectory>C:\Program Files\CruiseControl.NET\server\TestDriven.NET\Artifacts</CCNetArtifactDirectory>		
 	</PropertyGroup>
 		
 	<Target Name="Package" DependsOnTargets="MbUnit_AddIn">
@@ -27,7 +26,7 @@
 		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
 	</Target>
 		
-	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_Tests;Package" />
+	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests;Package" />
 	
 	<Target Name="Refly">
 		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
@@ -77,7 +76,7 @@
 	<Target Name="MbUnit_Tests">
 		<MSBuild Projects="@(MbUnit_Tests)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 
-		<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll /rt:Xml /rf:$(ReportsDir) /rnf:mbunittestreport" />
+		<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll" />
 		
 	</Target>
 
