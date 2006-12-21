@@ -25,12 +25,8 @@
 		<!-- CCNet Artifacts -->
 		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
 	</Target>
-		
-<<<<<<< .mine
-	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_Tests;Package" />
-=======
+
 	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests;Package" />
->>>>>>> .r152
 	
 	<Target Name="Refly">
 		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
