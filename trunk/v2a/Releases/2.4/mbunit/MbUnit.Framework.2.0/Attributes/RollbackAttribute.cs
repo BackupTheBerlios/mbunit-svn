@@ -9,7 +9,7 @@ using MbUnit.Core.Invokers;
 namespace MbUnit.Framework
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple=false, Inherited = true)]
-    public sealed class RollBackAttribute2 : DecoratorPatternAttribute
+    public sealed class RollBack2Attribute : DecoratorPatternAttribute
     {
         public override IRunInvoker GetInvoker(IRunInvoker invoker)
         {
