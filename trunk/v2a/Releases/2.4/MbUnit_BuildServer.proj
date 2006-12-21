@@ -53,7 +53,6 @@
 
 		<MbUnit_Tests Include="MbUnit\TestFu.Tests\TestFu.Tests.csproj" />
 		<MbUnit_Tests Include="MbUnit\MbUnit.Tests\MbUnit.Tests.csproj" />
-		<MbUnit_Tests Include="MbUnit\MbUnit.Tests.1.1\MbUnit.Tests.1.1.csproj" />
 
 		<MbUnit_2_0 Include="MbUnit\MbUnit.Framework.2.0\MbUnit.Framework.2.0.csproj" />
 		<MbUnit_2_0 Include="Tests\MbUnit.Framework.Tests20\MbUnit.Framework.Tests20.csproj" />
