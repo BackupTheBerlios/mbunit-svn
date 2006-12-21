@@ -26,7 +26,11 @@
 		<Copy Condition=" '$(CCNetArtifactDirectory)'!='' " SourceFiles="$(MsiFileName)" DestinationFolder="$(CCNetArtifactDirectory)" />	
 	</Target>
 		
-	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests;Package" />
+<<<<<<< .mine
+	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_Tests;Package" />
+=======
+	<Target Name="Build" DependsOnTargets="Increment;Refly;QuickGraph;MbUnit;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests;Package" />
+>>>>>>> .r152
 	
 	<Target Name="Refly">
 		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
@@ -42,9 +46,7 @@
 		<MbUnit_1_0 Include="MbUnit\MbUnit.Cons\MbUnit.Cons.csproj" />
 		<MbUnit_1_0 Include="MbUnit\MbUnit.GUI\MbUnit.GUI.csproj" />
 		<MbUnit_1_0 Include="MbUnit\MbUnit.Tasks\MbUnit.Tasks.csproj" />
-
-		<MbUnit_1_1 Include="MbUnit\MbUnit.Framework.1.1\MbUnit.Framework.1.1.csproj" />
-
+		
 		<MbUnit_AddIn Include="MbUnit\MbUnit.AddIn\MbUnit.AddIn.csproj" />
 
 		<MbUnit_MSBuild Include="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.csproj" />
@@ -61,10 +63,6 @@
 		<MSBuild Projects="@(MbUnit_1_0)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 	
-	<Target Name="MbUnit_1_1" DependsOnTargets="MbUnit">
-		<MSBuild Projects="@(MbUnit_1_1)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
-	</Target>
-
 	<Target Name="MbUnit_AddIn" DependsOnTargets="MbUnit">
 		<MSBuild Projects="@(MbUnit_AddIn)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>

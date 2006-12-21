@@ -8,7 +8,7 @@
 	</PropertyGroup>
 	
 	
-	<Target Name="Build" DependsOnTargets="Refly;QuickGraph;MbUnit;MbUnit_1_1;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests" />
+	<Target Name="Build" DependsOnTargets="Refly;QuickGraph;MbUnit;MbUnit_AddIn;MbUnit_MSBuild;MbUnit_2_0;MbUnit_Tests" />
 	
 	<Target Name="Refly">
 		<MSBuild Projects="Refly\Refly.sln" Targets="Clean;Rebuild" Properties="OutputPath=$(OutputPath)\" />
@@ -25,8 +25,6 @@
 		<MbUnit_1_0 Include="MbUnit\MbUnit.GUI\MbUnit.GUI.csproj" />
 		<MbUnit_1_0 Include="MbUnit\MbUnit.Tasks\MbUnit.Tasks.csproj" />
 
-		<MbUnit_1_1 Include="MbUnit\MbUnit.Framework.1.1\MbUnit.Framework.1.1.csproj" />
-
 		<MbUnit_AddIn Include="MbUnit\MbUnit.AddIn\MbUnit.AddIn.csproj" />
 
 		<MbUnit_MSBuild Include="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.csproj" />
@@ -42,10 +40,6 @@
 
 	<Target Name="MbUnit" DependsOnTargets="QuickGraph;Refly">
 		<MSBuild Projects="@(MbUnit_1_0)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
-	</Target>
-	
-	<Target Name="MbUnit_1_1">
-		<MSBuild Projects="@(MbUnit_1_1)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 	</Target>
 
 	<Target Name="MbUnit_AddIn">

@@ -461,6 +461,7 @@
     <Compile Include="ReadAttribute.cs" />
     <Compile Include="ReflectionAssert.cs" />
     <Compile Include="RepeatAttribute.cs" />
+    <Compile Include="RollBackAttribute.cs" />
     <Compile Include="RowAttribute.cs" />
     <Compile Include="Core\Runs\RowRun.cs" />
     <Compile Include="RowTestAttribute.cs" />
