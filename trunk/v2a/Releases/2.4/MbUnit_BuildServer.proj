@@ -69,7 +69,7 @@
 	<Target Name="MbUnit_Tests">
 		<MSBuild Projects="@(MbUnit_Tests)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 
-		<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll" />
+		<!--<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll" />-->
 		
 	</Target>
 
