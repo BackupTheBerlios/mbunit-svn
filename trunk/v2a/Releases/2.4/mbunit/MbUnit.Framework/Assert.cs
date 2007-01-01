@@ -1,26 +1,26 @@
 // MbUnit Test Framework
-// 
+//
 // Copyright (c) 2004 Jonathan de Halleux
 //
-// This software is provided 'as-is', without any express or implied warranty. 
-// 
-// In no event will the authors be held liable for any damages arising from 
+// This software is provided 'as-is', without any express or implied warranty.
+//
+// In no event will the authors be held liable for any damages arising from
 // the use of this software.
-// Permission is granted to anyone to use this software for any purpose, 
-// including commercial applications, and to alter it and redistribute it 
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
 // freely, subject to the following restrictions:
 //
-//		1. The origin of this software must not be misrepresented; 
-//		you must not claim that you wrote the original software. 
-//		If you use this software in a product, an acknowledgment in the product 
+//		1. The origin of this software must not be misrepresented;
+//		you must not claim that you wrote the original software.
+//		If you use this software in a product, an acknowledgment in the product
 //		documentation would be appreciated but is not required.
 //
-//		2. Altered source versions must be plainly marked as such, and must 
+//		2. Altered source versions must be plainly marked as such, and must
 //		not be misrepresented as being the original software.
 //
-//		3. This notice may not be removed or altered from any source 
+//		3. This notice may not be removed or altered from any source
 //		distribution.
-//		
+//
 //		MbUnit HomePage: http://www.mbunit.org
 //		Author: Jonathan de Halleux
 
@@ -35,11 +35,11 @@ using MbUnit.Core.Exceptions;
 
 namespace MbUnit.Framework
 {
-	/// <summary>
-	/// Assertion class
-	/// </summary>
-	/// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='Assert']"/>
-	public sealed class Assert
+    /// <summary>
+    /// Assertion class
+    /// </summary>
+    /// <include file="MbUnit.Framework.Doc.xml" path="doc/remarkss/remarks[@name='Assert']"/>
+    public sealed class Assert
     {
         #region Static fields
         private static ArrayList warnings = ArrayList.Synchronized(new ArrayList());
@@ -48,7 +48,7 @@ namespace MbUnit.Framework
 
         #region Private stuff
         /// <summary>
-        /// The Equals method throws an AssertionException. This is done 
+        /// The Equals method throws an AssertionException. This is done
         /// to make sure there is no mistake by calling this function.
         /// </summary>
         /// <param name="a"></param>
@@ -60,9 +60,9 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-        /// override the default ReferenceEquals to throw an AssertionException. This 
-        /// implementation makes sure there is no mistake in calling this function 
-        /// as part of Assert. 
+        /// override the default ReferenceEquals to throw an AssertionException. This
+        /// implementation makes sure there is no mistake in calling this function
+        /// as part of Assert.
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
@@ -138,36 +138,36 @@ namespace MbUnit.Framework
 
         #region Constructors
         /// <summary>
-        /// A private constructor disallows any instances of this object. 
-		/// </summary>
-		private Assert()
-		{ }
+        /// A private constructor disallows any instances of this object.
+        /// </summary>
+        private Assert()
+        { }
         #endregion
 
         #region IsTrue, IsFalse
         /// <summary>
         /// Asserts that a condition is true. If the condition is false the method throws
-		/// an <see cref="AssertionException"/>.
-		/// </summary> 
-		/// <param name="condition">The evaluated condition</param>
-		/// <param name="format">
-		/// The format of the message to display if the condition is false,
- 		/// containing zero or more format items. 
-		/// </param>
-		/// <param name="args">
-		/// An <see cref="Object"/> array containing zero or more objects to format. 
-		/// </param>
-		/// <remarks>
-		/// <para>
-		/// The error message is formatted using <see cref="String.Format(string, object[])"/>.
-		/// </para>
-		/// </remarks>
-		static public void IsTrue(bool condition, string format, params object[] args) 
-		{
+        /// an <see cref="AssertionException"/>.
+        /// </summary>
+        /// <param name="condition">The evaluated condition</param>
+        /// <param name="format">
+        /// The format of the message to display if the condition is false,
+        /// containing zero or more format items.
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format.
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void IsTrue(bool condition, string format, params object[] args)
+        {
             Assert.IncrementAssertCount();
             if (!condition)
-				Assert.Fail(format,args);
-		}
+                Assert.Fail(format, args);
+        }
 
         static public void IsTrue(bool condition, string message)
         {
@@ -175,40 +175,40 @@ namespace MbUnit.Framework
             if (!condition)
                 Assert.Fail(message);
         }
-    
-		/// <summary>
-		/// Asserts that a condition is true. If the condition is false the method throws
-		/// an <see cref="AssertionException"/>.
-		/// </summary>
-		/// <param name="condition">The evaluated condition</param>
-		static public void IsTrue(bool condition) 
-		{
-			Assert.IsTrue(condition, string.Empty);
-		}
 
-		/// <summary>
-		/// Asserts that a condition is false. If the condition is true the method throws
-		/// an <see cref="AssertionException"/>.
-		/// </summary>
-		/// <param name="condition">The evaluated condition</param>
-		/// <param name="format">
-		/// The format of the message to display if the condition is false,
- 		/// containing zero or more format items. 
-		/// </param>
-		/// <param name="args">
-		/// An <see cref="Object"/> array containing zero or more objects to format. 
-		/// </param>
-		/// <remarks>
-		/// <para>
-		/// The error message is formatted using <see cref="String.Format(string, object[])"/>.
-		/// </para>
-		/// </remarks>
-		static public void IsFalse(bool condition, string format, params object[] args) 
-		{
+        /// <summary>
+        /// Asserts that a condition is true. If the condition is false the method throws
+        /// an <see cref="AssertionException"/>.
+        /// </summary>
+        /// <param name="condition">The evaluated condition</param>
+        static public void IsTrue(bool condition)
+        {
+            Assert.IsTrue(condition, string.Empty);
+        }
+
+        /// <summary>
+        /// Asserts that a condition is false. If the condition is true the method throws
+        /// an <see cref="AssertionException"/>.
+        /// </summary>
+        /// <param name="condition">The evaluated condition</param>
+        /// <param name="format">
+        /// The format of the message to display if the condition is false,
+        /// containing zero or more format items.
+        /// </param>
+        /// <param name="args">
+        /// An <see cref="Object"/> array containing zero or more objects to format.
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
+        /// </para>
+        /// </remarks>
+        static public void IsFalse(bool condition, string format, params object[] args)
+        {
             Assert.IncrementAssertCount();
             if (condition)
-                Assert.Fail(format,args);
-		}
+                Assert.Fail(format, args);
+        }
 
         static public void IsFalse(bool condition, string message)
         {
@@ -216,92 +216,92 @@ namespace MbUnit.Framework
             if (condition)
                 Assert.Fail(message);
         }
-		
-		/// <summary>
-		/// Asserts that a condition is false. If the condition is true the method throws
-		/// an <see cref="AssertionException"/>.
-		/// </summary>
-		/// <param name="condition">The evaluated condition</param>
-		static public void IsFalse(bool condition) 
-		{
-			Assert.IsFalse(condition, string.Empty);
+
+        /// <summary>
+        /// Asserts that a condition is false. If the condition is true the method throws
+        /// an <see cref="AssertionException"/>.
+        /// </summary>
+        /// <param name="condition">The evaluated condition</param>
+        static public void IsFalse(bool condition)
+        {
+            Assert.IsFalse(condition, string.Empty);
         }
         #endregion
 
         #region AreEqual
         /// <summary>
         /// Verifies that two doubles are equal considering a delta. If the
-		/// expected value is infinity then the delta value is ignored. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		/// <param name="delta">The maximum acceptable difference between the
-		/// the expected and the actual</param>
+        /// expected value is infinity then the delta value is ignored. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        /// <param name="delta">The maximum acceptable difference between the
+        /// the expected and the actual</param>
         /// <param name="message">The message printed out upon failure</param>
-        static public void AreEqual(double expected, 
-			double actual, double delta, string message) 
-		{
-            Assert.IncrementAssertCount();
-            // handle infinity specially since subtracting two infinite values gives 
-            // NaN and the following test fails
-			if (double.IsInfinity(expected)) 
-			{
-				if (!(expected == actual))
-					Assert.FailNotEquals(expected, actual, message);
-			} 
-			else if (!(Math.Abs(expected-actual) <= delta))
-				Assert.FailNotEquals(expected, actual, message);
-		}
-
-        static public void AreEqual(double expected,double actual, double delta, string me, 
-            string format, params object[] args)
+        static public void AreEqual(double expected,
+            double actual, double delta, string message)
         {
-            AreEqual(expected,actual,delta,me,format,args);
+            Assert.IncrementAssertCount();
+            // handle infinity specially since subtracting two infinite values gives
+            // NaN and the following test fails
+            if (double.IsInfinity(expected))
+            {
+                if (!(expected == actual))
+                    Assert.FailNotEquals(expected, actual, message);
+            }
+            else if (!(Math.Abs(expected - actual) <= delta))
+                Assert.FailNotEquals(expected, actual, message);
         }
 
-		/// <summary>
-		/// Verifies that two doubles are equal considering a delta. If the
-		/// expected value is infinity then the delta value is ignored. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		/// <param name="delta">The maximum acceptable difference between the
-		/// the expected and the actual</param>
-		static public void AreEqual(double expected, double actual, double delta) 
-		{
-			Assert.AreEqual(expected, actual, delta, string.Empty);
-		}
+        static public void AreEqual(double expected, double actual, double delta, string me,
+            string format, params object[] args)
+        {
+            AreEqual(expected, actual, delta, me, format, args);
+        }
 
-		/// <summary>
-		/// Verifies that two floats are equal considering a delta. If the
-		/// expected value is infinity then the delta value is ignored. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="message">The message printed out upon failure</param>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		/// <param name="delta">The maximum acceptable difference between the
-		/// the expected and the actual</param>
-		static public void AreEqual(float expected, 
-			float actual, float delta, 
-			string message)
-		{
+        /// <summary>
+        /// Verifies that two doubles are equal considering a delta. If the
+        /// expected value is infinity then the delta value is ignored. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        /// <param name="delta">The maximum acceptable difference between the
+        /// the expected and the actual</param>
+        static public void AreEqual(double expected, double actual, double delta)
+        {
+            Assert.AreEqual(expected, actual, delta, string.Empty);
+        }
+
+        /// <summary>
+        /// Verifies that two floats are equal considering a delta. If the
+        /// expected value is infinity then the delta value is ignored. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="message">The message printed out upon failure</param>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        /// <param name="delta">The maximum acceptable difference between the
+        /// the expected and the actual</param>
+        static public void AreEqual(float expected,
+            float actual, float delta,
+            string message)
+        {
             Assert.IncrementAssertCount();
-            // handle infinity specially since subtracting two infinite values gives 
+            // handle infinity specially since subtracting two infinite values gives
             // NaN and the following test fails
-			if (float.IsInfinity(expected)) 
-			{
-				if (!(expected == actual))
-					Assert.FailNotEquals(expected, actual, message);
-			} 
-			else if (!(Math.Abs(expected-actual) <= delta))
-				Assert.FailNotEquals(expected, actual, message);
-		}
+            if (float.IsInfinity(expected))
+            {
+                if (!(expected == actual))
+                    Assert.FailNotEquals(expected, actual, message);
+            }
+            else if (!(Math.Abs(expected - actual) <= delta))
+                Assert.FailNotEquals(expected, actual, message);
+        }
 
         static public void AreEqual(float expected,
             float actual, float delta,
@@ -311,39 +311,39 @@ namespace MbUnit.Framework
         }
 
 
-		/// <summary>
-		/// Verifies that two floats are equal considering a delta. If the
-		/// expected value is infinity then the delta value is ignored. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		/// <param name="delta">The maximum acceptable difference between the
-		/// the expected and the actual</param>
-		static public void AreEqual(float expected, float actual, float delta) 
-		{
-			Assert.AreEqual(expected, actual, delta, string.Empty);
-		}
-
-		/// <summary>
-		/// Verifies that two decimals are equal. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="message">The message printed out upon failure</param>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		static public void AreEqual(decimal expected, decimal actual,
-		                            string message)
-		{
-            Assert.IncrementAssertCount();
-            if (!(expected == actual))
-                Assert.FailNotEquals(expected, actual,message);
-		}
+        /// <summary>
+        /// Verifies that two floats are equal considering a delta. If the
+        /// expected value is infinity then the delta value is ignored. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        /// <param name="delta">The maximum acceptable difference between the
+        /// the expected and the actual</param>
+        static public void AreEqual(float expected, float actual, float delta)
+        {
+            Assert.AreEqual(expected, actual, delta, string.Empty);
+        }
 
         /// <summary>
-        /// Verifies that two decimals are equal. If 
+        /// Verifies that two decimals are equal. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="message">The message printed out upon failure</param>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        static public void AreEqual(decimal expected, decimal actual,
+                                    string message)
+        {
+            Assert.IncrementAssertCount();
+            if (!(expected == actual))
+                Assert.FailNotEquals(expected, actual, message);
+        }
+
+        /// <summary>
+        /// Verifies that two decimals are equal. If
         /// they are not equals then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -351,10 +351,10 @@ namespace MbUnit.Framework
         /// <param name="actual">The actual value</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
@@ -369,36 +369,36 @@ namespace MbUnit.Framework
                 Assert.FailNotEquals(expected, actual, format, args);
         }
 
-		/// <summary>
-		/// Verifies that two decimals are equal. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		static public void AreEqual(decimal expected, decimal actual) 
-		{
-			Assert.AreEqual(expected, actual, string.Empty);
-		}
-		
-		/// <summary>
-		/// Verifies that two ints are equal. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="message">The message printed out upon failure</param>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		static public void AreEqual(int expected, int actual, 
-		                            string message)
-		{
-            Assert.IncrementAssertCount();
-            if (!(expected == actual))
-                Assert.FailNotEquals(expected, actual,message);
-		}
+        /// <summary>
+        /// Verifies that two decimals are equal. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        static public void AreEqual(decimal expected, decimal actual)
+        {
+            Assert.AreEqual(expected, actual, string.Empty);
+        }
 
         /// <summary>
-        /// Verifies that two ints are equal. If 
+        /// Verifies that two ints are equal. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="message">The message printed out upon failure</param>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        static public void AreEqual(int expected, int actual,
+                                    string message)
+        {
+            Assert.IncrementAssertCount();
+            if (!(expected == actual))
+                Assert.FailNotEquals(expected, actual, message);
+        }
+
+        /// <summary>
+        /// Verifies that two ints are equal. If
         /// they are not equals then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -406,10 +406,10 @@ namespace MbUnit.Framework
         /// <param name="actual">The actual value</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
@@ -424,32 +424,32 @@ namespace MbUnit.Framework
                 Assert.FailNotEquals(expected, actual, format, args);
         }
 
-		/// <summary>
-		/// Verifies that two ints are equal. If 
-		/// they are not equals then an <see cref="AssertionException"/> is
-		/// thrown.
-		/// </summary>
-		/// <param name="expected">The expected value</param>
-		/// <param name="actual">The actual value</param>
-		static public void AreEqual(int expected, int actual) 
-		{
-			Assert.AreEqual(expected, actual, string.Empty);
-		}
+        /// <summary>
+        /// Verifies that two ints are equal. If
+        /// they are not equals then an <see cref="AssertionException"/> is
+        /// thrown.
+        /// </summary>
+        /// <param name="expected">The expected value</param>
+        /// <param name="actual">The actual value</param>
+        static public void AreEqual(int expected, int actual)
+        {
+            Assert.AreEqual(expected, actual, string.Empty);
+        }
 
         /// <summary>
-		/// Verifies that two objects are equal.  Two objects are considered
-		/// equal if both are null, or if both have the same value.  All
-		/// non-numeric types are compared by using the <c>Equals</c> method.
-		/// If they are not equal an <see cref="AssertionException"/> is thrown.
-		/// </summary>
-		/// <param name="expected">The value that is expected</param>
-		/// <param name="actual">The actual value</param>
+        /// Verifies that two objects are equal.  Two objects are considered
+        /// equal if both are null, or if both have the same value.  All
+        /// non-numeric types are compared by using the <c>Equals</c> method.
+        /// If they are not equal an <see cref="AssertionException"/> is thrown.
+        /// </summary>
+        /// <param name="expected">The value that is expected</param>
+        /// <param name="actual">The actual value</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
@@ -457,10 +457,10 @@ namespace MbUnit.Framework
         /// </para>
         /// </remarks>
         static public void AreEqual(Object expected, Object actual,
-		                            string format, params object[] args)
-		{
+                                    string format, params object[] args)
+        {
             AreEqual(expected, actual, String.Format(format, args));
-		}
+        }
 
         /// <summary>
         /// Verifies that two objects are equal.  Two objects are considered
@@ -488,54 +488,54 @@ namespace MbUnit.Framework
             Assert.FailNotEquals(expected, actual, message);
         }
 
-		/// <summary>
-		/// Verifies that two objects are equal.  Two objects are considered
-		/// equal if both are null, or if both have the same value.  All
-		/// non-numeric types are compared by using the <c>Equals</c> method.
-		/// If they are not equal an <see cref="AssertionException"/> is thrown.
-		/// </summary>
-		/// <param name="expected">The value that is expected</param>
-		/// <param name="actual">The actual value</param>
-		static public void AreEqual(Object expected, Object actual) 
-		{
-			Assert.AreEqual(expected, actual, string.Empty);
-		}
-		
-		/// <summary>
-		/// Verifies that the value of the property described by <paramref name="pi"/> is the same
-		/// in both ojects.
-		/// </summary>
-		/// <param name="pi">
-		/// Property describing the value to test
-		/// </param>
-		/// <param name="expected">
-		/// Reference object
-		/// </param>
-		/// <param name="actual">
-		/// Actual object
-		/// </param>
-		/// <param name="indices">
-		/// Index of the property.
-		/// </param>
-		static public void AreValueEqual(PropertyInfo pi, Object expected, Object actual, params Object[] indices)
-		{
-			Assert.IsNotNull(expected);
-			Assert.IsNotNull(actual);
+        /// <summary>
+        /// Verifies that two objects are equal.  Two objects are considered
+        /// equal if both are null, or if both have the same value.  All
+        /// non-numeric types are compared by using the <c>Equals</c> method.
+        /// If they are not equal an <see cref="AssertionException"/> is thrown.
+        /// </summary>
+        /// <param name="expected">The value that is expected</param>
+        /// <param name="actual">The actual value</param>
+        static public void AreEqual(Object expected, Object actual)
+        {
+            Assert.AreEqual(expected, actual, string.Empty);
+        }
+
+        /// <summary>
+        /// Verifies that the value of the property described by <paramref name="pi"/> is the same
+        /// in both ojects.
+        /// </summary>
+        /// <param name="pi">
+        /// Property describing the value to test
+        /// </param>
+        /// <param name="expected">
+        /// Reference object
+        /// </param>
+        /// <param name="actual">
+        /// Actual object
+        /// </param>
+        /// <param name="indices">
+        /// Index of the property.
+        /// </param>
+        static public void AreValueEqual(PropertyInfo pi, Object expected, Object actual, params Object[] indices)
+        {
+            Assert.IsNotNull(expected);
+            Assert.IsNotNull(actual);
 
             Assert.IncrementAssertCount();
             // check types
-			if (!pi.DeclaringType.IsAssignableFrom(expected.GetType()))
-				Assert.Fail("Property declaring type does not match with expected type");
-			if (!pi.DeclaringType.IsAssignableFrom(actual.GetType()))
-				Assert.Fail("Property declaring type does not match with expected type");
-			
-			Assert.AreEqual(pi.GetValue(expected,indices),
-			                pi.GetValue(actual,indices),
-			                String.Format("{0}.{1} property does not have the same value",
-			                              pi.DeclaringType.Name,
-			                              pi.Name
-			                              )
-			                );
+            if (!pi.DeclaringType.IsAssignableFrom(expected.GetType()))
+                Assert.Fail("Property declaring type does not match with expected type");
+            if (!pi.DeclaringType.IsAssignableFrom(actual.GetType()))
+                Assert.Fail("Property declaring type does not match with expected type");
+
+            Assert.AreEqual(pi.GetValue(expected, indices),
+                            pi.GetValue(actual, indices),
+                            String.Format("{0}.{1} property does not have the same value",
+                                          pi.DeclaringType.Name,
+                                          pi.Name
+                                          )
+                            );
         }
         #endregion
 
@@ -583,12 +583,12 @@ namespace MbUnit.Framework
                 fail = true;
             }
 
-            if(fail)
+            if (fail)
             {
                 if (args != null)
-                        Assert.FailSame(expected, actual, message, args);
-                    else
-                        Assert.FailSame(expected, actual, message);
+                    Assert.FailSame(expected, actual, message, args);
+                else
+                    Assert.FailSame(expected, actual, message);
             }
         }
 
@@ -620,7 +620,7 @@ namespace MbUnit.Framework
 
 
 
-//NUnit Code
+        //NUnit Code
         #region Objects
         /// <summary>
         /// Asserts that two objects are not equal. If they are equal
@@ -875,97 +875,97 @@ namespace MbUnit.Framework
         #endregion
 
         #endregion
-   
-   		#region IsNull, IsNotNull
-		/// <summary>
-		/// Verifies that the object that is passed in is not equal to <code>null</code>
-		/// If the object is not <code>null</code> then an <see cref="AssertionException"/>
-		/// is thrown.
-		/// </summary>
-		/// <param name="anObject">The object that is to be tested</param>
+
+        #region IsNull, IsNotNull
+        /// <summary>
+        /// Verifies that the object that is passed in is not equal to <code>null</code>
+        /// If the object is not <code>null</code> then an <see cref="AssertionException"/>
+        /// is thrown.
+        /// </summary>
+        /// <param name="anObject">The object that is to be tested</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
         /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
         /// </para>
         /// </remarks>
-        static public void IsNotNull(Object anObject, string format, params object[] args) 
-		{
-			Assert.IsTrue(anObject != null, format, args); 
-		}
+        static public void IsNotNull(Object anObject, string format, params object[] args)
+        {
+            Assert.IsTrue(anObject != null, format, args);
+        }
 
         static public void IsNotNull(Object anObject, string message)
         {
             Assert.IsTrue(anObject != null, message);
         }
 
-		/// <summary>
-		/// Verifies that the object that is passed in is not equal to <code>null</code>
-		/// If the object is not <code>null</code> then an <see cref="AssertionException"/>
-		/// is thrown.
-		/// </summary>
-		/// <param name="anObject">The object that is to be tested</param>
-		static public void IsNotNull(Object anObject) 
-		{
-			Assert.IsNotNull(anObject, string.Empty);
-		}    
-		    
-		/// <summary>
-		/// Verifies that the object that is passed in is equal to <code>null</code>
-		/// If the object is <code>null</code> then an <see cref="AssertionException"/>
-		/// is thrown.
-		/// </summary>
-		/// <param name="anObject">The object that is to be tested</param>
+        /// <summary>
+        /// Verifies that the object that is passed in is not equal to <code>null</code>
+        /// If the object is not <code>null</code> then an <see cref="AssertionException"/>
+        /// is thrown.
+        /// </summary>
+        /// <param name="anObject">The object that is to be tested</param>
+        static public void IsNotNull(Object anObject)
+        {
+            Assert.IsNotNull(anObject, string.Empty);
+        }
+
+        /// <summary>
+        /// Verifies that the object that is passed in is equal to <code>null</code>
+        /// If the object is <code>null</code> then an <see cref="AssertionException"/>
+        /// is thrown.
+        /// </summary>
+        /// <param name="anObject">The object that is to be tested</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
         /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
         /// </para>
         /// </remarks>
-        static public void IsNull(Object anObject, string format, params object[] args) 
-		{
-			Assert.IsTrue(anObject == null, format, args); 
-		}
+        static public void IsNull(Object anObject, string format, params object[] args)
+        {
+            Assert.IsTrue(anObject == null, format, args);
+        }
 
         static public void IsNull(Object anObject, string format, string message)
         {
             Assert.IsTrue(anObject == null, message);
         }
 
-		/// <summary>
-		/// Verifies that the object that is passed in is equal to <code>null</code>
-		/// If the object is <code>null</code> then an <see cref="AssertionException"/>
-		/// is thrown.
-		/// </summary>
-		/// <param name="anObject">The object that is to be tested</param>
-		static public void IsNull(Object anObject) 
-		{
-			Assert.IsNull(anObject, string.Empty);
-		}
-		#endregion    
-    
+        /// <summary>
+        /// Verifies that the object that is passed in is equal to <code>null</code>
+        /// If the object is <code>null</code> then an <see cref="AssertionException"/>
+        /// is thrown.
+        /// </summary>
+        /// <param name="anObject">The object that is to be tested</param>
+        static public void IsNull(Object anObject)
+        {
+            Assert.IsNull(anObject, string.Empty);
+        }
+        #endregion
+
         #region Are same
         /// <summary>
         /// Asserts that two objects refer to the same object. If they
-		/// are not the same an <see cref="AssertionException"/> is thrown.
-		/// </summary>
-		/// <param name="message">The message to be printed when the two objects are not the same object.</param>
-		/// <param name="expected">The expected object</param>
-		/// <param name="actual">The actual object</param>
-		static public void AreSame(Object expected, Object actual, string message)
-		{
+        /// are not the same an <see cref="AssertionException"/> is thrown.
+        /// </summary>
+        /// <param name="message">The message to be printed when the two objects are not the same object.</param>
+        /// <param name="expected">The expected object</param>
+        /// <param name="actual">The actual object</param>
+        static public void AreSame(Object expected, Object actual, string message)
+        {
             Assert.IncrementAssertCount();
             if (object.ReferenceEquals(expected, actual)) return;
 
@@ -980,10 +980,10 @@ namespace MbUnit.Framework
         /// <param name="actual">The actual object</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
@@ -997,57 +997,60 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Asserts that two objects refer to the same object. If they
-		/// are not the same an <see cref="AssertionException"/> is thrown.
-		/// </summary>
-		/// <param name="expected">The expected object</param>
-		/// <param name="actual">The actual object</param>
-		static public void AreSame(Object expected, Object actual) 
-		{
-			Assert.AreSame(expected, actual, string.Empty);
+        /// are not the same an <see cref="AssertionException"/> is thrown.
+        /// </summary>
+        /// <param name="expected">The expected object</param>
+        /// <param name="actual">The actual object</param>
+        static public void AreSame(Object expected, Object actual)
+        {
+            Assert.AreSame(expected, actual, string.Empty);
         }
         #endregion
 
         #region AreNotSame
+
         static public void AreNotSame(object expected, object actual)
         {
             Assert.AreNotSame(expected, actual, string.Empty);
         }
+
         static public void AreNotSame(object expected, object actual, string message)
         {
             Assert.IncrementAssertCount();
             if (!object.ReferenceEquals(expected, actual)) return;
             Assert.FailSame(expected, actual, message);
         }
+
         static public void AreNotSame(object expected, object actual, string format, params object[] args)
         {
             AreNotSame(expected, actual, String.Format(format, args));
         }
         #endregion
 
-		#region Fail
-		/// <summary>
-		/// Throws an <see cref="AssertionException"/> with the message that is 
-		/// passed in. This is used by the other Assert functions. 
-		/// </summary>
+        #region Fail
+        /// <summary>
+        /// Throws an <see cref="AssertionException"/> with the message that is
+        /// passed in. This is used by the other Assert functions.
+        /// </summary>
         /// <param name="format">
-        /// The format of the message to initialize the <see cref="AssertionException"/> with. 
+        /// The format of the message to initialize the <see cref="AssertionException"/> with.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
         /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
         /// </para>
         /// </remarks>
-        static public void Fail(string format, params object[] args) 
-		{
+        static public void Fail(string format, params object[] args)
+        {
             Fail(string.Format(format, args));
-		}
+        }
 
         /// <summary>
-        /// Throws an <see cref="AssertionException"/> with the message that is 
-        /// passed in. This is used by the other Assert functions. 
+        /// Throws an <see cref="AssertionException"/> with the message that is
+        /// passed in. This is used by the other Assert functions.
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
         static public void Fail(string message)
@@ -1055,16 +1058,16 @@ namespace MbUnit.Framework
             throw new AssertionException(message);
         }
 
-		/// <summary>
-		/// Throws an <see cref="AssertionException"/> with the message that is 
-		/// passed in. This is used by the other Assert functions. 
-		/// </summary>
-		static public void Fail() 
-		{
-			Assert.Fail(string.Empty);
-		}
-		#endregion
-		
+        /// <summary>
+        /// Throws an <see cref="AssertionException"/> with the message that is
+        /// passed in. This is used by the other Assert functions.
+        /// </summary>
+        static public void Fail()
+        {
+            Assert.Fail(string.Empty);
+        }
+        #endregion
+
         #region Ignore
         /// <summary>
         /// Makes the current test ignored using <see cref="String.Format(string, object[])"/> like
@@ -1084,7 +1087,7 @@ namespace MbUnit.Framework
         public static void Ignore(string message)
         {
             if (message == null)
-				throw new ArgumentNullException("message");
+                throw new ArgumentNullException("message");
             throw new IgnoreRunException(message);
         }
         #endregion
@@ -1092,9 +1095,9 @@ namespace MbUnit.Framework
         #region LowerThan
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
-		/// <paramref name="right"/>.
-		/// </summary>
-		static public void LowerThan(int left, int right)
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void LowerThan(int left, int right)
         {
             Assert.IncrementAssertCount();
             Assert.IsTrue(left < right,
@@ -1106,7 +1109,7 @@ namespace MbUnit.Framework
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void LowerThan(int left, int right, 
+        static public void LowerThan(int left, int right,
             string message)
         {
             Assert.IsTrue(left < right,
@@ -1144,7 +1147,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left < right,
                           "{0} is not lower than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
@@ -1191,10 +1194,10 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-		/// Verifies that <paramref name="left"/> is strictly lower than
-		/// <paramref name="right"/>.
-		/// </summary>        
-		static public void LowerThan(long left, long right)
+        /// Verifies that <paramref name="left"/> is strictly lower than
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void LowerThan(long left, long right)
         {
             Assert.IsTrue(left < right,
                           "{0} is not lower than {1}",
@@ -1204,7 +1207,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void LowerThan(long left, long right,
             string message)
         {
@@ -1216,7 +1219,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void LowerThan(long left, long right,
             string format, params object[] args)
         {
@@ -1290,16 +1293,16 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-		/// Verifies that <paramref name="left"/> is strictly lower than
-		/// <paramref name="right"/>.
-		/// </summary>
-		static public void LowerThan(IComparable left, IComparable right)
-		{
-			Assert.IsNotNull(left);
-			Assert.IsNotNull(right);
-			Assert.IsTrue(left.CompareTo(right)<0,
-			              "{0} is not lower than {1}",
-			              left,right);
+        /// Verifies that <paramref name="left"/> is strictly lower than
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void LowerThan(IComparable left, IComparable right)
+        {
+            Assert.IsNotNull(left);
+            Assert.IsNotNull(right);
+            Assert.IsTrue(left.CompareTo(right) < 0,
+                          "{0} is not lower than {1}",
+                          left, right);
         }
 
         /// <summary>
@@ -1348,7 +1351,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left <= right,
                           "{0} is not lower equal than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
@@ -1430,7 +1433,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void LowerEqualThan(long left, long right)
         {
             Assert.IsTrue(left <= right,
@@ -1441,7 +1444,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void LowerEqualThan(long left, long right,
             string message)
         {
@@ -1453,7 +1456,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly lower than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void LowerEqualThan(long left, long right,
             string format, params object[] args)
         {
@@ -1528,22 +1531,22 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-		/// Verifies that <paramref name="left"/> is lower equal than
-		/// <paramref name="right"/>.
-		/// </summary>		
-		static public void LowerEqualThan(IComparable left, IComparable right)
-		{
-			Assert.IsNotNull(left);
-			Assert.IsNotNull(right);
-			Assert.IsTrue(left.CompareTo(right)<=0,
-			              "{0} is not lower equal than {1}",
-			              left,right);
+        /// Verifies that <paramref name="left"/> is lower equal than
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void LowerEqualThan(IComparable left, IComparable right)
+        {
+            Assert.IsNotNull(left);
+            Assert.IsNotNull(right);
+            Assert.IsTrue(left.CompareTo(right) <= 0,
+                          "{0} is not lower equal than {1}",
+                          left, right);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is lower equal than
         /// <paramref name="right"/>.
-        /// </summary>		
+        /// </summary>
         static public void LowerEqualThan(IComparable left, IComparable right,
             string message)
         {
@@ -1555,10 +1558,10 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-		/// Verifies that <paramref name="left"/> is lower equal than
-		/// <paramref name="right"/>.
-		/// </summary>		
-		static public void LowerEqualThan(IComparable left, IComparable right,
+        /// Verifies that <paramref name="left"/> is lower equal than
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void LowerEqualThan(IComparable left, IComparable right,
             string format, params object[] args)
         {
             LowerEqualThan(left, right, String.Format(format, args));
@@ -1571,7 +1574,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1585,7 +1588,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1598,7 +1601,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1614,7 +1617,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1628,7 +1631,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1641,7 +1644,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1657,7 +1660,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1671,7 +1674,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1684,7 +1687,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1700,7 +1703,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1714,7 +1717,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1727,7 +1730,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1743,7 +1746,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1757,7 +1760,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1770,7 +1773,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1786,7 +1789,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1800,7 +1803,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1813,7 +1816,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1829,7 +1832,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1843,7 +1846,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1856,7 +1859,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is less than the second
-        /// value. If it is not, then an 
+        /// value. If it is not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
@@ -1890,7 +1893,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left > right,
                           "{0} is not strictly greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
@@ -1948,7 +1951,7 @@ namespace MbUnit.Framework
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterThan(byte left, byte right,string message)
+        static public void GreaterThan(byte left, byte right, string message)
         {
             Assert.IsTrue(left > right,
                           "{0} is not strictly greater equal than {1}, {2}",
@@ -1967,7 +1970,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void GreaterThan(long left, long right)
         {
             Assert.IsTrue(left > right,
@@ -1978,7 +1981,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void GreaterThan(long left, long right, string message)
         {
             Assert.IsTrue(left > right,
@@ -1990,7 +1993,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void GreaterThan(long left, long right, string format, params object[] args)
         {
             GreaterThan(left, right, String.Format(format, args));
@@ -2015,7 +2018,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left > right,
                           "{0} is not strictly greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
@@ -2046,7 +2049,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left > right,
                           "{0} is not strictly greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
 
@@ -2061,21 +2064,21 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-		/// <paramref name="right"/>.
-		/// </summary>		
-		static public void GreaterThan(IComparable left, IComparable right)
-		{
-			Assert.IsNotNull(left);
-			Assert.IsNotNull(right);
-			Assert.IsTrue(left.CompareTo(right)>0,
-			              "{0} is not greater than {1}",
-			              left,right);
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void GreaterThan(IComparable left, IComparable right)
+        {
+            Assert.IsNotNull(left);
+            Assert.IsNotNull(right);
+            Assert.IsTrue(left.CompareTo(right) > 0,
+                          "{0} is not greater than {1}",
+                          left, right);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>		
+        /// </summary>
         static public void GreaterThan(IComparable left, IComparable right, string message)
         {
             Assert.IsNotNull(left);
@@ -2088,8 +2091,8 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>		
-        static public void GreaterThan(IComparable left, IComparable right, 
+        /// </summary>
+        static public void GreaterThan(IComparable left, IComparable right,
             string format, params object[] args)
         {
             GreaterThan(left, right, String.Format(format, args));
@@ -2102,8 +2105,8 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
-        /// <see cref="AssertionException"/> is thrown. 
+        /// value. If they are not, then an
+        /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
         /// <param name="arg2">The second value, expected to be less</param>
@@ -2117,7 +2120,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2130,7 +2133,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2146,7 +2149,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2161,7 +2164,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2174,7 +2177,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2190,7 +2193,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2205,7 +2208,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2218,7 +2221,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2234,7 +2237,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2249,7 +2252,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2262,7 +2265,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2278,7 +2281,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2293,7 +2296,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2307,7 +2310,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2323,7 +2326,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2338,7 +2341,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2351,7 +2354,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2367,7 +2370,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2382,7 +2385,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2395,7 +2398,7 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that the first value is greater than the second
-        /// value. If they are not, then an 
+        /// value. If they are not, then an
         /// <see cref="AssertionException"/> is thrown.
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
@@ -2429,14 +2432,14 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left >= right,
                           "{0} is not greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterEqualThan(int left, int right, 
+        static public void GreaterEqualThan(int left, int right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2461,14 +2464,14 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left >= right,
                           "{0} is not greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterEqualThan(short left, short right, 
+        static public void GreaterEqualThan(short left, short right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2501,7 +2504,7 @@ namespace MbUnit.Framework
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterEqualThan(byte left, byte right, 
+        static public void GreaterEqualThan(byte left, byte right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2510,7 +2513,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void GreaterEqualThan(long left, long right)
         {
             Assert.IsTrue(left >= right,
@@ -2521,7 +2524,7 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
-        /// </summary>        
+        /// </summary>
         static public void GreaterEqualThan(long left, long right, string message)
         {
             Assert.IsTrue(left >= right,
@@ -2532,8 +2535,8 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
-        /// </summary>        
-        static public void GreaterEqualThan(long left, long right, 
+        /// </summary>
+        static public void GreaterEqualThan(long left, long right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2558,14 +2561,14 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left >= right,
                           "{0} is not greater than {1}",
-                          left, right,message);
+                          left, right, message);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterEqualThan(double left, double right, 
+        static public void GreaterEqualThan(double left, double right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2590,7 +2593,7 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(left >= right,
                           "{0} is not greater than {1}, {2}",
-                          left, right,message);
+                          left, right, message);
         }
 
 
@@ -2598,7 +2601,7 @@ namespace MbUnit.Framework
         /// Verifies that <paramref name="left"/> is greater than
         /// <paramref name="right"/>.
         /// </summary>
-        static public void GreaterEqualThan(float left, float right, 
+        static public void GreaterEqualThan(float left, float right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2606,21 +2609,21 @@ namespace MbUnit.Framework
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
-		/// <paramref name="right"/>.
-		/// </summary>		
-		static public void GreaterEqualThan(IComparable left, IComparable right)
-		{
-			Assert.IsNotNull(left);
-			Assert.IsNotNull(right);
-			Assert.IsTrue(left.CompareTo(right)>=0,
-			              "{0} is not greater equal than {1}",
-			              left,right);
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void GreaterEqualThan(IComparable left, IComparable right)
+        {
+            Assert.IsNotNull(left);
+            Assert.IsNotNull(right);
+            Assert.IsTrue(left.CompareTo(right) >= 0,
+                          "{0} is not greater equal than {1}",
+                          left, right);
         }
 
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>		
+        /// </summary>
         static public void GreaterEqualThan(IComparable left, IComparable right, string message)
         {
             Assert.IsNotNull(left);
@@ -2633,8 +2636,8 @@ namespace MbUnit.Framework
         /// <summary>
         /// Verifies that <paramref name="left"/> is strictly greater than
         /// <paramref name="right"/>.
-        /// </summary>		
-        static public void GreaterEqualThan(IComparable left, IComparable right, 
+        /// </summary>
+        static public void GreaterEqualThan(IComparable left, IComparable right,
             string format, params object[] args)
         {
             GreaterEqualThan(left, right, String.Format(format, args));
@@ -2648,10 +2651,10 @@ namespace MbUnit.Framework
         /// </summary>
         static public void Between(int test, int left, int right)
         {
-            Assert.IsTrue(test>=left,
+            Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}",
                    test, left);
-            Assert.IsTrue(test<=right,
+            Assert.IsTrue(test <= right,
                    "{0} is greater than {1}",
                    test, right);
         }
@@ -2662,10 +2665,10 @@ namespace MbUnit.Framework
         /// </summary>
         static public void Between(int test, int left, int right, string message)
         {
-            Assert.IsTrue(test>=left,
+            Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
                    test, left, message);
-            Assert.IsTrue(test<=right,
+            Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
                    test, right, message);
         }
@@ -2676,7 +2679,7 @@ namespace MbUnit.Framework
         /// </summary>
         static public void Between(int test, int left, int right, string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
@@ -2701,20 +2704,20 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
-                   test, left,message);
+                   test, left, message);
             Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
-                   test, right,message);
+                   test, right, message);
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(short test, short left, short right, 
+        static public void Between(short test, short left, short right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
@@ -2739,20 +2742,20 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
-                   test, left,message);
+                   test, left, message);
             Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
-                   test, right,message);
+                   test, right, message);
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(byte test, byte left, byte right, 
+        static public void Between(byte test, byte left, byte right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
@@ -2777,20 +2780,20 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
-                   test, left,message);
+                   test, left, message);
             Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
-                   test, right,message);
+                   test, right, message);
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(long test, long left, long right, 
+        static public void Between(long test, long left, long right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
@@ -2815,20 +2818,20 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
-                   test, left,message);
+                   test, left, message);
             Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
-                   test, right,message);
+                   test, right, message);
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(double test, double left, double right, 
+        static public void Between(double test, double left, double right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
@@ -2853,68 +2856,68 @@ namespace MbUnit.Framework
         {
             Assert.IsTrue(test >= left,
                    "{0} is smaller than {1}, {2}",
-                   test, left,message);
+                   test, left, message);
             Assert.IsTrue(test <= right,
                    "{0} is greater than {1}, {2}",
-                   test, right,message);
+                   test, right, message);
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(float test, float left, float right, 
+        static public void Between(float test, float left, float right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
-    	/// <paramref name="right"/>.
-		/// </summary>
-    	static public void Between(IComparable test, IComparable left, IComparable right)
-    	{
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void Between(IComparable test, IComparable left, IComparable right)
+        {
             Assert.IsNotNull(test);
             Assert.IsNotNull(left);
             Assert.IsNotNull(right);
-            Assert.IsTrue(test.CompareTo(left)>=0,
-    		       "{0} is smaller than {1}",
-    		       test, left);
-    		Assert.IsTrue(test.CompareTo(right)<=0,
-    		       "{0} is greater than {1}",
-    		       test, right);
-    	}
+            Assert.IsTrue(test.CompareTo(left) >= 0,
+                   "{0} is smaller than {1}",
+                   test, left);
+            Assert.IsTrue(test.CompareTo(right) <= 0,
+                   "{0} is greater than {1}",
+                   test, right);
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
-    	/// <paramref name="right"/>.
-		/// </summary>
-    	static public void Between(
-            IComparable test, 
-            IComparable left, 
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void Between(
+            IComparable test,
+            IComparable left,
             IComparable right,
             string message)
-    	{
+        {
             Assert.IsNotNull(test);
             Assert.IsNotNull(left);
             Assert.IsNotNull(right);
-            Assert.IsTrue(test.CompareTo(left)>=0,
-    		       "{0} is smaller than {1}, {2}",
-    		       test, left,message);
-    		Assert.IsTrue(test.CompareTo(right)<=0,
-    		       "{0} is greater than {1}, {2}",
-    		       test, right,message);
-    	}
+            Assert.IsTrue(test.CompareTo(left) >= 0,
+                   "{0} is smaller than {1}, {2}",
+                   test, left, message);
+            Assert.IsTrue(test.CompareTo(right) <= 0,
+                   "{0} is greater than {1}, {2}",
+                   test, right, message);
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is between <paramref name="left"/> and
         /// <paramref name="right"/>.
         /// </summary>
-        static public void Between(IComparable test, IComparable left, IComparable right, 
+        static public void Between(IComparable test, IComparable left, IComparable right,
             string format, params object[] args)
         {
-            Between(test,left,right,String.Format(format,args));
+            Between(test, left, right, String.Format(format, args));
         }
 
         #endregion
@@ -3022,141 +3025,141 @@ namespace MbUnit.Framework
         }
         /// <summary>
         /// Asserts that <paramref name="test"/> is <strong>not</strong> between <paramref name="left"/> and
-    	/// <paramref name="right"/>.
-		/// </summary>
-    	static public void NotBetween(IComparable test, IComparable left, IComparable right)
-    	{
+        /// <paramref name="right"/>.
+        /// </summary>
+        static public void NotBetween(IComparable test, IComparable left, IComparable right)
+        {
             Assert.IsNotNull(test);
             Assert.IsNotNull(left);
             Assert.IsNotNull(right);
-            if (test.CompareTo(left)<0)
-    			return;
-    		if (test.CompareTo(right)>0)
-    			return;
-    		
-    		Assert.Fail(
-    		       "{0} is in {1} - {2}",
-    		       test, left, right);
+            if (test.CompareTo(left) < 0)
+                return;
+            if (test.CompareTo(right) > 0)
+                return;
+
+            Assert.Fail(
+                   "{0} is in {1} - {2}",
+                   test, left, right);
         }
         #endregion
-		
-		#region In, NotIn
-	   	/// <summary>
-    	/// Asserts that <paramref name="test"/> is in the dic <paramref name="list"/>.
-		/// </summary>    	
-    	static public void In(Object test, IDictionary dic)
-    	{
+
+        #region In, NotIn
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is in the dic <paramref name="list"/>.
+        /// </summary>
+        static public void In(Object test, IDictionary dic)
+        {
             In(test, dic, null);
-    	}
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is in the dic <paramref name="list"/>.
-        /// </summary>    	
+        /// </summary>
         static public void In(Object test, IDictionary dic, string message)
         {
             Assert.IsNotNull(test, "tested object is null");
             Assert.IsNotNull(dic, "Dictionary is a null reference");
             Assert.IsTrue(dic.Contains(test),
-                          "Dictionary does not contain {0} {1}", test,message);
-        }    	
-
-    	/// <summary>
-    	/// Asserts that <paramref name="test"/> is in the list <paramref name="list"/>.
-		/// </summary>    	
-    	static public void In(Object test, IList list)
-    	{
-            In(test, list, null);
-    	}
+                          "Dictionary does not contain {0} {1}", test, message);
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is in the list <paramref name="list"/>.
-        /// </summary>    	
+        /// </summary>
+        static public void In(Object test, IList list)
+        {
+            In(test, list, null);
+        }
+
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is in the list <paramref name="list"/>.
+        /// </summary>
         static public void In(Object test, IList list, string message)
         {
             Assert.IsNotNull(list, "List is a null reference");
             Assert.IsTrue(list.Contains(test),
-                          "List does not contain {0} {1}", test,message);
+                          "List does not contain {0} {1}", test, message);
         }
 
-    	/// <summary>
-    	/// Asserts that <paramref name="test"/> is in the enumerable collection <paramref name="enumerable"/>.
-		/// </summary>    	
-    	static public void In(Object test, IEnumerable enumerable, string message)
-    	{
-    		Assert.IsNotNull(enumerable,"Enumerable collection is a null reference");
-    		foreach(Object o in enumerable)
-    		{
-    			if (o==test)
-    				return;
-    		}
-    		Assert.Fail("Collection does not contain {0} {1}",test, message);
-    	}    	
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is in the enumerable collection <paramref name="enumerable"/>.
+        /// </summary>
+        static public void In(Object test, IEnumerable enumerable, string message)
+        {
+            Assert.IsNotNull(enumerable, "Enumerable collection is a null reference");
+            foreach (Object o in enumerable)
+            {
+                if (o == test)
+                    return;
+            }
+            Assert.Fail("Collection does not contain {0} {1}", test, message);
+        }
 
-    	/// <summary>
-    	/// Asserts that <paramref name="test"/> is in the enumerable collection <paramref name="enumerable"/>.
-		/// </summary>    	
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is in the enumerable collection <paramref name="enumerable"/>.
+        /// </summary>
         static public void In(Object test, IEnumerable enumerable)
         {
             In(test, enumerable, null);
         }
 
-	   	/// <summary>
-    	/// Asserts that <paramref name="test"/> is <strong>not</strong> in the dic <paramref name="list"/>.
-		/// </summary>    	
-    	static public void NotIn(Object test, IDictionary dic, string message)
-    	{
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is <strong>not</strong> in the dic <paramref name="list"/>.
+        /// </summary>
+        static public void NotIn(Object test, IDictionary dic, string message)
+        {
             Assert.IsNotNull(test);
-            Assert.IsNotNull(dic,"Dictionary is a null reference");
-    		Assert.IsFalse(dic.Contains(test),
-    		              "Dictionary does contain {0} {1}",test,message);
-    	}    	
+            Assert.IsNotNull(dic, "Dictionary is a null reference");
+            Assert.IsFalse(dic.Contains(test),
+                          "Dictionary does contain {0} {1}", test, message);
+        }
 
-	   	/// <summary>
-    	/// Asserts that <paramref name="test"/> is <strong>not</strong> in the dic <paramref name="list"/>.
-		/// </summary>    	
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is <strong>not</strong> in the dic <paramref name="list"/>.
+        /// </summary>
         static public void NotIn(Object test, IDictionary dic)
         {
             NotIn(test, dic, null);
         }
 
-    	/// <summary>
-    	/// Asserts that <paramref name="test"/> is <strong>not</strong> in the list <paramref name="list"/>.
-		/// </summary>    	
-    	static public void NotIn(Object test, IList list,string message)
-    	{
-    		Assert.IsNotNull(list,"List is a null reference");
-    		Assert.IsFalse(list.Contains(test),
-    		              "List does contain {0} {1}",test,message);
-    	}
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is <strong>not</strong> in the list <paramref name="list"/>.
+        /// </summary>
+        static public void NotIn(Object test, IList list, string message)
+        {
+            Assert.IsNotNull(list, "List is a null reference");
+            Assert.IsFalse(list.Contains(test),
+                          "List does contain {0} {1}", test, message);
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is <strong>not</strong> in the list <paramref name="list"/>.
-        /// </summary>    	
+        /// </summary>
         static public void NotIn(Object test, IList list)
         {
             NotIn(test, list, null);
         }
 
-    	/// <summary>
-    	/// Asserts that <paramref name="test"/> is <strong>not</strong> in the enumerable collection <paramref name="enumerable"/>.
-		/// </summary>    	
-    	static public void NotIn(Object test, IEnumerable enumerable, string message)
-    	{
-    		Assert.IsNotNull(enumerable,"Enumerable collection is a null reference");
-    		foreach(Object o in enumerable)
-    		{
-    			Assert.IsFalse(o==test,"{0} is part of the enumeration {1}",test, message);
-    		}
-    	}
+        /// <summary>
+        /// Asserts that <paramref name="test"/> is <strong>not</strong> in the enumerable collection <paramref name="enumerable"/>.
+        /// </summary>
+        static public void NotIn(Object test, IEnumerable enumerable, string message)
+        {
+            Assert.IsNotNull(enumerable, "Enumerable collection is a null reference");
+            foreach (Object o in enumerable)
+            {
+                Assert.IsFalse(o == test, "{0} is part of the enumeration {1}", test, message);
+            }
+        }
 
         /// <summary>
         /// Asserts that <paramref name="test"/> is <strong>not</strong> in the enumerable collection <paramref name="enumerable"/>.
-        /// </summary>    	
+        /// </summary>
         static public void NotIn(Object test, IEnumerable enumerable)
         {
             NotIn(test, enumerable, null);
         }
-        #endregion    	
+        #endregion
 
         #region IsEmpty
         //NUnit Code
@@ -3209,7 +3212,7 @@ namespace MbUnit.Framework
         {
             if (collection.Count != 0)
             {
-                if(args != null)
+                if (args != null)
                     Assert.FailIsNotEmpty(collection, message, args);
                 else
                     Assert.FailIsNotEmpty(collection, message);
@@ -3287,7 +3290,7 @@ namespace MbUnit.Framework
         {
             if (collection.Count == 0)
             {
-                if(args != null)
+                if (args != null)
                     Assert.FailIsEmpty(collection, message, args);
                 else
                     Assert.FailIsEmpty(collection, message);
@@ -3403,7 +3406,7 @@ namespace MbUnit.Framework
         /// <param name="args">Array of objects to be used in formatting the message</param>
         static public void IsAssignableFrom(System.Type expected, object actual, string message, params object[] args)
         {
-            if(!actual.GetType().IsAssignableFrom(expected))
+            if (!actual.GetType().IsAssignableFrom(expected))
             {
                 Assert.Fail(message);
             }
@@ -3441,17 +3444,23 @@ namespace MbUnit.Framework
         /// <param name="args">Array of objects to be used in formatting the message</param>
         static public void IsNotAssignableFrom(System.Type expected, object actual, string message, params object[] args)
         {
+     
+            bool needToFail = false; 
             try
             {
-                IsAssignableFrom(expected, actual, message, args);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                IsAssignableFrom(expected, actual, message, args);           
+                needToFail = true;              
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }
+          
         }
         #endregion
 
@@ -3486,7 +3495,7 @@ namespace MbUnit.Framework
         /// <param name="args">An array of objects to be used in formatting the message</param>
         public static void IsInstanceOfType(System.Type expected, object actual, string message, params object[] args)
         {
-            if(!expected.IsInstanceOfType(actual))
+            if (!expected.IsInstanceOfType(actual))
             {
                 Assert.Fail(message);
             }
@@ -3524,17 +3533,25 @@ namespace MbUnit.Framework
         /// <param name="args">An array of objects to be used in formatting the message</param>
         public static void IsNotInstanceOfType(System.Type expected, object actual, string message, params object[] args)
         {
+            
+            bool needToFail = false;
+       
             try
             {
                 IsInstanceOfType(expected, actual, message, args);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                                
+                needToFail = true;                
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }
+          
         }
         #endregion
 
@@ -3588,56 +3605,56 @@ namespace MbUnit.Framework
             warnings.Clear();
         }
         #endregion
-    
-    	#region Private Method
-		/// <summary>
-		/// This method is called when two objects have been compared and found to be
-		/// different. This prints a nice message to the screen. 
-		/// </summary>
-		/// <param name="expected">The expected object</param>
-		/// <param name="actual">The actual object</param>
+
+        #region Private Method
+        /// <summary>
+        /// This method is called when two objects have been compared and found to be
+        /// different. This prints a nice message to the screen.
+        /// </summary>
+        /// <param name="expected">The expected object</param>
+        /// <param name="actual">The actual object</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
         /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
         /// </para>
         /// </remarks>
-        static private void FailNotEquals(Object expected, Object actual, string format, params object[] args) 
-		{
-			throw new NotEqualAssertionException(expected,actual,
-				String.Format(format,args));
-		}
-    
-		/// <summary>
-		///  This method is called when the two objects are not the same. 
-		/// </summary>
-		/// <param name="expected">The expected object</param>
-		/// <param name="actual">The actual object</param>
+        static private void FailNotEquals(Object expected, Object actual, string format, params object[] args)
+        {
+            throw new NotEqualAssertionException(expected, actual,
+                String.Format(format, args));
+        }
+
+        /// <summary>
+        ///  This method is called when the two objects are not the same.
+        /// </summary>
+        /// <param name="expected">The expected object</param>
+        /// <param name="actual">The actual object</param>
         /// <param name="format">
         /// The format of the message to display if the assertion fails,
-        /// containing zero or more format items. 
+        /// containing zero or more format items.
         /// </param>
         /// <param name="args">
-        /// An <see cref="Object"/> array containing zero or more objects to format. 
+        /// An <see cref="Object"/> array containing zero or more objects to format.
         /// </param>
         /// <remarks>
         /// <para>
         /// The error message is formatted using <see cref="String.Format(string, object[])"/>.
         /// </para>
         /// </remarks>
-        static private void FailNotSame(Object expected, Object actual, string format, params object[] args) 
-		{
-			string formatted=string.Empty;
-			if (format != null)
-				formatted= format+" ";
-			Assert.Fail(format+"expected same",args);
-		}
+        static private void FailNotSame(Object expected, Object actual, string format, params object[] args)
+        {
+            string formatted = string.Empty;
+            if (format != null)
+                formatted = format + " ";
+            Assert.Fail(format + "expected same", args);
+        }
 
         static private void FailSame(Object expected, Object actual, string format, params object[] args)
         {
@@ -3663,6 +3680,7 @@ namespace MbUnit.Framework
                 formatted = format + " ";
             Assert.Fail(format + "expected to be empty", args);
         }
-		#endregion
-	}
+        #endregion
+    }
 }
+

@@ -1,26 +1,26 @@
 // MbUnit Test Framework
-// 
+//
 // Copyright (c) 2004 Jonathan de Halleux
 //
-// This software is provided 'as-is', without any express or implied warranty. 
-// 
-// In no event will the authors be held liable for any damages arising from 
+// This software is provided 'as-is', without any express or implied warranty.
+//
+// In no event will the authors be held liable for any damages arising from
 // the use of this software.
-// Permission is granted to anyone to use this software for any purpose, 
-// including commercial applications, and to alter it and redistribute it 
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
 // freely, subject to the following restrictions:
 //
-//		1. The origin of this software must not be misrepresented; 
-//		you must not claim that you wrote the original software. 
-//		If you use this software in a product, an acknowledgment in the product 
+//		1. The origin of this software must not be misrepresented;
+//		you must not claim that you wrote the original software.
+//		If you use this software in a product, an acknowledgment in the product
 //		documentation would be appreciated but is not required.
 //
-//		2. Altered source versions must be plainly marked as such, and must 
+//		2. Altered source versions must be plainly marked as such, and must
 //		not be misrepresented as being the original software.
 //
-//		3. This notice may not be removed or altered from any source 
+//		3. This notice may not be removed or altered from any source
 //		distribution.
-//		
+//
 //		MbUnit HomePage: http://www.mbunit.org
 //		Author: Jonathan de Halleux
 
@@ -33,149 +33,149 @@ using System.Collections;
 
 namespace MbUnit.Framework
 {
-	/// <summary>
-	/// Assertion helper for the <see cref="ICollection"/> class.
-	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// This class contains static helper methods to verify assertions on the
-	/// <see cref="ICollection"/> class.
-	/// </para>
-	/// </remarks>
-	public sealed class CollectionAssert
-	{
-		#region Private constructor
-		private CollectionAssert()
-		{}		
-		#endregion
+    /// <summary>
+    /// Assertion helper for the <see cref="ICollection"/> class.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This class contains static helper methods to verify assertions on the
+    /// <see cref="ICollection"/> class.
+    /// </para>
+    /// </remarks>
+    public sealed class CollectionAssert
+    {
+        #region Private constructor
+        private CollectionAssert()
+        { }
+        #endregion
 
         #region Synchronized
 
         /// <summary>
-		/// Verifies that the property value <see cref="ICollection.SyncRoot"/>
-		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
-		/// </summary>
-		/// <param name="expected">
-		/// Instance containing the expected value.
-		/// </param>
-		/// <param name="actual">
-		/// Instance containing the tested value.
-		/// </param>
-		public static void AreSyncRootEqual(
-			ICollection expected,
-			ICollection actual
-			)
-		{
-			if (expected==null && actual==null)
-				return;
-			
-			Assert.IsNotNull(expected);
-			Assert.IsNotNull(actual);
-			AreSyncRootEqual(expected.SyncRoot,actual);
-		}
-		
-		/// <summary>
-		/// Verifies that the property value <see cref="ICollection.SyncRoot"/>
-		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
-		/// </summary>
-		/// <param name="expected">
-		/// Expected value.
-		/// </param>
-		/// <param name="actual">
-		/// Instance containing the tested value.
-		/// </param>
-		public static void AreSyncRootEqual(
-			System.Object expected,
-			ICollection actual
-			)
-		{
-			if (expected==null && actual==null)
-				return;
-			
-			Assert.IsNotNull(expected);
-			Assert.IsNotNull(actual);
-			Assert.AreEqual(expected,actual.SyncRoot,
-						"Property SyncRoot not equal");
-			
-		}		
-		/// <summary>
-		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// is true.
-		/// </summary>
-		/// <param name="actual">
-		/// Instance containing the expected value.
-		/// </param>
-		public static void IsSynchronized(
-			ICollection actual
-			)
-		{		
-			Assert.IsNotNull(actual);
-			Assert.IsTrue(actual.IsSynchronized,
-						  "Property IsSynchronized is false");
-		}
+        /// Verifies that the property value <see cref="ICollection.SyncRoot"/>
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
+        /// </summary>
+        /// <param name="expected">
+        /// Instance containing the expected value.
+        /// </param>
+        /// <param name="actual">
+        /// Instance containing the tested value.
+        /// </param>
+        public static void AreSyncRootEqual(
+            ICollection expected,
+            ICollection actual
+            )
+        {
+            if (expected == null && actual == null)
+                return;
 
-		/// <summary>
-		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// is false.
-		/// </summary>
-		/// <param name="actual">
-		/// Instance containing the expected value.
-		/// </param>
-		public static void IsNotSynchronized(
-			ICollection actual
-			)
-		{		
-			Assert.IsNotNull(actual);
-			Assert.IsFalse(actual.IsSynchronized,
-						  "Property IsSynchronized is true");			
-		}
+            Assert.IsNotNull(expected);
+            Assert.IsNotNull(actual);
+            AreSyncRootEqual(expected.SyncRoot, actual);
+        }
 
-		/// <summary>
-		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
-		/// </summary>
-		/// <param name="expected">
-		/// Instance containing the expected value.
-		/// </param>
-		/// <param name="actual">
-		/// Instance containing the tested value.
-		/// </param>
-		public static void AreIsSynchronizedEqual(
-			ICollection expected,
-			ICollection actual
-			)
-		{
-			if (expected==null && actual==null)
-				return;
-			
-			Assert.IsNotNull(expected);
-			Assert.IsNotNull(actual);
-			AreIsSynchronizedEqual(expected.IsSynchronized,actual);
-		}
-		
-		/// <summary>
-		/// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
-		/// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
-		/// </summary>
-		/// <param name="expected">
-		/// Expected value.
-		/// </param>
-		/// <param name="actual">
-		/// Instance containing the tested value.
-		/// </param>
-		public static void AreIsSynchronizedEqual(
-			System.Boolean expected,
-			ICollection actual
-			)
-		{			
-			Assert.IsNotNull(actual);
-			Assert.AreEqual(expected,actual.IsSynchronized,
-						"Property IsSynchronized not equal");
+        /// <summary>
+        /// Verifies that the property value <see cref="ICollection.SyncRoot"/>
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
+        /// </summary>
+        /// <param name="expected">
+        /// Expected value.
+        /// </param>
+        /// <param name="actual">
+        /// Instance containing the tested value.
+        /// </param>
+        public static void AreSyncRootEqual(
+            System.Object expected,
+            ICollection actual
+            )
+        {
+            if (expected == null && actual == null)
+                return;
+
+            Assert.IsNotNull(expected);
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual.SyncRoot,
+                        "Property SyncRoot not equal");
+
+        }
+        /// <summary>
+        /// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
+        /// is true.
+        /// </summary>
+        /// <param name="actual">
+        /// Instance containing the expected value.
+        /// </param>
+        public static void IsSynchronized(
+            ICollection actual
+            )
+        {
+            Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.IsSynchronized,
+                          "Property IsSynchronized is false");
+        }
+
+        /// <summary>
+        /// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
+        /// is false.
+        /// </summary>
+        /// <param name="actual">
+        /// Instance containing the expected value.
+        /// </param>
+        public static void IsNotSynchronized(
+            ICollection actual
+            )
+        {
+            Assert.IsNotNull(actual);
+            Assert.IsFalse(actual.IsSynchronized,
+                          "Property IsSynchronized is true");
+        }
+
+        /// <summary>
+        /// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
+        /// of <paramref name="expected"/> and <paramref name="actual"/> are equal.
+        /// </summary>
+        /// <param name="expected">
+        /// Instance containing the expected value.
+        /// </param>
+        /// <param name="actual">
+        /// Instance containing the tested value.
+        /// </param>
+        public static void AreIsSynchronizedEqual(
+            ICollection expected,
+            ICollection actual
+            )
+        {
+            if (expected == null && actual == null)
+                return;
+
+            Assert.IsNotNull(expected);
+            Assert.IsNotNull(actual);
+            AreIsSynchronizedEqual(expected.IsSynchronized, actual);
+        }
+
+        /// <summary>
+        /// Verifies that the property value <see cref="ICollection.IsSynchronized"/>
+        /// of <paramref name="actual"/> is equal to <paramref name="expected"/>.
+        /// </summary>
+        /// <param name="expected">
+        /// Expected value.
+        /// </param>
+        /// <param name="actual">
+        /// Instance containing the tested value.
+        /// </param>
+        public static void AreIsSynchronizedEqual(
+            System.Boolean expected,
+            ICollection actual
+            )
+        {
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual.IsSynchronized,
+                        "Property IsSynchronized not equal");
 
         }
 
         #endregion
-        
+
         #region Count
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MbUnit.Framework
             Assert.AreEqual(i, col.Count);
         }
         #endregion
-        
+
         #region AreEqual
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace MbUnit.Framework
 
             if (fail)
             {
-                if(args != null)
+                if (args != null)
                     Assert.Fail(message, args);
                 else
                     Assert.Fail(message);
@@ -472,23 +472,17 @@ namespace MbUnit.Framework
             ArrayList arr = new ArrayList();
 
             foreach (object o in collection)
-            {
+            {                
                 //do a check to see if it is in the collection already
-                foreach (object subO in collection)
+                if (arr.Contains(o))
                 {
-                    if (o == subO)
-                    {
-                        if (arr.Contains(o))
-                        {
-                            fail = true;
-                            break;
-                        }
-                        else
-                        {
-                            arr.Add(o);
-                        }
-                    }
+                    fail = true;
+                    break;
                 }
+                else
+                {
+                    arr.Add(o);
+                }                
             }
 
             if (fail)
@@ -545,14 +539,16 @@ namespace MbUnit.Framework
                 {
                     if (o == subO)
                     {
-                        found = true;
+                        found = true;                        
+                        break;                        
                     }
                 }
-
-                if (found)
-                    foundAll = true;
-                else
+                               
+                if (!found)
+                {
                     foundAll = false;
+                    break;
+                }                
             }
 
             if (foundAll)
@@ -566,14 +562,16 @@ namespace MbUnit.Framework
                     {
                         if (o == subO)
                         {
-                            found = true;
+                            found = true;                            
+                            break;                            
                         }
                     }
 
-                    if (found && foundAll)
-                        foundAll = true;
-                    else
+                    if (!found)
+                    {
                         foundAll = false;
+                        break;
+                    }                    
                 }
             }
 
@@ -657,18 +655,24 @@ namespace MbUnit.Framework
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
         public static void AreNotEqual(ICollection expected, ICollection actual, IComparer comparer, string message, params object[] args)
-        {
+        {            
+            bool needToFail = false;
+            
             try
             {
-                AreEqual(expected, actual);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                AreEqual(expected, actual);                                
+                needToFail = true;                
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+                        
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }
+            
         }
         #endregion
 
@@ -704,17 +708,25 @@ namespace MbUnit.Framework
         /// <param name="args">Arguments to be used in formatting the message</param>
         public static void AreNotEquivalent(ICollection expected, ICollection actual, string message, params object[] args)
         {
+            
+            bool needToFail = false;
+            
             try
             {
-                AreEquivalent(expected, actual, message, args);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                AreEquivalent(expected, actual, message, args);                                
+                needToFail = true;
+                
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+                        
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }
+            
         }
         #endregion
 
@@ -803,37 +815,45 @@ namespace MbUnit.Framework
         /// <param name="args">Arguments to be used in formatting the message</param>
         public static void DoesNotContain(ICollection collection, Object actual, string message, params object[] args)
         {
+            
+            bool needToFail = false;
+            
             try
             {
                 Contains(collection, actual, message, args);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                               
+                needToFail = true;                
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+                        
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }
+            
         }
         #endregion
 
         #region IsNotSubsetOf
-
+                
         /// <summary>
-        /// Asserts that superset is not a subject of subset.
+        /// Asserts that subset is not a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         public static void IsNotSubsetOf(ICollection subset, ICollection superset)
         {
             IsNotSubsetOf(subset, superset, string.Empty, null);
         }
 
         /// <summary>
-        /// Asserts that superset is not a subject of subset.
+        /// Asserts that subset is not a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         /// <param name="message">The message that will be displayed on failure</param>
         public static void IsNotSubsetOf(ICollection subset, ICollection superset, string message)
         {
@@ -841,45 +861,53 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-        /// Asserts that superset is not a subject of subset.
+        /// Asserts that subset is not a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
         public static void IsNotSubsetOf(ICollection subset, ICollection superset, string message, params object[] args)
         {
+            
+            bool needToFail = false;            
             try
             {
                 IsSubsetOf(subset, superset, message, args);
-
-                //Do fail before now...
-                Assert.Fail(message);
+                                
+                needToFail = true;
+                
             }
             catch (Core.Exceptions.AssertionException)
             {
                 //Do Nothing as expected
             }
+                        
+            if (needToFail)
+            {
+                Assert.Fail(message, args);
+            }          
         }
+       
         #endregion
 
         #region IsSubsetOf
-
+             
         /// <summary>
-        /// Asserts that superset is a subset of subset.
+        /// Asserts that subset is a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         public static void IsSubsetOf(ICollection subset, ICollection superset)
         {
             IsSubsetOf(subset, superset, string.Empty, null);
         }
 
         /// <summary>
-        /// Asserts that superset is a subset of subset.
+        /// Asserts that subset is a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         /// <param name="message">The message that will be displayed on failure</param>
         public static void IsSubsetOf(ICollection subset, ICollection superset, string message)
         {
@@ -887,10 +915,10 @@ namespace MbUnit.Framework
         }
 
         /// <summary>
-        /// Asserts that superset is a subset of subset.
+        /// Asserts that subset is a subset of superset.
         /// </summary>
-        /// <param name="subset">The ICollection superset to be considered</param>
-        /// <param name="superset">The ICollection subset to be considered</param>
+        /// <param name="subset">The ICollection subset to be considered</param>
+        /// <param name="superset">The ICollection superset to be considered</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
         public static void IsSubsetOf(ICollection subset, ICollection superset, string message, params object[] args)
@@ -899,11 +927,11 @@ namespace MbUnit.Framework
             bool foundAll = true;
 
             //All of superset are in subset
-            foreach (object o in superset)
+            foreach (object o in subset)
             {
                 found = false;
 
-                foreach (object supO in subset)
+                foreach (object supO in superset)
                 {
                     if (o == supO)
                     {
@@ -913,12 +941,13 @@ namespace MbUnit.Framework
                 }
 
                 if (!found)
-                    foundAll = true;
-                else
+                {
                     foundAll = false;
+                    break;
+                }
             }
 
-            if (foundAll)
+            if (!foundAll)
             {
                 if (args != null)
                     Assert.Fail(message, args);
@@ -926,7 +955,9 @@ namespace MbUnit.Framework
                     Assert.Fail(message);
             }
         }
-        #endregion
     
+        #endregion
+
     }
 }
+
