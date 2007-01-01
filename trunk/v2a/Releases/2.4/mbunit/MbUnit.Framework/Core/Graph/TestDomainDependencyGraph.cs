@@ -187,7 +187,7 @@ namespace MbUnit.Core.Graph
                 throw new InvalidOperationException("Cannot be zero");
 
             // set vertices colors
-            this.OnLog("etting up fixture colors");
+            this.OnLog("Setting up fixture colors");
             VertexColorDictionary colors = new VertexColorDictionary();
             foreach (TestDomainVertex v in graph.Vertices)
                 colors.Add(v, GraphColor.White);

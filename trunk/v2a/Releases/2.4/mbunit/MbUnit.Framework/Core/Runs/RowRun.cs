@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Collections;
 using System.IO;
+using System.Globalization;
+
 using MbUnit.Core;
 using MbUnit.Core.Invokers;
 using MbUnit.Core.Framework;
@@ -67,7 +69,7 @@ namespace MbUnit.Core.Runs
             {
                 get 
                 {
-                    StringWriter sw = new StringWriter();
+                    StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
                     sw.Write("{0}(", this.method.Name);
                     Object[] data = this.row.GetRow();
                     for(int i =0;i<data.Length;++i)
