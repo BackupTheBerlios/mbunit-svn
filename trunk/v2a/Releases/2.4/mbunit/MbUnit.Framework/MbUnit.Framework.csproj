@@ -171,6 +171,7 @@
     <Compile Include="CompositeFixtureAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Exceptions\InnerExceptionTypeMismatchException.cs" />
     <Compile Include="Core\Runs\CombinatorialRun.cs" />
     <Compile Include="ConditionalExceptionAttribute.cs" />
     <Compile Include="ConsoleTester.cs" />
