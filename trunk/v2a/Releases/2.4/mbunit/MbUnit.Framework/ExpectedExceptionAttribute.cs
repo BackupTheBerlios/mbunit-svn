@@ -24,13 +24,13 @@
 //		MbUnit HomePage: http://www.mbunit.org
 //		Author: Jonathan de Halleux
 using System;
+
 using MbUnit.Framework;
 using MbUnit.Core.Invokers;
 using MbUnit.Core.Framework;
 
 namespace MbUnit.Framework
 {
-	
 	/// <summary>
 	/// Tags method that should throw an exception.
 	/// </summary>
@@ -39,23 +39,35 @@ namespace MbUnit.Framework
     public class ExpectedExceptionAttribute : DecoratorPatternAttribute
     {
 		Type exceptionType;
+        Type innerExceptionType;
 		
-		public ExpectedExceptionAttribute(Type exceptionType)
+		public ExpectedExceptionAttribute(Type exceptionType) 
+            : this(exceptionType, null, null)
 		{
-			if (exceptionType==null)
-				throw new ArgumentNullException("exceptionType");
-			this.exceptionType = exceptionType;
 		}
 
-		public ExpectedExceptionAttribute(Type exceptionType,string description)
-		:base(description)
+        public ExpectedExceptionAttribute(Type exceptionType, string description)
+            : this(exceptionType, description, null)
+        {
+        }
+
+        public ExpectedExceptionAttribute(Type exceptionType, Type innerExceptionType)
+            : this(exceptionType, null, innerExceptionType)
+        {
+        }
+
+		public ExpectedExceptionAttribute(Type exceptionType, string description, Type innerExceptionType)
+            : base(description)
 		{
-			if (exceptionType==null)
-				throw new ArgumentNullException("exceptionType");
-			
+            if (exceptionType == null)
+                throw new ArgumentNullException("exceptionType");
 			this.exceptionType = exceptionType;
+            this.innerExceptionType = innerExceptionType;
 		}
 		
+        /// <summary>
+        /// The expected exception.
+        /// </summary>
 		public Type ExceptionType
 		{
 			get
@@ -63,10 +75,21 @@ namespace MbUnit.Framework
 				return this.exceptionType;
 			}
 		}
+
+        /// <summary>
+        /// The expected inner exception.
+        /// </summary>
+        public Type InnerExceptionType
+        {
+            get
+            {
+                return innerExceptionType;
+            }
+        }
 		
 		public override IRunInvoker GetInvoker(IRunInvoker invoker)
 		{
-			return new ExpectedExceptionRunInvoker(invoker, this.ExceptionType, this.Description);
+			return new ExpectedExceptionRunInvoker(invoker, ExceptionType, InnerExceptionType, Description);
 		}
 	}
 }

@@ -23,7 +23,6 @@
 //		
 //		MbUnit HomePage: http://www.mbunit.org
 //		Author: Jonathan de Halleux
-
 using System;
 using System.Reflection;
 using System.Collections;
@@ -33,22 +32,23 @@ using MbUnit.Core.Runs;
 
 namespace MbUnit.Core.Invokers
 {	
-	using MbUnit.Core.Exceptions;
-	
 	public class ExpectedExceptionRunInvoker : DecoratorRunInvoker
 	{
 		private Type exceptionType;
+        private Type innerExceptionType;
 
-        public ExpectedExceptionRunInvoker(
-		        IRunInvoker invoker,
-		        Type exceptionType,
-                string description
-                )
-		:base(invoker,description)
+        public ExpectedExceptionRunInvoker(IRunInvoker invoker, Type exceptionType, string description)
+            : this(invoker, exceptionType, null, description)
+        {
+        }
+
+        public ExpectedExceptionRunInvoker(IRunInvoker invoker, Type exceptionType, Type innerExceptionType, 
+            string description) : base(invoker, description)
 		{
-			if (exceptionType==null)
+			if (exceptionType == null)
 				throw new ArgumentNullException("exceptionType");
 			this.exceptionType = exceptionType;
+            this.innerExceptionType = innerExceptionType;
         }
 		
 		public Type ExceptionType
@@ -58,7 +58,15 @@ namespace MbUnit.Core.Invokers
 				return this.exceptionType;
 			}
 		}
-		
+
+        public Type InnerExceptionType
+        {
+            get
+            {
+                return this.innerExceptionType;
+            }
+        }
+
         public override object Execute(Object o, IList args)
         {
             try
@@ -72,13 +80,12 @@ namespace MbUnit.Core.Invokers
                     catchedException = ex.InnerException;
 
                 Exception current = catchedException;
-                // check the execption is not ignoreexecption
                 if (this.ExceptionType != typeof(IgnoreRunException))
                 {
                     Exception cu = catchedException;
                     while (cu!=null)
                     {
-                        // ignore exection, propagate
+                        // ignore exception, propagate
                         if (typeof(IgnoreRunException).IsInstanceOfType(cu))
                             throw ex;
                         cu = cu.InnerException;
@@ -94,6 +101,12 @@ namespace MbUnit.Core.Invokers
                             this.Description,
                             catchedException
                             );
+                }
+
+                if (InnerExceptionType != null && !InnerExceptionType.IsInstanceOfType(current.InnerException))
+                {
+                    throw new InnerExceptionTypeMismatchException(InnerExceptionType, Description, 
+                        current.InnerException);
                 }
 
                 return null;
