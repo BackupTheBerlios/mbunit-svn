@@ -106,10 +106,10 @@ namespace MbUnit.Core.Exceptions
 		{
 			get
 			{
-				return String.Format("Method duration too long. Expected [{0},{1]], got {2}",
-				                     this.minDuration,
-				                     this.maxDuration,
-				                     this.actualDuration);
+                return String.Format( "Method duration too long. Expected [{0},{1}], got {2}",
+                                         this.minDuration,
+                                         this.maxDuration,
+                                         this.actualDuration );
 			}
 		}
 	}
