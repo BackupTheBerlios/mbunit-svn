@@ -48,7 +48,7 @@
 		<MbUnit_MSBuild Include="MbUnit\MbUnit.MSBuild.Tasks\MbUnit.MSBuild.Tasks.csproj" />
 
 		<MbUnit_Tests Include="MbUnit\TestFu.Tests\TestFu.Tests.csproj" />
-		<MbUnit_Tests Include="MbUnit\MbUnit.Tests\MbUnit.Tests.csproj" />
+		<MbUnit_Tests Include="Tests\MbUnit.Framework\MbUnit.Framework.Tests.csproj" />
 
 		<MbUnit_2_0 Include="MbUnit\MbUnit.Framework.2.0\MbUnit.Framework.2.0.csproj" />
 		<MbUnit_2_0 Include="Tests\MbUnit.Framework.Tests20\MbUnit.Framework.Tests20.csproj" />
@@ -69,7 +69,7 @@
 	<Target Name="MbUnit_Tests">
 		<MSBuild Projects="@(MbUnit_Tests)" Targets="Clean;Rebuild" Properties="$(DisableRecursiveBuildProperties);OutputPath=$(OutputPath)\" />
 
-		<!--<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Tests.exe $(OutputPath)\MbUnit.Framework.Tests.2.0.dll" />-->
+		<!--<Exec IgnoreExitCode="True" Command="$(OutputPath)\MbUnit.Cons.exe $(OutputPath)\MbUnit.Framework.Tests.dll $(OutputPath)\MbUnit.Framework.Tests.2.0.dll" />-->
 		
 	</Target>
 
