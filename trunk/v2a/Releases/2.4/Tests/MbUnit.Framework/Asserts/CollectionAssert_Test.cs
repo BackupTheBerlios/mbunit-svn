@@ -428,29 +428,29 @@ namespace MbUnit.Framework.Tests.Asserts
         }
         #endregion
 
-        #region IsSubsetOf
-        [Test]
-        public void IsSubsetOf()
-        {
-            System.Data.DataSet x = new System.Data.DataSet();
-            System.Data.DataSet y = new System.Data.DataSet();
-            System.Data.DataSet z = new System.Data.DataSet();
-            System.Data.DataSet a = new System.Data.DataSet();
+        //#region IsSubsetOf
+        //[Test]
+        //public void IsSubsetOf()
+        //{
+        //    System.Data.DataSet x = new System.Data.DataSet();
+        //    System.Data.DataSet y = new System.Data.DataSet();
+        //    System.Data.DataSet z = new System.Data.DataSet();
+        //    System.Data.DataSet a = new System.Data.DataSet();
 
-            ArrayList set1 = new ArrayList();
-            set1.Add(x);
-            set1.Add(y);
-            set1.Add(z);
+        //    ArrayList set1 = new ArrayList();
+        //    set1.Add(x);
+        //    set1.Add(y);
+        //    set1.Add(z);
 
-            ArrayList set2 = new ArrayList();
-            set2.Add(y);
-            set2.Add(z);
+        //    ArrayList set2 = new ArrayList();
+        //    set2.Add(y);
+        //    set2.Add(z);
 
-            CollectionAssert.IsSubsetOf(set1, set2);
-            CollectionAssert.IsSubsetOf(set1, set2, "test");
-            CollectionAssert.IsSubsetOf(set1, set2, "test {0}", "1");
-        }
-        #endregion
+        //    CollectionAssert.IsSubsetOf(set1, set2);
+        //    CollectionAssert.IsSubsetOf(set1, set2, "test");
+        //    CollectionAssert.IsSubsetOf(set1, set2, "test {0}", "1");
+        //}
+        //#endregion
 
         #region IsNotSubsetOf
         [Test]

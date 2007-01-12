@@ -29,14 +29,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MbUnit.Framework, Version=1.0.2568.1684, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MbUnit.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\TestDriven.NET 2.0\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Algorithms, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\QuickGraph.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Algorithms.Graphviz, Version=2.21.1.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\QuickGraph.Algorithms.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="Refly, Version=2.21.1.0, Culture=neutral, PublicKeyToken=829676e11975a31c">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\Refly.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestFu, Version=1.0.2568.801, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\TestFu.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\ArrayAssert_Test.cs" />
@@ -57,7 +81,6 @@
     <Compile Include="Asserts\SerialAssertTest.cs" />
     <Compile Include="Asserts\TypeAssert_Test.cs" />
     <Compile Include="Asserts\WebAssert_Test.cs" />
-    <Compile Include="Core\CombinatorialTest1.cs" />
     <Compile Include="Core\CombinatorialTest2.cs" />
     <Compile Include="Core\DecoratedFixtureTest.cs" />
     <Compile Include="Core\DifferentApartementStateFixture.cs" />
@@ -114,8 +137,6 @@
     <Compile Include="Asserts\XmlUnitTests\XPathTests.cs" />
     <Compile Include="Asserts\XmlUnitTests\XsltTests.cs" />
     <Compile Include="Samples\FixtureSetUpThrowsTest.cs" />
-    <Compile Include="Samples\NUnitFixture.cs" />
-    <Compile Include="Samples\NUnitSerializationFixture.cs" />
     <Compile Include="Samples\SampleCompiler.cs" />
     <Compile Include="Samples\Samples.cs" />
     <Compile Include="Samples\TestFixtureSample.cs" />

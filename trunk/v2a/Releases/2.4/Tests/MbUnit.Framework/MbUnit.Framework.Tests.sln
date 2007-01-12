@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUnit.Framework.Tests", "MbUnit.Framework.Tests.csproj", "{9673298A-2E7B-4024-9261-00E4A9FF13EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUnit.Framework", "..\..\mbunit\MbUnit.Framework\MbUnit.Framework.csproj", "{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFu", "..\..\mbunit\TestFu\TestFu.csproj", "{A88D4337-9198-4095-B889-63D6F11F3894}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGraph", "..\..\quickgraph\QuickGraph\QuickGraph.csproj", "{5F42D0C5-A525-4891-9A5D-3D8BE4A21626}"
@@ -27,14 +25,6 @@ Global
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.StrongDebug|Any CPU.Build.0 = Debug|Any CPU
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.StrongRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{9673298A-2E7B-4024-9261-00E4A9FF13EB}.StrongRelease|Any CPU.Build.0 = Release|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.StrongDebug|Any CPU.ActiveCfg = StrongDebug|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.StrongDebug|Any CPU.Build.0 = StrongDebug|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.StrongRelease|Any CPU.ActiveCfg = StrongRelease|Any CPU
-		{F822ABA5-0F5F-44AF-A13C-EE62DDF5E397}.StrongRelease|Any CPU.Build.0 = StrongRelease|Any CPU
 		{A88D4337-9198-4095-B889-63D6F11F3894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A88D4337-9198-4095-B889-63D6F11F3894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A88D4337-9198-4095-B889-63D6F11F3894}.Release|Any CPU.ActiveCfg = Release|Any CPU
